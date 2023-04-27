@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "pinia": "^2.0.32",
+    "preline": "^1.8.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
@@ -20,10 +21,13 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/test-utils": "^2.3.0",
+    "autoprefixer": "^10.4.14",
     "eslint": "^8.34.0",
     "eslint-plugin-vue": "^9.9.0",
     "jsdom": "^21.1.0",
+    "postcss": "^8.4.23",
     "prettier": "^2.8.4",
+    "tailwindcss": "^3.3.2",
     "vite": "^4.1.4",
     "vitest": "^0.29.1"
   }
