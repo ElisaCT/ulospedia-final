@@ -60,13 +60,13 @@
    <!-- Ragam ulos -->
    <RagamUlos />
 
-<div class="mx-[180px]">
-  <!-- jenis Ulos -->
-  <JenisUlos />
+  <div class="mx-[180px]">
+    <!-- jenis Ulos -->
+    <JenisUlos />
 
-  <!-- Video player -->
-  <VideoPlayer />
-</div>
+    <!-- Video player -->
+    <VideoPlayer />
+  </div>
 
   <Footer />
 </template>
