@@ -1,5 +1,5 @@
 <template>
-  <div class="flex place-content-center pb-10">
+  <div class="flex place-content-center pb-10 pt-10">
     <div
       class="flex bg-primary_surface hover:bg-primary_surface rounded-[16px] transition dark:bg-primary_main dark:hover:bg-primary_hover"
     >

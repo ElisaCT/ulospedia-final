@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14">
+  <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14 pt-10">
     <h2 class="text-2xl font-bold md:text-4xl text-neutral_100 mb-4">Alat Tenun Ulos</h2>
     <p class="mt-1 text-neutral_90 text-[16px] mb-0">
       Tiga jenis alat tenun yang digunakan penenun dengan tangan-tangan terampil untuk menghasilkan
