@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
 import SejarahUlos from '@/views/SejarahUlos.vue'
 import Penenun from '@/views/Penenun.vue'
 import PenenunGedogan from '@/views/PenenunGedogan.vue'
@@ -20,7 +20,7 @@ const router = createRouter({
     },
     {
       path: '/penenun',
-      name: 'Penenun',
+      name: 'penenun',
       component: Penenun
     },
     {

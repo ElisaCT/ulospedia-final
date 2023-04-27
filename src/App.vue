@@ -31,11 +31,11 @@ nav {
 
 nav a {
   font-weight: 400;
-  color: #0A0A0A;
-  }
+  color: #0a0a0a;
+}
 
 nav a.router-link-exact-active {
-  color: #3355B5;
+  color: #3355b5;
   text-decoration: underline;
-  }
+}
 </style>
