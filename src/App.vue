@@ -1,20 +1,19 @@
 <template>
-      <nav class="bg-white shadow-md rounded-full px-12 ml-40 mr-40">
-        <div class="container flex items-center justify-between">
-          <a href="https://flowbite.com/" class="items-center">
-            <img src="./assets/ditenun-logo.png" class="h-12" alt="Ditenun Logo" />
-          </a>
-          <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <div class="flex md:flex-row md:space-x-16 md:border-0">
-              <router-link to="/">Home</router-link>
-              <router-link to="/about">About</router-link>
-              <router-link to="/sejarah-ulos">Sejarah Ulos</router-link>
-              <router-link to="/penenun">Penenun</router-link>
-              <router-link to="/penenun-gedogan">Penenun Gedogan</router-link>
-            </div>
-          </div>
+  <nav class="bg-white shadow-md rounded-full px-12 ml-40 mr-40">
+    <div class="container flex items-center justify-between">
+      <a href="https://flowbite.com/" class="items-center">
+        <img src="./assets/ditenun-logo.png" class="h-12" alt="Ditenun Logo" />
+      </a>
+      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+        <div class="flex md:flex-row md:space-x-16 md:border-0">
+          <router-link to="/">Home</router-link>
+          <router-link to="/sejarah-ulos">Sejarah Ulos</router-link>
+          <router-link to="/penenun">Penenun</router-link>
+          <router-link to="/penenun-gedogan">Penenun Gedogan</router-link>
         </div>
-      </nav>
+      </div>
+    </div>
+  </nav>
   <router-view />
 </template>
 

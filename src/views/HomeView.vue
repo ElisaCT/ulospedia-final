@@ -86,5 +86,7 @@ export default {
     // eslint-disable-next-line vue/no-unused-components, vue/no-reserved-component-names
     Footer, Carousel, RagamUlos, JenisUlos, VideoPlayer
   }
-}
+};
+
 </script>
+
