@@ -10,7 +10,6 @@
           <router-link to="/sejarah-ulos">Sejarah Ulos</router-link>
           <router-link to="/galeri-ulos">Galeri Ulos</router-link>
           <router-link to="/penenun">Penenun</router-link>
-          <router-link to="/penenun-gedogan">Penenun Gedogan</router-link>
         </div>
       </div>
     </div>
@@ -69,7 +68,8 @@
 }
 
 nav {
-  padding: 30px;
+  margin-top: 24px;
+  padding: 15px 50px;
 }
 
 nav a {
@@ -77,6 +77,8 @@ nav a {
   color: #0a0a0a;
   text-decoration: none;
   border-bottom: 2px solid transparent;
+  padding-left: 4px;
+  padding-right: 4px;
   padding-bottom: 2px;
 }
 
