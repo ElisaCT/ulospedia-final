@@ -106,7 +106,6 @@
     <!-- jenis Ulos -->
     <JenisUlos />
   </div>
-  <Footer />
 </template>
 
 <script>
