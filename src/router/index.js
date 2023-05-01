@@ -5,6 +5,7 @@ import GaleriUlosView from '@/views/GaleriUlosView.vue'
 import Penenun from '@/views/Penenun.vue'
 import PenenunGedogan from '@/views/PenenunGedogan.vue'
 import UlosDetail from '@/views/UlosDetail.vue'
+import PenenunDetail from '@/views/PenenunDetail.vue'
 import ('preline')
 
 const router = createRouter({
@@ -39,6 +40,11 @@ const router = createRouter({
             path: '/detail-ulos',
             name: 'detail-ulos',
             component: UlosDetail
+        },
+        {
+            path: '/detail-penenun',
+            name: 'detail-penenun',
+            component: PenenunDetail
         }
     ]
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="mx-[180px]">
     <!-- Hero section -->
-    <div class="flex flex-wrap items-center justify-center md:flex-row py-16 px-6">
+    <div class="flex flex-wrap items-center justify-center md:flex-row pt-8 pb-10 px-6">
       <div class="md:w-1/2 text-center md:text-left md:text-xl">
         <h1 class="text-5xl font-bold text-gray-900 leading-tight">
           Lebih dekat dengan <span class="text-blue-600">Ulos</span> bersama
@@ -14,7 +14,7 @@
         <div class="mt-8 md:mt-12">
           <a
             href="#"
-            class="bg-primary_main hover:bg-primary_hover text-neutral_10 font-md py-4 px-6 rounded-[8px]"
+            class="bg-primary_main hover:bg-primary_hover text-neutral_10 font-medium py-3 px-10 rounded-lg"
             >Eksplor Ulos</a
           >
         </div>
@@ -26,7 +26,7 @@
     </div>
 
     <!-- Two card -->
-    <div class="flex justify-center gap-8">
+    <div class="flex justify-center gap-8 py-8">
       <!-- card 1 -->
       <div class="w-1/2 sm:w-full flex-1">
         <div

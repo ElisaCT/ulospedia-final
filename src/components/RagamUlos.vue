@@ -1,7 +1,7 @@
 <template>
     <div class=" bg-[#FDF7E9] pt-[61px] pb-[105px] mt-24 px-[180px]">
         <!-- Title -->
-        <div class="font-[#0A0A0A] pb-8">
+        <div class="font-[#0A0A0A] pb-8 text-center">
             <h1 class="text-[44px] font-bold">Ragam Ulos</h1>
             <p class="text-xl">Temukan berbagai keunikan ulos dari beberapa etnis Batak berikut.</p>
         </div>

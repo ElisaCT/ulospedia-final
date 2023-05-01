@@ -10,6 +10,7 @@
               src="../assets/images/harungguan.png"
               alt="{{ ulosName }}"
             />
+            <ecommerceAvailable class="absolute top-6 right-6 z-10"/>
           </div>
           <div
             class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
@@ -24,9 +25,11 @@
   </template>
   
   <script>
+  import ecommerceAvailable from './ecommerceAvailable.vue';
   export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'UlosCard',
+    components: {ecommerceAvailable},
     props:{
         ulosName: String, 
         ethnic: String

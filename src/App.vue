@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-white shadow-md rounded-full px-12 ml-40 mr-40 mb-10">
+  <nav class="bg-neutral_10 shadow-md rounded-full px-12 ml-40 mr-40 mb-8 sticky top-6 z-10">
     <div class="container flex items-center justify-between">
       <a href="https://flowbite.com/" class="items-center">
         <img src="./assets/ditenun-logo.png" class="h-12" alt="Ditenun Logo" />
@@ -70,6 +70,7 @@
 nav {
   margin-top: 24px;
   padding: 15px 50px;
+  box-shadow: 0px 2px 6px rgba(112, 144, 176, 0.2);
 }
 
 nav a {
