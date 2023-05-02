@@ -1,5 +1,23 @@
 <template>
   <div class="flex min-h-screen items-center justify-center">
+    <div v-if="penenuns">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <!-- card -->
+        <div v-for="penenun in penenuns" :key="penenun.id">
+          <div class="p-10">
+            <h1 class="text-lg font-bold">{{ penenun.name }}</h1>
+          </div>
+          <div>
+            <img :src="penenun.imageUrl" />
+          </div>
+        </div>
+        <!-- end card -->
+      </div>
+    </div>
+    <div v-else>Loading...</div>
+  </div>
+
+  <div class="flex min-h-screen items-center justify-center">
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       <div
         class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
@@ -24,9 +42,27 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'PenenunGedogan'
+  name: 'App',
+  data: function () {
+    return {
+      penenuns: null
+    }
+  },
+  mounted() {
+    axios
+      .get('http://company.ditenun.com/api/v1/ulospedia/client/weavers?theLoom=Gedongan&pageNo=1')
+      .then((response) => {
+        this.penenuns = response.data.data.weaverList.clientWeaverResponseList
+        console.log(this.penenuns)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 }
 </script>
 

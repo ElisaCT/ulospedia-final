@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import SejarahUlos from '@/views/SejarahUlos.vue'
 import Penenun from '@/views/Penenun.vue'
+import GaleriUlos from '@/views/GaleriUlos.vue'
 import PenenunGedogan from '@/views/PenenunGedogan.vue'
+
 import('preline')
 
 const router = createRouter({
@@ -24,8 +26,13 @@ const router = createRouter({
       component: Penenun
     },
     {
+      path: '/galeri-ulos',
+      name: 'galeri-ulos',
+      component: GaleriUlos
+    },
+    {
       path: '/penenun-gedogan',
-      name: 'penenun-godagan',
+      name: 'penenun-gedogan',
       component: PenenunGedogan
     }
   ]
