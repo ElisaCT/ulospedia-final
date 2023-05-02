@@ -4,12 +4,13 @@
       <a href="https://flowbite.com/" class="items-center">
         <img src="./assets/ditenun-logo.png" class="h-12" alt="Ditenun Logo" />
       </a>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+      <div class="md:block md:w-auto" id="navbar-default">
         <div class="flex md:flex-row md:space-x-16 md:border-0">
           <router-link to="/">Home</router-link>
           <router-link to="/sejarah-ulos">Sejarah Ulos</router-link>
           <router-link to="/galeri-ulos">Galeri Ulos</router-link>
           <router-link to="/penenun">Penenun</router-link>
+          <router-link to="/penenun-gedogan">Penenun Gedogan</router-link>
         </div>
       </div>
     </div>
