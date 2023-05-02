@@ -9,35 +9,37 @@
   <div class="flex justify-center">
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       <div class="group relative cursor-pointer items-center justify-center overflow-hidden">
-        <div class="relative">
-          <img
-            class="h-80 w-90 rounded-xl object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-            src="../assets/gedogan.png"
-            alt=""
-          />
-          <div class="absolute inset-0 flex items-center justify-center">
+        <router-link to="/penenun-gedogan">
+          <div class="relative">
+            <img
+              class="h-80 w-90 rounded-xl object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
+              src="../assets/gedogan.png"
+              alt=""
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <p
+                class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2 opacity-100 hover:opacity-0 transition duration-300 ease-in"
+              >
+                Gedogan
+              </p>
+            </div>
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from-neutral_100 group-hover:via-neutral_100 group-hover:to-neutral_100 opacity-70"
+          ></div>
+          <div
+            class="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0"
+          >
             <p
-              class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2 opacity-100 hover:opacity-0 transition duration-300 ease-in"
+              class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             >
-              Gedogan
+              Gedogan merupakan salah satu jenis alat tenun tradisional yang sudah sejak lama
+              digunakan oleh para leluhur di berbagai daerah Indonesia dalam proses penenunan kain.
+              Cara penggunaannya yaitu dengan memangku atau menggendong alat tenun sambil duduk di
+              lantai.
             </p>
           </div>
-        </div>
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from-neutral_100 group-hover:via-neutral_100 group-hover:to-neutral_100 opacity-70"
-        ></div>
-        <div
-          class="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0"
-        >
-          <p
-            class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-          >
-            Gedogan merupakan salah satu jenis alat tenun tradisional yang sudah sejak lama
-            digunakan oleh para leluhur di berbagai daerah Indonesia dalam proses penenunan kain.
-            Cara penggunaannya yaitu dengan memangku atau menggendong alat tenun sambil duduk di
-            lantai.
-          </p>
-        </div>
+        </router-link>
       </div>
       <div class="group relative cursor-pointer items-center justify-center overflow-hidden">
         <div class="">

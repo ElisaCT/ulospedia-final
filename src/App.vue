@@ -10,7 +10,6 @@
           <router-link to="/sejarah-ulos">Sejarah Ulos</router-link>
           <router-link to="/galeri-ulos">Galeri Ulos</router-link>
           <router-link to="/penenun">Penenun</router-link>
-          <router-link to="/penenun-gedogan">Penenun Gedogan</router-link>
         </div>
       </div>
     </div>
