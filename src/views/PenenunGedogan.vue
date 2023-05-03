@@ -23,6 +23,7 @@
         class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
       >
         <div class="h-96 w-72">
+          <div class="gradient"></div>
           <img
             class="h-full w-full object-cover transition-transform rounded-lg"
             src="../assets/asti-panjaitan.png"
@@ -66,4 +67,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+  .gradient{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.375) 0.79%, rgba(0, 0, 0, 0.175) 17.08%, rgba(0, 0, 0, 0.1) 31.87%, rgba(0, 0, 0, 0) 99.17%);
+    border-radius: 8px;
+  }
+</style>

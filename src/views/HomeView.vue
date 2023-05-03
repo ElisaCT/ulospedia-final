@@ -26,7 +26,7 @@
     </div>
 
     <!-- Two card -->
-    <div class="flex justify-center gap-8 py-8">
+    <div class="flex justify-center gap-8 py-8 lg:flex-row sm:flex-col">
       <!-- card 1 -->
       <div class="w-1/2 sm:w-full flex-1">
         <div
@@ -41,30 +41,21 @@
               kehidupan, dan kematian.
             </p>
           </div>
-          <div class="px-6 py-4 flex items-center">
+          <div class="px-6 py-4 flex items-center gap-2">
             <a
               href="#"
-              class="hover:text-blue-700 text-blue-600 font-medium underline decoration-solid py-2 px-4 rounded mr-2"
-              >Jelajahi Ulos</a
-            >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              class="h-5 w-5 text-blue-600 rotate-90"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M6.707 10.707a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L13 7.414V15a1 1 0 01-2 0V7.414l-3.293 3.293a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"
-              />
+              class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
+              >Jelajahi Ulos</a>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path stroke="#3355B5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"/>
             </svg>
           </div>
         </div>
       </div>
 
       <!-- card 2 -->
-      <div class="w-1/2 flex-1">
+      <div class="w-1/2 sm:w-full flex-1">
         <div
           class="bg-[#FBEFD2] overflow-hidden justify-items-start text-left"
           style="box-shadow: 18px 18px 0px #000000"
@@ -77,23 +68,14 @@
               pada saat kematian.
             </p>
           </div>
-          <div class="px-6 py-4 flex items-center">
+          <div class="px-6 py-4 flex items-center gap-2">
             <a
               href="#"
-              class="hover:text-blue-700 text-blue-600 font-medium underline decoration-solid py-2 px-4 rounded mr-2"
-              >Telusuri Sejarah Ulos</a
-            >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              class="h-5 w-5 text-blue-600 rotate-90"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M6.707 10.707a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L13 7.414V15a1 1 0 01-2 0V7.414l-3.293 3.293a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"
-              />
+              class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
+              >Telusuri Sejarah Ulos</a>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path stroke="#3355B5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"/>
             </svg>
           </div>
         </div>
