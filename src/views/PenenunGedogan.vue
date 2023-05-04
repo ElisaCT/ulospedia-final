@@ -5,7 +5,7 @@
       Tangan-tangan terampil penghasil ulos kualitas tinggi
     </p>
   </div>
-  <div class="flex justify-center pb-10">
+  <div class="flex px-28">
     <div v-if="penenuns">
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         <div v-for="penenun in penenuns" :key="penenun.id">
@@ -29,11 +29,16 @@
         </div>
       </div>
     </div>
+
+    <div v-else>
+      <CardSkeleton/>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CardSkeleton from '../components/CardSkeleton.vue'
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -53,7 +58,8 @@ export default {
       .catch((error) => {
         console.log(error)
       })
-  }
+  },
+  components: {CardSkeleton}
 }
 </script>
 
