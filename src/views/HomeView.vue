@@ -26,15 +26,15 @@
     </div>
 
     <!-- Two card -->
-    <div class="flex justify-center gap-8 py-8 lg:flex-row sm:flex-col">
+    <div class="flex justify-center gap-8 py-8 lg:flex-row md:flex-col sm:flex-col ">
       <!-- card 1 -->
-      <div class="w-1/2 sm:w-full flex-1">
+      <div class="lg:w-1/2 md:w-1/2 sm:w-full">
         <div
-          class="bg-[#D6DDF0] overflow-hidden justify-items-start text-left"
+          class="bg-[#D6DDF0] justify-items-start text-left w-auto"
           style="box-shadow: 18px 18px 0px #000000"
         >
           <div class="px-6 py-4">
-            <h4 class="font-bold text-2xl mb-2">Apa itu ulos?</h4>
+            <h4 class="font-bold text-2xl mb-2 md:text-xl sm:text-lg">Apa itu ulos?</h4>
             <p class="text-gray-700 text-lg">
               Ulos merupakan selendang tenun tradisional Batak yang berasal dari Sumatera Utara.
               Kain ini berperan penting dalam setiap tahap kehidupan budaya Batak, yaitu kelahiran,
@@ -55,13 +55,13 @@
       </div>
 
       <!-- card 2 -->
-      <div class="w-1/2 sm:w-full flex-1">
+      <div class="lg:w-1/2 md:w-1/2 sm:w-full">
         <div
-          class="bg-[#FBEFD2] overflow-hidden justify-items-start text-left"
+          class="bg-[#FBEFD2] justify-items-start text-left w-auto"
           style="box-shadow: 18px 18px 0px #000000"
         >
           <div class="px-6 py-4">
-            <h4 class="font-bold text-2xl mb-2">Lahir, hidup, dan mati</h4>
+            <h4 class="font-bold text-2xl mb-2 md:text-xl sm:text-lg">Lahir, hidup, dan mati</h4>
             <p class="text-gray-700 text-lg">
               Ulos merupakan simbol kesuburan dalam upacara kelahiran, bagian penting dari tata cara
               pelaksanaan upacara adat selama hidup, serta tanda berkabung dan penghormatan terakhir
@@ -81,6 +81,7 @@
         </div>
       </div>
     </div>
+    
     <carousel />
   </div>
   <ragam-ulos />

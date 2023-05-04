@@ -7,18 +7,18 @@
         </div>
 
         <!-- Button -->
-        <div class="gap-6 font-[#0A0A0A] lg:text-2xl md:text-xl sm:text-base text-center">
+        <div class="gap-6 font-[#0A0A0A] lg:text-2xl md:text-xl sm:text-base text-center ">
             <!-- first col -->
-            <div class="grid grid-cols-3 gap-6 pb-6"> 
-                <a class="bg-[#BBC6E6] md:col-span-2  sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Toba</a>
-                <a class="bg-[#FBEFD2] md:col-span-2  sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Simalungun</a>
+            <div class="grid md:grid-cols-3 gap-6 pb-6 sm:flex-row"> 
+                <a class="bg-[#BBC6E6] md:col-span-2 sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Toba</a>
+                <a class="bg-[#FBEFD2] md:col-span-1 sm:col-span-3  h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Simalungun</a>
             </div>
 
             <!-- second col -->
-            <div class="grid md:grid-cols-3 sm:flex-row gap-6 h-[140px] ">
-                <a class="bg-[#FBEFD2] rounded-[20px]  flex justify-center items-center" href=#>Batak Mandailing</a>
-                <a class="bg-[#BBC6E6] rounded-[20px]  flex justify-center items-center" href=#>Batak Karo</a>
-                <a class="bg-[#FBEFD2] rounded-[20px]  flex justify-center items-center" href=#>Batak Angkola</a>
+            <div class="grid md:grid-cols-3 sm:flex-row gap-6 ">
+                <a class="bg-[#FBEFD2] rounded-[20px] h-[140px]  flex justify-center items-center" href=#>Batak Mandailing</a>
+                <a class="bg-[#BBC6E6] rounded-[20px] h-[140px]  flex justify-center items-center" href=#>Batak Karo</a>
+                <a class="bg-[#FBEFD2] rounded-[20px] h-[140px]  flex justify-center items-center" href=#>Batak Angkola</a>
             </div>
         </div>
     </div>

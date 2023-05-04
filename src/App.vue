@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <nav class="bg-neutral_10 shadow-md rounded-full px-12 ml-40 mr-40 mb-8 sticky top-6 z-10">
     <div class="container flex items-center justify-between">
       <a href="https://flowbite.com/" class="items-center">
@@ -23,7 +23,7 @@
             <div class="flex flex-wrap items-left mr-4">
                 <span class="font-normal text-md text-neutral_70 sm:text-center dark:text-gray-400">© 2023 <a href=# class="hover:underline">DiTenun Ulospedia</a>
                 </span>
-                <ul class="flex flex-wrap items-left mt-3 ml-16 text-md font-normal text-neutral_70 dark:text-gray-400 sm:mt-0">
+                <ul class="flex flex-wrap items-left mt-3 ml-16 text-md font-normal text-neutral_70 dark:text-gray-400 md:flex-row sm:mt-0 sm:flex-col">
                     <li>
                         <a href="#" class="mr-4 hover:underline md:mr-6 ">WebApp</a>
                     </li>
@@ -38,7 +38,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+            <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0 ">
                 <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"><path fill="#757575" d="M17.5 3.603v12.794a1.103 1.103 0 0 1-1.103 1.103H3.603A1.103 1.103 0 0 1 2.5 16.397V3.603A1.103 1.103 0 0 1 3.603 2.5h12.794A1.103 1.103 0 0 1 17.5 3.603ZM6.912 8.235H4.706v7.06h2.206v-7.06ZM7.11 5.81a1.27 1.27 0 0 0-1.261-1.28h-.04a1.28 1.28 0 0 0 0 2.56 1.27 1.27 0 0 0 1.301-1.24v-.04Zm8.184 5.197c0-2.122-1.35-2.947-2.691-2.947a2.515 2.515 0 0 0-2.232 1.138h-.062v-.962H8.235v7.06h2.206V11.54a1.465 1.465 0 0 1 1.324-1.58h.083c.702 0 1.223.441 1.223 1.553v3.781h2.206l.017-4.288Z"/></svg>
                     <span class="sr-only">LinkedIn Page</span>
@@ -87,5 +87,95 @@ nav a {
 nav a.router-link-exact-active {
   color: #3355b5;
   border-bottom-color:#3355b5;
+}
+</style> -->
+
+
+<template>
+  <nav class="bg-neutral_10 shadow-md rounded-full px-12 mb-8 sticky top-6 z-10">
+    <div class="container flex items-center justify-between">
+      <a href="https://flowbite.com/" class="items-center">
+        <img src="./assets/ditenun-logo.png" class="h-12" alt="Ditenun Logo" />
+      </a>
+      <button class="md:hidden" @click="toggleMenu">
+        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+          <path v-show="!showMenu" d="M4 6h16M4 12h16M4 18h16"></path>
+          <path v-show="showMenu" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <div class="md:flex md:w-auto md:items-center" :class="{'block': showMenu, 'hidden': !showMenu}">
+        <div class="md:flex md:flex-row md:space-x-16 md:border-0">
+          <router-link to="/" @click="closeMenu">Home</router-link>
+          <router-link to="/sejarah-ulos" @click="closeMenu">Sejarah Ulos</router-link>
+          <router-link to="/galeri-ulos" @click="closeMenu">Galeri Ulos</router-link>
+          <router-link to="/penenun" @click="closeMenu">Penenun</router-link>
+          <router-link to="/penenun-gedogan" @click="closeMenu">Penenun Gedogan</router-link>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <router-view />
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      showMenu: false
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.showMenu = !this.showMenu;
+    },
+    closeMenu() {
+      this.showMenu = false;
+    }
+  }
+};
+</script>
+
+<style scoped>
+nav {
+  margin-top: 24px;
+  padding: 15px 50px;
+  box-shadow: 0px 2px 6px rgba(112, 144, 176, 0.2);
+}
+
+nav a {
+  font-weight: 400;
+  color: #0a0a0a;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 2px;
+}
+
+nav a.router-link-exact-active {
+  color: #3355b5;
+  border-bottom-color:#3355b5;
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 10px;
+  }
+  nav a {
+    display: block;
+    padding: 10px 0;
+  }
+  nav button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  .block {
+    display: block;
+  }
+  .hidden {
+    display: none;
+  }
 }
 </style>
