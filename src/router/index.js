@@ -11,49 +11,44 @@ import PenenunDetail from '@/views/PenenunDetail.vue'
 import ('preline')
 
 const router = createRouter({
-    history: createWebHistory(
-        import.meta.env.BASE_URL),
-    routes: [{
-            path: '/',
-            name: 'home',
-            component: HomeView
-        },
-        {
-            path: '/sejarah-ulos',
-            name: 'sejarah-ulos',
-            component: SejarahUlos
-        },
-        {
-            path: '/galeri-ulos',
-            name: 'galeri-ulos',
-            component: GaleriUlosView
-        },
-        {
-            path: '/penenun',
-            name: 'penenun',
-            component: Penenun
-        },
-        {
-            path: '/galeri-ulos',
-            name: 'galeri-ulos',
-            component: GaleriUlos
-        },
-        {
-            path: '/penenun-gedogan',
-            name: 'penenun-gedogan',
-            component: PenenunGedogan
-        },
-        {
-            path: '/detail-ulos',
-            name: 'detail-ulos',
-            component: UlosDetail
-        },
-        {
-            path: '/detail-penenun',
-            name: 'detail-penenun',
-            component: PenenunDetail
-        }
-    ]
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: HomeView
+    },
+    {
+      path: '/sejarah-ulos',
+      name: 'sejarah-ulos',
+      component: SejarahUlos
+    },
+    {
+      path: '/penenun',
+      name: 'penenun',
+      component: Penenun
+    },
+    {
+      path: '/galeri-ulos',
+      name: 'galeri-ulos',
+      component: GaleriUlos
+    },
+    {
+      path: '/penenun-gedogan',
+      name: 'penenun-gedogan',
+      component: PenenunGedogan
+    },
+    {
+      path: '/penenun-gedogan/:id',
+      name: 'PenenunDetail',
+      component: PenenunDetail
+    },
+    {
+      path: '/penenun-detail',
+      name: 'penenun-detail',
+      component: PenenunDetail
+    }
+  ]
 })
 
 export default router

@@ -1,49 +1,71 @@
 <template>
-  <div class="flex min-h-screen items-center justify-center">
+  <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14 pt-10">
+    <h2 class="text-2xl font-bold md:text-4xl text-neutral_100 mb-4">Penenun Gedogan</h2>
+    <p class="mt-1 text-neutral_90 text-[16px] mb-0">
+      Tangan-tangan terampil penghasil ulos kualitas tinggi
+    </p>
+  </div>
+  <div class="flex px-28">
     <div v-if="penenuns">
-      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        <!-- card -->
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         <div v-for="penenun in penenuns" :key="penenun.id">
-          <div class="p-10">
-            <h1 class="text-lg font-bold">{{ penenun.name }}</h1>
-          </div>
-          <div>
-            <img :src="penenun.imageUrl" />
+          <div
+            class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+          >
+            <div class="h-[300px] w-[252px]">
+              <img
+                class="h-full w-full object-cover transition-transform rounded-lg"
+                :src="penenun.imageUrl"
+              />
+            </div>
+            <div
+              class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+            ></div>
+            <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6">
+              <h1 class="text-xl font-medium text-neutral_10">{{ penenun.name }}</h1>
+              <p class="text-neutral_10">{{ penenun.age }}</p>
+            </div>
           </div>
         </div>
-        <!-- end card -->
       </div>
     </div>
-    <div v-else>Loading...</div>
-  </div>
 
-  <div class="flex min-h-screen items-center justify-center">
-    <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-      <div
-        class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
-      >
-        <div class="h-96 w-72">
-          <div class="gradient"></div>
-          <img
-            class="h-full w-full object-cover transition-transform rounded-lg"
-            src="../assets/asti-panjaitan.png"
-            alt=""
-          />
-        </div>
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
-        ></div>
-        <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6">
-          <h1 class="text-xl font-medium text-neutral_10">Asti Panjaitan</h1>
-          <p class="text-neutral_10">32 Tahun</p>
+    <div v-else>
+      <CardSkeleton />
+    </div>
+  </div>
+  <router-link :to="'/penenun-gedogan/${penenuns.id}'">
+    <div class="flex justify-center pb-10">
+      <div v-if="penenuns">
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div v-for="penenun in penenuns" :key="penenun.id">
+            <div
+              class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+            >
+              <div class="h-[300px] w-[252px]">
+                <img
+                  class="h-full w-full object-cover transition-transform rounded-lg"
+                  :src="penenun.imageUrl"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+              ></div>
+              <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6">
+                <h1 class="text-xl font-medium text-neutral_10">{{ penenun.name }}</h1>
+                <p class="text-neutral_10">{{ penenun.age }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
 import axios from 'axios'
+import CardSkeleton from '../components/CardSkeleton.vue'
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -63,7 +85,8 @@ export default {
       .catch((error) => {
         console.log(error)
       })
-  }
+  },
+  components: { CardSkeleton }
 }
 </script>
 
