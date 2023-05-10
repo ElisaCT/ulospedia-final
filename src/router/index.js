@@ -5,6 +5,7 @@ import GaleriUlosView from '@/views/GaleriUlosView.vue'
 import Penenun from '@/views/Penenun.vue'
 import GaleriUlos from '@/views/GaleriUlos.vue'
 import PenenunGedogan from '@/views/PenenunGedogan.vue'
+import PenenunDetail from '@/views/PenenunDetail.vue'
 import UlosDetail from '@/views/UlosDetail.vue'
 import PenenunDetail from '@/views/PenenunDetail.vue'
 
@@ -24,11 +25,6 @@ const router = createRouter({
             component: SejarahUlos
         },
         {
-            path: '/galeri-ulos',
-            name: 'galeri-ulos',
-            component: GaleriUlosView
-        },
-        {
             path: '/penenun',
             name: 'penenun',
             component: Penenun
@@ -42,16 +38,6 @@ const router = createRouter({
             path: '/penenun-gedogan',
             name: 'penenun-gedogan',
             component: PenenunGedogan
-        },
-        {
-            path: '/detail-ulos',
-            name: 'detail-ulos',
-            component: UlosDetail
-        },
-        {
-            path: '/detail-penenun',
-            name: 'detail-penenun',
-            component: PenenunDetail
         }
     ]
 })
