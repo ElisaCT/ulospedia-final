@@ -90,4 +90,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+  .gradient{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.375) 0.79%, rgba(0, 0, 0, 0.175) 17.08%, rgba(0, 0, 0, 0.1) 31.87%, rgba(0, 0, 0, 0) 99.17%);
+    border-radius: 8px;
+  }
+</style>

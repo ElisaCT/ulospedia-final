@@ -3,7 +3,7 @@
   <div class="carousel">
     <!-- title -->
     <div class="flex flex-row pb-6">
-      <h2 class="text-4xl text-left grow font-medium">Temukan Fakta Menarik Ulos</h2>
+      <h2 class="lg:text-4xl md:text-3xl sm:text-2xl text-left grow font-medium">Temukan Fakta Menarik Ulos</h2>
       <!-- button -->
       <div class="flex flex-row gap-6">
         <!-- prev -->
@@ -50,7 +50,8 @@
         :key="index"
         :class="['carousel-item', { active: index === currentSlide }]"
       >
-        <img :src="slide.image" :alt="slide.alt" />
+        <img :src="slide.image" :alt="slide.alt" 
+            class="object-cover"/>
       </div>
     </div>
   </div>
@@ -104,6 +105,7 @@ export default {
 
 .carousel-inner {
   position: relative;
+  width: 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -115,7 +117,7 @@ export default {
   height: 100%;
   width: 100%;
   opacity: 0;
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.6s ease-in;
 }
 
 .carousel-item.active {

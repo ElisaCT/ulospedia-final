@@ -1,12 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import SejarahUlos from '@/views/SejarahUlos.vue'
+import GaleriUlosView from '@/views/GaleriUlosView.vue'
 import Penenun from '@/views/Penenun.vue'
 import GaleriUlos from '@/views/GaleriUlos.vue'
 import PenenunGedogan from '@/views/PenenunGedogan.vue'
+import UlosDetail from '@/views/UlosDetail.vue'
 import PenenunDetail from '@/views/PenenunDetail.vue'
 
-import('preline')
+import ('preline')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
