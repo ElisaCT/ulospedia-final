@@ -5,6 +5,7 @@ import Penenun from '@/views/Penenun.vue'
 import GaleriUlos from '@/views/GaleriUlos.vue'
 import PenenunGedogan from '@/views/PenenunGedogan.vue'
 import PenenunDetail from '@/views/PenenunDetail.vue'
+import AdminLogin from '@/views/Admin/Login.vue'
 
 import ('preline')
 
@@ -42,9 +43,9 @@ const router = createRouter({
             component: PenenunDetail
         },
         {
-            path: '/penenun-detail',
-            name: 'penenun-detail',
-            component: PenenunDetail
+            path: '/admin/login',
+            name: 'admin-login',
+            component: AdminLogin
         }
     ]
 })
