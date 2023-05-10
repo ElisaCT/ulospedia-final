@@ -6,39 +6,43 @@
     </p>
   </div>
   
-  <router-link :to="'/penenun-gedogan/${penenuns.id}'">
+  
     <div class="flex justify-center pb-10">
-      <div v-if="penenuns">
-        <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <div v-for="penenun in penenuns" :key="penenun.id">
-            <div
-              class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
-            >
-              <div class="h-[300px] w-[252px]">
-          <div class="gradient"></div>
-                <img
-                  class="h-full w-full object-cover transition-transform rounded-lg"
-                  :src="penenun.imageUrl"
-                />
-              </div>
-              <div
-                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
-              ></div>
-              <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6">
-                <h1 class="text-xl font-medium text-neutral_10">{{ penenun.name }}</h1>
-                <p class="text-neutral_10">{{ penenun.age }}</p>
-              </div>
+      
+        <div v-if="penenuns">
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+            <div v-for="penenun in penenuns" :key="penenun.id">
+              <router-link :to="'/penenun-gedogan/' + penenun.id">
+                <div
+                  class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+                >
+                  <div class="h-[300px] w-[252px]">
+              <div class="gradient"></div>
+                    <img
+                      class="h-full w-full object-cover transition-transform rounded-lg"
+                      :src="penenun.imageUrl"
+                    />
+                  </div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+                  ></div>
+                  <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6">
+                    <h1 class="text-xl font-medium text-neutral_10">{{ penenun.name }}</h1>
+                    <p class="text-neutral_10">{{ penenun.age }}</p>
+                  </div>
+                </div>
+              </router-link>
             </div>
           </div>
-        </div>
-      </div>
+    </div>
+      
 
       <div v-else>
-      <CardSkeleton />
-    </div>
+        <CardSkeleton />
+      </div>
     
     </div>
-  </router-link>
+  
 </template>
 
 <script>
@@ -63,6 +67,12 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+  },
+  methods:{
+    // eslint-disable-next-line no-unused-vars
+    // goToDetail(id){
+    //   this.$router.push('/penenun-gedogan/${id}')
+    // }
   },
   components: { CardSkeleton }
 }

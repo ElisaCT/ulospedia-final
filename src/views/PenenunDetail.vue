@@ -67,10 +67,12 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://company.ditenun.com/api/v1/ulospedia/client/weavers/1').then((response) => {
-      this.penenunDetails = response.data.data
-      console.log(this.penenunDetails)
-    })
+    axios
+    .get('http://company.ditenun.com/api/v1/ulospedia/client/weavers/' + this.$route.params.id)
+      .then((response) => {
+        this.penenunDetails = response.data.data
+        console.log(this.penenunDetails)
+      })
   },
   methods() {}
 }
