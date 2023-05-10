@@ -29,6 +29,56 @@
                 <p class="w-auto h-4 bg-[#eeee]" ></p>
             </div>
         </div>
+
+        <div class="card col-span-1 h-[300px] placeholder wave">
+            <div class="h-[300px] w-[252px]">
+                <img src="" alt="">
+            </div>
+            <div class="flex flex-row absolute left-6 bottom-6 z-10">
+                <h1 class="w-auto h-6 bg-[#eeee]"></h1>
+                <p class="w-auto h-4 bg-[#eeee]" ></p>
+            </div>
+        </div>
+
+        <div class="card col-span-1 h-[300px] placeholder wave">
+            <div class="h-[300px] w-[252px]">
+                <img src="" alt="">
+            </div>
+            <div class="flex flex-row absolute left-6 bottom-6">
+                <h1 class="w-auto h-6 bg-[#eeee]"></h1>
+                <p class="w-auto h-4 bg-[#eeee]" ></p>
+            </div>
+        </div>
+
+        <div class="card col-span-1 h-[300px] placeholder wave">
+            <div class="h-[300px] w-[252px]">
+                <img src="" alt="">
+            </div>
+            <div class="flex flex-row absolute left-6 bottom-6">
+                <h1 class="w-auto h-6 bg-[#eeee]"></h1>
+                <p class="w-auto h-4 bg-[#eeee]" ></p>
+            </div>
+        </div>
+
+        <div class="card col-span-1 h-[300px] placeholder wave">
+            <div class="h-[300px] w-[252px]">
+                <img src="" alt="">
+            </div>
+            <div class="flex flex-row absolute left-6 bottom-6">
+                <h1 class="w-auto h-6 bg-[#eeee]"></h1>
+                <p class="w-auto h-4 bg-[#eeee]" ></p>
+            </div>
+        </div>
+
+        <div class="card col-span-1 h-[300px] placeholder wave">
+            <div class="h-[300px] w-[252px]">
+                <img src="" alt="">
+            </div>
+            <div class="flex flex-row absolute left-6 bottom-6">
+                <h1 class="w-auto h-6 bg-[#eeee]"></h1>
+                <p class="w-auto h-4 bg-[#eeee]" ></p>
+            </div>
+        </div>
     </div>
 </template>
 <script>

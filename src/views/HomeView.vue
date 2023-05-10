@@ -94,14 +94,12 @@
 // @ is an alias to /src
 import RagamUlos from '../components/RagamUlos.vue'
 import JenisUlos from '../components/JenisUlos.vue'
-import Footer from '../components/Footer.vue'
 import Carousel from '../components/Carousel.vue'
 
 export default {
   name: 'HomeView',
   components: {
     // eslint-disable-next-line vue/no-unused-components, vue/no-reserved-component-names
-    Footer,
     RagamUlos,
     JenisUlos,
     Carousel

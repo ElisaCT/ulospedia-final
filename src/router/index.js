@@ -1,12 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import SejarahUlos from '@/views/SejarahUlos.vue'
-import GaleriUlosView from '@/views/GaleriUlosView.vue'
 import Penenun from '@/views/Penenun.vue'
 import GaleriUlos from '@/views/GaleriUlos.vue'
 import PenenunGedogan from '@/views/PenenunGedogan.vue'
-import PenenunDetail from '@/views/PenenunDetail.vue'
-import UlosDetail from '@/views/UlosDetail.vue'
 import PenenunDetail from '@/views/PenenunDetail.vue'
 
 import ('preline')
@@ -38,6 +35,16 @@ const router = createRouter({
             path: '/penenun-gedogan',
             name: 'penenun-gedogan',
             component: PenenunGedogan
+        },
+        {
+            path: '/penenun-gedogan/:id',
+            name: 'PenenunDetail',
+            component: PenenunDetail
+        },
+        {
+            path: '/penenun-detail',
+            name: 'penenun-detail',
+            component: PenenunDetail
         }
     ]
 })
