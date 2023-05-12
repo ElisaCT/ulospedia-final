@@ -48,7 +48,7 @@ const router = createRouter({
             component: PenenunDetail
         },
         {
-            path: '/ulos-detail/',
+            path: '/ulos-detail/:id',
             name: 'UlosDetail',
             component: UlosDetail
         },

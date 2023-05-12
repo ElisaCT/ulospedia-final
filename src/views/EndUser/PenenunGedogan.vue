@@ -64,7 +64,8 @@ export default {
     return {
       penenuns: null,
       pageNo: 1,
-      lastPage:true
+      lastPage:true,
+      searchText: ''
     }
   },
   mounted() {

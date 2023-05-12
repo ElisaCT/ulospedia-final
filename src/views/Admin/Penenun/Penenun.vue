@@ -106,6 +106,9 @@
                 </div>
         </div>
         <DeleteConfirmation/>
+        <DiscardConfirmation/>
+        <SaveSuccess/>
+        <EmptyState/>
     </div>
     </div>
 
@@ -113,10 +116,16 @@
 <script>
 import Sidebar from '../../../components/Admin/Sidebar.vue';
 import DeleteConfirmation from '../../../components/Admin/Modals/DeleteConfirmation.vue';
+import DiscardConfirmation from '../../../components/Admin/Modals/DiscardConfirmation.vue';
+import SaveSuccess from '../../../components/Admin/Modals/SaveSuccess.vue';
+import EmptyState from '../../../components/Admin/EmptyState.vue';
 export default {
     components:{
         Sidebar,
-        DeleteConfirmation
+        DeleteConfirmation,
+        DiscardConfirmation,
+        SaveSuccess,
+        EmptyState
     }
 }
 </script>
