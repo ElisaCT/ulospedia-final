@@ -1,4 +1,5 @@
 <template>
+  <Navbar/>
   <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14 pt-10">
     <h2 class="text-2xl font-bold md:text-4xl text-neutral_100 mb-4">Penenun Gedogan</h2>
     <p class="mt-1 text-neutral_90 text-[16px] mb-0">
@@ -47,12 +48,14 @@
     <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14">
         <button class="text-neutral_70 font-medium text-lg bg-neutral_20 items-center px-4 py-4 rounded-lg w-full max-w-md" @click="loadMore" v-if="!lastPage">Muat lebih banyak</button>
     </div>
-  
+    <Footer/>
 </template>
 
 <script>
 import axios from 'axios'
-import CardSkeleton from '../components/CardSkeleton.vue'
+import CardSkeleton from '../../components/EndUser/CardSkeleton.vue'
+import Navbar from '../../components/EndUser/Navbar.vue'
+import Footer from '../../components/EndUser/Footer.vue';
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -101,7 +104,12 @@ export default {
       }
     }
   },
-  components: { CardSkeleton }
+  components: { 
+    CardSkeleton,
+    Navbar,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Footer 
+  }
 }
 </script>
 

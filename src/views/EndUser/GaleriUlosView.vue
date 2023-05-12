@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
     <div class="mx-[180px]">
       <!-- search -->
       <div class="flex flex-row items-center gap-3">
@@ -32,15 +33,19 @@
       </div>
       
     </div>
+    <Footer/>
   </template>
   
   <script>
-  import UlosCard from '../components/UlosCard.vue';
+  import UlosCard from '../../components/EndUser/UlosCard.vue';
+  import Navbar from '../../components/EndUser/Navbar.vue'
+  import Footer from '../../components/EndUser/Footer.vue';
 
   export default {
     name: "GaleriUlosView",
     components:{
-      UlosCard
+      // eslint-disable-next-line vue/no-reserved-component-names
+      UlosCard, Navbar, Footer
     },
     data() {
       return {

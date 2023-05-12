@@ -1,4 +1,5 @@
 <template>
+    <Navbar/>
    <div class="flex flex-col gap-12 items-center px-44">
         <div class="flex gap-6 items-center">
             <div class="flex flex-col items-center gap-2">
@@ -86,11 +87,14 @@
             </div>
         </div>
     </div>
-
+    <Footer/>
 </template>
 <script>
+import Navbar from '../../components/EndUser/Navbar.vue'
+import Footer from '../../components/EndUser/Footer.vue';
 export default {
-    
+    // eslint-disable-next-line vue/no-reserved-component-names
+    components:{Navbar, Footer}
 }
 </script>
 <style scoped>

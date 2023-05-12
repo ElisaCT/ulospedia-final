@@ -1,13 +1,17 @@
+<!-- eslint-disable vue/no-reserved-component-names -->
+<!-- eslint-disable vue/no-reserved-component-names -->
+<!-- eslint-disable vue/no-reserved-component-names -->
 <template>
+  <Navbar/>
   <div class="mx-[180px]">
     <!-- Hero section -->
     <div class="flex flex-wrap items-center justify-center md:flex-row pt-8 pb-10 px-6">
       <div class="md:w-1/2 text-center md:text-left md:text-xl">
         <h1 class="text-5xl font-bold text-gray-900 leading-tight">
-          Lebih dekat dengan <span class="text-blue-600">Ulos</span> bersama
-          <span class="text-blue-600">Ulospedia</span>
+          Lebih dekat dengan <span class="text-primary_main">Ulos</span> bersama
+          <span class="text-primary_main">Ulospedia</span>
         </h1>
-        <p class="mt-4 text-gray-600 text-lg md:text-xl">
+        <p class="mt-4 text-neutral_90 text-lg md:text-xl">
           Kembangkan pengetahuanmu tentang ulos <br />
           bersama Ditenun Ulospedia
         </p>
@@ -21,7 +25,7 @@
       </div>
 
       <div class="md:w-1/2 mt-12 md:mt-0">
-        <img src="../assets/images/hero-1.png" alt="Hero Image" class="w-full rounded" />
+        <img src="../../assets/images/hero-1.png" alt="Hero Image" class="w-full rounded" />
       </div>
     </div>
 
@@ -88,13 +92,17 @@
     <!-- jenis Ulos -->
     <JenisUlos />
   </div>
+
+  <Footer/>
 </template>
 
 <script>
 // @ is an alias to /src
-import RagamUlos from '../components/RagamUlos.vue'
-import JenisUlos from '../components/JenisUlos.vue'
-import Carousel from '../components/Carousel.vue'
+import RagamUlos from '../../components/EndUser/RagamUlos.vue'
+import JenisUlos from '../../components/EndUser/JenisUlos.vue'
+import Carousel from '../../components/EndUser/Carousel.vue'
+import Navbar from '../../components/EndUser/Navbar.vue'
+import Footer from '../../components/EndUser/Footer.vue';
 
 export default {
   name: 'HomeView',
@@ -102,7 +110,10 @@ export default {
     // eslint-disable-next-line vue/no-unused-components, vue/no-reserved-component-names
     RagamUlos,
     JenisUlos,
-    Carousel
+    Carousel,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Footer,
+    Navbar
   }
 }
 </script>
