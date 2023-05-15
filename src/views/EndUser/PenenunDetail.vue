@@ -1,4 +1,5 @@
 <template>
+  <Navbar/>
   <div v-if="penenunDetails">
     <div v-for="penenunDetail in penenunDetails" :key="penenunDetail.id">
       <div class="flex flex-col gap-12 items-center px-44 p-12">
@@ -56,9 +57,13 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 <script>
 import axios from 'axios'
+import Navbar from '../../components/EndUser/Navbar.vue'
+import Footer from '../../components/EndUser/Footer.vue';
+
 export default {
   name: 'penenun-detail',
   data: function () {
@@ -74,7 +79,13 @@ export default {
         console.log(this.penenunDetails)
       })
   },
-  methods() {}
+  methods() {
+
+  },
+  components:{
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Navbar, Footer
+  }
 }
 </script>
 <style lang=""></style>

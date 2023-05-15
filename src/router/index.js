@@ -1,11 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import HomeView from '@/views/HomeView.vue'
 import SejarahUlos from '@/views/SejarahUlos.vue'
 import Penenun from '@/views/Penenun.vue'
-import GaleriUlos from '@/views/GaleriUlos.vue'
+import GaleriUlosView from '@/views/EndUser/GaleriUlosView.vue'
 import PenenunGedogan from '@/views/PenenunGedogan.vue'
 import PenenunDetail from '@/views/PenenunDetail.vue'
+import UlosDetail from '@/views/EndUser/UlosDetail.vue'
+
+// Admin
 import AdminLogin from '@/views/Admin/Login.vue'
+import Dashboard from '@/views/Admin/Dashboard.vue'
+import AdminUlos from '@/views/Admin/Ulos/Ulos.vue'
+import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
 
 import ('preline')
 
@@ -30,7 +37,7 @@ const router = createRouter({
         {
             path: '/galeri-ulos',
             name: 'galeri-ulos',
-            component: GaleriUlos
+            component: GaleriUlosView
         },
         {
             path: '/penenun-gedogan',
@@ -43,9 +50,29 @@ const router = createRouter({
             component: PenenunDetail
         },
         {
+            path: '/ulos-detail/:id',
+            name: 'UlosDetail',
+            component: UlosDetail
+        },
+        {
             path: '/admin/login',
             name: 'admin-login',
             component: AdminLogin
+        },
+        {
+            path: '/admin/dashboard',
+            name: 'dashboard',
+            component: Dashboard
+        },
+        {
+            path: '/admin/ulos',
+            name: 'AdminUlos',
+            component: AdminUlos
+        },
+        {
+            path: '/admin/penenun',
+            name: 'AdminPenenun',
+            component: AdminPenenun
         }
     ]
 })

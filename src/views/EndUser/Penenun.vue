@@ -1,4 +1,5 @@
 <template>
+  <Navbar/>
   <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14 pt-10">
     <h2 class="text-2xl font-bold md:text-4xl text-neutral_100 mb-4">Alat Tenun Ulos</h2>
     <p class="mt-1 text-neutral_90 text-[16px] mb-0">
@@ -13,7 +14,7 @@
           <div class="relative">
             <img
               class="h-80 w-90 rounded-xl object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-              src="../assets/gedogan.png"
+              src="../../assets/gedogan.png"
               alt=""
             />
             <div class="absolute inset-0 flex items-center justify-center">
@@ -45,7 +46,7 @@
         <div class="">
           <img
             class="h-80 w-90 object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-            src="../assets/atbm.png"
+            src="../../assets/atbm.png"
             alt=""
           />
           <div class="absolute inset-0 flex items-center justify-center">
@@ -75,7 +76,7 @@
         <div class="relative">
           <img
             class="h-80 w-90 object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-            src="../assets/atm.png"
+            src="../../assets/atm.png"
             alt=""
           />
           <div class="absolute inset-0 flex items-center justify-center">
@@ -103,12 +104,22 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar from '../../components/EndUser/Navbar.vue'
+import Footer from '../../components/EndUser/Footer.vue';
+
 export default {
 
   // eslint-disable-next-line vue/multi-word-component-names
-  name: 'penenun'
+  name: 'penenun',
+
+  components:{
+    Navbar,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Footer
+  }
 }
 </script>

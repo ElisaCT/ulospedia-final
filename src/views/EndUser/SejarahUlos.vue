@@ -1,4 +1,5 @@
 <template>
+  <Navbar/>
   <div class="flex place-content-center pb-10 pt-10">
     <div
       class="flex bg-primary_surface hover:bg-primary_surface rounded-[16px] transition dark:bg-primary_main dark:hover:bg-primary_hover"
@@ -48,7 +49,7 @@
           <div class="lg:col-span-4 mt-10 lg:mt-0">
             <img
               class="w-full rounded-xl"
-              src="../assets/sejarah-ulos.png"
+              src="../../assets/sejarah-ulos.png"
               alt="Image Description"
             />
           </div>
@@ -95,7 +96,7 @@
         <!-- Grid -->
         <div class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
           <div class="lg:col-span-4 mt-10 lg:mt-0">
-            <img class="w-full rounded-xl" src="../assets/arti-ulos.png" alt="Image Description" />
+            <img class="w-full rounded-xl" src="../../assets/arti-ulos.png" alt="Image Description" />
           </div>
           <!-- End Col -->
           <div class="lg:col-span-6 lg:mt-0">
@@ -137,7 +138,7 @@
           <div class="lg:col-span-4 mt-10 lg:mt-0">
             <img
               class="w-full rounded-xl"
-              src="../assets/ulos-modern.png"
+              src="../../assets/ulos-modern.png"
               alt="Image Description"
             />
           </div>
@@ -173,10 +174,14 @@
     </div>
     <!-- End Tab Ulos di zaman modern -->
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar from '../../components/EndUser/Navbar.vue'
+import Footer from '../../components/EndUser/Footer.vue';
 export default {
-  name: 'SejarahUlos'
+    // eslint-disable-next-line vue/no-reserved-component-names
+    components:{Navbar, Footer}
 }
 </script>
