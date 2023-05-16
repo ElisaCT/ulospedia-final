@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import HomeView from '@/views/EndUser/HomeView.vue'
 import SejarahUlos from '@/views/EndUser/SejarahUlos.vue'
 import Penenun from '@/views/EndUser/Penenun.vue'
@@ -8,6 +9,7 @@ import PenenunDetail from '@/views/EndUser/PenenunDetail.vue'
 import UlosDetail from '@/views/EndUser/UlosDetail.vue'
 
 // Admin
+import AdminLogin from '@/views/Admin/Login.vue'
 import Dashboard from '@/views/Admin/Dashboard.vue'
 import AdminUlos from '@/views/Admin/Ulos/Ulos.vue'
 import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
@@ -51,6 +53,11 @@ const router = createRouter({
             path: '/ulos-detail/:id',
             name: 'UlosDetail',
             component: UlosDetail
+        },
+        {
+            path: '/admin/login',
+            name: 'admin-login',
+            component: AdminLogin
         },
         {
             path: '/admin/dashboard',
