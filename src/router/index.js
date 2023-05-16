@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import HomeView from '@/views/HomeView.vue'
-import SejarahUlos from '@/views/SejarahUlos.vue'
-import Penenun from '@/views/Penenun.vue'
+import HomeView from '@/views/EndUser/HomeView.vue'
+import SejarahUlos from '@/views/EndUser/SejarahUlos.vue'
+import Penenun from '@/views/EndUser/Penenun.vue'
 import GaleriUlosView from '@/views/EndUser/GaleriUlosView.vue'
-import PenenunGedogan from '@/views/PenenunGedogan.vue'
-import PenenunDetail from '@/views/PenenunDetail.vue'
+import PenenunGedogan from '@/views/EndUser/PenenunGedogan.vue'
+import PenenunDetail from '@/views/EndUser/PenenunDetail.vue'
 import UlosDetail from '@/views/EndUser/UlosDetail.vue'
 
 // Admin
