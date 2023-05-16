@@ -27,7 +27,9 @@
                 <img src="../assets/images/detail-harungguan.png" alt="" class="col-span-3">
                 <img src="../assets/images/motif-harungguan.png" alt="" class="col-span-3">
 
-                <button class="absolute bottom-6 right-6 z-10 flex flex-row gap-2 rounded-lg px-4 py-3 items-center bg-neutral_20 text-neutral_70 font-medium text-base ">
+                <button 
+                id="btn-lihat-semua-gambar"
+                class="absolute bottom-6 right-6 z-10 flex flex-row gap-2 rounded-lg px-4 py-3 items-center bg-neutral_20 text-neutral_70 font-medium text-base ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                         <path stroke="#757575" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M11.693 5.54a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28ZM4.307 5.54a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28ZM11.693 13.74a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28ZM4.307 13.74a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28Z"/>
                     </svg>
@@ -79,7 +81,9 @@
                             <h5 class="font-normal text-xl">Rp350.000</h5>
                         </div>
 
-                        <button class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2">
+                        <button 
+                        id="btn-beli-sekarang"
+                        class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2">
                             Beli sekarang
                         </button>
                     </div>

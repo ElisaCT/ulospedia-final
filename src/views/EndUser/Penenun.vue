@@ -17,7 +17,9 @@
               src="../../assets/gedogan.png"
               alt=""
             />
-            <div class="absolute inset-0 flex items-center justify-center">
+            <div 
+            id="gedongan"
+            class="absolute inset-0 flex items-center justify-center">
               <p
                 class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2 opacity-100 hover:opacity-0 transition duration-300 ease-in"
               >
@@ -49,7 +51,7 @@
             src="../../assets/atbm.png"
             alt=""
           />
-          <div class="absolute inset-0 flex items-center justify-center">
+          <div   id="atbm" class="absolute inset-0 flex items-center justify-center">
             <p
               class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2"
             >
@@ -79,7 +81,7 @@
             src="../../assets/atm.png"
             alt=""
           />
-          <div class="absolute inset-0 flex items-center justify-center">
+          <div   id="atm" class="absolute inset-0 flex items-center justify-center">
             <p
               class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2"
             >

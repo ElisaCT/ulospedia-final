@@ -8,6 +8,7 @@
             <path stroke="#C2C2C2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.583 17.5a7.917 7.917 0 1 0 0-15.833 7.917 7.917 0 0 0 0 15.833ZM18.333 18.333l-1.666-1.666"/>
           </svg>
           <input
+          id="field-cari-ulos"
           class=" w-full bg-[#F5F5F5] focus:outline-none pl-3"
           type="text"
           v-model="searchText"
@@ -17,6 +18,7 @@
         </div>
 
         <button
+          id="btn-filter"
           class="ml-4 border border-[#E0E0E0] bg-white text-[#616161] font-normal py-2 px-2 rounded-lg flex flex-row gap-2 items-center"
           @click="handleFilter"
         >

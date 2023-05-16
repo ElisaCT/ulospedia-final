@@ -9,6 +9,7 @@
         <!-- prev -->
         <button
           @click="prevSlide"
+          id="prev-button"
           class="flex items-center justify-center w-10 h-10 rounded-full bg-[#EDEDED] hover:bg-gray-300 focus:outline-none rotate-180"
         >
           <svg
@@ -27,6 +28,7 @@
         <!-- Next -->
         <button
           @click="nextSlide"
+          id="next-button"
           class="flex items-center justify-center w-10 h-10 rounded-full bg-[#3355B5] hover:bg-gray-300 focus:outline-none"
         >
           <svg

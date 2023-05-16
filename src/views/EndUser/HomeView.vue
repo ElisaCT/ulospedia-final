@@ -17,6 +17,7 @@
         </p>
         <div class="mt-8 md:mt-12">
           <a
+            id="btn-ekplore-ulos"
             href="#"
             class="bg-primary_main hover:bg-primary_hover text-neutral_10 font-medium py-3 px-10 rounded-lg"
             >Eksplor Ulos</a
@@ -47,6 +48,7 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
+              id="text-jelajahi-ulos"
               href="#"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
               >Jelajahi Ulos</a>
@@ -74,6 +76,7 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
+              id="text-telusuri-sejarah-ulos"
               href="#"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
               >Telusuri Sejarah Ulos</a>
