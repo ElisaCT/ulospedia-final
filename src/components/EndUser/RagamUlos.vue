@@ -9,9 +9,9 @@
         <!-- Button -->
         <div class="gap-6 font-[#0A0A0A] lg:text-2xl md:text-xl sm:text-base text-center">
             <!-- first col -->
-            <div class="grid grid-cols-3 gap-6 pb-6"> 
-                <a class="bg-[#BBC6E6] md:col-span-2  sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Toba</a>
-                <a class="bg-[#FBEFD2] md:col-span-2  sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Simalungun</a>
+            <div class="grid grid-cols-2 gap-6 pb-6"> 
+                <a class="bg-[#BBC6E6] lg:col-span-1 md:col-span-2  sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Toba</a>
+                <a class="bg-[#FBEFD2] lg:col-span-1 md:col-span-2  sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Simalungun</a>
             </div>
 
             <!-- second col -->
