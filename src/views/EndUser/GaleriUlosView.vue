@@ -70,8 +70,8 @@
     </div>
   </div>
 
-    <!-- Load more -->
-    <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14">
+   <!-- Load more -->
+   <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14">
         <button class="text-neutral_70 font-medium text-lg bg-neutral_20 items-center px-4 py-4 rounded-lg w-full max-w-md" @click="loadMore" v-if="!lastPage">Muat lebih banyak</button>
     </div>
 
@@ -106,14 +106,14 @@
     mounted() {
       axios
         .get(
-          `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}&colors=`
+          `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
         )
         .then((response) => {
           console.log(response.data)
           this.ulosData = response.data.data.ulosList.clientUlosResponseList
 
           // cek state apakah akan menjadi page terakhir atau tidak
-          if (!response.data.data.weaverList.isLastPage) {
+          if (!response.data.data.ulosList.isLastPage) {
             this.pageNo = this.pageNo + 1
             this.lastPage = false
           }
@@ -125,14 +125,14 @@
     methods: {
       async loadMore() {
         const moreUlosData = await axios.get(
-          `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}&colors=`
+          `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
         )
         console.log(moreUlosData.data)
         this.ulosData = this.ulosData.concat(
           moreUlosData.data.data.ulosList.clientUlosResponseList
         )
         // cek state apakah akan menjadi page terakhir atau tidak
-        if (!moreUlosData.data.data.weaverList.isLastPage) {
+        if (!moreUlosData.data.data.ulosList.isLastPage) {
           this.pageNo = this.pageNo + 1
           this.lastPage = false
         } else {
@@ -149,14 +149,14 @@
           // If searchText is empty, reset the ulosData to the original data
           axios
             .get(
-              `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}&colors=`
+              `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
             )
             .then((response) => {
               console.log(response.data)
               this.ulosData = response.data.data.ulosList.clientUlosResponseList
 
               // cek state apakah akan menjadi page terakhir atau tidak
-              if (!response.data.data.weaverList.isLastPage) {
+              if (!response.data.data.ulosList.isLastPage) {
                 this.pageNo = this.pageNo + 1
                 this.lastPage = false
               }
