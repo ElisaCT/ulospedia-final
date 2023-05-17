@@ -14,7 +14,7 @@
           />
         </svg>
         <input
-          class="w-full bg-[#F5F5F5] focus:outline-none pl-3"
+          class="w-full bg-[#F5F5F5] border-[#F5F5F5] focus:outline-none pl-3"
           type="text"
           v-model="searchText"
           @input="handleSearch"
@@ -199,7 +199,7 @@
                 />
               </div>
               <div
-                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 "
               ></div>
               <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
                 <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
