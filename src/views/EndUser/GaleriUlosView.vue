@@ -14,7 +14,7 @@
           />
         </svg>
         <input
-          class="w-full bg-[#F5F5F5] outline-none focus:outline-none pl-3"
+          class="w-full bg-[#F5F5F5] focus:outline-none pl-3"
           type="text"
           v-model="searchText"
           @input="handleSearch"
@@ -36,187 +36,191 @@
             stroke-width="1.5"
             d="M18.334 5.417h-5M5 5.417H1.667M8.333 8.333a2.917 2.917 0 1 0 0-5.833 2.917 2.917 0 0 0 0 5.833ZM18.333 14.583H15M6.667 14.583h-5M11.667 17.5a2.917 2.917 0 1 0 0-5.833 2.917 2.917 0 0 0 0 5.833Z"
           />
+          <path
+            stroke="#616161"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+            stroke-width="1.5"
+            d="M18.334 5.417h-5M5 5.417H1.667M8.333 8.333a2.917 2.917 0 1 0 0-5.833 2.917 2.917 0 0 0 0 5.833ZM18.333 14.583H15M6.667 14.583h-5M11.667 17.5a2.917 2.917 0 1 0 0-5.833 2.917 2.917 0 0 0 0 5.833Z"
+          />
         </svg>
         Filter
       </button>
+    </div>
 
-      <!-- menu filter -->
-      <div v-if="isDropdownVisible" class="relative">
-        <div
-          id="dropdown"
-          class="absolute top-2 right-2 mt-4 z-[4] bg-white px-10 py-6 w-96 rounded-lg shadow flex flex-col gap-4 border border-solid border-primary_surface"
-        >
-          <div class="flex flex-row gap-14">
-            <div class="gap-6">
-              <div>
-                <label class="font-normal text-left text-base text-neutral_90 pb-2"
-                  >Ragam Ulos</label
-                >
-                <ul
-                  class="text-base text-neutral_80 font-normal gap-2 pl-3"
-                  aria-labelledby="dropdownDefaultButton"
-                >
-                  <li class="py-2">
-                    <label>
-                      <input type="radio" value="toba" v-model="selectedOption" />
-                      Batak Toba
-                    </label>
-                  </li>
-                  <li class="py-2">
-                    <label>
-                      <input type="radio" value="karo" v-model="selectedOption" />
-                      Batak Karo
-                    </label>
-                  </li>
-                  <li class="py-2">
-                    <label>
-                      <input type="radio" value="simalungun" v-model="selectedOption" />
-                      Batak Simalungun
-                    </label>
-                  </li>
-                  <li class="py-2">
-                    <label>
-                      <input type="radio" value="mandailing" v-model="selectedOption" />
-                      Batak Mandailing
-                    </label>
-                  </li>
-                  <li class="py-2">
-                    <label>
-                      <input type="radio" value="angkola" v-model="selectedOption" />
-                      Batak Angkola
-                    </label>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="mt-6">
-                <label class="font-normal text-left text-base text-neutral_90 py-2"
-                  >Jenis Ulos</label
-                >
-                <ul
-                  class="text-base text-neutral_80 font-normal gap-2 pl-3"
-                  aria-labelledby="dropdownDefaultButton"
-                >
-                  <li class="py-2">
-                    <label>
-                      <input type="radio" value="tradisional" v-model="selectedOption" />
-                      Tradisional
-                    </label>
-                  </li>
-                  <li class="py-2">
-                    <label>
-                      <input type="radio" value="pengembangan" v-model="selectedOption" />
-                      Pengembangan
-                    </label>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
+    <!-- menu filter -->
+    <div v-if="isDropdownVisible" class="relative">
+      <div
+        id="dropdown"
+        class="absolute top-2 right-2 mt-4 z-[4] bg-white px-10 py-6 w-96 rounded-lg shadow flex flex-col gap-4 border border-solid border-primary_surface"
+      >
+        <div class="flex flex-row gap-14">
+          <div class="gap-6">
             <div>
-              <label class="font-normal text-left text-base text-neutral_90 pb-2">Jenis Ulos</label>
+              <label class="font-normal text-left text-base text-neutral_90 pb-2">Ragam Ulos</label>
               <ul
                 class="text-base text-neutral_80 font-normal gap-2 pl-3"
                 aria-labelledby="dropdownDefaultButton"
               >
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="merah" v-model="isChecked" />
-                    Merah
+                    <input type="radio" value="toba" v-model="selectedOption" />
+                    Batak Toba
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="hitam" v-model="isChecked" />
-                    Hitam
+                    <input type="radio" value="karo" v-model="selectedOption" />
+                    Batak Karo
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="putih" v-model="isChecked" />
-                    Putih
+                    <input type="radio" value="simalungun" v-model="selectedOption" />
+                    Batak Simalungun
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="biru" v-model="isChecked" />
-                    Biru
+                    <input type="radio" value="mandailing" v-model="selectedOption" />
+                    Batak Mandailing
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="hijau" v-model="isChecked" />
-                    Hijau
+                    <input type="radio" value="angkola" v-model="selectedOption" />
+                    Batak Angkola
+                  </label>
+                </li>
+              </ul>
+            </div>
+
+            <div class="mt-6">
+              <label class="font-normal text-left text-base text-neutral_90 py-2">Jenis Ulos</label>
+              <ul
+                class="text-base text-neutral_80 font-normal gap-2 pl-3"
+                aria-labelledby="dropdownDefaultButton"
+              >
+                <li class="py-2">
+                  <label>
+                    <input type="radio" value="tradisional" v-model="selectedOption" />
+                    Tradisional
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="kuning" v-model="isChecked" />
-                    Kuning
+                    <input type="radio" value="pengembangan" v-model="selectedOption" />
+                    Pengembangan
                   </label>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div class="flex flex-row gap-4 justify-end">
-            <button
-              class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
-              @click="isDropdownVisible = false"
+          <div>
+            <label class="font-normal text-left text-base text-neutral_90 pb-2">Jenis Ulos</label>
+            <ul
+              class="text-base text-neutral_80 font-normal gap-2 pl-3"
+              aria-labelledby="dropdownDefaultButton"
             >
-              Batal
-            </button>
-            <button
-              class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
-              @click="selectOption(selectedOption)"
-            >
-              Terapkan
-            </button>
+              <li class="py-2">
+                <label>
+                  <input type="checkbox" value="merah" v-model="isChecked" />
+                  Merah
+                </label>
+              </li>
+              <li class="py-2">
+                <label>
+                  <input type="checkbox" value="hitam" v-model="isChecked" />
+                  Hitam
+                </label>
+              </li>
+              <li class="py-2">
+                <label>
+                  <input type="checkbox" value="putih" v-model="isChecked" />
+                  Putih
+                </label>
+              </li>
+              <li class="py-2">
+                <label>
+                  <input type="checkbox" value="biru" v-model="isChecked" />
+                  Biru
+                </label>
+              </li>
+              <li class="py-2">
+                <label>
+                  <input type="checkbox" value="hijau" v-model="isChecked" />
+                  Hijau
+                </label>
+              </li>
+              <li class="py-2">
+                <label>
+                  <input type="checkbox" value="kuning" v-model="isChecked" />
+                  Kuning
+                </label>
+              </li>
+            </ul>
           </div>
+        </div>
+
+        <div class="flex flex-row gap-4 justify-end">
+          <button
+            class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
+            @click="isDropdownVisible = false"
+          >
+            Batal
+          </button>
+          <button
+            class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
+            @click="selectOption(selectedOption)"
+          >
+            Terapkan
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- card ulos -->
+  <div class="flex justify-center py-8">
+    <div v-if="ulosData && ulosData.length > 0">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div v-for="ulos in ulosData" :key="ulos.id">
+          <router-link :to="'/ulos-detail/' + ulos.id">
+            <div
+              class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+            >
+              <div class="h-[300px] w-[252px]">
+                <div class="gradient"></div>
+                <img
+                  class="h-full w-full object-cover transition-transform rounded-lg"
+                  :src="ulos.imageUrl"
+                />
+              </div>
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+              ></div>
+              <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
+                <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
+                <p class="text-neutral_10">{{ ulos.originEthnic }}</p>
+              </div>
+              <div v-if="ulos.isAvailableOnEcommerce === true">
+                <ecommerceAvailable class="absolute top-6 right-6 z-[3]" />
+              </div>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
 
-    <!-- card ulos -->
-    <div class="flex justify-center py-8">
-      <div v-if="ulosData && ulosData.length > 0">
-        <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <div v-for="ulos in ulosData" :key="ulos.id">
-            <router-link :to="'/ulos-detail/' + ulos.id">
-              <div
-                class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
-              >
-                <div class="h-[300px] w-[252px]">
-                  <div class="gradient"></div>
-                  <img
-                    class="h-full w-full object-cover transition-transform rounded-lg"
-                    :src="ulos.imageUrl"
-                  />
-                </div>
-                <div
-                  class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
-                ></div>
-                <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
-                  <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
-                  <p class="text-neutral_10">{{ ulos.originEthnic }}</p>
-                </div>
-                <div v-if="ulos.isAvailableOnEcommerce === true">
-                  <ecommerceAvailable class="absolute top-6 right-6 z-[3]" />
-                </div>
-              </div>
-            </router-link>
-          </div>
-        </div>
-      </div>
+    <div v-else-if="searchText && ulosData && ulosData.length === 0">
+      <!-- Show empty state component when searchText is not empty and ulosData is empty -->
+      <EmptySearch />
+    </div>
 
-      <div v-else-if="searchText && ulosData && ulosData.length === 0">
-        <!-- Show empty state component when searchText is not empty and ulosData is empty -->
-        <EmptySearch />
-      </div>
-
-      <div v-else>
-        <CardSkeleton />
-      </div>
+    <div v-else>
+      <CardSkeleton />
     </div>
   </div>
 
@@ -355,16 +359,37 @@ export default {
           })
       }
     },
-    handleFilter() {
-      // Do something to filter results
-    },
     toggleDropdown() {
       this.isDropdownVisible = !this.isDropdownVisible
       this.selectedOption = null // Reset the selected option
     },
-    selectOption(option) {
-      this.selectedOption = option
-      this.isDropdownVisible = false // Hide the dropdown after selection
+    // handleSearch() {
+    //   if (this.searchText) {
+    //     this.ulosData = this.ulosData.filter((ulos) => {
+    //       return ulos.name.toLowerCase().includes(this.searchText.toLowerCase())
+    //     })
+    //   } else {
+    //     // If searchText is empty, reset the ulosData to the original data
+    //     axios
+    //       .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
+    //       .then((response) => {
+    //         console.log(response.data)
+    //         this.ulosData = response.data.data.ulosList.clientUlosResponseList
+
+    //         // cek state apakah akan menjadi page terakhir atau tidak
+    //         if (!response.data.data.weaverList.isLastPage) {
+    //           this.pageNo = this.pageNo + 1
+    //           this.lastPage = false
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         console.log(error)
+    //       })
+    //   }
+    // },
+    handleFilter() {
+      // Do something to filter results
+      console.log('Filtering results')
     }
   }
 }
