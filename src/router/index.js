@@ -15,6 +15,7 @@ import AdminLogin from '@/views/Admin/Login.vue'
 import Dashboard from '@/views/Admin/Dashboard.vue'
 import AdminUlos from '@/views/Admin/Ulos/Ulos.vue'
 import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
+import AddPenenun from '@/views/Admin/Penenun/AddPenenun.vue'
 
 import ('preline')
 
@@ -85,6 +86,11 @@ const router = createRouter({
             path: '/admin/penenun',
             name: 'AdminPenenun',
             component: AdminPenenun
+        },
+        {
+            path: '/admin/add-penenun',
+            name: 'AddPenenun',
+            component: AddPenenun
         }
     ]
 })

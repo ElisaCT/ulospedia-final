@@ -23,8 +23,8 @@
       </div>
 
       <button
-      id="filterButton"  
-      class="ml-4 border border-[#E0E0E0] bg-white text-[#616161] font-normal py-2 px-2 rounded-lg flex flex-row gap-2 items-center"
+        id="filterButton"
+        class="ml-4 border border-[#E0E0E0] bg-white text-[#616161] font-normal py-2 px-2 rounded-lg flex flex-row gap-2 items-center"
         @click="toggleDropdown"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
@@ -42,39 +42,47 @@
 
       <!-- menu filter -->
       <div v-if="isDropdownVisible" class="relative">
-        <div id="dropdown" class="absolute top-2 right-2 mt-4 z-[4] bg-white px-10 py-6 w-96 rounded-lg shadow flex flex-col gap-4 border border-solid border-primary_surface">
+        <div
+          id="dropdown"
+          class="absolute top-2 right-2 mt-4 z-[4] bg-white px-10 py-6 w-96 rounded-lg shadow flex flex-col gap-4 border border-solid border-primary_surface"
+        >
           <div class="flex flex-row gap-14">
             <div class="gap-6">
               <div>
-                <label class="font-normal text-left text-base text-neutral_90 pb-2">Ragam Ulos</label>
-                <ul class="text-base text-neutral_80 font-normal gap-2 pl-3" aria-labelledby="dropdownDefaultButton">
+                <label class="font-normal text-left text-base text-neutral_90 pb-2"
+                  >Ragam Ulos</label
+                >
+                <ul
+                  class="text-base text-neutral_80 font-normal gap-2 pl-3"
+                  aria-labelledby="dropdownDefaultButton"
+                >
                   <li class="py-2">
                     <label>
-                      <input type="radio" value="toba" v-model="selectedOption">
+                      <input type="radio" value="toba" v-model="selectedOption" />
                       Batak Toba
                     </label>
                   </li>
                   <li class="py-2">
                     <label>
-                      <input type="radio" value="karo" v-model="selectedOption">
+                      <input type="radio" value="karo" v-model="selectedOption" />
                       Batak Karo
                     </label>
                   </li>
                   <li class="py-2">
                     <label>
-                      <input type="radio" value="simalungun" v-model="selectedOption">
+                      <input type="radio" value="simalungun" v-model="selectedOption" />
                       Batak Simalungun
                     </label>
                   </li>
                   <li class="py-2">
                     <label>
-                      <input type="radio" value="mandailing" v-model="selectedOption">
+                      <input type="radio" value="mandailing" v-model="selectedOption" />
                       Batak Mandailing
                     </label>
                   </li>
                   <li class="py-2">
                     <label>
-                      <input type="radio" value="angkola" v-model="selectedOption">
+                      <input type="radio" value="angkola" v-model="selectedOption" />
                       Batak Angkola
                     </label>
                   </li>
@@ -82,74 +90,90 @@
               </div>
 
               <div class="mt-6">
-                <label class="font-normal text-left text-base text-neutral_90 py-2">Jenis Ulos</label>
-                  <ul class="text-base text-neutral_80 font-normal gap-2 pl-3" aria-labelledby="dropdownDefaultButton">
-                    <li class="py-2">
-                      <label>
-                        <input type="radio" value="tradisional" v-model="selectedOption">
-                        Tradisional
-                      </label>
-                    </li>
-                    <li class="py-2">
-                      <label>
-                        <input type="radio" value="pengembangan" v-model="selectedOption">
-                        Pengembangan
-                      </label>
-                    </li>
-                  </ul>
+                <label class="font-normal text-left text-base text-neutral_90 py-2"
+                  >Jenis Ulos</label
+                >
+                <ul
+                  class="text-base text-neutral_80 font-normal gap-2 pl-3"
+                  aria-labelledby="dropdownDefaultButton"
+                >
+                  <li class="py-2">
+                    <label>
+                      <input type="radio" value="tradisional" v-model="selectedOption" />
+                      Tradisional
+                    </label>
+                  </li>
+                  <li class="py-2">
+                    <label>
+                      <input type="radio" value="pengembangan" v-model="selectedOption" />
+                      Pengembangan
+                    </label>
+                  </li>
+                </ul>
               </div>
-          </div>
+            </div>
 
-          <div>
-            <label class="font-normal text-left text-base text-neutral_90 pb-2">Jenis Ulos</label>
-              <ul class="text-base text-neutral_80 font-normal gap-2 pl-3" aria-labelledby="dropdownDefaultButton">
+            <div>
+              <label class="font-normal text-left text-base text-neutral_90 pb-2">Jenis Ulos</label>
+              <ul
+                class="text-base text-neutral_80 font-normal gap-2 pl-3"
+                aria-labelledby="dropdownDefaultButton"
+              >
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="merah" v-model="isChecked">
+                    <input type="checkbox" value="merah" v-model="isChecked" />
                     Merah
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="hitam" v-model="isChecked">
+                    <input type="checkbox" value="hitam" v-model="isChecked" />
                     Hitam
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="putih" v-model="isChecked">
+                    <input type="checkbox" value="putih" v-model="isChecked" />
                     Putih
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="biru" v-model="isChecked">
+                    <input type="checkbox" value="biru" v-model="isChecked" />
                     Biru
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="hijau" v-model="isChecked">
+                    <input type="checkbox" value="hijau" v-model="isChecked" />
                     Hijau
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="checkbox" value="kuning" v-model="isChecked">
+                    <input type="checkbox" value="kuning" v-model="isChecked" />
                     Kuning
                   </label>
                 </li>
               </ul>
-          </div>
+            </div>
           </div>
 
           <div class="flex flex-row gap-4 justify-end">
-            <button class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70" @click="isDropdownVisible = false">Batal</button>
-            <button class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10" @click="selectOption(selectedOption)">Terapkan</button>
+            <button
+              class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
+              @click="isDropdownVisible = false"
+            >
+              Batal
+            </button>
+            <button
+              class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
+              @click="selectOption(selectedOption)"
+            >
+              Terapkan
+            </button>
           </div>
-      </div>
-       
-       
+        </div>
       </div>
     </div>
 
@@ -245,6 +269,11 @@ export default {
       selectedOption: null
     }
   },
+  watch: {
+    selectedOption(value) {
+      console.log(value)
+    }
+  },
   mounted() {
     axios
       .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
@@ -328,15 +357,14 @@ export default {
     },
     handleFilter() {
       // Do something to filter results
-    
     },
     toggleDropdown() {
-    this.isDropdownVisible = !this.isDropdownVisible;
-    this.selectedOption = null; // Reset the selected option
+      this.isDropdownVisible = !this.isDropdownVisible
+      this.selectedOption = null // Reset the selected option
     },
     selectOption(option) {
-      this.selectedOption = option;
-      this.isDropdownVisible = false; // Hide the dropdown after selection
+      this.selectedOption = option
+      this.isDropdownVisible = false // Hide the dropdown after selection
     }
   }
 }
