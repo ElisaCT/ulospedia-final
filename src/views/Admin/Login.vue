@@ -16,12 +16,12 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="#" method="POST">
+          <form class="space-y-6" action="#" @submit.prevent="login">
             <div>
               <label
-                for="email-address-icon"
+                for="username-address-icon"
                 class="block mb-2 text-base font-medium text-neutral_100"
-                >Email</label
+                >username</label
               >
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -36,11 +36,12 @@
                   </svg>
                 </div>
                 <input
+                  v-model="username"
                   type="text"
-                  id="email-address-icon"
+                  id="username-address-icon"
                   required
                   class="border border-primary_border text-neutral_70 text-base rounded-lg focus:border-primary_pressed block w-full pl-10 p-2.5"
-                  placeholder="Masukkan email anda"
+                  placeholder="Masukkan username anda"
                 />
               </div>
 
@@ -67,6 +68,7 @@
                   </svg>
                 </div>
                 <input
+                  v-model="password"
                   id="password"
                   name="password"
                   type="password"
@@ -111,6 +113,33 @@
   </div>
 </template>
 <script>
-export default {}
+import axios from 'axios'
+
+export default {
+  name: 'admin-login',
+  data() {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('http://company.ditenun.com/api/v1/auth/login', {
+          username: this.username,
+          password: this.password
+        })
+
+        // Handle successful login, e.g., store token in localStorage or Vuex store
+        console.log('Logged in:', response.data)
+
+        // Redirect to the home page or perform any other necessary actions
+      } catch (error) {
+        // Handle login error
+        console.error('Login failed:', error.response.data)
+      }
+    }
+  }
+}
 </script>
-<style lang=""></style>
