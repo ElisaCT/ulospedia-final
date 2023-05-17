@@ -5,6 +5,8 @@ import SejarahUlos from '@/views/EndUser/SejarahUlos.vue'
 import Penenun from '@/views/EndUser/Penenun.vue'
 import GaleriUlosView from '@/views/EndUser/GaleriUlosView.vue'
 import PenenunGedogan from '@/views/EndUser/PenenunGedogan.vue'
+import PenenunATBM from '@/views/EndUser/PenenunATBM.vue'
+import PenenunATM from '@/views/EndUser/PenenunATM.vue'
 import PenenunDetail from '@/views/EndUser/PenenunDetail.vue'
 import UlosDetail from '@/views/EndUser/UlosDetail.vue'
 
@@ -43,6 +45,16 @@ const router = createRouter({
             path: '/penenun-gedogan',
             name: 'penenun-gedogan',
             component: PenenunGedogan
+        },
+        {
+            path: '/penenun-atbm',
+            name: 'penenun-atbm',
+            component: PenenunATBM
+        },
+        {
+            path: '/penenun-atm',
+            name: 'penenun-atm',
+            component: PenenunATM
         },
         {
             path: '/penenun-gedogan/:id',

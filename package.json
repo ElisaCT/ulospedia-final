@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "flowbite": "^1.6.5",
     "pinia": "^2.0.32",
     "preline": "^1.8.0",
     "vue": "^3.2.47",
