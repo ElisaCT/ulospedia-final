@@ -65,31 +65,31 @@
               >
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="toba" v-model="selectedOption" />
+                    <input type="radio" value="Batak Toba" v-model="selectedOptionEthnic" />
                     Batak Toba
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="karo" v-model="selectedOption" />
+                    <input type="radio" value="karo" v-model="selectedOptionEthnic" />
                     Batak Karo
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="simalungun" v-model="selectedOption" />
+                    <input type="radio" value="simalungun" v-model="selectedOptionEthnic" />
                     Batak Simalungun
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="mandailing" v-model="selectedOption" />
+                    <input type="radio" value="mandailing" v-model="selectedOptionEthnic" />
                     Batak Mandailing
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="angkola" v-model="selectedOption" />
+                    <input type="radio" value="angkola" v-model="selectedOptionEthnic" />
                     Batak Angkola
                   </label>
                 </li>
@@ -104,13 +104,13 @@
               >
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="tradisional" v-model="selectedOption" />
+                    <input type="radio" value="tradisional" v-model="selectedOptionType" />
                     Tradisional
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="pengembangan" v-model="selectedOption" />
+                    <input type="radio" value="pengembangan" v-model="selectedOptionType" />
                     Pengembangan
                   </label>
                 </li>
@@ -173,7 +173,7 @@
           </button>
           <button
             class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
-            @click="selectOption(selectedOption)"
+            @click="addFilter"
           >
             Terapkan
           </button>
@@ -182,9 +182,20 @@
     </div>
   </div>
 
+  <div v-if="applyClicked === true">
+    <!-- type -->
+    <!-- {{ selectedOptionType }} -->
+    <!-- ethnic -->
+    <div>
+      <span>{{ selectedOptionEthnic }}</span>
+      <button @click="deleteSelectedOptionEthnic" v-if="selectedOptionEthnic !== ''">X</button>
+    </div>
+    <!-- colors -->
+  </div>
+
   <!-- card ulos -->
   <div class="flex justify-center py-8">
-    <div v-if="ulosData && ulosData.length > 0">
+    <div v-if="ulosData.length > 0">
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         <div v-for="ulos in ulosData" :key="ulos.id">
           <router-link :to="'/ulos-detail/' + ulos.id">
@@ -214,7 +225,7 @@
       </div>
     </div>
 
-    <div v-else-if="searchText && ulosData && ulosData.length === 0">
+    <div v-else-if="ulosData.length === 0">
       <!-- Show empty state component when searchText is not empty and ulosData is empty -->
       <EmptySearch />
     </div>
@@ -262,19 +273,25 @@ export default {
   data: function () {
     return {
       searchText: '',
-      ulosData: null,
+      ulosData: [],
       pageNo: 1,
       lastPage: true,
-      ethnic: '',
-      type: '',
+      // ethnic: '',
+      // type: '',
       colors: '',
       search: '',
       isDropdownVisible: false,
-      selectedOption: null
+      selectedOptionType: '',
+      selectedOptionEthnic: '',
+      applyClicked: false
     }
   },
   watch: {
-    selectedOption(value) {
+    selectedOptionType(value) {
+      console.log(value)
+      // this.selectedOptionEthnic = value
+    },
+    selectedOptionEthnic(value) {
       console.log(value)
     }
   },
@@ -284,7 +301,6 @@ export default {
       .then((response) => {
         console.log(response.data)
         this.ulosData = response.data.data.ulosList.clientUlosResponseList
-
         // cek state apakah akan menjadi page terakhir atau tidak
         if (!response.data.data.ulosList.isLastPage) {
           this.pageNo = this.pageNo + 1
@@ -297,6 +313,55 @@ export default {
       })
   },
   methods: {
+    deleteSelectedOptionEthnic() {
+      this.pageNo = 1
+
+      this.selectedOptionEthnic = ''
+      // hapus penanda di filter
+      const url = this.setApiPath(
+        this.pageNo,
+        this.selectedOptionEthnic,
+        this.selectedOptionType,
+        this.colors,
+        this.searchText
+      )
+
+      axios.get(url).then((response) => {
+        console.log(response.data)
+        this.ulosData = response.data.data.ulosList.clientUlosResponseList
+        if (!response.data.data.ulosList.isLastPage) {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = false
+        } else {
+          this.lastPage = true
+        }
+      })
+    },
+    addFilter() {
+      this.pageNo = 1
+
+      const url = this.setApiPath(
+        this.pageNo,
+        this.selectedOptionEthnic,
+        this.selectedOptionType,
+        this.colors,
+        this.searchText
+      )
+
+      axios.get(url).then((response) => {
+        console.log(response.data)
+        this.ulosData = response.data.data.ulosList.clientUlosResponseList
+        if (!response.data.data.ulosList.isLastPage) {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = false
+        } else {
+          this.lastPage = true
+        }
+      })
+
+      this.applyClicked = !this.applyClicked
+      this.isDropdownVisible = !this.isDropdownVisible
+    },
     setApiPath(pageNo, ethnic, type, colors, search) {
       return `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${pageNo}${
         ethnic !== '' ? '&ethnic=' + ethnic : ''
@@ -310,7 +375,13 @@ export default {
         this.setApiPath(this.pageNo, this.ethnic, this.type, this.colors, this.searchText)
       )
       const moreUlosData = await axios.get(
-        this.setApiPath(this.pageNo, this.ethnic, this.type, this.colors, this.searchText)
+        this.setApiPath(
+          this.pageNo,
+          this.selectedOptionEthnic,
+          this.selectedOptionType,
+          this.colors,
+          this.searchText
+        )
       )
       console.log(moreUlosData.data)
       this.ulosData = this.ulosData.concat(moreUlosData.data.data.ulosList.clientUlosResponseList)
