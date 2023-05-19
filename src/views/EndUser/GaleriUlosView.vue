@@ -107,79 +107,53 @@ import CardSkeleton from '../../components/EndUser/CardSkeleton.vue'
 import ecommerceAvailable from '../../components/EndUser/ecommerceAvailable.vue'
 import EmptySearch from '../../components/EndUser/EmptySearch.vue'
 
-    },
-    data: function () {
-      return {
-        ulosData: null,
-        pageNo: 1,
-        lastPage:true
-      }
-    },
-    mounted() {
-      axios
-        .get(
-          `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
-        )
-        .then((response) => {
-          console.log(response.data)
-          this.ulosData = response.data.data.ulosList.clientUlosResponseList
+export default {
+  name: 'GaleriUlosView',
+  components: {
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Navbar,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Footer,
+    CardSkeleton,
+    ecommerceAvailable,
+    EmptySearch
+  },
+  data: function () {
+    return {
+      ulosData: null,
+      pageNo: 1,
+      lastPage: true
+    }
+  },
+  mounted() {
+    axios
+      .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
+      .then((response) => {
+        console.log(response.data)
+        this.ulosData = response.data.data.ulosList.clientUlosResponseList
 
-          // cek state apakah akan menjadi page terakhir atau tidak
-          if (!response.data.data.ulosList.isLastPage) {
-            this.pageNo = this.pageNo + 1
-            this.lastPage = false
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    },
-    methods: {
-      async loadMore() {
-        const moreUlosData = await axios.get(
-          `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
-        )
-        console.log(moreUlosData.data)
-        this.ulosData = this.ulosData.concat(
-          moreUlosData.data.data.ulosList.clientUlosResponseList
-        )
         // cek state apakah akan menjadi page terakhir atau tidak
-        if (!moreUlosData.data.data.ulosList.isLastPage) {
+        if (!response.data.data.ulosList.isLastPage) {
           this.pageNo = this.pageNo + 1
           this.lastPage = false
         }
-      },
-      handleSearch() {
-        if (this.searchText) {
-          this.ulosData = this.ulosData.filter((ulos) => {
-            return ulos.name.toLowerCase().includes(this.searchText.toLowerCase());
-          });
-        }
-        else {
-          // If searchText is empty, reset the ulosData to the original data
-          axios
-            .get(
-              `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
-            )
-            .then((response) => {
-              console.log(response.data)
-              this.ulosData = response.data.data.ulosList.clientUlosResponseList
-
-              // cek state apakah akan menjadi page terakhir atau tidak
-              if (!response.data.data.ulosList.isLastPage) {
-                this.pageNo = this.pageNo + 1
-                this.lastPage = false
-              }
-            })
-            .catch((error) => {
-              console.log(error)
-            })
-          }
-      },
-      handleFilter() {
-        // Do something to filter results
-        console.log('Filtering results');
-      },
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  },
+  methods: {
+    async loadMore() {
+      const moreUlosData = await axios.get(
+        `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
+      )
+      console.log(moreUlosData.data)
+      this.ulosData = this.ulosData.concat(moreUlosData.data.data.ulosList.clientUlosResponseList)
+      // cek state apakah akan menjadi page terakhir atau tidak
+      if (!moreUlosData.data.data.ulosList.isLastPage) {
+        this.pageNo = this.pageNo + 1
+        this.lastPage = false
+      }
     },
     handleSearch() {
       if (this.searchText) {
@@ -195,7 +169,7 @@ import EmptySearch from '../../components/EndUser/EmptySearch.vue'
             this.ulosData = response.data.data.ulosList.clientUlosResponseList
 
             // cek state apakah akan menjadi page terakhir atau tidak
-            if (!response.data.data.weaverList.isLastPage) {
+            if (!response.data.data.ulosList.isLastPage) {
               this.pageNo = this.pageNo + 1
               this.lastPage = false
             }
@@ -209,6 +183,34 @@ import EmptySearch from '../../components/EndUser/EmptySearch.vue'
       // Do something to filter results
       console.log('Filtering results')
     }
+  },
+  handleSearch() {
+    if (this.searchText) {
+      this.ulosData = this.ulosData.filter((ulos) => {
+        return ulos.name.toLowerCase().includes(this.searchText.toLowerCase())
+      })
+    } else {
+      // If searchText is empty, reset the ulosData to the original data
+      axios
+        .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
+        .then((response) => {
+          console.log(response.data)
+          this.ulosData = response.data.data.ulosList.clientUlosResponseList
+
+          // cek state apakah akan menjadi page terakhir atau tidak
+          if (!response.data.data.weaverList.isLastPage) {
+            this.pageNo = this.pageNo + 1
+            this.lastPage = false
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  },
+  handleFilter() {
+    // Do something to filter results
+    console.log('Filtering results')
   }
 }
 </script>
