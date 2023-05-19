@@ -71,25 +71,25 @@
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="karo" v-model="selectedOptionEthnic" />
+                    <input type="radio" value="Batak Karo" v-model="selectedOptionEthnic" />
                     Batak Karo
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="simalungun" v-model="selectedOptionEthnic" />
+                    <input type="radio" value="Batak Simalungun" v-model="selectedOptionEthnic" />
                     Batak Simalungun
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="mandailing" v-model="selectedOptionEthnic" />
+                    <input type="radio" value="Batak Mandailing" v-model="selectedOptionEthnic" />
                     Batak Mandailing
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="angkola" v-model="selectedOptionEthnic" />
+                    <input type="radio" value="Batak Angkola" v-model="selectedOptionEthnic" />
                     Batak Angkola
                   </label>
                 </li>
@@ -104,13 +104,13 @@
               >
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="tradisional" v-model="selectedOptionType" />
+                    <input type="radio" value="Tradisional" v-model="selectedOptionType" />
                     Tradisional
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="pengembangan" v-model="selectedOptionType" />
+                    <input type="radio" value="Pengembangan" v-model="selectedOptionType" />
                     Pengembangan
                   </label>
                 </li>
@@ -126,37 +126,37 @@
             >
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="merah" v-model="isChecked" />
+                  <input type="checkbox" value="merah" v-model="isCheckedColor" />
                   Merah
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="hitam" v-model="isChecked" />
+                  <input type="checkbox" value="hitam" v-model="isCheckedColor" />
                   Hitam
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="putih" v-model="isChecked" />
+                  <input type="checkbox" value="putih" v-model="isCheckedColor" />
                   Putih
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="biru" v-model="isChecked" />
+                  <input type="checkbox" value="biru" v-model="isCheckedColor" />
                   Biru
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="hijau" v-model="isChecked" />
+                  <input type="checkbox" value="hijau" v-model="isCheckedColor" />
                   Hijau
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="kuning" v-model="isChecked" />
+                  <input type="checkbox" value="kuning" v-model="isCheckedColor" />
                   Kuning
                 </label>
               </li>
@@ -182,15 +182,69 @@
     </div>
   </div>
 
-  <div v-if="applyClicked === true">
+  <div v-if="applyClicked === true" class="flex justify-center pt-6 gap-2">
     <!-- type -->
-    <!-- {{ selectedOptionType }} -->
+    <div
+      v-if="selectedOptionType !== ''"
+      class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
+    >
+      <span class="text-sm font-normal text-primary_main mr-2">{{ selectedOptionType }}</span>
+      <button @click="deleteSelectedOptionType">
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
+          <path
+            stroke="#3355B5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="m12.5 4-8 8m0-8 8 8"
+            opacity=".9"
+          />
+        </svg>
+      </button>
+    </div>
     <!-- ethnic -->
-    <div>
-      <span>{{ selectedOptionEthnic }}</span>
-      <button @click="deleteSelectedOptionEthnic" v-if="selectedOptionEthnic !== ''">X</button>
+    <div
+      v-if="selectedOptionEthnic !== ''"
+      class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
+    >
+      <span class="text-sm font-normal text-primary_main mr-2">{{ selectedOptionEthnic }}</span>
+      <button @click="deleteSelectedOptionEthnic">
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
+          <path
+            stroke="#3355B5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="m12.5 4-8 8m0-8 8 8"
+            opacity=".9"
+          />
+        </svg>
+      </button>
     </div>
     <!-- colors -->
+    <!-- <div v-if="isCheckedColor.length > 0">
+      <div v-if="isCheckedColor !== ''">
+        <div v-for="color in isCheckedColor" :key="color">
+          <div
+            class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
+          >
+            <span class="text-sm font-normal text-primary_main mr-2">{{ isCheckedColor }}</span>
+            <button @click="deleteSelectedOptionEthnic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
+                <path
+                  stroke="#3355B5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="m12.5 4-8 8m0-8 8 8"
+                  opacity=".9"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
 
   <!-- card ulos -->
@@ -210,7 +264,7 @@
                 />
               </div>
               <div
-                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 "
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100"
               ></div>
               <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
                 <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
@@ -283,6 +337,7 @@ export default {
       isDropdownVisible: false,
       selectedOptionType: '',
       selectedOptionEthnic: '',
+      //isCheckedColor: [],
       applyClicked: false
     }
   },
@@ -292,6 +347,9 @@ export default {
       // this.selectedOptionEthnic = value
     },
     selectedOptionEthnic(value) {
+      console.log(value)
+    },
+    selectedOptionColors(value) {
       console.log(value)
     }
   },
@@ -317,6 +375,30 @@ export default {
       this.pageNo = 1
 
       this.selectedOptionEthnic = ''
+      // hapus penanda di filter
+      const url = this.setApiPath(
+        this.pageNo,
+        this.selectedOptionEthnic,
+        this.selectedOptionType,
+        this.colors,
+        this.searchText
+      )
+
+      axios.get(url).then((response) => {
+        console.log(response.data)
+        this.ulosData = response.data.data.ulosList.clientUlosResponseList
+        if (!response.data.data.ulosList.isLastPage) {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = false
+        } else {
+          this.lastPage = true
+        }
+      })
+    },
+    deleteSelectedOptionType() {
+      this.pageNo = 1
+
+      this.selectedOptionType = ''
       // hapus penanda di filter
       const url = this.setApiPath(
         this.pageNo,

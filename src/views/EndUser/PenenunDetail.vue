@@ -10,21 +10,21 @@
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main"
+                <span class="text-sm font-normal text-primary_main"
                   >Penenun {{ penenunDetail.theLoom }}</span
                 >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main">{{
+                <span class="text-sm font-normal text-primary_main">{{
                   penenunDetail.ethnic
                 }}</span>
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main"
+                <span class="text-sm font-normal text-primary_main"
                   >Usia {{ penenunDetail.age }}</span
                 >
               </span>
