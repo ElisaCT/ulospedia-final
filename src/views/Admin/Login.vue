@@ -100,6 +100,7 @@
 
             <div>
               <button
+                @click="login"
                 type="submit"
                 class="flex w-full justify-center rounded-lg bg-primary_main px-4 py-2 text-lg font-medium leading-6 text-neutral_10 hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
@@ -114,6 +115,7 @@
 </template>
 <script>
 import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'admin-login',
@@ -133,11 +135,7 @@ export default {
 
         // Handle successful login, e.g., store token in localStorage or Vuex store
         console.log('Logged in:', response.data)
-<<<<<<< HEAD
-        this.$router.push('/penenun-gedogan')
-=======
         this.$router.push('/admin/dashboard')
->>>>>>> admin/dashboard
 
         // Redirect to the home page or perform any other necessary actions
       } catch (error) {
@@ -145,6 +143,17 @@ export default {
         console.error('Login failed:', error.response.data)
       }
     }
+  },
+  setup() {
+    const router = useRouter()
+
+    const login = () => {
+      localStorage.setItem('authenticated', true)
+      router.push({ name: 'dashboard' })
+    }
+
+    // eslint-disable-next-line vue/no-dupe-keys
+    return { login }
   }
 }
 </script>

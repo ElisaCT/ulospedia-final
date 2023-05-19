@@ -326,11 +326,6 @@ export default {
   },
   data: function () {
     return {
-<<<<<<< HEAD
-      ulosData: null,
-      pageNo: 1,
-      lastPage: true
-=======
       searchText: '',
       ulosData: [],
       pageNo: 1,
@@ -356,7 +351,6 @@ export default {
     },
     selectedOptionColors(value) {
       console.log(value)
->>>>>>> 35edec49431b6ee5e37ddf9f5c2ae7d8e26899f8
     }
   },
   mounted() {
@@ -365,10 +359,6 @@ export default {
       .then((response) => {
         console.log(response.data)
         this.ulosData = response.data.data.ulosList.clientUlosResponseList
-<<<<<<< HEAD
-
-=======
->>>>>>> 35edec49431b6ee5e37ddf9f5c2ae7d8e26899f8
         // cek state apakah akan menjadi page terakhir atau tidak
         if (!response.data.data.ulosList.isLastPage) {
           this.pageNo = this.pageNo + 1
@@ -381,19 +371,6 @@ export default {
       })
   },
   methods: {
-<<<<<<< HEAD
-    async loadMore() {
-      const moreUlosData = await axios.get(
-        `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
-      )
-      console.log(moreUlosData.data)
-      this.ulosData = this.ulosData.concat(moreUlosData.data.data.ulosList.clientUlosResponseList)
-      // cek state apakah akan menjadi page terakhir atau tidak
-      if (!moreUlosData.data.data.ulosList.isLastPage) {
-        this.pageNo = this.pageNo + 1
-        this.lastPage = false
-      }
-=======
     deleteSelectedOptionEthnic() {
       this.pageNo = 1
 
@@ -417,7 +394,6 @@ export default {
           this.lastPage = true
         }
       })
->>>>>>> 35edec49431b6ee5e37ddf9f5c2ae7d8e26899f8
     },
     deleteSelectedOptionType() {
       this.pageNo = 1
@@ -568,34 +544,6 @@ export default {
       // Do something to filter results
       console.log('Filtering results')
     }
-  },
-  handleSearch() {
-    if (this.searchText) {
-      this.ulosData = this.ulosData.filter((ulos) => {
-        return ulos.name.toLowerCase().includes(this.searchText.toLowerCase())
-      })
-    } else {
-      // If searchText is empty, reset the ulosData to the original data
-      axios
-        .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
-        .then((response) => {
-          console.log(response.data)
-          this.ulosData = response.data.data.ulosList.clientUlosResponseList
-
-          // cek state apakah akan menjadi page terakhir atau tidak
-          if (!response.data.data.weaverList.isLastPage) {
-            this.pageNo = this.pageNo + 1
-            this.lastPage = false
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-  },
-  handleFilter() {
-    // Do something to filter results
-    console.log('Filtering results')
   }
 }
 </script>
