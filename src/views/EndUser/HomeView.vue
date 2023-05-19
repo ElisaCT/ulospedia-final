@@ -2,7 +2,7 @@
 <!-- eslint-disable vue/no-reserved-component-names -->
 <!-- eslint-disable vue/no-reserved-component-names -->
 <template>
-  <Navbar/>
+  <Navbar />
   <div class="mx-[180px]">
     <!-- Hero section -->
     <div class="flex flex-wrap items-center justify-center md:flex-row pt-8 pb-10 px-6">
@@ -17,7 +17,7 @@
         </p>
         <div class="mt-8 md:mt-12">
           <a
-            href="#"
+            href="/galeri-ulos"
             class="bg-primary_main hover:bg-primary_hover text-neutral_10 font-medium py-3 px-10 rounded-lg"
             >Eksplor Ulos</a
           >
@@ -47,12 +47,19 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
-              href="#"
+              href="/sejarah-ulos"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
-              >Jelajahi Ulos</a>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-              <path stroke="#3355B5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"/>
+              >Jelajahi Ulos</a
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path
+                stroke="#3355B5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"
+              />
             </svg>
           </div>
         </div>
@@ -74,12 +81,19 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
-              href="#"
+              href="/sejarah-ulos"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
-              >Telusuri Sejarah Ulos</a>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-              <path stroke="#3355B5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"/>
+              >Telusuri Sejarah Ulos</a
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path
+                stroke="#3355B5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"
+              />
             </svg>
           </div>
         </div>
@@ -93,7 +107,7 @@
     <JenisUlos />
   </div>
 
-  <Footer/>
+  <Footer />
 </template>
 
 <script>
@@ -102,7 +116,7 @@ import RagamUlos from '../../components/EndUser/RagamUlos.vue'
 import JenisUlos from '../../components/EndUser/JenisUlos.vue'
 import Carousel from '../../components/EndUser/Carousel.vue'
 import Navbar from '../../components/EndUser/Navbar.vue'
-import Footer from '../../components/EndUser/Footer.vue';
+import Footer from '../../components/EndUser/Footer.vue'
 
 export default {
   name: 'HomeView',

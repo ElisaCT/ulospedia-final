@@ -5,6 +5,8 @@ import SejarahUlos from '@/views/EndUser/SejarahUlos.vue'
 import Penenun from '@/views/EndUser/Penenun.vue'
 import GaleriUlosView from '@/views/EndUser/GaleriUlosView.vue'
 import PenenunGedogan from '@/views/EndUser/PenenunGedogan.vue'
+import PenenunATBM from '@/views/EndUser/PenenunATBM.vue'
+import PenenunATM from '@/views/EndUser/PenenunATM.vue'
 import PenenunDetail from '@/views/EndUser/PenenunDetail.vue'
 import UlosDetail from '@/views/EndUser/UlosDetail.vue'
 
@@ -13,6 +15,7 @@ import AdminLogin from '@/views/Admin/Login.vue'
 import Dashboard from '@/views/Admin/Dashboard.vue'
 import AdminUlos from '@/views/Admin/Ulos/Ulos.vue'
 import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
+import AddPenenun from '@/views/Admin/Penenun/AddPenenun.vue'
 
 import ('preline')
 
@@ -45,6 +48,16 @@ const router = createRouter({
             component: PenenunGedogan
         },
         {
+            path: '/penenun-atbm',
+            name: 'penenun-atbm',
+            component: PenenunATBM
+        },
+        {
+            path: '/penenun-atm',
+            name: 'penenun-atm',
+            component: PenenunATM
+        },
+        {
             path: '/penenun-gedogan/:id',
             name: 'PenenunDetail',
             component: PenenunDetail
@@ -73,6 +86,11 @@ const router = createRouter({
             path: '/admin/penenun',
             name: 'AdminPenenun',
             component: AdminPenenun
+        },
+        {
+            path: '/admin/add-penenun',
+            name: 'AddPenenun',
+            component: AddPenenun
         }
     ]
 })

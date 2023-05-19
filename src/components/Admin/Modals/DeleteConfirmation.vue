@@ -8,7 +8,7 @@
 		<!-- Background overlay -->
         <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
 
-		<div class="bg-white rounded-lg p-6 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
+		<div class="rounded-lg p-6 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
 		  <div class="flex flex-row gap-4 w-full mr-4">
 			<div>
 				<svg class="" xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none"><rect width="48" height="48" x="4" y="4" fill="#EEB4B0" rx="24"/><path stroke="#CB3A31" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M37 21.98c-3.33-.33-6.68-.5-10.02-.5-1.98 0-3.96.1-5.94.3l-2.04.2M24.5 20.97l.22-1.31c.16-.95.28-1.66 1.97-1.66h2.62c1.69 0 1.82.75 1.97 1.67l.22 1.3M34.85 25.14l-.65 10.07C34.09 36.78 34 38 31.21 38h-6.42c-2.79 0-2.88-1.22-2.99-2.79l-.65-10.07M26.33 32.5h3.33M25.5 28.5h5"/><rect width="48" height="48" x="4" y="4" stroke="#FEF3F2" stroke-width="8" rx="24"/></svg>

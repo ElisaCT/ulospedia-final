@@ -1,5 +1,5 @@
 <template>
-  <Navbar/>
+  <Navbar />
   <div v-if="penenunDetails">
     <div v-for="penenunDetail in penenunDetails" :key="penenunDetail.id">
       <div class="flex flex-col gap-12 items-center px-44 p-12">
@@ -10,21 +10,21 @@
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main"
+                <span class="text-sm font-normal text-primary_main"
                   >Penenun {{ penenunDetail.theLoom }}</span
                 >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main">{{
+                <span class="text-sm font-normal text-primary_main">{{
                   penenunDetail.ethnic
                 }}</span>
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main"
+                <span class="text-sm font-normal text-primary_main"
                   >Usia {{ penenunDetail.age }}</span
                 >
               </span>
@@ -57,12 +57,12 @@
       </div>
     </div>
   </div>
-  <Footer/>
+  <Footer />
 </template>
 <script>
 import axios from 'axios'
 import Navbar from '../../components/EndUser/Navbar.vue'
-import Footer from '../../components/EndUser/Footer.vue';
+import Footer from '../../components/EndUser/Footer.vue'
 
 export default {
   name: 'penenun-detail',
@@ -73,18 +73,18 @@ export default {
   },
   mounted() {
     axios
-    .get('http://company.ditenun.com/api/v1/ulospedia/client/weavers/' + this.$route.params.id)
+      .get('http://company.ditenun.com/api/v1/ulospedia/client/weavers/' + this.$route.params.id)
       .then((response) => {
         this.penenunDetails = response.data.data
         console.log(this.penenunDetails)
       })
   },
-  methods() {
-
-  },
-  components:{
+  methods() {},
+  components: {
     // eslint-disable-next-line vue/no-reserved-component-names
-    Navbar, Footer
+    Navbar,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Footer
   }
 }
 </script>
