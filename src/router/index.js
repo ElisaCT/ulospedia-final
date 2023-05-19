@@ -1,11 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import SejarahUlos from '@/views/SejarahUlos.vue'
-import Penenun from '@/views/Penenun.vue'
-import GaleriUlos from '@/views/GaleriUlos.vue'
-import PenenunGedogan from '@/views/PenenunGedogan.vue'
-import PenenunDetail from '@/views/PenenunDetail.vue'
+
+import HomeView from '@/views/EndUser/HomeView.vue'
+import SejarahUlos from '@/views/EndUser/SejarahUlos.vue'
+import Penenun from '@/views/EndUser/Penenun.vue'
+import GaleriUlosView from '@/views/EndUser/GaleriUlosView.vue'
+import PenenunGedogan from '@/views/EndUser/PenenunGedogan.vue'
+import PenenunATBM from '@/views/EndUser/PenenunATBM.vue'
+import PenenunATM from '@/views/EndUser/PenenunATM.vue'
+import PenenunDetail from '@/views/EndUser/PenenunDetail.vue'
+import UlosDetail from '@/views/EndUser/UlosDetail.vue'
+
+// Admin
 import AdminLogin from '@/views/Admin/Login.vue'
+import Dashboard from '@/views/Admin/Dashboard.vue'
+import AdminUlos from '@/views/Admin/Ulos/Ulos.vue'
+import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
+import AddPenenun from '@/views/Admin/Penenun/AddPenenun.vue'
 
 import ('preline')
 
@@ -30,7 +40,7 @@ const router = createRouter({
         {
             path: '/galeri-ulos',
             name: 'galeri-ulos',
-            component: GaleriUlos
+            component: GaleriUlosView
         },
         {
             path: '/penenun-gedogan',
@@ -38,14 +48,49 @@ const router = createRouter({
             component: PenenunGedogan
         },
         {
+            path: '/penenun-atbm',
+            name: 'penenun-atbm',
+            component: PenenunATBM
+        },
+        {
+            path: '/penenun-atm',
+            name: 'penenun-atm',
+            component: PenenunATM
+        },
+        {
             path: '/penenun-gedogan/:id',
             name: 'PenenunDetail',
             component: PenenunDetail
         },
         {
+            path: '/ulos-detail/:id',
+            name: 'UlosDetail',
+            component: UlosDetail
+        },
+        {
             path: '/admin/login',
             name: 'admin-login',
             component: AdminLogin
+        },
+        {
+            path: '/admin/dashboard',
+            name: 'dashboard',
+            component: Dashboard
+        },
+        {
+            path: '/admin/ulos',
+            name: 'AdminUlos',
+            component: AdminUlos
+        },
+        {
+            path: '/admin/penenun',
+            name: 'AdminPenenun',
+            component: AdminPenenun
+        },
+        {
+            path: '/admin/add-penenun',
+            name: 'AddPenenun',
+            component: AddPenenun
         }
     ]
 })

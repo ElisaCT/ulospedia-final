@@ -1,19 +1,23 @@
+<!-- eslint-disable vue/no-reserved-component-names -->
+<!-- eslint-disable vue/no-reserved-component-names -->
+<!-- eslint-disable vue/no-reserved-component-names -->
 <template>
+  <Navbar />
   <div class="mx-[180px]">
     <!-- Hero section -->
     <div class="flex flex-wrap items-center justify-center md:flex-row pt-8 pb-10 px-6">
       <div class="md:w-1/2 text-center md:text-left md:text-xl">
         <h1 class="text-5xl font-bold text-gray-900 leading-tight">
-          Lebih dekat dengan <span class="text-blue-600">Ulos</span> bersama
-          <span class="text-blue-600">Ulospedia</span>
+          Lebih dekat dengan <span class="text-primary_main">Ulos</span> bersama
+          <span class="text-primary_main">Ulospedia</span>
         </h1>
-        <p class="mt-4 text-gray-600 text-lg md:text-xl">
+        <p class="mt-4 text-neutral_90 text-lg md:text-xl">
           Kembangkan pengetahuanmu tentang ulos <br />
           bersama Ditenun Ulospedia
         </p>
         <div class="mt-8 md:mt-12">
           <a
-            href="#"
+            href="/galeri-ulos"
             class="bg-primary_main hover:bg-primary_hover text-neutral_10 font-medium py-3 px-10 rounded-lg"
             >Eksplor Ulos</a
           >
@@ -21,7 +25,7 @@
       </div>
 
       <div class="md:w-1/2 mt-12 md:mt-0">
-        <img src="../assets/images/hero-1.png" alt="Hero Image" class="w-full rounded" />
+        <img src="../../assets/images/hero-1.png" alt="Hero Image" class="w-full rounded" />
       </div>
     </div>
 
@@ -43,12 +47,19 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
-              href="#"
+              href="/sejarah-ulos"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
-              >Jelajahi Ulos</a>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-              <path stroke="#3355B5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"/>
+              >Jelajahi Ulos</a
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path
+                stroke="#3355B5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"
+              />
             </svg>
           </div>
         </div>
@@ -70,12 +81,19 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
-              href="#"
+              href="/sejarah-ulos"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
-              >Telusuri Sejarah Ulos</a>
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-              <path stroke="#3355B5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5" d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"/>
+              >Telusuri Sejarah Ulos</a
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path
+                stroke="#3355B5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"
+              />
             </svg>
           </div>
         </div>
@@ -88,13 +106,17 @@
     <!-- jenis Ulos -->
     <JenisUlos />
   </div>
+
+  <Footer />
 </template>
 
 <script>
 // @ is an alias to /src
-import RagamUlos from '../components/RagamUlos.vue'
-import JenisUlos from '../components/JenisUlos.vue'
-import Carousel from '../components/Carousel.vue'
+import RagamUlos from '../../components/EndUser/RagamUlos.vue'
+import JenisUlos from '../../components/EndUser/JenisUlos.vue'
+import Carousel from '../../components/EndUser/Carousel.vue'
+import Navbar from '../../components/EndUser/Navbar.vue'
+import Footer from '../../components/EndUser/Footer.vue'
 
 export default {
   name: 'HomeView',
@@ -102,7 +124,10 @@ export default {
     // eslint-disable-next-line vue/no-unused-components, vue/no-reserved-component-names
     RagamUlos,
     JenisUlos,
-    Carousel
+    Carousel,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Footer,
+    Navbar
   }
 }
 </script>

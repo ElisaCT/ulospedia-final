@@ -2,7 +2,7 @@
     <!-- Ulos tradisional -->
      <div class="flex flex-wrap items-center justify-center md:flex-row py-16 px-6">
         <div class="md:w-1/2 mt-12 md:mt-0">
-         <img src="../assets/images/ulos-tradisional.png" alt="Ulos tradisional" class="w-full rounded">
+         <img src="../../assets/images/ulos-tradisional.png" alt="Ulos tradisional" class="w-full rounded">
         </div>
 
       <div class="md:w-1/2 text-center md:text-left md:text-xl">
@@ -20,7 +20,7 @@
       </div>
 
       <div class="md:w-1/2 mt-12 md:mt-0">
-        <img src="../assets/images/ulos-pengembangan.png" alt="Ulos tradisional" class="w-full rounded">
+        <img src="../../assets/images/ulos-pengembangan.png" alt="Ulos tradisional" class="w-full rounded">
       </div>
     </div>
 </template>

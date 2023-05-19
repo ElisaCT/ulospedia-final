@@ -133,7 +133,11 @@ export default {
 
         // Handle successful login, e.g., store token in localStorage or Vuex store
         console.log('Logged in:', response.data)
+<<<<<<< HEAD
         this.$router.push('/penenun-gedogan')
+=======
+        this.$router.push('/admin/dashboard')
+>>>>>>> admin/dashboard
 
         // Redirect to the home page or perform any other necessary actions
       } catch (error) {
