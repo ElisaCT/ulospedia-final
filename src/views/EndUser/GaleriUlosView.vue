@@ -326,37 +326,9 @@ export default {
   },
   data: function () {
     return {
-<<<<<<< HEAD
       ulosData: null,
       pageNo: 1,
       lastPage: true
-=======
-      searchText: '',
-      ulosData: [],
-      pageNo: 1,
-      lastPage: true,
-      // ethnic: '',
-      // type: '',
-      colors: '',
-      search: '',
-      isDropdownVisible: false,
-      selectedOptionType: '',
-      selectedOptionEthnic: '',
-      //isCheckedColor: [],
-      applyClicked: false
-    }
-  },
-  watch: {
-    selectedOptionType(value) {
-      console.log(value)
-      // this.selectedOptionEthnic = value
-    },
-    selectedOptionEthnic(value) {
-      console.log(value)
-    },
-    selectedOptionColors(value) {
-      console.log(value)
->>>>>>> 35edec49431b6ee5e37ddf9f5c2ae7d8e26899f8
     }
   },
   mounted() {
@@ -365,10 +337,6 @@ export default {
       .then((response) => {
         console.log(response.data)
         this.ulosData = response.data.data.ulosList.clientUlosResponseList
-<<<<<<< HEAD
-
-=======
->>>>>>> 35edec49431b6ee5e37ddf9f5c2ae7d8e26899f8
         // cek state apakah akan menjadi page terakhir atau tidak
         if (!response.data.data.ulosList.isLastPage) {
           this.pageNo = this.pageNo + 1
@@ -381,7 +349,6 @@ export default {
       })
   },
   methods: {
-<<<<<<< HEAD
     async loadMore() {
       const moreUlosData = await axios.get(
         `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
@@ -393,31 +360,6 @@ export default {
         this.pageNo = this.pageNo + 1
         this.lastPage = false
       }
-=======
-    deleteSelectedOptionEthnic() {
-      this.pageNo = 1
-
-      this.selectedOptionEthnic = ''
-      // hapus penanda di filter
-      const url = this.setApiPath(
-        this.pageNo,
-        this.selectedOptionEthnic,
-        this.selectedOptionType,
-        this.colors,
-        this.searchText
-      )
-
-      axios.get(url).then((response) => {
-        console.log(response.data)
-        this.ulosData = response.data.data.ulosList.clientUlosResponseList
-        if (!response.data.data.ulosList.isLastPage) {
-          this.pageNo = this.pageNo + 1
-          this.lastPage = false
-        } else {
-          this.lastPage = true
-        }
-      })
->>>>>>> 35edec49431b6ee5e37ddf9f5c2ae7d8e26899f8
     },
     deleteSelectedOptionType() {
       this.pageNo = 1
@@ -476,6 +418,7 @@ export default {
       ${colors !== '' ? '&colors=' + colors : ''}
       ${search !== '' ? '&search=' + search : ''}`
     },
+    // eslint-disable-next-line no-dupe-keys, vue/no-dupe-keys
     async loadMore() {
       console.log(
         this.setApiPath(this.pageNo, this.ethnic, this.type, this.colors, this.searchText)
