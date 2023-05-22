@@ -59,6 +59,7 @@
                 </thead>
                 <tbody class="divide-y divide-neutral_30 text-neutral_90">
                     <tr class="">
+                        <!-- hover state -->
                         <td class="px-6 py-4">
                             Asti Panjaitan
                         </td>
