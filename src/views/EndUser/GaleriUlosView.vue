@@ -1,17 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <Navbar/>
-    <div class="mx-[180px]">
-      <!-- search -->
-      <div class="flex flex-row items-center gap-3">
-        <div class="inline-flex flex-grow items-center bg-[#F5F5F5] rounded-lg py-2 px-4">
-          <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-            <path stroke="#C2C2C2" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.583 17.5a7.917 7.917 0 1 0 0-15.833 7.917 7.917 0 0 0 0 15.833ZM18.333 18.333l-1.666-1.666"/>
-          </svg>
-          <input
-          id="field-cari-ulos"
-          class=" w-full bg-[#F5F5F5] focus:outline-none pl-3"
-=======
   <Navbar />
   <div class="mx-[180px]">
     <!-- search -->
@@ -28,7 +15,6 @@
         </svg>
         <input
           class="w-full bg-[#F5F5F5] focus:outline-none pl-3"
->>>>>>> admin/dashboard
           type="text"
           v-model="searchText"
           @input="handleSearch"
