@@ -193,31 +193,13 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   methods: {
-    async logout() {
-      try {
-        const response = await axios.post('http://company.ditenun.com/api/v1/auth/logout', null, {
-          // Request body data
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        })
-
-        // console.log(response.data)
-
-        if (response.data.code === 200) {
-          localStorage.setItem('authenticated', false)
-          localStorage.setItem('token', null)
-          this.$router.push('/admin/login')
-        }
-        // Handle the response data as needed
-      } catch (error) {
-        console.error('Error:', error)
-        // Handle the error response
-      }
+    logout() {
+      console.log('TEST LOGOUT')
+      localStorage.removeItem('authenticated')
+      localStorage.removeItem('token')
+      this.$router.push('/admin/login')
     }
   },
   setup() {
