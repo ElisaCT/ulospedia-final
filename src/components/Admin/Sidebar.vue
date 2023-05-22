@@ -191,17 +191,42 @@
     </div>
   </aside>
 </template>
+
 <script>
-import { useRouter } from 'vue-router'
+import axios from 'axios'
 
 export default {
-  setup() {
-    const router = useRouter()
-    const logout = () => {
-      localStorage.setItem('authenticated', false)
-      router.push({ name: 'admin-login' })
+  methods: {
+    async logout() {
+      try {
+        const response = await axios.post('http://company.ditenun.com/api/v1/auth/logout', null, {
+          // Request body data
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+
+        // console.log(response.data)
+
+        if (response.data.code === 200) {
+          localStorage.setItem('authenticated', false)
+          localStorage.setItem('token', null)
+          this.$router.push('/admin/login')
+        }
+        // Handle the response data as needed
+      } catch (error) {
+        console.error('Error:', error)
+        // Handle the error response
+      }
     }
-    return { logout }
+  },
+  setup() {
+    // const router = useRouter()
+    // const logout = () => {
+    //   localStorage.setItem('authenticated', false)
+    //   router.push({ name: 'admin-login' })
+    // }
+    // return { logout }
   }
 }
 </script>

@@ -12,7 +12,7 @@
           <div class="flex items-center">
             <label
               for="dropzone-file"
-              class="flex flex-col items-center justify-center w-36 h-36 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+              class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
             >
               <div class="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
@@ -68,6 +68,36 @@
           </div>
         </div>
 
+        <!-- born year -->
+        <!-- <DatePicker v-model="selectedDate" :disabled-dates="disableFutureDates"></DatePicker> -->
+        <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
+          <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+            >Tahun Lahir Penenun*</label
+          >
+          <div class="md:w-2/3">
+            <!-- <input
+              type="number"
+              id="birth-year"
+              class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
+              placeholder="Masukkan tahun lahir penenun"
+              required
+              min="1900"
+              :max="maxYear"
+              step="1"
+              value="2016"
+            /> -->
+            <div>
+              <Datepicker
+                :customInput="{ input: true, click: toggleDatepicker }"
+                :disabled="true"
+                :format="'yyyy'"
+                v-model="selectedYear"
+              ></Datepicker>
+              <button @click="toggleDatepicker">Select Year</button>
+            </div>
+          </div>
+        </div>
+
         <!-- suku penenun -->
         <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
           <label
@@ -79,7 +109,7 @@
             <select
               v-model="selectedEthnic"
               id="penenun-ethnic"
-              class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
+              class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5 pl-3"
             >
               <option disabled value="">Pilih asal suku</option>
               <option v-for="ethnic in ethincs" :key="ethnic" :value="ethnic">
@@ -146,46 +176,46 @@
 
         <!-- story penenun -->
         <div class="flex flex-col gap-6 md:flex-row pb-6">
-                    <label
-                      for="ulos-meaning"
-                      class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                      >Cerita Penenun</label
-                    >
-                    <div class="md:w-2/3">
-                      <textarea
-                        type="text"
-                        id="ulos-meaning"
-                        rows="4"
-                        class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
-                        placeholder="Masukkan cerita yang ingin dibagikan penenun"
-                      ></textarea>
-                    </div>
-                  </div>
+          <label for="ulos-meaning" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+            >Cerita Penenun</label
+          >
+          <div class="md:w-2/3">
+            <textarea
+              type="text"
+              id="ulos-meaning"
+              rows="4"
+              class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
+              placeholder="Masukkan cerita yang ingin dibagikan penenun"
+            ></textarea>
+          </div>
+        </div>
       </div>
 
       <div class="flex flex-row gap-6 justify-end mt-6">
         <button
-              @click="backToPenenun"
-              class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
-            >
-              Batal
-            </button>
-            <button
-              @click="sumbit"
-              class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
-            >
-              Simpan
-            </button>
+          @click="backToPenenun"
+          class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
+        >
+          Batal
+        </button>
+        <button
+          @click="sumbit"
+          class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
+        >
+          Simpan
+        </button>
       </div>
     </div>
   </div>
 </template>
 <script>
-//import Multiselect from 'vue-multiselect'
+// import Datepicker from '@vuepic/vue-datepicker';
+// import '@vuepic/vue-datepicker/dist/main.css';
 
 export default {
   components: {
     //Multiselect
+    //Datepicker
   },
   data() {
     return {
@@ -199,7 +229,10 @@ export default {
       selectedTechnics: [],
       technics: ['Teknik Ikat Lungsi', 'Teknik Ikat Pakan', 'Teknik Ikat Ganda'],
       selectedTool: '',
-      tools: ['Gedogan', 'Alat Tenun Bukan Mesin (ATBM)', 'Alat Tenun Mesin (ATM)']
+      tools: ['Gedogan', 'Alat Tenun Bukan Mesin (ATBM)', 'Alat Tenun Mesin (ATM)'],
+      maxYear: new Date().getFullYear(),
+      selectedYear: null,
+      showDatepicker: false,
     }
   },
   methods: {
@@ -223,8 +256,22 @@ export default {
     },
     backToPenenun() {
       this.$router.push('/admin/penenun')
-    }
+    },
+    disableFutureDates(date) {
+      const today = new Date()
+      return date > today
+    },
+    getCurrentDate() {
+      const today = new Date()
+      const year = today.getFullYear()
+      const month = String(today.getMonth() + 1).padStart(2, '0')
+      const day = String(today.getDate()).padStart(2, '0')
+      return `${year}-${month}-${day}`
+    },
+    toggleDatepicker() {
+      this.showDatepicker = !this.showDatepicker;
+    },
   }
 }
 </script>
-<style lang=""></style>
+<style scoped></style>
