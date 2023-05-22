@@ -59,5 +59,7 @@ module.exports = {
             sans: ['Roboto', 'sans-serif'],
         }
     },
-    plugins: [require('preline/plugin')]
+    plugins: [
+        require('preline/plugin')
+    ]
 }
