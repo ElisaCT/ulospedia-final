@@ -100,7 +100,7 @@
 
             <div>
               <button
-                @click="login"
+                @click="loginUser"
                 type="submit"
                 class="flex w-full justify-center rounded-lg bg-primary_main px-4 py-2 text-lg font-medium leading-6 text-neutral_10 hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
@@ -126,34 +126,57 @@ export default {
     }
   },
   methods: {
-    async login() {
+    async loginUser() {
+
+      console.log(this.username)
+      console.log(this.password)
+
+      // const response = await axios.post('http://company.ditenun.com/api/v1/auth/login', {
+      //   username: this.username,
+      //   password: this.password
+      // })
+
+      // console.log(response.data)
+
       try {
         const response = await axios.post('http://company.ditenun.com/api/v1/auth/login', {
+          // Request body data
           username: this.username,
           password: this.password
         })
 
-        // Handle successful login, e.g., store token in localStorage or Vuex store
-        console.log('Logged in:', response.data)
-        this.$router.push('/admin/dashboard')
+        console.log(response.data)
 
-        // Redirect to the home page or perform any other necessary actions
+        if (response.data.code === 200) {
+          localStorage.setItem('authenticated', true)
+          localStorage.setItem('token', response.data.data.token)
+          this.$router.push('/admin/dashboard')
+        }
+        // Handle the response data as needed
       } catch (error) {
-        // Handle login error
-        console.error('Login failed:', error.response.data)
+        console.error('Error:', error.response.data)
+        // Handle the error response
       }
+
+      // // Handle successful login, e.g., store token in localStorage or Vuex store
+      // console.log('Logged in:', response.data)
+      // this.$router.push('/admin/dashboard')
+
+      // Redirect to the home page or perform any other necessary actions
     }
   },
   setup() {
-    const router = useRouter()
+    // const router = useRouter()
 
-    const login = () => {
-      localStorage.setItem('authenticated', true)
-      router.push({ name: 'dashboard' })
-    }
+    // const login = () => {
+    //   localStorage.setItem('authenticated', false)
+    //   router.push({ name: 'dashboard' })
+    // }
+
+    console.log('TEST')
 
     // eslint-disable-next-line vue/no-dupe-keys
-    return { login }
+    // return login
   }
 }
 </script>

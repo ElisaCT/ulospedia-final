@@ -191,17 +191,24 @@
     </div>
   </aside>
 </template>
-<script>
-import { useRouter } from 'vue-router'
 
+<script>
 export default {
-  setup() {
-    const router = useRouter()
-    const logout = () => {
-      localStorage.setItem('authenticated', false)
-      router.push({ name: 'admin-login' })
+  methods: {
+    logout() {
+      console.log('TEST LOGOUT')
+      localStorage.removeItem('authenticated')
+      localStorage.removeItem('token')
+      this.$router.push('/admin/login')
     }
-    return { logout }
+  },
+  setup() {
+    // const router = useRouter()
+    // const logout = () => {
+    //   localStorage.setItem('authenticated', false)
+    //   router.push({ name: 'admin-login' })
+    // }
+    // return { logout }
   }
 }
 </script>

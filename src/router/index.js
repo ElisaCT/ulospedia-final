@@ -14,85 +14,97 @@ import UlosDetail from '@/views/EndUser/UlosDetail.vue'
 import AdminLogin from '@/views/Admin/Login.vue'
 import Dashboard from '@/views/Admin/Dashboard.vue'
 import AdminUlos from '@/views/Admin/Ulos/Ulos.vue'
+import AddUlos from '@/views/Admin/Ulos/AddUlos.vue'
 import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
 import AddPenenun from '@/views/Admin/Penenun/AddPenenun.vue'
+import GenerateMotif from '@/views/Admin/GenerateMotif/GenerateMotif.vue'
 
-import('preline')
+import ('preline')
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/sejarah-ulos',
-      name: 'sejarah-ulos',
-      component: SejarahUlos
-    },
-    {
-      path: '/penenun',
-      name: 'penenun',
-      component: Penenun
-    },
-    {
-      path: '/galeri-ulos',
-      name: 'galeri-ulos',
-      component: GaleriUlosView
-    },
-    {
-      path: '/penenun-gedogan',
-      name: 'penenun-gedogan',
-      component: PenenunGedogan
-    },
-    {
-      path: '/penenun-atbm',
-      name: 'penenun-atbm',
-      component: PenenunATBM
-    },
-    {
-      path: '/penenun-atm',
-      name: 'penenun-atm',
-      component: PenenunATM
-    },
-    {
-      path: '/penenun-gedogan/:id',
-      name: 'PenenunDetail',
-      component: PenenunDetail
-    },
-    {
-      path: '/ulos-detail/:id',
-      name: 'UlosDetail',
-      component: UlosDetail
-    },
-    {
-      path: '/admin/login',
-      name: 'admin-login',
-      component: AdminLogin
-    },
-    {
-      path: '/admin/dashboard',
-      name: 'dashboard',
-      component: Dashboard
-    },
-    {
-      path: '/admin/ulos',
-      name: 'AdminUlos',
-      component: AdminUlos
-    },
-    {
-      path: '/admin/penenun',
-      name: 'AdminPenenun',
-      component: AdminPenenun
-    },
-    {
-      path: '/admin/add-penenun',
-      name: 'AddPenenun',
-      component: AddPenenun
-    }
-  ]
+    history: createWebHistory(
+        import.meta.env.BASE_URL),
+    routes: [{
+            path: '/',
+            name: 'home',
+            component: HomeView
+        },
+        {
+            path: '/sejarah-ulos',
+            name: 'sejarah-ulos',
+            component: SejarahUlos
+        },
+        {
+            path: '/penenun',
+            name: 'penenun',
+            component: Penenun
+        },
+        {
+            path: '/galeri-ulos',
+            name: 'galeri-ulos',
+            component: GaleriUlosView
+        },
+        {
+            path: '/penenun-gedogan',
+            name: 'penenun-gedogan',
+            component: PenenunGedogan
+        },
+        {
+            path: '/penenun-atbm',
+            name: 'penenun-atbm',
+            component: PenenunATBM
+        },
+        {
+            path: '/penenun-atm',
+            name: 'penenun-atm',
+            component: PenenunATM
+        },
+        {
+            path: '/penenun-gedogan/:id',
+            name: 'PenenunDetail',
+            component: PenenunDetail
+        },
+        {
+            path: '/ulos-detail/:id',
+            name: 'UlosDetail',
+            component: UlosDetail
+        },
+        {
+            path: '/admin/login',
+            name: 'admin-login',
+            component: AdminLogin
+        },
+        {
+            path: '/admin/dashboard',
+            name: 'dashboard',
+            component: Dashboard
+        },
+        {
+            path: '/admin/ulos',
+            name: 'AdminUlos',
+            component: AdminUlos
+        },
+        {
+            path: '/admin/add-ulos',
+            name: 'AddUlos',
+            component: AddUlos
+        },
+        {
+            path: '/admin/penenun',
+            name: 'AdminPenenun',
+            component: AdminPenenun
+        },
+        {
+            path: '/admin/add-penenun',
+            name: 'AddPenenun',
+            component: AddPenenun
+        },
+        {
+            path: '/admin/generate-motif',
+            name: 'GenerateMotif',
+            component: GenerateMotif
+        }
+    ]
 })
 
 // router.beforeEach((to, from) => {
@@ -104,11 +116,11 @@ const router = createRouter({
 // })
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = JSON.parse(localStorage.getItem('authenticated'))
+    const isAuthenticated = JSON.parse(localStorage.getItem('authenticated'))
 
-  if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
-  if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
-  else next()
+    if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
+    if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
+    else next()
 })
 
 export default router
