@@ -14,7 +14,7 @@
           />
         </svg>
         <input
-          class="w-full bg-[#F5F5F5] border-[#F5F5F5] focus:outline-none pl-3"
+          class="w-full bg-[#F5F5F5] focus:outline-none pl-3"
           type="text"
           v-model="searchText"
           @input="handleSearch"
@@ -53,7 +53,7 @@
     <div v-if="isDropdownVisible" class="relative">
       <div
         id="dropdown"
-        class="absolute top-2 right-2 mt-4 z-[4] bg-white px-10 py-6 w-96 rounded-lg shadow flex flex-col gap-4 border border-solid border-primary_surface"
+        class="absolute top-2 right-2 mt-4 z-[4] bg-neutral_10 px-10 py-6 w-96 rounded-lg shadow flex flex-col gap-4 border border-solid border-primary_surface"
       >
         <div class="flex flex-row gap-14">
           <div class="gap-6">
@@ -65,7 +65,12 @@
               >
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="Batak Toba" v-model="selectedOptionEthnic" />
+                    <input
+                      type="radio"
+                      value="Batak Toba"
+                      v-model="selectedOptionEthnic"
+                      class=""
+                    />
                     Batak Toba
                   </label>
                 </li>
@@ -126,37 +131,32 @@
             >
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="merah" v-model="isCheckedColor" />
+                  <input type="checkbox" v-model="colors.Merah" @change="showChips" />
                   Merah
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="hitam" v-model="isCheckedColor" />
+                  <input type="checkbox" v-model="colors.Hitam" @change="showChips" />
                   Hitam
                 </label>
               </li>
+
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="putih" v-model="isCheckedColor" />
-                  Putih
-                </label>
-              </li>
-              <li class="py-2">
-                <label>
-                  <input type="checkbox" value="biru" v-model="isCheckedColor" />
+                  <input type="checkbox" v-model="colors.Biru" @change="showChips" />
                   Biru
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="hijau" v-model="isCheckedColor" />
+                  <input type="checkbox" v-model="colors.Hijau" @change="showChips" />
                   Hijau
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" value="kuning" v-model="isCheckedColor" />
+                  <input type="checkbox" v-model="colors.Kuning" @change="showChips" />
                   Kuning
                 </label>
               </li>
@@ -182,7 +182,7 @@
     </div>
   </div>
 
-  <div v-if="applyClicked === true" class="flex justify-center pt-6 gap-2">
+  <div class="flex justify-center pt-6 gap-2">
     <!-- type -->
     <div
       v-if="selectedOptionType !== ''"
@@ -222,29 +222,23 @@
       </button>
     </div>
     <!-- colors -->
-    <!-- <div v-if="isCheckedColor.length > 0">
-      <div v-if="isCheckedColor !== ''">
-        <div v-for="color in isCheckedColor" :key="color">
-          <div
-            class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
-          >
-            <span class="text-sm font-normal text-primary_main mr-2">{{ isCheckedColor }}</span>
-            <button @click="deleteSelectedOptionEthnic">
-              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
-                <path
-                  stroke="#3355B5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="m12.5 4-8 8m0-8 8 8"
-                  opacity=".9"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
+    <div v-for="selectedColor in convertColorsObjToArray" :key="selectedColor">
+      <div class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2">
+        <span class="text-sm font-normal text-primary_main mr-2">{{ selectedColor }}</span>
+        <button @click="deleteSelectedOptionColor(selectedColor)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
+            <path
+              stroke="#3355B5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="m12.5 4-8 8m0-8 8 8"
+              opacity=".9"
+            />
+          </svg>
+        </button>
       </div>
-    </div> -->
+    </div>
   </div>
 
   <!-- card ulos -->
@@ -264,7 +258,7 @@
                 />
               </div>
               <div
-                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100"
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
               ></div>
               <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
                 <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
@@ -326,46 +320,120 @@ export default {
   },
   data: function () {
     return {
-      ulosData: null,
+      colors: {
+        Merah: false,
+        Kuning: false,
+        Hitam: false,
+        Hijau: false,
+        Biru: false
+      },
+      searchText: '',
+      ulosData: [],
       pageNo: 1,
-      lastPage: true
+      lastPage: true,
+      // ethnic: '',
+      // type: '',
+      search: '',
+      isDropdownVisible: false,
+      selectedOptionType: '',
+      selectedOptionEthnic: '',
+      // selectedOptionColors: [],
+      applyClickedEthnic: false,
+      applyClickedType: false
+    }
+  },
+  watch: {
+    selectedOptionType(value) {
+      console.log(value)
+      // this.selectedOptionEthnic = value
+    },
+    selectedOptionEthnic(value) {
+      console.log(value)
     }
   },
   mounted() {
     axios
       .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
       .then((response) => {
-        console.log(response.data)
         this.ulosData = response.data.data.ulosList.clientUlosResponseList
         // cek state apakah akan menjadi page terakhir atau tidak
         if (!response.data.data.ulosList.isLastPage) {
           this.pageNo = this.pageNo + 1
           this.lastPage = false
-          console.log(`State: ${this.lastPage}`)
         }
       })
       .catch((error) => {
         console.log(error)
       })
   },
+  computed: {
+    convertColorsObjToArray() {
+      return Object.entries(this.colors)
+        .filter(([color, value]) => value === true)
+        .map(([color]) => color)
+    }
+  },
   methods: {
-    async loadMore() {
-      const moreUlosData = await axios.get(
-        `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`
+    convertColors(colors) {
+      return Object.keys(colors)
+        .filter((color) => colors[color])
+        .join('-')
+    },
+    deleteSelectedOptionEthnic() {
+      this.pageNo = 1
+      this.applyClickedEthnic = false
+
+      this.selectedOptionEthnic = ''
+      // hapus penanda di filter
+      const url = this.setApiPath(
+        this.pageNo,
+        this.selectedOptionEthnic,
+        this.selectedOptionType,
+        this.colors,
+        this.searchText
       )
-      console.log(moreUlosData.data)
-      this.ulosData = this.ulosData.concat(moreUlosData.data.data.ulosList.clientUlosResponseList)
-      // cek state apakah akan menjadi page terakhir atau tidak
-      if (!moreUlosData.data.data.ulosList.isLastPage) {
-        this.pageNo = this.pageNo + 1
-        this.lastPage = false
-      }
+
+      axios.get(url).then((response) => {
+        console.log(response.data)
+        this.ulosData = response.data.data.ulosList.clientUlosResponseList
+        if (!response.data.data.ulosList.isLastPage) {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = false
+        } else {
+          this.lastPage = true
+        }
+      })
     },
     deleteSelectedOptionType() {
       this.pageNo = 1
+      this.applyClickedType = false
 
       this.selectedOptionType = ''
-      // hapus penanda di filter
+
+      const url = this.setApiPath(
+        this.pageNo,
+        this.selectedOptionEthnic,
+        this.selectedOptionType,
+        this.colors,
+        this.searchText
+      )
+
+      axios.get(url).then((response) => {
+        console.log(response.data)
+        this.ulosData = response.data.data.ulosList.clientUlosResponseList
+        if (!response.data.data.ulosList.isLastPage) {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = false
+        } else {
+          this.lastPage = true
+        }
+      })
+    },
+    deleteSelectedOptionColor(color) {
+      this.colors[color] = !this.colors[color]
+
+      this.pageNo = 1
+
       const url = this.setApiPath(
         this.pageNo,
         this.selectedOptionEthnic,
@@ -392,9 +460,11 @@ export default {
         this.pageNo,
         this.selectedOptionEthnic,
         this.selectedOptionType,
-        this.colors,
+        this.convertColors(this.colors),
         this.searchText
       )
+
+      console.log(url)
 
       axios.get(url).then((response) => {
         console.log(response.data)
@@ -407,7 +477,8 @@ export default {
         }
       })
 
-      this.applyClicked = !this.applyClicked
+      this.applyClickedType = true
+      this.applyClickedEthnic = true
       this.isDropdownVisible = !this.isDropdownVisible
     },
     setApiPath(pageNo, ethnic, type, colors, search) {
@@ -415,14 +486,11 @@ export default {
         ethnic !== '' ? '&ethnic=' + ethnic : ''
       }
       ${type !== '' ? '&type=' + type : ''}
-      ${colors !== '' ? '&colors=' + colors : ''}
+      ${this.convertColors(this.colors) !== '' ? '&colors=' + this.convertColors(this.colors) : ''}
       ${search !== '' ? '&search=' + search : ''}`
     },
     // eslint-disable-next-line no-dupe-keys, vue/no-dupe-keys
     async loadMore() {
-      console.log(
-        this.setApiPath(this.pageNo, this.ethnic, this.type, this.colors, this.searchText)
-      )
       const moreUlosData = await axios.get(
         this.setApiPath(
           this.pageNo,
@@ -432,7 +500,6 @@ export default {
           this.searchText
         )
       )
-      console.log(moreUlosData.data)
       this.ulosData = this.ulosData.concat(moreUlosData.data.data.ulosList.clientUlosResponseList)
       // cek state apakah akan menjadi page terakhir atau tidak
       if (!moreUlosData.data.data.ulosList.isLastPage) {
@@ -444,101 +511,41 @@ export default {
     },
     handleSearch() {
       this.pageNo = 1
-      console.log(
-        `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}&search=${this.searchText}`
+
+      const url = this.setApiPath(
+        this.pageNo,
+        this.selectedOptionEthnic,
+        this.selectedOptionType,
+        this.colors,
+        this.searchText
       )
-      if (this.searchText === '') {
-        axios
-          .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=1`)
-          .then((response) => {
-            console.log(response.data.data.ulosList.clientUlosResponseList)
-            this.ulosData = response.data.data.ulosList.clientUlosResponseList
-            // cek state apakah akan menjadi page terakhir atau tidak
-            if (!response.data.data.ulosList.isLastPage) {
-              this.pageNo = this.pageNo + 1
-              this.lastPage = false
-            } else {
-              this.lastPage = true
-            }
-          })
-      } else {
-        axios
-          .get(
-            `http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}&search=${this.searchText}`
-          )
-          .then((response) => {
-            console.log(response.data.data.ulosList.clientUlosResponseList)
-            this.ulosData = response.data.data.ulosList.clientUlosResponseList
-            // cek state apakah akan menjadi page terakhir atau tidak
-            if (!response.data.data.ulosList.isLastPage) {
-              this.pageNo = this.pageNo + 1
-              this.lastPage = false
-            } else {
-              this.lastPage = true
-            }
-          })
-      }
+
+      console.log(url)
+
+      axios.get(url).then((response) => {
+        console.log(response.data)
+        this.ulosData = response.data.data.ulosList.clientUlosResponseList
+        if (!response.data.data.ulosList.isLastPage) {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = false
+        } else {
+          this.lastPage = true
+        }
+      })
     },
     toggleDropdown() {
+      this.applyClickedEthnic = false
+      this.applyClickedType = false
+      this.colors = {
+        Merah: false,
+        Kuning: false,
+        Hitam: false,
+        Hijau: false,
+        Biru: false
+      }
       this.isDropdownVisible = !this.isDropdownVisible
       this.selectedOption = null // Reset the selected option
-    },
-    // handleSearch() {
-    //   if (this.searchText) {
-    //     this.ulosData = this.ulosData.filter((ulos) => {
-    //       return ulos.name.toLowerCase().includes(this.searchText.toLowerCase())
-    //     })
-    //   } else {
-    //     // If searchText is empty, reset the ulosData to the original data
-    //     axios
-    //       .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
-    //       .then((response) => {
-    //         console.log(response.data)
-    //         this.ulosData = response.data.data.ulosList.clientUlosResponseList
-
-    //         // cek state apakah akan menjadi page terakhir atau tidak
-    //         if (!response.data.data.weaverList.isLastPage) {
-    //           this.pageNo = this.pageNo + 1
-    //           this.lastPage = false
-    //         }
-    //       })
-    //       .catch((error) => {
-    //         console.log(error)
-    //       })
-    //   }
-    // },
-    handleFilter() {
-      // Do something to filter results
-      console.log('Filtering results')
     }
-  },
-  handleSearch() {
-    if (this.searchText) {
-      this.ulosData = this.ulosData.filter((ulos) => {
-        return ulos.name.toLowerCase().includes(this.searchText.toLowerCase())
-      })
-    } else {
-      // If searchText is empty, reset the ulosData to the original data
-      axios
-        .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
-        .then((response) => {
-          console.log(response.data)
-          this.ulosData = response.data.data.ulosList.clientUlosResponseList
-
-          // cek state apakah akan menjadi page terakhir atau tidak
-          if (!response.data.data.weaverList.isLastPage) {
-            this.pageNo = this.pageNo + 1
-            this.lastPage = false
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    }
-  },
-  handleFilter() {
-    // Do something to filter results
-    console.log('Filtering results')
   }
 }
 </script>

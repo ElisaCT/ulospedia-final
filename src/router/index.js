@@ -14,8 +14,10 @@ import UlosDetail from '@/views/EndUser/UlosDetail.vue'
 import AdminLogin from '@/views/Admin/Login.vue'
 import Dashboard from '@/views/Admin/Dashboard.vue'
 import AdminUlos from '@/views/Admin/Ulos/Ulos.vue'
+import AddUlos from '@/views/Admin/Ulos/AddUlos.vue'
 import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
 import AddPenenun from '@/views/Admin/Penenun/AddPenenun.vue'
+import GenerateMotif from '@/views/Admin/GenerateMotif/GenerateMotif.vue'
 
 import ('preline')
 
@@ -83,6 +85,11 @@ const router = createRouter({
             component: AdminUlos
         },
         {
+            path: '/admin/add-ulos',
+            name: 'AddUlos',
+            component: AddUlos
+        },
+        {
             path: '/admin/penenun',
             name: 'AdminPenenun',
             component: AdminPenenun
@@ -91,8 +98,29 @@ const router = createRouter({
             path: '/admin/add-penenun',
             name: 'AddPenenun',
             component: AddPenenun
+        },
+        {
+            path: '/admin/generate-motif',
+            name: 'GenerateMotif',
+            component: GenerateMotif
         }
     ]
+})
+
+// router.beforeEach((to, from) => {
+//   console.log(to)
+//   console.log(from)
+//   if (to.path === '/admin/dashboard') {
+//     router.push('/fnjfnjenek')
+//   }
+// })
+
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = JSON.parse(localStorage.getItem('authenticated'))
+
+    if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
+    if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
+    else next()
 })
 
 export default router
