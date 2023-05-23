@@ -44,7 +44,7 @@
                 type="file"
                 class="hidden"
                 accept="image/png, image/jpg, image/jpeg"
-                :disabled="!toggleStatus"
+      
               />
             </label>
           </div>
@@ -74,7 +74,7 @@
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Tahun Lahir Penenun*</label
           >
-          <div class="md:w-2/3">
+          <div class="w-2/3 relative inline-block">
             <!-- <input
               type="number"
               id="birth-year"
@@ -87,13 +87,7 @@
               value="2016"
             /> -->
             <div>
-              <Datepicker
-                :customInput="{ input: true, click: toggleDatepicker }"
-                :disabled="true"
-                :format="'yyyy'"
-                v-model="selectedYear"
-              ></Datepicker>
-              <button @click="toggleDatepicker">Select Year</button>
+              <YearPicker v-on:updateYear="updateBirthYear"></YearPicker>
             </div>
           </div>
         </div>
@@ -270,11 +264,12 @@
 <script>
 // import Datepicker from '@vuepic/vue-datepicker';
 // import '@vuepic/vue-datepicker/dist/main.css';
-
+import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
 export default {
   components: {
     //Multiselect
     //Datepicker
+    YearPicker
   },
   data() {
     return {
@@ -282,10 +277,14 @@ export default {
       selectedTool: '',
       maxYear: new Date().getFullYear(),
       selectedYear: null,
-      showDatepicker: false
+      showDatepicker: false,
+      birthYear: null
     }
   },
   methods: {
+    updateBirthYear(year) {
+      this.birthYear = year
+    },
     backToPenenun() {
       this.$router.push('/admin/penenun')
     },
@@ -306,6 +305,4 @@ export default {
   }
 }
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

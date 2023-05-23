@@ -54,7 +54,7 @@
           <thead class="text-neutral_70 font-bold bg-[#F8F7FA] uppercase w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <div @click="sortByName" class="flex flex-row items-center gap-3">
+                <button @click="sortByName" class="flex flex-row items-center gap-3">
                   Nama Penenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -66,10 +66,10 @@
                       d="m16.3 10.27-2.717-2.716a.827.827 0 0 0-1.166 0L9.7 10.271M16.3 17.73l-2.717 2.716a.827.827 0 0 1-1.166 0L9.7 17.729"
                     />
                   </svg>
-                </div>
+                </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <div class="flex flex-row items-center gap-3">
+                <button class="flex flex-row items-center gap-3">
                   Alat Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -81,10 +81,10 @@
                       d="m16.3 10.27-2.717-2.716a.827.827 0 0 0-1.166 0L9.7 10.271M16.3 17.73l-2.717 2.716a.827.827 0 0 1-1.166 0L9.7 17.729"
                     />
                   </svg>
-                </div>
+                </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <div class="flex flex-row items-center gap-3">
+                <button class="flex flex-row items-center gap-3">
                   Teknik Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -96,10 +96,10 @@
                       d="m16.3 10.27-2.717-2.716a.827.827 0 0 0-1.166 0L9.7 10.271M16.3 17.73l-2.717 2.716a.827.827 0 0 1-1.166 0L9.7 17.729"
                     />
                   </svg>
-                </div>
+                </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <div class="flex flex-row items-center gap-3">
+                <button class="flex flex-row items-center gap-3">
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -111,7 +111,7 @@
                       d="m16.3 10.27-2.717-2.716a.827.827 0 0 0-1.166 0L9.7 10.271M16.3 17.73l-2.717 2.716a.827.827 0 0 1-1.166 0L9.7 17.729"
                     />
                   </svg>
-                </div>
+                </button>
               </th>
 
               <th scope="col" class="px-6 py-3"></th>

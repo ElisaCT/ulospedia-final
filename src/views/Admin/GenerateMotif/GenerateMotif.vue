@@ -5,22 +5,7 @@
       <div class="flex flex-row justify-between items-center">
         <h3 class="font-medium text-3xl text-left pb-6">Generate Motif</h3>
         <div class="flex flex-row gap-6">
-          <router-link to="">
-            <button
-              class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <path
-                  stroke="#fff"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M10 18.333c4.583 0 8.333-3.75 8.333-8.333S14.583 1.667 10 1.667 1.667 5.417 1.667 10s3.75 8.333 8.333 8.333ZM6.667 10h6.666M10 13.333V6.667"
-                />
-              </svg>
-              Tambah Gambar Ulos
-            </button>
-          </router-link>
+          <AddUlos/>
           <router-link to="">
             <button
               class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
@@ -143,6 +128,9 @@
           <EmptySearch />
         </div>
       </div>
+
+      <AddMotif/>
+      <AddMotifHasilGenerate/>
     </div>
   </div>
 </template>
@@ -151,10 +139,16 @@
 import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
 import EmptySearch from '../../../components/Admin/EmptyState.vue'
+import AddUlos from '../../../components/Admin/GenerateMotif/AddUlos.vue'
+import AddMotif from '../../../components/Admin/GenerateMotif/AddMotif.vue'
+import AddMotifHasilGenerate from '../../../components/Admin/GenerateMotif/AddMotifHasilGenerate.vue'
 export default {
   components: {
     Sidebar,
-    EmptySearch
+    EmptySearch,
+    AddUlos,
+    AddMotif,
+    AddMotifHasilGenerate
   },
   data: function () {
     return {
