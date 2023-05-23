@@ -4,7 +4,7 @@
     <Sidebar />
     <div class="ml-80 pt-10 gap-6 mr-8">
       <div class="flex flex-row justify-between items-center">
-        <h3 class="font-medium text-3xl text-left pb-6">Daftar Ulos</h3>
+        <h3 class="font-medium text-3xl text-left pb-6">Daftar Penenun</h3>
         <router-link to="add-penenun">
           <button
             class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
@@ -44,7 +44,7 @@
               <input
                 type="text"
                 id="table-search"
-                class="block p-2 pl-10 text-base font-normal text-neutral_30 rounded-lg w-80 bg-neutral_20 focus:ring-neutral_50 focus:border-neutral_80"
+                class="block p-2 pl-10 text-base font-normal text-neutral_90 rounded-lg w-80 bg-neutral_20 focus:ring-neutral_50 focus:border-neutral_80"
                 placeholder="Cari berdasarkan nama penenun"
               />
             </div>
