@@ -18,6 +18,8 @@ import AddUlos from '@/views/Admin/Ulos/AddUlos.vue'
 import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
 import AddPenenun from '@/views/Admin/Penenun/AddPenenun.vue'
 import GenerateMotif from '@/views/Admin/GenerateMotif/GenerateMotif.vue'
+import MotifUlos from '@/views/Admin/GenerateMotif/MotifUlos.vue'
+import MotifUlosHasilGenerate from '@/views/Admin/GenerateMotif/MotifUlosHasilGenerate.vue'
 
 import ('preline')
 
@@ -77,32 +79,50 @@ const router = createRouter({
         {
             path: '/admin/dashboard',
             name: 'dashboard',
-            component: Dashboard
+            component: Dashboard,
+            meta: { requiresAuth: true }
         },
         {
             path: '/admin/ulos',
             name: 'AdminUlos',
-            component: AdminUlos
+            component: AdminUlos,
+            meta: { requiresAuth: true }
         },
         {
             path: '/admin/add-ulos',
             name: 'AddUlos',
-            component: AddUlos
+            component: AddUlos,
+            //meta: { requiresAuth: true }
         },
         {
             path: '/admin/penenun',
             name: 'AdminPenenun',
-            component: AdminPenenun
+            component: AdminPenenun,
+            meta: { requiresAuth: true }
         },
         {
             path: '/admin/add-penenun',
             name: 'AddPenenun',
-            component: AddPenenun
+            component: AddPenenun,
+            //meta: { requiresAuth: true }
         },
         {
             path: '/admin/generate-motif',
             name: 'GenerateMotif',
-            component: GenerateMotif
+            component: GenerateMotif,
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/admin/generate-motif/motif-ulos',
+            name: 'MotifUlos',
+            component: MotifUlos,
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/admin/generate-motif/motif-ulos/hasil-generate',
+            name: 'MotifUlosHasilGenerate',
+            component: MotifUlosHasilGenerate,
+            meta: { requiresAuth: true }
         }
     ]
 })
@@ -117,10 +137,17 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const isAuthenticated = JSON.parse(localStorage.getItem('authenticated'))
+    const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
 
-    if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
-    if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
-    else next()
+    // if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
+    // if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
+    // else next()
+
+    if (requiresAuth && !isAuthenticated) {
+        next({ name: 'admin-login' })
+    } else {
+        next()
+    }
 })
 
 export default router

@@ -103,19 +103,39 @@
           <label
             for="penenun-ethnic"
             class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-            >Suku Penenun</label
+            >Suku Penenun*</label
           >
-          <div class="md:w-2/3">
+          <div class="md:w-2/3 relative inline-block">
             <select
-              v-model="selectedEthnic"
-              id="penenun-ethnic"
-              class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5 pl-3"
+              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              required
             >
-              <option disabled value="">Pilih asal suku</option>
-              <option v-for="ethnic in ethincs" :key="ethnic" :value="ethnic">
-                {{ ethnic }}
+              <option value="" disabled selected hidden>Pilih Suku Penenun</option>
+              <option value="option1" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
+              <option value="option2" class="pb-3 hover:bg-primary_surface">
+                Batak Simalungun
+              </option>
+              <option value="option3" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
+              <option value="option2" class="pb-3 hover:bg-primary_surface">Batak Angkola</option>
+              <option value="option3" class="pb-3 hover:bg-primary_surface">
+                Batak Mandailing
               </option>
             </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral_80"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                <g clip-path="url(#a)">
+                  <path
+                    fill="#323232"
+                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                </defs>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -139,19 +159,37 @@
           <label
             for="penenun-ethnic"
             class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-            >Suku Penenun</label
+            >Alat Tenun*</label
           >
-          <div class="md:w-2/3">
+          <div class="md:w-2/3 relative inline-block">
             <select
-              v-model="selectedEthnic"
-              id="penenun-ethnic"
-              class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
+              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              required
             >
-              <option disabled value="">Pilih asal suku</option>
-              <option v-for="ethnic in ethincs" :key="ethnic" :value="ethnic">
-                {{ ethnic }}
+              <option value="" disabled selected hidden>Pilih Alat Tenun</option>
+              <option value="option1" class="pb-3 hover:bg-primary_surface">Gedogan</option>
+              <option value="option2" class="pb-3 hover:bg-primary_surface">
+                Alat Tenun Bukan Mesin (ATBM)
+              </option>
+              <option value="option3" class="pb-3 hover:bg-primary_surface">
+                Alat Tenun Mesin (ATM)
               </option>
             </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                <g clip-path="url(#a)">
+                  <path
+                    fill="#323232"
+                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                </defs>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -160,24 +198,44 @@
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Teknik Tenun yang digunakan*</label
           >
-          <div class="md:w-2/3">
+          <div class="md:w-2/3 relative inline-block">
             <select
-              v-model="selectedTechnics"
-              id="ulos-ethnic"
-              class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
+              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              required
             >
-              <option disabled value="">Pilih Teknik Tenun</option>
-              <option v-for="technic in technics" :key="technic" :value="technic">
-                {{ technic }}
+              <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
+              <option value="option1" class="pb-3 hover:bg-primary_surface">
+                Teknik Ikat Lungsi
+              </option>
+              <option value="option2" class="pb-3 hover:bg-primary_surface">
+                Teknik Ikat Pakan
+              </option>
+              <option value="option3" class="pb-3 hover:bg-primary_surface">
+                Teknik Ikat Ganda
               </option>
             </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                <g clip-path="url(#a)">
+                  <path
+                    fill="#323232"
+                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                </defs>
+              </svg>
+            </div>
           </div>
         </div>
 
         <!-- story penenun -->
         <div class="flex flex-col gap-6 md:flex-row pb-6">
           <label for="ulos-meaning" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-            >Cerita Penenun</label
+            >Cerita Penenun*</label
           >
           <div class="md:w-2/3">
             <textarea
@@ -186,6 +244,7 @@
               rows="4"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan cerita yang ingin dibagikan penenun"
+              required
             ></textarea>
           </div>
         </div>
@@ -219,41 +278,14 @@ export default {
   },
   data() {
     return {
-      ethincs: [
-        'Batak Toba',
-        'Batak Karo',
-        'Batak Simalungun',
-        'Batak Mandailing',
-        'Batak Angkola'
-      ], // Array of ethnics values for the dropdown
       selectedTechnics: [],
-      technics: ['Teknik Ikat Lungsi', 'Teknik Ikat Pakan', 'Teknik Ikat Ganda'],
       selectedTool: '',
-      tools: ['Gedogan', 'Alat Tenun Bukan Mesin (ATBM)', 'Alat Tenun Mesin (ATM)'],
       maxYear: new Date().getFullYear(),
       selectedYear: null,
-      showDatepicker: false,
+      showDatepicker: false
     }
   },
   methods: {
-    nextStep() {
-      if (this.currentStep < this.totalSteps) {
-        this.currentStep++
-      }
-    },
-    previousStep() {
-      if (this.currentStep > 1) {
-        this.currentStep--
-      }
-    },
-    addTag(newTag) {
-      const tag = {
-        name: newTag,
-        code: newTag.substring(0, 2) + Math.floor(Math.random() * 10000000)
-      }
-      this.options.push(tag)
-      this.value.push(tag)
-    },
     backToPenenun() {
       this.$router.push('/admin/penenun')
     },
@@ -269,9 +301,11 @@ export default {
       return `${year}-${month}-${day}`
     },
     toggleDatepicker() {
-      this.showDatepicker = !this.showDatepicker;
-    },
+      this.showDatepicker = !this.showDatepicker
+    }
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+
+</style>
