@@ -133,7 +133,7 @@
         >
           <div id="hs-mega-menu-basic-dr" type="button" class="flex items-center w-full">
             <div class="mr-16">
-              <div><span>Gabriella</span></div>
+              <div><span>{{ username }}</span></div>
               <div class="font font-light text-sm pt-0"><span>admin</span></div>
             </div>
           </div>
@@ -166,7 +166,13 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+  data: function () {
+    return {
+      username: ''
+    }
+  },
   methods: {
     logout() {
       console.log('TEST LOGOUT')
@@ -175,13 +181,18 @@ export default {
       this.$router.push('/admin/login')
     }
   },
-  setup() {
-    // const router = useRouter()
-    // const logout = () => {
-    //   localStorage.setItem('authenticated', false)
-    //   router.push({ name: 'admin-login' })
-    // }
-    // return { logout }
+  mounted() {
+    const token = localStorage.getItem('token')
+    axios
+      .get('http://company.ditenun.com/api/v1/admin/current', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        console.log(response)
+        this.username = response.data.data.currentAdminUsername
+      })
   }
 }
 </script>

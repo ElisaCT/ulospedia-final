@@ -42,6 +42,7 @@
                 </svg>
               </div>
               <input
+                v-model="searchQuery"
                 type="text"
                 id="table-search"
                 class="block p-2 pl-10 text-base font-normal text-neutral_90 rounded-lg w-80 bg-neutral_20 focus:ring-neutral_50 focus:border-neutral_80"
@@ -54,7 +55,7 @@
           <thead class="text-neutral_70 font-bold bg-[#F8F7FA] uppercase w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <button @click="sortByName" class="flex flex-row items-center gap-3">
+                <button v-on:click="sortTable('name')" class="flex flex-row items-center gap-3">
                   Nama Penenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -69,7 +70,7 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3">
+                <button v-on:click="sortTable('theLoom')" class="flex flex-row items-center gap-3">
                   Alat Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -84,7 +85,10 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3">
+                <button
+                  v-on:click="sortTable('technique')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Teknik Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -99,7 +103,7 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3">
+                <button v-on:click="sortTable('ethnic')" class="flex flex-row items-center gap-3">
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -118,12 +122,12 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral_30 text-neutral_90">
-            <tr class="" v-for="weaver in weavers" :key="weaver.id">
+            <tr class="" v-for="(weavers, id) in filteredWeavers" :key="id">
               <!-- hover state -->
-              <td class="px-6 py-4">{{ weaver.name }}</td>
-              <td class="px-6 py-4">{{ weaver.theLoom }}</td>
-              <td class="px-6 py-4">{{ weaver.technique }}</td>
-              <td class="px-6 py-4">{{ weaver.ethnic }}</td>
+              <td class="px-6 py-4">{{ weavers.name }}</td>
+              <td class="px-6 py-4">{{ weavers.theLoom }}</td>
+              <td class="px-6 py-4">{{ weavers.technique }}</td>
+              <td class="px-6 py-4">{{ weavers.ethnic }}</td>
               <td class="px-6 py-4">
                 <div class="flex gap-4">
                   <router-link to="/">
@@ -250,7 +254,7 @@ export default {
       totalElementOnPage: 0,
       sortDir: 'asc',
       pageNo: 1,
-      search: '',
+      searchQuery: '',
       sortBy: '',
       lastPage: true,
       moveState: false
@@ -344,6 +348,41 @@ export default {
         this.pageNo = this.pageNo - 1
         this.lastPage = true
       }
+    },
+    async fetchWeavers() {
+      try {
+        const token = localStorage.getItem('token')
+        const response = await axios.get('http://company.ditenun.com/api/v1/ulospedia/weavers', {
+          params: {
+            pageNo: 1,
+            pageSize: 10,
+            sortBy: this.sortBy,
+            sortOrder: this.sortOrder
+          },
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        this.weavers = response.data
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    sortTable(sortBy) {
+      if (this.sortBy === sortBy) {
+        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc'
+      } else {
+        this.sortBy = sortBy
+        this.sortOrder = 'asc'
+      }
+      this.fetchWeavers()
+    }
+  },
+  computed: {
+    filteredWeavers() {
+      return this.weavers.filter((weaver) =>
+        weaver.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
     }
   },
   components: {

@@ -144,7 +144,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/client/weavers?theLoom=Gedongan&pageNo=1')
+      .get('http://company.ditenun.com/api/v1/ulospedia/client/weavers?theLoom=Gedogan&pageNo=1')
       .then((response) => {
         this.penenuns = response.data.data.weaverList.clientWeaverResponseList
         console.log(this.penenuns)

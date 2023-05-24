@@ -2,7 +2,7 @@
 <template>
   <div class="grid grid-cols-2">
     <div class="col-span-1">
-      <img src="../../assets/images/admin/login-illustration.png" alt="" />
+      <img src="../../assets/images/admin/login-illustration.png" alt="" class="h-screen w-full" />
     </div>
 
     <div class="form col-span-1">
@@ -127,7 +127,6 @@ export default {
   },
   methods: {
     async loginUser() {
-
       console.log(this.username)
       console.log(this.password)
 

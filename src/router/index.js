@@ -93,7 +93,7 @@ const router = createRouter({
             path: '/admin/add-ulos',
             name: 'AddUlos',
             component: AddUlos,
-            //meta: { requiresAuth: true }
+            meta: { requiresAuth: true }
         },
         {
             path: '/admin/penenun',
@@ -105,7 +105,7 @@ const router = createRouter({
             path: '/admin/add-penenun',
             name: 'AddPenenun',
             component: AddPenenun,
-            //meta: { requiresAuth: true }
+            meta: { requiresAuth: true }
         },
         {
             path: '/admin/generate-motif',
