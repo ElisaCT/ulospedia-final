@@ -127,67 +127,40 @@
       </ul>
 
       <!--Logout-->
-      <ul>
-        <li>
-          <div class="relative pt-44">
-            <div
-              class="hs-dropdown [--strategy:static] sm:[--strategy:absolute] [--adaptive:none] sm:[--trigger:hover]"
-            >
-              <div
-                class="flex items-center p-3 text-primary_pressed font-normal text-lg transition duration-75 rounded-lg hover:bg-primary_surface"
-              >
-                <button id="hs-mega-menu-basic-dr" type="button" class="flex items-center w-full">
-                  <div class="mr-16">
-                    <div><span>Gabriella</span></div>
-                    <div class="font font-light text-sm pt-0"><span>admin</span></div>
-                  </div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-5 h-5"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                    />
-                  </svg>
-                </button>
-              </div>
-
-              <div
-                class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-48 hidden z-10 bg-white sm:shadow-md rounded-lg p-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full sm:border before:-top-5 before:left-0 before:w-full before:h-5"
-              >
-                <button
-                  @click="logout"
-                  type="button"
-                  class="py-[.688rem] px-4 inline-flex justify-center items-center gap-2 rounded-md border-2 border-primary_main font-semibold text-primary_main hover:text-white hover:bg-primary_main hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:border-gray-700 dark:hover:border-blue-500"
-                >
-                  Logout
-
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                    />
-                  </svg>
-                </button>
-              </div>
+      <div class="relative pt-44">
+        <div
+          class="flex flex-col items-center p-3 text-primary_pressed font-normal text-lg transition duration-75 rounded-lg gap-3"
+        >
+          <div id="hs-mega-menu-basic-dr" type="button" class="flex items-center w-full">
+            <div class="mr-16">
+              <div><span>Gabriella</span></div>
+              <div class="font font-light text-sm pt-0"><span>admin</span></div>
             </div>
           </div>
-        </li>
-      </ul>
+          <button
+            @click="logout"
+            type="button"
+            class="py-[.688rem] px-4 inline-flex justify-center items-center gap-2 rounded-md font-semibold border-2 text-primary_main hover:text-neutral_10 hover:bg-primary_main hover:border-blue-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:border-gray-700 dark:hover:border-blue-500"
+          >
+            Logout
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </aside>
 </template>

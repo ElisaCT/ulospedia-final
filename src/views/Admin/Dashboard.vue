@@ -3,7 +3,7 @@
   <Sidebar />
   <div class="ml-80 pt-10 gap-6 mr-8">
     <h3 class="text-2xl font-medium text-left pb-6">Dashboard Ulospedia DiTenun</h3>
-    <div class="grid grid-cols-12 gap-5">
+    <div class="grid grid-cols-12 gap-12">
       <div class="col-span-6 relative">
         <img src="../../assets/images/Admin/dashboard-ulos.svg" class="w-full" />
         <div
@@ -25,10 +25,27 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-12 gap-6 pt-6">
+    <div class="grid grid-cols-12 gap-12 pt-6">
       <!-- Ulos-ulos -->
       <div class="col-span-6">
-        <p class="font-bold text-lg text-left pb-4">Ulos-ulos</p>
+        <div class="flex flex-row justify-between">
+          <p class="font-bold text-lg text-left pb-4">Data Ulos Terbaru</p>
+          <router-link to="ulos">
+            <button class="flex flex-row items-center gap-2 justify-center">
+            <span class="text-primary_main">selengkapnya</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path
+                stroke="#3355B5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"
+              />
+            </svg>
+          </button>
+          </router-link>
+        </div>
 
         <div v-if="penenuns">
           <div class="grid grid-cols-2 gap-6">
@@ -62,7 +79,24 @@
 
       <!-- Penenun -->
       <div class="col-span-6">
-        <p class="font-bold text-lg text-left pb-4">Penenun</p>
+        <div class="flex flex-row justify-between">
+          <p class="font-bold text-lg text-left pb-4">Data Penenun Terbaru</p>
+          <router-link to="penenun">
+            <button class="flex flex-row items-center gap-2 justify-center">
+            <span class="text-primary_main">selengkapnya</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path
+                stroke="#3355B5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="M12.025 4.942 17.083 10l-5.058 5.058M2.917 10h14.025"
+              />
+            </svg>
+          </button>
+          </router-link>
+        </div>
 
         <div v-if="penenuns">
           <div class="grid grid-cols-2 gap-5">
