@@ -160,14 +160,10 @@ export default {
   },
   mounted() {
     axios
-      .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
+      .get('http://company.ditenun.com/api/v1/generate/ulos')
       .then((response) => {
-        this.ulosData = response.data.data.ulosList.clientUlosResponseList
-        // cek state apakah akan menjadi page terakhir atau tidak
-        if (!response.data.data.ulosList.isLastPage) {
-          this.pageNo = this.pageNo + 1
-          this.lastPage = false
-        }
+        this.ulosData = response.data.data.ulosDashboardList
+        
       })
       .catch((error) => {
         console.log(error)

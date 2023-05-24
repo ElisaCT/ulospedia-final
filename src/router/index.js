@@ -44,7 +44,8 @@ const router = createRouter({
         {
             path: '/galeri-ulos',
             name: 'galeri-ulos',
-            component: GaleriUlosView
+            component: GaleriUlosView,
+            props: true
         },
         {
             path: '/penenun-gedogan',
@@ -148,6 +149,8 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
-})
+});
+
+
 
 export default router

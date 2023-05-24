@@ -223,24 +223,22 @@
     </div>
     <!-- colors -->
     <div v-for="selectedColor in convertColorsObjToArray" :key="selectedColor">
-        <div
-          class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
-        >
-          <span class="text-sm font-normal text-primary_main mr-2">{{ selectedColor }}</span>
-          <button @click="deleteSelectedOptionColor(selectedColor)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
-              <path
-                stroke="#3355B5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="m12.5 4-8 8m0-8 8 8"
-                opacity=".9"
-              />
-            </svg>
-          </button>
-        </div>
+      <div class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2">
+        <span class="text-sm font-normal text-primary_main mr-2">{{ selectedColor }}</span>
+        <button @click="deleteSelectedOptionColor(selectedColor)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
+            <path
+              stroke="#3355B5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="m12.5 4-8 8m0-8 8 8"
+              opacity=".9"
+            />
+          </svg>
+        </button>
       </div>
+    </div>
   </div>
 
   <!-- card ulos -->
@@ -367,13 +365,17 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+    if (this.$route.query.ethnic) {
+      this.selectedOptionEthnic = this.$route.query.ethnic
+      console.log(this.selectedOptionEthnic)
+    }
   },
-  computed:{
+  computed: {
     convertColorsObjToArray() {
-    return Object.entries(this.colors)
-      .filter(([color, value]) => value === true)
-      .map(([color]) => color)
-  }
+      return Object.entries(this.colors)
+        .filter(([color, value]) => value === true)
+        .map(([color]) => color)
+    }
   },
   methods: {
     convertColors(colors) {
@@ -432,7 +434,7 @@ export default {
       })
     },
     deleteSelectedOptionColor(color) {
-      this.colors[color] = !this.colors[color];
+      this.colors[color] = !this.colors[color]
 
       this.pageNo = 1
 
@@ -454,8 +456,7 @@ export default {
           this.lastPage = true
         }
       })
-
-  },
+    },
     addFilter() {
       this.pageNo = 1
 
@@ -549,6 +550,7 @@ export default {
       this.selectedOption = null // Reset the selected option
     }
   },
+  created() {}
 }
 </script>
 
