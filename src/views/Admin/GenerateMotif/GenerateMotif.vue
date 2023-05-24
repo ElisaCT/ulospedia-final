@@ -161,14 +161,14 @@ export default {
     console.log(token)
 
     axios
-      .get(`http://company.ditenun.com/api/v1/generate/ulos`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+      .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
       .then((response) => {
-        this.ulosMotif = response.data.data.ulosDashboardList
-        console.log(this.ulosMotif)
+        this.ulosData = response.data.data.ulosList.clientUlosResponseList
+        // cek state apakah akan menjadi page terakhir atau tidak
+        if (!response.data.data.ulosList.isLastPage) {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = false
+        }
       })
       .catch((error) => {
         if (error.response && error.response.status === 403) {

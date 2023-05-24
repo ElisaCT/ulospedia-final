@@ -155,19 +155,10 @@
                       </svg>
                     </button>
                   </router-link>
-                  <router-link to="/">
-                    <button class="p-[10px] bg-danger_surface rounded">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
-                        <path
-                          stroke="#CB3A31"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M14 3.987a67.801 67.801 0 0 0-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987M5.667 3.313l.146-.873C5.92 1.807 6 1.333 7.127 1.333h1.746c1.127 0 1.214.5 1.314 1.114l.146.866M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714M6.887 11h2.22M6.333 8.333h3.334"
-                        />
-                      </svg>
-                    </button>
-                  </router-link>
+                  <DeleteConfirmation
+                    :weaver-id="weaver.id"
+                    @weaver-deleted="handleWeaverDeleted"
+                  />
                 </div>
               </td>
             </tr>
@@ -180,7 +171,7 @@
             Menampilkan 1 sampai {{ totalElementOnPage }} dari {{ totalElement }} data
           </p>
           <div class="flex flex-row gap-4 items-center">
-            <button @click="previousPage" class="p-1 bg-neutral_20 rounded">
+            <button @click="previousPage" :disabled="isLoading" class="p-1 bg-neutral_30 rounded">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                 <path
                   stroke="#C2C2C2"
@@ -195,7 +186,7 @@
             <div class="p-1 bg-primary_surface text-sm text-center text-primary_hover rounded">
               <span class="p-1 w-5 h-5">{{ pageNo }}</span>
             </div>
-            <button @click="nextPage" class="p-1 bg-neutral_30 rounded">
+            <button @click="nextPage" :disabled="isLoading" class="p-1 bg-neutral_30 rounded">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                 <path
                   stroke="#616161"
@@ -210,7 +201,7 @@
           </div>
         </div>
       </div>
-      <DeleteConfirmation />
+
       <DiscardConfirmation />
       <SaveSuccess />
       <EmptyState />
@@ -231,13 +222,14 @@ export default {
     const token = localStorage.getItem('token')
     console.log(token)
     axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/weavers', {
+      .get('http://company.ditenun.com/api/v1/ulospedia/weavers?sortDir=desc', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       .then((response) => {
         console.log(response.data)
+        this.lastPage = response.data.data.weavers.lastPage
         this.weavers = response.data.data.weavers.weaversListAdminDashboard
         this.totalElement = response.data.data.weavers.totalAllElements
         this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
@@ -253,10 +245,14 @@ export default {
       search: '',
       sortBy: '',
       lastPage: true,
-      moveState: false
+      moveState: false,
+      isLoading: false
     }
   },
   methods: {
+    handleWeaverDeleted(weaverId) {
+      this.weavers = this.weavers.filter((weaver) => weaver.id !== weaverId)
+    },
     defineParam(pageNo, sortBy, sortDir, search) {
       return `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${pageNo}${
         sortBy !== '' ? '&sortBy=' + sortBy : ''
@@ -293,56 +289,76 @@ export default {
       }
     },
     async nextPage() {
+      console.log('DITEKAN')
+      console.log(this.lastPage)
       if (this.lastPage) {
         return
       }
-      const token = localStorage.getItem('token')
-      const url = this.defineParam(this.pageNo + 1, 'name', 'asc', '')
-      console.log(url)
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`
+
+      this.isLoading = true
+
+      try {
+        const token = localStorage.getItem('token')
+        const url = this.defineParam(this.pageNo + 1, 'name', 'asc', '')
+        console.log(url)
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+
+        console.log(response.data)
+        this.weavers = response.data.data.weavers.weaversListAdminDashboard
+        this.totalElement = response.data.data.weavers.totalAllElements
+        this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
+
+        // cek apakah current page adalah page terakhir
+        if (!response.data.data.weavers.lastPage) {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = false
+        } else {
+          this.pageNo = this.pageNo + 1
+          this.lastPage = true
         }
-      })
-
-      console.log(response.data)
-      this.weavers = response.data.data.weavers.weaversListAdminDashboard
-      this.totalElement = response.data.data.weavers.totalAllElements
-      this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
-
-      // cek apakah current page adalah page terakhir
-      if (!response.data.data.weavers.lastPage) {
-        this.pageNo = this.pageNo + 1
-        this.lastPage = false
-      } else {
-        this.pageNo = this.pageNo + 1
-        this.lastPage = true
+      } catch (err) {
+        console.log(err)
+      } finally {
+        this.isLoading = false
       }
     },
     async previousPage() {
+      console.log('DITEKAN')
       if (this.pageNo === 1) {
         return
       }
 
-      const token = localStorage.getItem('token')
-      const url = this.defineParam(this.pageNo - 1, 'name', 'asc', '')
-      console.log(url)
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      this.isLoading = true
+
+      try {
+        const token = localStorage.getItem('token')
+        const url = this.defineParam(this.pageNo - 1, 'name', 'asc', '')
+        console.log(url)
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+
+        console.log(response.data)
+        this.weavers = response.data.data.weavers.weaversListAdminDashboard
+
+        // cek apakah current page adalah page terakhir
+        if (!response.data.data.weavers.lastPage) {
+          this.pageNo = this.pageNo - 1
+          this.lastPage = false
+        } else {
+          this.pageNo = this.pageNo - 1
+          this.lastPage = true
         }
-      })
-
-      console.log(response.data)
-      this.weavers = response.data.data.weavers.weaversListAdminDashboard
-
-      // cek apakah current page adalah page terakhir
-      if (!response.data.data.weavers.lastPage) {
-        this.pageNo = this.pageNo - 1
-        this.lastPage = false
-      } else {
-        this.pageNo = this.pageNo - 1
-        this.lastPage = true
+      } catch (err) {
+        console.log(err)
+      } finally {
+        this.isLoading = false
       }
     }
   },

@@ -365,6 +365,10 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+    if (this.$route.query.ethnic) {
+      this.selectedOptionEthnic = this.$route.query.ethnic
+      console.log(this.selectedOptionEthnic)
+    }
   },
   computed: {
     convertColorsObjToArray() {
@@ -546,7 +550,12 @@ export default {
       this.isDropdownVisible = !this.isDropdownVisible
       this.selectedOption = null // Reset the selected option
     }
+<<<<<<< HEAD
   }
+=======
+  },
+  created() {}
+>>>>>>> 06cd2a397d6210eb005b2f177f550d304a91606d
 }
 </script>
 

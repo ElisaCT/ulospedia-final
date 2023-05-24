@@ -122,7 +122,6 @@ import JenisUlos from '../../components/EndUser/JenisUlos.vue'
 import Carousel from '../../components/EndUser/Carousel.vue'
 import Navbar from '../../components/EndUser/Navbar.vue'
 import Footer from '../../components/EndUser/Footer.vue'
-import VideoPlayer from '../../components/EndUser/VideoPlayer.vue'
 
 export default {
   name: 'HomeView',
@@ -133,9 +132,7 @@ export default {
     Carousel,
     // eslint-disable-next-line vue/no-reserved-component-names
     Footer,
-    Navbar,
-    // eslint-disable-next-line vue/no-unused-components
-    VideoPlayer
+    Navbar
   }
 }
 </script>
