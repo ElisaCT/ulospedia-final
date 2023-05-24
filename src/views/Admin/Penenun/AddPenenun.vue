@@ -44,7 +44,6 @@
                 type="file"
                 class="hidden"
                 accept="image/png, image/jpg, image/jpeg"
-      
               />
             </label>
           </div>
