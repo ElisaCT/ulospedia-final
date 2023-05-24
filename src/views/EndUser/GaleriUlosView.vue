@@ -493,7 +493,6 @@ export default {
       ${this.convertColors(this.colors) !== '' ? '&colors=' + this.convertColors(this.colors) : ''}
       ${search !== '' ? '&search=' + search : ''}`
     },
-    // eslint-disable-next-line no-dupe-keys, vue/no-dupe-keys
     async loadMore() {
       const moreUlosData = await axios.get(
         this.setApiPath(
@@ -550,12 +549,8 @@ export default {
       this.isDropdownVisible = !this.isDropdownVisible
       this.selectedOption = null // Reset the selected option
     }
-<<<<<<< HEAD
-  }
-=======
   },
   created() {}
->>>>>>> 06cd2a397d6210eb005b2f177f550d304a91606d
 }
 </script>
 

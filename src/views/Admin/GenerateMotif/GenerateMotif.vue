@@ -94,9 +94,9 @@
 
       <!-- ulos -->
       <div class="flex justify-center py-8">
-        <div v-if="ulosMotif.length > 0">
+        <div v-if="ulosList.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div v-for="ulos in ulosMotif" :key="ulos.id">
+            <div v-for="ulos in ulosList" :key="ulos.id">
               <router-link :to="'/ulos-detail/' + ulos.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
@@ -123,8 +123,8 @@
           </div>
         </div>
 
-        <div v-else-if="ulosMotif.length === 0">
-          <!-- Show empty state component when searchText is not empty and ulosMotif is empty -->
+        <div v-else-if="ulosList.length === 0">
+          <!-- Show empty state component when searchText is not empty and ulosList is empty -->
           <EmptySearch />
         </div>
       </div>
@@ -153,7 +153,7 @@ export default {
   data: function () {
     return {
       searchText: '',
-      ulosMotif: []
+      ulosList: []
     }
   },
   mounted() {
@@ -161,14 +161,14 @@ export default {
     console.log(token)
 
     axios
-      .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
-      .then((response) => {
-        this.ulosData = response.data.data.ulosList.clientUlosResponseList
-        // cek state apakah akan menjadi page terakhir atau tidak
-        if (!response.data.data.ulosList.isLastPage) {
-          this.pageNo = this.pageNo + 1
-          this.lastPage = false
+      .get('http://company.ditenun.com/api/v1/generate/ulos', {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
+      })
+      .then((response) => {
+        console.log(response.data)
+        this.ulosList = response.data.data.ulosDashboardList
       })
       .catch((error) => {
         if (error.response && error.response.status === 403) {
