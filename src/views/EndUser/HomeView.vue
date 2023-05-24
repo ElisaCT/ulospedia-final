@@ -107,6 +107,11 @@
     <JenisUlos />
   </div>
 
+  <div class="home">
+    <h1>Welcome to My YouTube Channel</h1>
+    <VideoPlayer videoId="ywWLIckWVtk" />
+  </div>
+
   <Footer />
 </template>
 
@@ -128,7 +133,14 @@ export default {
     // eslint-disable-next-line vue/no-reserved-component-names
     Footer,
     Navbar
-  },
-  
+  }
 }
 </script>
+
+<style>
+iframe {
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+}
+</style>

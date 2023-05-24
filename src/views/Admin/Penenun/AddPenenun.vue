@@ -40,11 +40,11 @@
                 </p>
               </div>
               <input
+                @change="handleFileChange"
                 id="dropzone-file"
                 type="file"
                 class="hidden"
                 accept="image/png, image/jpg, image/jpeg"
-      
               />
             </label>
           </div>
@@ -59,6 +59,7 @@
           >
           <div class="md:w-2/3">
             <input
+              v-model="name"
               type="text"
               id="ulos-name"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -101,17 +102,20 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
+              v-model="ethnic"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
             >
               <option value="" disabled selected hidden>Pilih Suku Penenun</option>
-              <option value="option1" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
-              <option value="option2" class="pb-3 hover:bg-primary_surface">
+              <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
+              <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
                 Batak Simalungun
               </option>
-              <option value="option3" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
-              <option value="option2" class="pb-3 hover:bg-primary_surface">Batak Angkola</option>
-              <option value="option3" class="pb-3 hover:bg-primary_surface">
+              <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
+              <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
+                Batak Angkola
+              </option>
+              <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
                 Batak Mandailing
               </option>
             </select>
@@ -140,6 +144,7 @@
           >
           <div class="md:w-2/3">
             <input
+              v-model="domicile"
               type="text"
               id="domicile"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -157,15 +162,16 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
+              v-model="theLoom"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
             >
               <option value="" disabled selected hidden>Pilih Alat Tenun</option>
-              <option value="option1" class="pb-3 hover:bg-primary_surface">Gedogan</option>
-              <option value="option2" class="pb-3 hover:bg-primary_surface">
+              <option value="Gedogan" class="pb-3 hover:bg-primary_surface">Gedogan</option>
+              <option value="ATBM" class="pb-3 hover:bg-primary_surface">
                 Alat Tenun Bukan Mesin (ATBM)
               </option>
-              <option value="option3" class="pb-3 hover:bg-primary_surface">
+              <option value="ATM" class="pb-3 hover:bg-primary_surface">
                 Alat Tenun Mesin (ATM)
               </option>
             </select>
@@ -194,17 +200,18 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
+              v-model="technique"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
             >
               <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
-              <option value="option1" class="pb-3 hover:bg-primary_surface">
+              <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
                 Teknik Ikat Lungsi
               </option>
-              <option value="option2" class="pb-3 hover:bg-primary_surface">
+              <option value="Ikat Pakan" class="pb-3 hover:bg-primary_surface">
                 Teknik Ikat Pakan
               </option>
-              <option value="option3" class="pb-3 hover:bg-primary_surface">
+              <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
                 Teknik Ikat Ganda
               </option>
             </select>
@@ -233,6 +240,7 @@
           >
           <div class="md:w-2/3">
             <textarea
+              v-model="story"
               type="text"
               id="ulos-meaning"
               rows="4"
@@ -252,7 +260,7 @@
           Batal
         </button>
         <button
-          @click="sumbit"
+          @click="submit"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
           Simpan
@@ -265,6 +273,7 @@
 // import Datepicker from '@vuepic/vue-datepicker';
 // import '@vuepic/vue-datepicker/dist/main.css';
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
+import axios from 'axios'
 export default {
   components: {
     //Multiselect
@@ -278,10 +287,89 @@ export default {
       maxYear: new Date().getFullYear(),
       selectedYear: null,
       showDatepicker: false,
-      birthYear: null
+      domicile: '',
+      name: '',
+      birthYear: null,
+      ethnic: '',
+      theLoom: '',
+      technique: '',
+      story: '',
+      image: null
+    }
+  },
+  watch: {
+    name(newValue) {
+      console.log(newValue)
+    },
+    birthYear(newValue) {
+      console.log(newValue)
+    },
+    ethnic(newValue) {
+      console.log(newValue)
+    },
+    domicile(newValue) {
+      console.log(newValue)
+    },
+    theLoom(newValue) {
+      console.log(newValue)
+    },
+    technique(newValue) {
+      console.log(newValue)
+    },
+    story(newValue) {
+      console.log(newValue)
+    },
+    image(newValue) {
+      console.log(newValue)
     }
   },
   methods: {
+    async submit() {
+      const token = localStorage.getItem('token')
+
+      const responseDataText = await axios.post(
+        'http://company.ditenun.com/api/v1/ulospedia/weavers',
+        {
+          name: this.name,
+          yearOfBirth: this.birthYear,
+          ethnic: this.ethnic,
+          domicile: this.domicile,
+          theLoom: this.theLoom,
+          technique: this.technique,
+          story: this.story
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      console.log(responseDataText.data)
+      const newWeaverId = responseDataText.data.data.weaver.id
+      console.log(newWeaverId)
+      console.log(`http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`)
+
+      const formData = new FormData()
+      formData.append('weaver-image', this.image)
+
+      const responseDataImage = await axios.post(
+        `http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
+      console.log(responseDataImage)
+
+      this.$router.push('/admin/penenun')
+    },
+    handleFileChange(event) {
+      this.image = event.target.files[0]
+    },
     updateBirthYear(year) {
       this.birthYear = year
     },

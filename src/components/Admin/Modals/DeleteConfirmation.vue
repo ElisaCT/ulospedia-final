@@ -1,7 +1,17 @@
 <template>
   <div>
     <!-- Delete button -->
-    <button @click="showModal = true" class="text-red-500">Delete</button>
+    <button @click="showModal = true" class="p-[10px] bg-danger_surface rounded">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+        <path
+          stroke="#CB3A31"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M14 3.987a67.801 67.801 0 0 0-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987M5.667 3.313l.146-.873C5.92 1.807 6 1.333 7.127 1.333h1.746c1.127 0 1.214.5 1.314 1.114l.146.866M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714M6.887 11h2.22M6.333 8.333h3.334"
+        />
+      </svg>
+    </button>
 
     <!-- Modal -->
     <div v-if="showModal" class="fixed inset-0 flex items-center justify-center">
@@ -53,18 +63,29 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
       showModal: false
     }
   },
+  props: ['weaverId'],
   methods: {
-    deleteItem() {
-      // Perform the delete action here
-      // Example: Make an API call to delete the item
-      // Once the delete action is complete, you can close the modal
+    async deleteItem() {
+      const token = localStorage.getItem('token')
+      const response = await axios.delete(
+        `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      console.log(response.data)
       this.showModal = false
+      this.$emit('weaver-deleted', this.weaverId)
     }
   }
 }

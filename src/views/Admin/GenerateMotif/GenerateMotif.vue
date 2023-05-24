@@ -5,7 +5,7 @@
       <div class="flex flex-row justify-between items-center">
         <h3 class="font-medium text-3xl text-left pb-6">Generate Motif</h3>
         <div class="flex flex-row gap-6">
-          <AddUlos/>
+          <AddUlos />
           <router-link to="">
             <button
               class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
@@ -94,9 +94,9 @@
 
       <!-- ulos -->
       <div class="flex justify-center py-8">
-        <div v-if="ulosData.length > 0">
+        <div v-if="ulosList.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div v-for="ulos in ulosData" :key="ulos.id">
+            <div v-for="ulos in ulosList" :key="ulos.id">
               <router-link :to="'/ulos-detail/' + ulos.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
@@ -115,7 +115,7 @@
                     class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
                   >
                     <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
-                    <p class="text-neutral_10">{{ ulos.originEthnic }}</p>
+                    <p class="text-neutral_10">{{ ulos.ethnic }}</p>
                   </div>
                 </div>
               </router-link>
@@ -123,14 +123,14 @@
           </div>
         </div>
 
-        <div v-else-if="ulosData.length === 0">
-          <!-- Show empty state component when searchText is not empty and ulosData is empty -->
+        <div v-else-if="ulosList.length === 0">
+          <!-- Show empty state component when searchText is not empty and ulosList is empty -->
           <EmptySearch />
         </div>
       </div>
 
-      <AddMotif/>
-      <AddMotifHasilGenerate/>
+      <AddMotif />
+      <AddMotifHasilGenerate />
     </div>
   </div>
 </template>
@@ -153,22 +153,32 @@ export default {
   data: function () {
     return {
       searchText: '',
-      ulosData: [],
-      pageNo: 1,
-      lastPage: true
+      ulosList: []
     }
   },
   mounted() {
+    const token = localStorage.getItem('token')
+    console.log(token)
+
     axios
-      .get('http://company.ditenun.com/api/v1/generate/ulos')
+      .get('http://company.ditenun.com/api/v1/generate/ulos', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       .then((response) => {
-        this.ulosData = response.data.data.ulosDashboardList
-        
+        console.log(response.data)
+        this.ulosList = response.data.data.ulosDashboardList
       })
       .catch((error) => {
-        console.log(error)
+        if (error.response && error.response.status === 403) {
+          console.error('Unauthorized access. Please check your credentials.')
+        } else {
+          console.error('An error occurred while fetching data:', error)
+        }
       })
-  }
+  },
+  methods: {}
 }
 </script>
 <style></style>
