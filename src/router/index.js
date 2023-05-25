@@ -17,6 +17,7 @@ import AdminUlos from '@/views/Admin/Ulos/Ulos.vue'
 import AddUlos from '@/views/Admin/Ulos/AddUlos.vue'
 import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
 import AddPenenun from '@/views/Admin/Penenun/AddPenenun.vue'
+import EditPenenun from '@/views/Admin/Penenun/EditPenenun.vue'
 import DetailPenenun from '@/views/Admin/Penenun/DetailPenenun.vue'
 import GenerateMotif from '@/views/Admin/GenerateMotif/GenerateMotif.vue'
 import MotifUlos from '@/views/Admin/GenerateMotif/MotifUlos.vue'
@@ -109,6 +110,12 @@ const router = createRouter({
             meta: { requiresAuth: true }
         },
         {
+            path: '/admin/edit-penenun/:id',
+            name: 'EditPenenun',
+            component: EditPenenun,
+            meta: { requiresAuth: true }
+        },
+        {
             path: '/admin/penenun/detail-penenun/:id',
             name: 'DetailPenenun',
             component: DetailPenenun,
@@ -120,13 +127,13 @@ const router = createRouter({
             meta: { requiresAuth: true }
         },
         {
-            path: '/admin/generate-motif/motif-ulos',
+            path: '/admin/generate-motif/motif-ulos/:id',
             name: 'MotifUlos',
             component: MotifUlos,
             meta: { requiresAuth: true }
         },
         {
-            path: '/admin/generate-motif/motif-ulos/hasil-generate',
+            path: '/admin/generate-motif/:id/motif-ulos/hasil-generate',
             name: 'MotifUlosHasilGenerate',
             component: MotifUlosHasilGenerate,
             meta: { requiresAuth: true }

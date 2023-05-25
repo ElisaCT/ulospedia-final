@@ -136,7 +136,7 @@
 
                 <td class="px-6 py-4">
                   <div class="flex gap-4">
-                    <router-link to="/">
+                    <router-link :to="'/admin/edit-penenun/'+ weavers.id">
                       <button class="p-[10px] bg-secondary_surface rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                           <path

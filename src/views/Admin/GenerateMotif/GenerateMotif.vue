@@ -97,7 +97,7 @@
         <div v-if="ulosList.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             <div v-for="ulos in ulosList" :key="ulos.id">
-              <router-link :to="'/ulos-detail/' + ulos.id">
+              <router-link :to="'/admin/generate-motif/motif-ulos/' + ulos.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >

@@ -104,7 +104,32 @@
 
     <div class="ml-80 pt-10 gap-6 mr-8">
       <!-- semua -->
-      <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">all ulos data</div>
+      <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">
+        <div v-if="motifUlos">
+          <div v-for="motif in motifUlos" :key="motif.id">
+            <router-link :to="'/generate-motif/' + motif.id + '/motif-ulos/hasil-generate'">
+              <div
+                class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+              >
+                <div class="h-[300px] w-[252px]">
+                  <div class="gradient"></div>
+                  <img
+                    class="h-full w-full object-cover transition-transform rounded-lg"
+                    :src="motif.imageUrl"
+                  />
+                </div>
+                <div
+                  class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+                ></div>
+              </div>
+            </router-link>
+          </div>
+        </div>
+
+        <div v-else>
+          <EmptyState :name="propName" />
+        </div>
+      </div>
 
       <!-- besar -->
       <div id="segment-2" class="hidden" role="tabpanel" aria-labelledby="segment-item-2">
@@ -123,10 +148,32 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
+import EmptyState from '../../../components/Admin/EmptyState.vue'
 export default {
   components: {
-    Sidebar
+    Sidebar,
+    EmptyState
+  },
+  data: function () {
+    return {
+      motifUlos: [],
+      propName: 'Motif Ulos'
+    }
+  },
+  mounted() {
+    const token = localStorage.getItem('token')
+    axios
+      .get(`http://company.ditenun.com/api/v1/generate/ulos/${this.motifUlos.id}/motifs`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        this.motifUlos = response.data.data
+        console.log(this.motifUlos)
+      })
   }
 }
 </script>

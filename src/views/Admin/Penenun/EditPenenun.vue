@@ -2,7 +2,7 @@
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
     <div class="">
-      <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Tambah Penenun</h3>
+      <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Ubah Data Penenun</h3>
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6 mb-8">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Penenun</h5>
         <div class="flex flex-col gap-6 md:flex-row pb-6">
@@ -59,7 +59,7 @@
           >
           <div class="md:w-2/3">
             <input
-              v-model="name"
+              v-model="weaverData.name"
               type="text"
               id="ulos-name"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -76,17 +76,6 @@
             >Tahun Lahir Penenun*</label
           >
           <div class="w-2/3 relative inline-block">
-            <!-- <input
-              type="number"
-              id="birth-year"
-              class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
-              placeholder="Masukkan tahun lahir penenun"
-              required
-              min="1900"
-              :max="maxYear"
-              step="1"
-              value="2016"
-            /> -->
             <div>
               <YearPicker v-on:updateYear="updateBirthYear"></YearPicker>
             </div>
@@ -102,7 +91,7 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
-              v-model="ethnic"
+              v-model="weaverData.ethnic"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
             >
@@ -144,7 +133,7 @@
           >
           <div class="md:w-2/3">
             <input
-              v-model="domicile"
+              v-model="weaverData.domicile"
               type="text"
               id="domicile"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -162,7 +151,7 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
-              v-model="theLoom"
+              v-model="weaverData.theLoom"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
             >
@@ -200,7 +189,7 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
-              v-model="technique"
+              v-model="weaverData.technique"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
             >
@@ -240,7 +229,7 @@
           >
           <div class="md:w-2/3">
             <textarea
-              v-model="story"
+              v-model="weaverData.story"
               type="text"
               id="ulos-meaning"
               rows="4"
@@ -260,7 +249,7 @@
           Batal
         </button>
         <button
-          @click="submit"
+          @click="editWeaver(weaver)"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
           Simpan
@@ -270,14 +259,11 @@
   </div>
 </template>
 <script>
-// import Datepicker from '@vuepic/vue-datepicker';
-// import '@vuepic/vue-datepicker/dist/main.css';
+
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
 import axios from 'axios'
 export default {
   components: {
-    //Multiselect
-    //Datepicker
     YearPicker
   },
   data() {
@@ -287,15 +273,24 @@ export default {
       maxYear: new Date().getFullYear(),
       selectedYear: null,
       showDatepicker: false,
-      domicile: '',
-      name: '',
-      birthYear: null,
-      ethnic: '',
-      theLoom: '',
-      technique: '',
-      story: '',
-      image: null,
-
+      // domicile: '',
+      // name: '',
+      // birthYear: null,
+      // ethnic: '',
+      // theLoom: '',
+      // technique: '',
+      // story: '',
+      // image: null,
+      weaverData: {
+        name: '',
+        birthYear: null,
+        domicile: '',
+        ethnic: '',
+        theLoom: '',
+        technique: '',
+        story: '',
+        image: null
+      }
     }
   },
   watch: {
@@ -325,19 +320,19 @@ export default {
     }
   },
   methods: {
-    async submit() {
+    async updateWeaver() {
       const token = localStorage.getItem('token')
 
-      const responseDataText = await axios.post(
-        'http://company.ditenun.com/api/v1/ulospedia/weavers',
+      const responseDataText = await axios.put(
+        `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaver.id}`,
         {
-          name: this.name,
-          yearOfBirth: this.birthYear,
-          ethnic: this.ethnic,
-          domicile: this.domicile,
-          theLoom: this.theLoom,
-          technique: this.technique,
-          story: this.story
+          name: this.weaverData.name,
+          yearOfBirth: this.weaverData.birthYear,
+          ethnic: this.weaverData.ethnic,
+          domicile: this.weaverData.domicile,
+          theLoom: this.weaverData.theLoom,
+          technique: this.weaverData.technique,
+          story: this.weaverData.story
         },
         {
           headers: {
@@ -354,7 +349,7 @@ export default {
       const formData = new FormData()
       formData.append('weaver-image', this.image)
 
-      const responseDataImage = await axios.post(
+      const responseDataImage = await axios.put(
         `http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`,
         formData,
         {
@@ -367,6 +362,17 @@ export default {
       console.log(responseDataImage)
 
       this.$router.push('/admin/penenun')
+    },
+    async editWeaver(weaverData) {
+      this.weaverData = {
+        name: weaverData.name,
+        birthYear: weaverData.birthYear,
+        domicile: weaverData.domicile,
+        ethnic: weaverData.ethnic,
+        theLoom: weaverData.theLoom,
+        technique: weaverData.theLoom,
+        story: weaverData.story
+      }
     },
     handleFileChange(event) {
       this.image = event.target.files[0]

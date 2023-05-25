@@ -16,7 +16,7 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="#" v-on:submit.prevent="login">
+          <form class="space-y-6" v-on:submit.prevent="login">
             <div>
               <label
                 for="username-address-icon"

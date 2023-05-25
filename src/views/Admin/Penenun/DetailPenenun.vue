@@ -31,7 +31,10 @@
                 Edit Penenun
               </button>
             </router-link>
-            <DeleteButtonPenenun :weaver-id="weaverDetail.id" @weaver-deleted="handleWeaverDeleted" />
+            <DeleteButtonPenenun
+              :weaver-id="weaverDetail.id"
+              @weaver-deleted="handleWeaverDeleted"
+            />
           </div>
         </div>
       </div>
@@ -107,7 +110,7 @@ export default {
   },
   data: function () {
     return {
-      weaverDetails: null
+      weaverDetails: []
     }
   },
   mounted() {
@@ -123,10 +126,14 @@ export default {
         console.log(this.weaverDetails)
       })
   },
-  methods:{
+  methods: {
     handleWeaverDeleted(weaverId) {
-      this.weavers = this.weavers.filter((weaver) => weaver.id !== weaverId)
-    },
+      console.log('Before filtering:', this.weaverDetails)
+      this.weaverDetails = this.weaverDetails.filter((weaverDetail) => weaverDetail.id !== weaverId)
+      console.log('After filtering:', this.weaverDetails)
+      console.log('navigate')
+      this.$router.push('/admin/penenun')
+    }
   }
 }
 </script>
