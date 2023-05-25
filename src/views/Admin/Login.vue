@@ -16,7 +16,7 @@
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="#" @submit.prevent="login">
+          <form class="space-y-6" action="#" v-on:submit.prevent="login">
             <div>
               <label
                 for="username-address-icon"
@@ -40,12 +40,14 @@
                   type="text"
                   id="username-address-icon"
                   required
-                  class="border border-primary_border text-neutral_70 text-base rounded-lg focus:border-primary_pressed block w-full pl-10 p-2.5"
+                  class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_pressed block w-full pl-10 p-2.5"
                   placeholder="Masukkan username anda"
                 />
+                <span v-if="username" class="invalid-feedback">Masukkan username anda</span>
+        
               </div>
 
-              <label for="password-icon" class="block mb-2 text-base font-medium text-neutral_100"
+              <label for="password-icon" class="block mb-2 text-base font-medium text-neutral_100 pt-4"
                 >Password</label
               >
               <div class="relative">
@@ -74,10 +76,11 @@
                   type="password"
                   autocomplete="current-password"
                   required
-                  class="border border-primary_border text-neutral_70 text-base rounded-lg focus:border-primary_main block w-full pl-10 p-2.5"
+                  class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_main block w-full pl-10 p-2.5"
                   placeholder="Masukkan password anda"
                 />
-                <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                
+                <!-- <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
                     <path
                       stroke="#404040"
@@ -94,7 +97,7 @@
                       d="M10 16.892c2.942 0 5.683-1.734 7.592-4.734.75-1.175.75-3.15 0-4.325-1.909-3-4.65-4.733-7.592-4.733-2.942 0-5.683 1.733-7.592 4.733-.75 1.175-.75 3.15 0 4.325 1.909 3 4.65 4.734 7.592 4.734Z"
                     />
                   </svg>
-                </div>
+                </div> -->
               </div>
             </div>
 
@@ -115,7 +118,15 @@
 </template>
 <script>
 import axios from 'axios'
-import { useRouter } from 'vue-router'
+//import { ref, computed } from 'vue'
+// import { reactive } from 'vue' // "from '@vue/composition-api'" if you are using Vue <2.7
+// import { useVuelidate } from '@vuelidate/core'
+// import { required } from '@vuelidate/validators'
+// import { useRouter } from 'vue-router'
+
+// const startValidation = ref(false);
+// const username = ref('');
+// const password = ref('');
 
 export default {
   name: 'admin-login',
@@ -125,17 +136,18 @@ export default {
       password: ''
     }
   },
+  // validations:{
+  //   username: {required}
+  // },
   methods: {
+    login: function(){
+      this.$v.$touch();
+      if(this.$v.$pending || this.$v.$error) return;
+    },
     async loginUser() {
       console.log(this.username)
       console.log(this.password)
 
-      // const response = await axios.post('http://company.ditenun.com/api/v1/auth/login', {
-      //   username: this.username,
-      //   password: this.password
-      // })
-
-      // console.log(response.data)
 
       try {
         const response = await axios.post('http://company.ditenun.com/api/v1/auth/login', {
@@ -157,22 +169,21 @@ export default {
         // Handle the error response
       }
 
-      // // Handle successful login, e.g., store token in localStorage or Vuex store
-      // console.log('Logged in:', response.data)
-      // this.$router.push('/admin/dashboard')
-
-      // Redirect to the home page or perform any other necessary actions
+     
     }
   },
   setup() {
-    // const router = useRouter()
-
-    // const login = () => {
-    //   localStorage.setItem('authenticated', false)
-    //   router.push({ name: 'dashboard' })
-    // }
-
-    console.log('TEST')
+    // const state= reactive({
+    //   email:'',
+    //   password: ''
+    // })
+    // const rules = computed(() => {
+    //         email: { required },
+    //         password: { required
+    //         }
+    //     })
+    //return { v$: useVuelidate() }
+    //console.log('TEST')
 
     // eslint-disable-next-line vue/no-dupe-keys
     // return login

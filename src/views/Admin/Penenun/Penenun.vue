@@ -121,52 +121,67 @@
               <th scope="col" class="px-6 py-3"></th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-neutral_30 text-neutral_90">
-            <tr class="" v-for="(weavers, id) in filteredWeavers" :key="id">
-              <!-- hover state -->
-              <td class="px-6 py-4">{{ weavers.name }}</td>
-              <td class="px-6 py-4">{{ weavers.theLoom }}</td>
-              <td class="px-6 py-4">{{ weavers.technique }}</td>
-              <td class="px-6 py-4">{{ weavers.ethnic }}</td>
-              <td class="px-6 py-4">
-                <div class="flex gap-4">
-                  <router-link to="/">
-                    <button class="p-[10px] bg-secondary_surface rounded">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
-                        <path
-                          stroke="#ECB11F"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M7.333 1.333H6C2.667 1.333 1.333 2.667 1.333 6v4c0 3.333 1.334 4.667 4.667 4.667h4c3.333 0 4.667-1.334 4.667-4.667V8.667"
-                        />
-                        <path
-                          stroke="#ECB11F"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-miterlimit="10"
-                          stroke-width="1.5"
-                          d="M10.693 2.013 5.44 7.267c-.2.2-.4.593-.44.88l-.287 2.006c-.106.727.407 1.234 1.134 1.134L7.853 11c.28-.04.674-.24.88-.44l5.254-5.253c.906-.907 1.333-1.96 0-3.294-1.334-1.333-2.387-.906-3.294 0Z"
-                        />
-                        <path
-                          stroke="#ECB11F"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-miterlimit="10"
-                          stroke-width="1.5"
-                          d="M9.94 2.767a4.763 4.763 0 0 0 3.293 3.293"
-                        />
-                      </svg>
-                    </button>
-                  </router-link>
-                  <DeleteConfirmation
-                    :weaver-id="weaver.id"
-                    @weaver-deleted="handleWeaverDeleted"
-                  />
-                </div>
+          <template v-if="filteredWeavers.length > 0">
+            <tbody class="divide-y divide-neutral_30 text-neutral_90">
+              <tr
+                class="hover:bg-primary_surface hover:cursor-pointer"
+                v-for="(weavers, id) in filteredWeavers"
+                :key="id"
+                
+              >
+                <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.name }}</td>
+                <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.theLoom }}</td>
+                <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.technique }}</td>
+                <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.ethnic }}</td>
+
+                <td class="px-6 py-4">
+                  <div class="flex gap-4">
+                    <router-link to="/">
+                      <button class="p-[10px] bg-secondary_surface rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                          <path
+                            stroke="#ECB11F"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M7.333 1.333H6C2.667 1.333 1.333 2.667 1.333 6v4c0 3.333 1.334 4.667 4.667 4.667h4c3.333 0 4.667-1.334 4.667-4.667V8.667"
+                          />
+                          <path
+                            stroke="#ECB11F"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-miterlimit="10"
+                            stroke-width="1.5"
+                            d="M10.693 2.013 5.44 7.267c-.2.2-.4.593-.44.88l-.287 2.006c-.106.727.407 1.234 1.134 1.134L7.853 11c.28-.04.674-.24.88-.44l5.254-5.253c.906-.907 1.333-1.96 0-3.294-1.334-1.333-2.387-.906-3.294 0Z"
+                          />
+                          <path
+                            stroke="#ECB11F"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-miterlimit="10"
+                            stroke-width="1.5"
+                            d="M9.94 2.767a4.763 4.763 0 0 0 3.293 3.293"
+                          />
+                        </svg>
+                      </button>
+                    </router-link>
+                    <DeleteConfirmation
+                      :weaver-id="weavers.id"
+                      @weaver-deleted="handleWeaverDeleted"
+                      class="z-10"
+                    />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </template>
+          <template v-else>
+            <tr>
+              <td colspan="5">
+                <EmptyState :name="propName" />
               </td>
             </tr>
-          </tbody>
+          </template>
         </table>
 
         <!-- pagination -->
@@ -175,10 +190,14 @@
             Menampilkan 1 sampai {{ totalElementOnPage }} dari {{ totalElement }} data
           </p>
           <div class="flex flex-row gap-4 items-center">
-            <button @click="previousPage" :disabled="isLoading" class="p-1 bg-neutral_30 rounded">
+            <button
+              @click="previousPage"
+              :disabled="isLoading || pageNo === 1"
+              class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                 <path
-                  stroke="#C2C2C2"
+                  stroke="#616161"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-miterlimit="10"
@@ -190,7 +209,11 @@
             <div class="p-1 bg-primary_surface text-sm text-center text-primary_hover rounded">
               <span class="p-1 w-5 h-5">{{ pageNo }}</span>
             </div>
-            <button @click="nextPage" :disabled="isLoading" class="p-1 bg-neutral_30 rounded">
+            <button
+              @click="nextPage"
+              :disabled="isLoading || lastPage"
+              class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                 <path
                   stroke="#616161"
@@ -205,18 +228,14 @@
           </div>
         </div>
       </div>
-
-      <DiscardConfirmation />
-      <SaveSuccess />
-      <EmptyState />
     </div>
   </div>
 </template>
 <script>
 import Sidebar from '../../../components/Admin/Sidebar.vue'
 import DeleteConfirmation from '../../../components/Admin/Modals/DeleteConfirmation.vue'
-import DiscardConfirmation from '../../../components/Admin/Modals/DiscardConfirmation.vue'
-import SaveSuccess from '../../../components/Admin/Modals/SaveSuccess.vue'
+//import DiscardConfirmation from '../../../components/Admin/Modals/DiscardConfirmation.vue'
+//import SaveSuccess from '../../../components/Admin/Modals/SaveSuccess.vue'
 import EmptyState from '../../../components/Admin/EmptyState.vue'
 import axios from 'axios'
 export default {
@@ -250,7 +269,8 @@ export default {
       sortBy: '',
       lastPage: true,
       moveState: false,
-      isLoading: false
+      isLoading: false,
+      propName: 'Penenun'
     }
   },
   methods: {
@@ -392,6 +412,9 @@ export default {
         this.sortOrder = 'asc'
       }
       this.fetchWeavers()
+    },
+    goToDetailPage(weaverId) {
+      this.$router.push(`/admin/penenun/detail-penenun/${weaverId}`)
     }
   },
   computed: {
@@ -404,8 +427,7 @@ export default {
   components: {
     Sidebar,
     DeleteConfirmation,
-    DiscardConfirmation,
-    SaveSuccess,
+
     EmptyState
   }
 }
