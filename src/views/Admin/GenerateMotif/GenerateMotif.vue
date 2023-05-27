@@ -8,31 +8,30 @@
           <!-- Add ulos -->
           <AddUlos @data="handleAddUlos" />
 
-          <router-link to="">
-            <button
-              class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <path
-                  stroke="#757575"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="10"
-                  stroke-width="1.5"
-                  d="m11.05 3-6.842 7.242c-.258.275-.508.816-.558 1.191l-.308 2.7c-.109.975.591 1.642 1.558 1.475l2.683-.458c.375-.067.9-.342 1.159-.625l6.841-7.242c1.184-1.25 1.717-2.675-.125-4.416C13.625 1.142 12.233 1.75 11.05 3Z"
-                />
-                <path
-                  stroke="#757575"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="10"
-                  stroke-width="1.5"
-                  d="M9.908 4.208A5.105 5.105 0 0 0 14.45 8.5M2.5 18.333h15"
-                />
-              </svg>
-              Sunting Konten
-            </button>
-          </router-link>
+          <button
+            @click="toggleDeleteUlos"
+            class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path
+                stroke="#757575"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="m11.05 3-6.842 7.242c-.258.275-.508.816-.558 1.191l-.308 2.7c-.109.975.591 1.642 1.558 1.475l2.683-.458c.375-.067.9-.342 1.159-.625l6.841-7.242c1.184-1.25 1.717-2.675-.125-4.416C13.625 1.142 12.233 1.75 11.05 3Z"
+              />
+              <path
+                stroke="#757575"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="M9.908 4.208A5.105 5.105 0 0 0 14.45 8.5M2.5 18.333h15"
+              />
+            </svg>
+            {{ showDeleteUlos ? 'Save' : 'Sunting Konten' }}
+          </button>
         </div>
       </div>
       <!-- search -->
@@ -99,8 +98,34 @@
         <div v-if="ulosList.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             <div v-for="ulos in ulosList" :key="ulos.id">
-              <router-link :to="'/admin/generate-motif/' + ulos.id + '/motif-ulos/'">
-                <div
+              <template v-if="!showDeleteUlos">
+                <router-link :to="'/admin/generate-motif/' + ulos.id + '/motif-ulos/'">
+                  <div
+                    class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+                  >
+                    <div class="h-[300px] w-[252px]">
+                      <div class="gradient"></div>
+                      <img
+                        class="h-full w-full object-cover transition-transform rounded-lg"
+                        :src="ulos.imageUrl"
+                      />
+                    </div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+                    ></div>
+                    <div
+                      class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
+                    >
+                      <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
+                      <p class="text-neutral_10">{{ ulos.ethnic }}</p>
+                    </div>
+                  </div>
+                </router-link>
+              </template>
+
+              <template v-else>
+                <div class="flex flex-col items-center gap-1">
+                  <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
                   <div class="h-[300px] w-[252px]">
@@ -120,8 +145,9 @@
                     <p class="text-neutral_10">{{ ulos.ethnic }}</p>
                   </div>
                 </div>
-              </router-link>
-             
+                <DeleteUlos />
+                </div>
+              </template>
             </div>
           </div>
         </div>
@@ -131,7 +157,7 @@
           <EmptySearch />
         </div>
       </div>
-
+      <DeleteUlos />
       <AddMotif />
       <AddMotifHasilGenerate />
     </div>
@@ -145,19 +171,21 @@ import EmptySearch from '../../../components/Admin/EmptyState.vue'
 import AddUlos from '../../../components/Admin/GenerateMotif/AddUlos.vue'
 import AddMotif from '../../../components/Admin/GenerateMotif/AddMotif.vue'
 import AddMotifHasilGenerate from '../../../components/Admin/GenerateMotif/AddMotifHasilGenerate.vue'
+import DeleteUlos from '../../../components/Admin/Modals/Generate Motif/DeleteUlos.vue'
 export default {
   components: {
     Sidebar,
     EmptySearch,
     AddUlos,
     AddMotif,
-    AddMotifHasilGenerate
+    AddMotifHasilGenerate,
+    DeleteUlos
   },
   data: function () {
     return {
       searchText: '',
       ulosList: [],
-      
+      showDeleteUlos: false
     }
   },
   mounted() {
@@ -189,11 +217,18 @@ export default {
       // this.showModal = false
       this.ulosList.unshift(data)
     },
-    sendID(){
-      const ID = this.$route.params.id;
-      this.$router.push({ name: 'MotifUlos', params: { ID } });
+    sendID() {
+      const ID = this.$route.params.id
+      this.$router.push({ name: 'MotifUlos', params: { ID } })
+    },
+    toggleDeleteUlos() {
+      this.showDeleteUlos = !this.showDeleteUlos
     }
   }
 }
 </script>
-<style></style>
+<style scoped>
+.disabled-card {
+  pointer-events: none;
+}
+</style>

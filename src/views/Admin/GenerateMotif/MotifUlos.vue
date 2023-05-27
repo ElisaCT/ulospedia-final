@@ -6,7 +6,7 @@
         <h3 class="font-medium text-3xl text-left pb-6">Motif { Ulos name }</h3>
         <div class="flex flex-row gap-6">
           <AddMotif @data="handleAddMotif" />
-          <router-link to="">
+         
             <button
               class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
             >
@@ -30,7 +30,7 @@
               </svg>
               Sunting Konten
             </button>
-          </router-link>
+          
         </div>
       </div>
     </div>
@@ -140,11 +140,13 @@ import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
 import EmptyState from '../../../components/Admin/EmptyState.vue'
 import AddMotif from '../../../components/Admin/GenerateMotif/AddMotif.vue'
+import DeleteUlos from '../../../components/Admin/Modals/Generate Motif/DeleteUlos.vue'
 export default {
   components: {
     Sidebar,
     EmptyState,
-    AddMotif
+    AddMotif,
+    DeleteUlos
   },
   data: function () {
     return {
