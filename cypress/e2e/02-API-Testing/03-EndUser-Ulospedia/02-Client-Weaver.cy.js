@@ -1,15 +1,14 @@
 // API ini digunakan untuk mengakses data penenun yang dibutuhkan pada fitur penenun padaweb Ulospedia. }
 
-describe('Ulospedia API Tests', () => {
-    const baseUrl = 'http://company.ditenun.com/api/v1/ulospedia/client';
+describe('Pengujian API: Data Penenun', () => {
 
-    it('should retrieve all weavers', () => {
+    it('GET: Mendapatkan semua data penenun', () => {
         const theLoom = 'Gedongan';
         const pageNo = 1;
 
         cy.request({
             method: 'GET',
-            url: `${baseUrl}/weavers?theLoom=${theLoom}&pageNo=${pageNo}`,
+            url: `ulospedia/client/weavers?theLoom=${theLoom}&pageNo=${pageNo}`,
             headers: {
                 'accept': '*/*'
             }
@@ -20,12 +19,12 @@ describe('Ulospedia API Tests', () => {
         });
     });
 
-    it('should retrieve a specific weaver', () => {
+    it('GET: Mendapatkan data penenun berdasarkan penenun ID yang valid(Tersedia)', () => {
         const weaverId = 33;
 
         cy.request({
             method: 'GET',
-            url: `${baseUrl}/weavers/${weaverId}`,
+            url: `ulospedia/client/weavers/${weaverId}`,
             headers: {
                 'accept': '*/*'
             }
