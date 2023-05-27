@@ -59,6 +59,7 @@
                   </p>
                 </div>
                 <input
+                  @change="handleFileChange"
                   id="dropzone-file"
                   type="file"
                   class="hidden"
@@ -73,6 +74,7 @@
             >
             <div class="md:w-2/3">
               <input
+                v-model="name"
                 type="text"
                 id="ulos-name"
                 class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -88,17 +90,20 @@
             >
             <div class="md:w-2/3 relative inline-block">
               <select
+                v-model="ethnic"
                 class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                 required
               >
                 <option value="" disabled selected hidden>Pilih Suku Ulos</option>
-                <option value="option1" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
-                <option value="option2" class="pb-3 hover:bg-primary_surface">
+                <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
+                <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
                   Batak Simalungun
                 </option>
-                <option value="option3" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
-                <option value="option2" class="pb-3 hover:bg-primary_surface">Batak Angkola</option>
-                <option value="option3" class="pb-3 hover:bg-primary_surface">
+                <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
+                <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
+                  Batak Angkola
+                </option>
+                <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
                   Batak Mandailing
                 </option>
               </select>
@@ -127,7 +132,7 @@
               Batal
             </button>
             <button
-              @click="sumbit"
+              @click="submit"
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
@@ -140,18 +145,76 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      showModal: false
+      showModal: false,
+      image: null,
+      name: '',
+      ethnic: ''
+    }
+  },
+  watch: {
+    name(newValue) {
+      console.log(newValue)
+    },
+    ethnic(newValue) {
+      console.log(newValue)
+    },
+    image(newValue) {
+      console.log(newValue)
     }
   },
   methods: {
-    submit() {
-      // Perform the delete action here
-      // Example: Make an API call to delete the item
-      // Once the delete action is complete, you can close the modal
+    async submit() {
+      const token = localStorage.getItem('token')
+
+      const responseDataText = await axios.post(
+        'http://company.ditenun.com/api/v1/generate/ulos',
+        {
+          name: this.name,
+          ethnic: this.ethnic
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      console.log(responseDataText.data)
+      const newUlosDataId = responseDataText.data.data.ulosData.id
+      console.log(newUlosDataId)
+      console.log(`http://company.ditenun.com/api/v1/generate/ulos/${newUlosDataId}/image`)
+
+      const formData = new FormData()
+      formData.append('ulos-image', this.image)
+
+      const secondResponse = await axios.post(
+        `http://company.ditenun.com/api/v1/generate/ulos/${newUlosDataId}/image`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
+      console.log(secondResponse)
+
       this.showModal = false
+
+      this.$emit('data', {
+        id: newUlosDataId,
+        name: responseDataText.data.data.ulosData.name,
+        ethnic: responseDataText.data.data.ulosData.ethnic,
+        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${newUlosDataId}/image`
+      })
+      //console.log(responseDataImage)
+    },
+    handleFileChange(event) {
+      this.image = event.target.files[0]
     }
   }
 }

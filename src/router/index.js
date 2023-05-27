@@ -24,7 +24,7 @@ import MotifUlos from '@/views/Admin/GenerateMotif/MotifUlos.vue'
 import MotifUlosHasilGenerate from '@/views/Admin/GenerateMotif/MotifUlosHasilGenerate.vue'
 
 import ('preline')
-
+//const ulosID = this.$route.params.id
 const router = createRouter({
     history: createWebHistory(
         import.meta.env.BASE_URL),
@@ -127,13 +127,13 @@ const router = createRouter({
             meta: { requiresAuth: true }
         },
         {
-            path: '/admin/generate-motif/motif-ulos/:id',
+            path: '/admin/generate-motif/:id/motif-ulos',
             name: 'MotifUlos',
             component: MotifUlos,
             meta: { requiresAuth: true }
         },
         {
-            path: '/admin/generate-motif/:id/motif-ulos/hasil-generate',
+            path: '/admin/generate-motif/:id/motif-ulos/:motifId/hasil-generate',
             name: 'MotifUlosHasilGenerate',
             component: MotifUlosHasilGenerate,
             meta: { requiresAuth: true }

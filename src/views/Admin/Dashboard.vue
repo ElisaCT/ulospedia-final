@@ -9,7 +9,7 @@
         <div
           class="absolute inset-0 left-9 top-6 flex flex-col text-left pl-6 gap-2 text-neutral_10"
         >
-          <h2 class="font-semibold text-4xl">30</h2>
+          <h2 class="font-semibold text-4xl">{{ totalUlos }}</h2>
           <h5 class="font-medium text-xl">Data Ulos</h5>
         </div>
       </div>
@@ -19,7 +19,7 @@
         <div
           class="absolute inset-0 left-9 top-6 flex flex-col text-left pl-6 gap-2 text-neutral_10"
         >
-          <h2 class="font-semibold text-4xl">30</h2>
+          <h2 class="font-semibold text-4xl">{{ totalWeaver }}</h2>
           <h5 class="font-medium text-xl">Data Penenun</h5>
         </div>
       </div>
@@ -139,10 +139,13 @@ export default {
   components: { Sidebar },
   data: function () {
     return {
-      penenuns: null
+      penenuns: null,
+      totalWeaver:'',
+      totalUlos:''
     }
   },
   mounted() {
+    const token = localStorage.getItem('token')
     axios
       .get('http://company.ditenun.com/api/v1/ulospedia/client/weavers?theLoom=Gedogan&pageNo=1')
       .then((response) => {
@@ -151,6 +154,26 @@ export default {
       })
       .catch((error) => {
         console.log(error)
+      })
+
+      axios.get('http://company.ditenun.com/api/v1/ulospedia/weavers/count', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        this.totalWeaver = response.data.data.countOfWeaver
+        console.log(this.totalWeaver)
+      })
+
+      axios.get('http://company.ditenun.com/api/v1/ulospedia/ulos/count', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        this.totalUlos = response.data.data.totalUlos
+        console.log(this.totalUlos)
       })
   }
 }

@@ -5,7 +5,9 @@
       <div class="flex flex-row justify-between items-center">
         <h3 class="font-medium text-3xl text-left pb-6">Generate Motif</h3>
         <div class="flex flex-row gap-6">
-          <AddUlos />
+          <!-- Add ulos -->
+          <AddUlos @data="handleAddUlos" />
+
           <router-link to="">
             <button
               class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
@@ -97,7 +99,7 @@
         <div v-if="ulosList.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             <div v-for="ulos in ulosList" :key="ulos.id">
-              <router-link :to="'/admin/generate-motif/motif-ulos/' + ulos.id">
+              <router-link :to="'/admin/generate-motif/' + ulos.id + '/motif-ulos/'">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
@@ -119,6 +121,7 @@
                   </div>
                 </div>
               </router-link>
+             
             </div>
           </div>
         </div>
@@ -153,7 +156,8 @@ export default {
   data: function () {
     return {
       searchText: '',
-      ulosList: []
+      ulosList: [],
+      
     }
   },
   mounted() {
@@ -173,12 +177,23 @@ export default {
       .catch((error) => {
         if (error.response && error.response.status === 403) {
           console.error('Unauthorized access. Please check your credentials.')
+          this.$router.push('/admin/login')
         } else {
           console.error('An error occurred while fetching data:', error)
         }
       })
   },
-  methods: {}
+  methods: {
+    handleAddUlos(data) {
+      //const file = event.target.files[0];
+      // this.showModal = false
+      this.ulosList.unshift(data)
+    },
+    sendID(){
+      const ID = this.$route.params.id;
+      this.$router.push({ name: 'MotifUlos', params: { ID } });
+    }
+  }
 }
 </script>
 <style></style>

@@ -5,22 +5,7 @@
       <div class="flex flex-row justify-between items-center">
         <h3 class="font-medium text-3xl text-left pb-6">Motif { Ulos name }</h3>
         <div class="flex flex-row gap-6">
-          <router-link to="">
-            <button
-              class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <path
-                  stroke="#fff"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M10 18.333c4.583 0 8.333-3.75 8.333-8.333S14.583 1.667 10 1.667 1.667 5.417 1.667 10s3.75 8.333 8.333 8.333ZM6.667 10h6.666M10 13.333V6.667"
-                />
-              </svg>
-              Tambah Motif Ulos
-            </button>
-          </router-link>
+          <AddMotif @data="handleAddMotif" />
           <router-link to="">
             <button
               class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
@@ -105,9 +90,11 @@
     <div class="ml-80 pt-10 gap-6 mr-8">
       <!-- semua -->
       <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">
-        <div v-if="motifUlos">
-          <div v-for="motif in motifUlos" :key="motif.id">
-            <router-link :to="'/generate-motif/' + motif.id + '/motif-ulos/hasil-generate'">
+        <div v-if="motifUlos.length > 0">
+          <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+            <div v-for="motif in motifUlos" :key="motif.id">
+              <!-- <router-link :to="'/generate-motif/' + ulosID + '/motif-ulos/'+motif.id+'/hasil-generate'"> -->
+              <!-- @click="sendDataId(motif.id)" -->
               <div
                 class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
               >
@@ -122,7 +109,8 @@
                   class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
                 ></div>
               </div>
-            </router-link>
+              <!-- </router-link> -->
+            </div>
           </div>
         </div>
 
@@ -151,29 +139,44 @@
 import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
 import EmptyState from '../../../components/Admin/EmptyState.vue'
+import AddMotif from '../../../components/Admin/GenerateMotif/AddMotif.vue'
 export default {
   components: {
     Sidebar,
-    EmptyState
+    EmptyState,
+    AddMotif
   },
   data: function () {
     return {
       motifUlos: [],
-      propName: 'Motif Ulos'
+      propName: 'Motif Ulos',
+      ulosID: this.$route.params.id
     }
   },
   mounted() {
     const token = localStorage.getItem('token')
+    const ulosID = this.$route.params.id
+
     axios
-      .get(`http://company.ditenun.com/api/v1/generate/ulos/${this.motifUlos.id}/motifs`, {
+      .get(`http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       .then((response) => {
-        this.motifUlos = response.data.data
+        console.log(response.data)
+        this.motifUlos = response.data.data.motifs
         console.log(this.motifUlos)
       })
+  },
+  methods: {
+    handleAddMotif(data) {
+      this.motifUlos.unshift(data)
+    },
+    sendDataId(motifId) {
+      console.log('card clicked motifId:', motifId)
+      this.$router.push({ name: 'MotifUlosHasilGenerate', params: { motifId } })
+    }
   }
 }
 </script>

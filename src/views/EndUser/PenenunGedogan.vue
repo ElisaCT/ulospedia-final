@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .gradient {
   width: 100%;
   height: 100%;

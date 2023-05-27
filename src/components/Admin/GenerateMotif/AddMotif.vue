@@ -59,6 +59,7 @@
                   </p>
                 </div>
                 <input
+                  @change="handleFileChange"
                   id="dropzone-file"
                   type="file"
                   class="hidden"
@@ -75,13 +76,14 @@
             >
             <div class="md:w-2/3 relative inline-block">
               <select
+                v-model="size"
                 class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                 required
               >
                 <option value="" disabled selected hidden>Pilih Ukuran Motif</option>
-                <option value="option1" class="pb-3 hover:bg-primary_surface">Besar</option>
-                <option value="option2" class="pb-3 hover:bg-primary_surface">Sedang</option>
-                <option value="option3" class="pb-3 hover:bg-primary_surface">Kecil</option>
+                <option value="Besar" class="pb-3 hover:bg-primary_surface">Besar</option>
+                <option value="Sedang" class="pb-3 hover:bg-primary_surface">Sedang</option>
+                <option value="Kecil" class="pb-3 hover:bg-primary_surface">Kecil</option>
               </select>
               <div
                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
@@ -108,7 +110,7 @@
               Batal
             </button>
             <button
-              @click="sumbit"
+              @click="submit"
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
@@ -121,18 +123,76 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      showModal: false
+      showModal: false,
+      image: null,
+      size: '',
+      ulosID: this.$route.params.id
+    }
+  },
+  watch: {
+    size(newValue) {
+      console.log(newValue)
+    },
+    image(newValue) {
+      console.log(newValue)
     }
   },
   methods: {
-    submit() {
-      // Perform the delete action here
-      // Example: Make an API call to delete the item
-      // Once the delete action is complete, you can close the modal
+    async submit() {
+      const token = localStorage.getItem('token')
+      const ulosID = this.$route.params.id
+
+      const responseDataText = await axios.post(
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs`,
+        {
+          size: this.size
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+
+      console.log(ulosID)
+      console.log(responseDataText.data)
+      const newMotifDataId = responseDataText.data.data.motif.id
+      console.log(newMotifDataId)
+      console.log(
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`
+      )
+
+      const formData = new FormData()
+      formData.append('motif-image', this.image)
+
+      const secondResponse = await axios.post(
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
+      console.log(secondResponse)
+
       this.showModal = false
+      console.log('hide')
+
+      this.$emit('data', {
+        id: newMotifDataId,
+        // size: responseDataText.data.data.motif,
+        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`
+      })
+    },
+    handleFileChange(event) {
+      this.image = event.target.files[0]
     }
   }
 }
