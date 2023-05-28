@@ -388,10 +388,19 @@ it('should retrieve weaver image by ID', () => {
     //     });
     // });
 
-describe('',() => {
+describe('Pengujian API: Invalid',() => {
+
+})
+describe('Pengujian API: Gambar Ulos lainnya dengan invalid credentials',() => {
 
 })
 
 describe('',() => {
 
+    const invalidUlosId = 1011;
+    const ulosId = 10;
+    const imagePath = 'motifUlos1.jpeg';
+    const motifImageId = 2;
+    const invalidMotifImageId = 12;
+    const invalidAuthToken = 'INVALID_TOKEN';
 })

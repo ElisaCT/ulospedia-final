@@ -6,7 +6,7 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
         cy.loginAndSetAuthToken();
     });
 
-    it('POST: Menambahkan gambar ulos utuh pada generate motif berdasarkan id yang valid(tersedia) ', () => {
+    it('POST: Menambahkan gambar ulos utuh pada generate motif berdasarkan id ulos yang valid(tersedia) ', () => {
         const id = 10;
         const authToken = Cypress.env('authToken');
 
@@ -63,7 +63,7 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
         });
     });
 
-    it('GET: Menampilkan data ulos pada fitur generate motif berdasarkan Id yang valid', () => {
+    it('GET: Menampilkan data ulos pada fitur generate motif berdasarkan Id ulos yang valid', () => {
         const id = 10; // Ulos ID parameter
         const authToken = Cypress.env('authToken');
 

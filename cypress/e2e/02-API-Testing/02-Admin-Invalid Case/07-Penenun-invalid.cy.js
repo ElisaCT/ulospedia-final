@@ -102,7 +102,7 @@ describe('Pengujian API: Penenun', () => {
     });
 
 
-    // it('GET: Mendapatkan jumlah penenun yang tersedia: should retrieve count of weavers', () => {
+    // it('GET: Mendapatkan jumlah penenun yang tersedia', () => {
     //     const authToken = Cypress.env('authToken');
     //     cy.request({
     //         method: 'GET',
@@ -121,7 +121,7 @@ describe('Pengujian API: Penenun', () => {
     //     });
     // });
 
-    // it('should add a new weaver with valid credentials and valid request body', () => {
+    // it('POST: Menambahkan/membuat data text penenun yang baru', () => {
     //     const authToken = Cypress.env('authToken');
     //     const requestBody = {
                 // "name": "James Doe",
@@ -154,7 +154,7 @@ describe('Pengujian API: Penenun', () => {
     //     });
     // });
 
-    // it('POST: Menambah Data Penenun Baru (gambar/image): should add new weaver image', () => {
+    // it('POST: Menambah Data Penenun Baru (gambar/image)', () => {
     //     const weaverId = 2;
     //     const authToken = Cypress.env('authToken');
 
@@ -194,7 +194,7 @@ describe('Pengujian API: Penenun', () => {
     //         });
     // });
 
-    // it('should delete weaver data', () => {
+    // it('DELETE: Menghapus data penenun berdasarkan id penenun yang valid(tersedia)', () => {
     //     const authToken = Cypress.env('authToken');
     //     const weaverId = 3;
 
@@ -212,7 +212,7 @@ describe('Pengujian API: Penenun', () => {
     //     });
     // });
 
-    it('should add new weaver image', () => {
+    it('POST: Menambahkan gambar penenun yang baru berdasarkan penenun ID yang valid(tersedia)', () => {
         const weaverId = 10;
         const authToken = Cypress.env('authToken');
 
@@ -237,7 +237,7 @@ describe('Pengujian API: Penenun', () => {
             });
     });
 
-    // it('should update weaver data', () => {
+    // it('PUT: Memperbaharui/Mengedit data text penenun berdasarkan ID penenun yang valid(Tersedia)', () => {
     //     const authToken = Cypress.env('authToken');
     //     const weaverId = 3;
 

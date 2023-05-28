@@ -26,7 +26,8 @@ describe('Pengujian API - Ulos utuh', () => {
     // it('POST: Membuat atau mengupload gambar ulos utuh yang baru berdasarkan ulosId yang valid(tersedia)', () => {
     //     const ulosId = 10;
     //     const imagePath = 'ulosUtuh1.jpeg';
-
+    //      const authToken = Cypress.env('authToken');
+    
     //     cy.fixture(imagePath, 'binary').then((fileContent) => {
     //         const formData = new FormData();
     //         formData.append('main-image', Cypress.Blob.binaryStringToBlob(fileContent), imagePath);
