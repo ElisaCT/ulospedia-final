@@ -8,7 +8,7 @@
           <!-- Add ulos -->
           <AddUlos @data="handleAddUlos" />
 
-          <button
+          <!-- <button
             @click="toggleDeleteUlos"
             class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
           >
@@ -31,7 +31,7 @@
               />
             </svg>
             {{ showDeleteUlos ? 'Save' : 'Sunting Konten' }}
-          </button>
+          </button> -->
         </div>
       </div>
       <!-- search -->
@@ -58,7 +58,6 @@
             class="w-full bg-[#F5F5F5] focus:outline-none pl-3"
             type="text"
             v-model="searchText"
-            @input="handleSearch"
             placeholder="Cari ulos"
           />
         </div>
@@ -93,14 +92,14 @@
         </div>
       </div>
       <div v-if="loading">
-          <CardSkeleton />
-        </div>
+        <CardSkeleton />
+      </div>
 
       <!-- ulos -->
       <div class="flex justify-center py-8">
-        <div v-if="ulosList.length > 0">
+        <div v-if="filteredUlos.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div v-for="ulos in ulosList" :key="ulos.id">
+            <div v-for="(ulos, id) in filteredUlos" :key="id" class="">
               <!-- <template v-if="!showDeleteUlos"> -->
               <div>
                 <router-link :to="'/admin/generate-motif/' + ulos.id + '/motif-ulos/'">
@@ -126,7 +125,9 @@
                   </div>
                 </router-link>
               </div>
-              <DeleteUlos :ulos-id="ulos.id" @ulos-deleted="handleUlosDeleted" />
+              <div>
+                <DeleteUlos :ulos-id="ulos.id" @ulos-deleted="handleUlosDeleted" class="z-10" />
+              </div>
               <!-- </template> -->
 
               <!-- <template v-else>
@@ -161,14 +162,12 @@
           </div>
         </div>
 
-        <div v-else-if="ulosList.length === 0 && loading!==true">
+        <div v-else-if="filteredUlos.length === 0 && loading !== true">
           <!-- Show empty state component when searchText is not empty and ulosList is empty -->
-          <EmptySearch />
+          <EmptySearch :name="propName" />
         </div>
-
-        
       </div>
-      
+
       <DeleteUlos />
       <AddMotif />
       <AddMotifHasilGenerate />
@@ -200,7 +199,8 @@ export default {
       searchText: '',
       ulosList: [],
       showDeleteUlos: false,
-      loading: false
+      loading: false,
+      propName: 'ulos'
     }
   },
   mounted() {
@@ -233,12 +233,22 @@ export default {
       // this.showModal = false
       this.ulosList.unshift(data)
     },
+    handleUlosDeleted(ulosId){
+      this.ulosList = this.ulosList.filter((ulos) => ulos.id !== ulosId)
+    },
     sendID() {
       const ID = this.$route.params.id
       this.$router.push({ name: 'MotifUlos', params: { ID } })
     },
     toggleDeleteUlos() {
       this.showDeleteUlos = !this.showDeleteUlos
+    }
+  },
+  computed: {
+    filteredUlos() {
+      return this.ulosList.filter((ulos) =>
+        ulos.name.toLowerCase().includes(this.searchText.toLowerCase())
+      )
     }
   }
 }
