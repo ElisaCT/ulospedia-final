@@ -75,7 +75,7 @@ export default {
       showModal: false
     }
   },
-  props: ['UlosId'],
+  props: ['ulosId'],
   methods: {
     async deleteItem() {
       const token = localStorage.getItem('token')
