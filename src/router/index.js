@@ -145,9 +145,9 @@ router.beforeEach((to, from, next) => {
     const isAuthenticated = JSON.parse(localStorage.getItem('authenticated'))
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
 
-    // if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
-    // if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
-    // else next()
+    if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
+    if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
+    else next()
 
     if (requiresAuth && !isAuthenticated) {
         next({ name: 'admin-login' })

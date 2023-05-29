@@ -8,7 +8,7 @@
           <!-- Add ulos -->
           <AddUlos @data="handleAddUlos" />
 
-          <!-- <button
+          <button
             @click="toggleDeleteUlos"
             class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
           >
@@ -31,7 +31,7 @@
               />
             </svg>
             {{ showDeleteUlos ? 'Save' : 'Sunting Konten' }}
-          </button> -->
+          </button>
         </div>
       </div>
       <!-- search -->
@@ -58,6 +58,7 @@
             class="w-full bg-[#F5F5F5] focus:outline-none pl-3"
             type="text"
             v-model="searchText"
+            @input="handleSearch"
             placeholder="Cari ulos"
           />
         </div>
@@ -65,14 +66,20 @@
         <div class="col-span-3 relative inline-block">
           <select
             class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-            required
+            v-model="selectedOptionEthnic"
           >
             <option value="" disabled selected hidden>Pilih Asal Suku</option>
-            <option value="option1" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
-            <option value="option2" class="pb-3 hover:bg-primary_surface">Batak Simalungun</option>
-            <option value="option3" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
-            <option value="option2" class="pb-3 hover:bg-primary_surface">Batak Angkola</option>
-            <option value="option3" class="pb-3 hover:bg-primary_surface">Batak Mandailing</option>
+            <option value="batak toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
+            <option value="batak simalungun" class="pb-3 hover:bg-primary_surface">
+              Batak Simalungun
+            </option>
+            <option value="batak karo" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
+            <option value="batak angkola" class="pb-3 hover:bg-primary_surface">
+              Batak Angkola
+            </option>
+            <option value="batak mandailing" class="pb-3 hover:bg-primary_surface">
+              Batak Mandailing
+            </option>
           </select>
           <div
             class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
@@ -99,10 +106,36 @@
       <div class="flex justify-center py-8">
         <div v-if="filteredUlos.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div v-for="(ulos, id) in filteredUlos" :key="id" class="">
-              <!-- <template v-if="!showDeleteUlos"> -->
-              <div>
-                <router-link :to="'/admin/generate-motif/' + ulos.id + '/motif-ulos/'">
+            <div v-for="ulos in ulosList" :key="ulos.id" class="">
+              <template v-if="!showDeleteUlos">
+                <div>
+                  <router-link :to="'/admin/generate-motif/' + ulos.id + '/motif-ulos/'">
+                    <div
+                      class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+                    >
+                      <div class="h-[300px] w-[252px]">
+                        <div class="gradient"></div>
+                        <img
+                          class="h-full w-full object-cover transition-transform rounded-lg"
+                          :src="ulos.imageUrl"
+                        />
+                      </div>
+                      <div
+                        class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+                      ></div>
+                      <div
+                        class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
+                      >
+                        <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
+                        <p class="text-neutral_10">{{ ulos.ethnic }}</p>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+              </template>
+
+              <template v-else>
+                <div class="flex flex-col items-center gap-1">
                   <div
                     class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                   >
@@ -123,41 +156,11 @@
                       <p class="text-neutral_10">{{ ulos.ethnic }}</p>
                     </div>
                   </div>
-                </router-link>
-              </div>
-              <div>
-                <DeleteUlos :ulos-id="ulos.id" @ulos-deleted="handleUlosDeleted" class="z-10" />
-              </div>
-              <!-- </template> -->
-
-              <!-- <template v-else>
-                <div class="flex flex-col items-center gap-1">
-                  <div
-                  class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
-                >
-                  <div class="h-[300px] w-[252px]">
-                    <div class="gradient"></div>
-                    <img
-                      class="h-full w-full object-cover transition-transform rounded-lg"
-                      :src="ulos.imageUrl"
-                    />
-                  </div>
-                  <div
-                    class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
-                  ></div>
-                  <div
-                    class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
-                  >
-                    <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
-                    <p class="text-neutral_10">{{ ulos.ethnic }}</p>
+                  <div>
+                    <DeleteUlos :ulos-id="ulos.id" @ulos-deleted="handleUlosDeleted" class="z-10" />
                   </div>
                 </div>
-                <DeleteUlos 
-                :ulos-id="ulos.id"
-                @ulos-deleted="handleUlosDeleted"/>
-                
-                </div>
-              </template> -->
+              </template>
             </div>
           </div>
         </div>
@@ -167,10 +170,6 @@
           <EmptySearch :name="propName" />
         </div>
       </div>
-
-      <DeleteUlos />
-      <AddMotif />
-      <AddMotifHasilGenerate />
     </div>
   </div>
 </template>
@@ -180,8 +179,6 @@ import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
 import EmptySearch from '../../../components/Admin/EmptyState.vue'
 import AddUlos from '../../../components/Admin/GenerateMotif/AddUlos.vue'
-import AddMotif from '../../../components/Admin/GenerateMotif/AddMotif.vue'
-import AddMotifHasilGenerate from '../../../components/Admin/GenerateMotif/AddMotifHasilGenerate.vue'
 import DeleteUlos from '../../../components/Admin/Modals/Generate Motif/DeleteUlos.vue'
 import CardSkeleton from '../../../components/EndUser/CardSkeleton.vue'
 export default {
@@ -189,8 +186,7 @@ export default {
     Sidebar,
     EmptySearch,
     AddUlos,
-    AddMotif,
-    AddMotifHasilGenerate,
+
     DeleteUlos,
     CardSkeleton
   },
@@ -200,11 +196,14 @@ export default {
       ulosList: [],
       showDeleteUlos: false,
       loading: false,
-      propName: 'ulos'
+      propName: 'ulos',
+      selectedOptionEthnic: ''
     }
   },
   mounted() {
     const token = localStorage.getItem('token')
+    const url = this.getUrlPath(this.searchText, this.selectedOptionEthnic)
+    console.log(url)
     console.log(token)
     this.loading = true
     axios
@@ -233,7 +232,7 @@ export default {
       // this.showModal = false
       this.ulosList.unshift(data)
     },
-    handleUlosDeleted(ulosId){
+    handleUlosDeleted(ulosId) {
       this.ulosList = this.ulosList.filter((ulos) => ulos.id !== ulosId)
     },
     sendID() {
@@ -242,6 +241,25 @@ export default {
     },
     toggleDeleteUlos() {
       this.showDeleteUlos = !this.showDeleteUlos
+    },
+    getUrlPath(searchText, selectedOptionEthnic) {
+      return `http://company.ditenun.com/api/v1/generate/ulos${
+        searchText !== '' ? '?search-data=' + searchText : ''
+      }${selectedOptionEthnic !== '' ? '&ethnic=' + selectedOptionEthnic : ''}`
+    },
+    handleSearch() {
+      const url = this.getUrlPath(this.searchText, this.selectedOptionEthnic)
+      const token = localStorage.getItem('token')
+      console.log(url)
+
+      axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then((response)=>{
+        console.log(response.data)
+        this.ulosList = response.data.data.ulosDashboardList
+      })
     }
   },
   computed: {

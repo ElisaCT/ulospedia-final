@@ -8,6 +8,7 @@
           <AddMotif @data="handleAddMotif" />
 
           <button
+            @click="toggleDeleteMotif"
             class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
@@ -28,7 +29,7 @@
                 d="M9.908 4.208A5.105 5.105 0 0 0 14.45 8.5M2.5 18.333h15"
               />
             </svg>
-            Sunting Konten
+            {{ showDeleteMotif ? 'Save' : 'Sunting Konten' }}
           </button>
         </div>
       </div>
@@ -43,10 +44,10 @@
           <nav class="flex space-x-2 p-1.5" aria-label="Tabs" role="tablist">
             <button
               type="button"
-              class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white active"
+              class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('')"
-              :class="{ 'hs-tab-active:bg-primary_main': activeButton === '' }"
+              :class="{ 'active': activeButton === '' }"
             >
               Semua
             </button>
@@ -55,7 +56,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('besar')"
-              :class="{ 'hs-tab-active:bg-primary_main': activeButton === 'besar' }"
+              :class="{ 'active': activeButton === 'besar' }"
             >
               Besar
             </button>
@@ -64,7 +65,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('sedang')"
-              :class="{ 'hs-tab-active:bg-primary_main': activeButton === 'sedang' }"
+              :class="{ 'active': activeButton === 'sedang' }"
             >
               Sedang
             </button>
@@ -73,7 +74,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('kecil')"
-              :class="{ 'hs-tab-active:bg-primary_main': activeButton === 'kecil' }"
+              :class="{ 'active': activeButton === 'kecil' }"
             >
               Kecil
             </button>
@@ -90,24 +91,56 @@
       <div>
         <div v-if="motifUlos.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div v-for="motif in motifUlos" :key="motif.id">
-              <!-- <router-link :to="'/generate-motif/' + ulosID + '/motif-ulos/'+motif.id+'/hasil-generate'"> -->
-              <!-- @click="sendDataId(motif.id)" -->
-              <div
-                class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
-              >
-                <div class="h-[300px] w-[252px]">
-                  <div class="gradient"></div>
-                  <img
-                    class="h-full w-full object-cover transition-transform rounded-lg"
-                    :src="motif.imageUrl"
-                  />
+            <div v-for="motif in motifUlos" :key="motif.id" @click="sendDataId(motif.id)">
+              <template v-if="!showDeleteMotif">
+                <!-- <router-link
+                  :to="'/generate-motif/' + ulosID + '/motif-ulos/' + motif.id + '/hasil-generate'"
+                > -->
+                  
+                  <div
+                    class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+                  >
+                    <div class="h-[300px] w-[252px]">
+                      <div class="gradient"></div>
+                      <img
+                        class="h-full w-full object-cover transition-transform rounded-lg"
+                        :src="motif.imageUrl"
+                      />
+                    </div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+                    ></div>
+                  </div>
+                <!-- </router-link> -->
+                <!-- <DeleteMotif :motif-id="motif.id" @motif-deleted="handleMotifDeleted" class="z-10" /> -->
+              </template>
+
+              <template v-else>
+                <!-- @click="sendDataId(motif.id)" -->
+                <div class="flex flex-col items-center gap-1">
+                  <div
+                    class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+                  >
+                    <div class="h-[300px] w-[252px]">
+                      <div class="gradient"></div>
+                      <img
+                        class="h-full w-full object-cover transition-transform rounded-lg"
+                        :src="motif.imageUrl"
+                      />
+                    </div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+                    ></div>
+                  </div>
+                  <div>
+                    <DeleteMotif
+                      :motif-id="motif.id"
+                      @motif-deleted="handleMotifDeleted"
+                      class="z-10"
+                    />
+                  </div>
                 </div>
-                <div
-                  class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
-                ></div>
-              </div>
-              <!-- </router-link> -->
+              </template>
             </div>
           </div>
         </div>
@@ -138,14 +171,14 @@ import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
 import EmptyState from '../../../components/Admin/EmptyState.vue'
 import AddMotif from '../../../components/Admin/GenerateMotif/AddMotif.vue'
-import DeleteUlos from '../../../components/Admin/Modals/Generate Motif/DeleteUlos.vue'
+import DeleteMotif from '../../../components/Admin/Modals/Generate Motif/DeleteMotif.vue'
 import CardSkeleton from '../../../components/EndUser/CardSkeleton.vue'
 export default {
   components: {
     Sidebar,
     EmptyState,
     AddMotif,
-    DeleteUlos,
+    DeleteMotif,
     CardSkeleton
   },
   data: function () {
@@ -156,7 +189,8 @@ export default {
       loading: false,
       ulosName: '',
       size: '',
-      activeButton: ''
+      activeButton: '',
+      showDeleteMotif: false
     }
   },
   mounted() {
@@ -180,6 +214,9 @@ export default {
   methods: {
     handleAddMotif(data) {
       this.motifUlos.unshift(data)
+    },
+    handleMotifDeleted(motifId) {
+      this.motifUlos = this.motifUlos.filter((motif) => motif.id !== motifId)
     },
     sendDataId(motifId) {
       console.log('card clicked motifId:', motifId)
@@ -216,8 +253,13 @@ export default {
     changeSize(newSize) {
       this.size = newSize
       this.activeButton = newSize
+
       console.log(this.size, this.activeButton)
       this.fetchMotifs(this.size)
+    },
+    toggleDeleteMotif() {
+      this.showDeleteMotif = !this.showDeleteMotif
+      console.log(this.showDeleteMotif)
     }
   }
 }
