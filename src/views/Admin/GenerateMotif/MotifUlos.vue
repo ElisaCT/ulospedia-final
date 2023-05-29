@@ -46,9 +46,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white active"
               role="tab"
               @click="changeSize('')"
-              :class="{
-                'hs-tab-active:bg-primary_main': activeButton === ''
-              }"
+              :class="{ 'hs-tab-active:bg-primary_main': activeButton === '' }"
             >
               Semua
             </button>
@@ -57,9 +55,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('besar')"
-              :class="{
-                'hs-tab-active:bg-primary_main': activeButton === 'besar'
-              }"
+              :class="{ 'hs-tab-active:bg-primary_main': activeButton === 'besar' }"
             >
               Besar
             </button>
@@ -68,9 +64,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('sedang')"
-              :class="{
-                'hs-tab-active:bg-primary_main': activeButton === 'sedang'
-              }"
+              :class="{ 'hs-tab-active:bg-primary_main': activeButton === 'sedang' }"
             >
               Sedang
             </button>
@@ -79,9 +73,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('kecil')"
-              :class="{
-                'hs-tab-active:bg-primary_main': activeButton === 'kecil'
-              }"
+              :class="{ 'hs-tab-active:bg-primary_main': activeButton === 'kecil' }"
             >
               Kecil
             </button>
@@ -183,7 +175,7 @@ export default {
     //     this.ulosName = response.data.motifs.ulosName
     //     console.log(this.motifUlos)
     //   })
-    this.fetchMotifs()
+    this.fetchMotifs('')
   },
   methods: {
     handleAddMotif(data) {
@@ -193,32 +185,29 @@ export default {
       console.log('card clicked motifId:', motifId)
       this.$router.push({ name: 'MotifUlosHasilGenerate', params: { motifId } })
     },
+    getUrlPath(ulosId, size) {
+      if (size === '') {
+        return `http://company.ditenun.com/api/v1/generate/ulos/${ulosId}/motifs`
+      }
+      return `http://company.ditenun.com/api/v1/generate/ulos/${ulosId}/motifs?size=${size}`
+    },
     async fetchMotifs(size) {
       this.loading = true
 
       try {
         const token = localStorage.getItem('token')
         const ulosID = this.$route.params.id
-        // const config = {
-        //   headers: {
-        //     Authorization: `Bearer ${token}`
-        //   }
-        // }
-        const response = await axios.get(
-          `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs`,
-          {
-            params: {
-              size: this.size
-            },
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
+        const url = this.getUrlPath(ulosID, size)
+        console.log(url)
+
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        )
+        })
+        console.log(response.data)
         this.motifUlos = response.data.data.motifs.motifDashboardResponseList
         this.ulosName = response.data.data.motifs.ulosName
-        console.log(response)
-        console.log(this.size)
       } catch (error) {
         console.log(error)
       }
@@ -226,7 +215,9 @@ export default {
     },
     changeSize(newSize) {
       this.size = newSize
-      this.fetchMotifs()
+      this.activeButton = newSize
+      console.log(this.size, this.activeButton)
+      this.fetchMotifs(this.size)
     }
   }
 }
