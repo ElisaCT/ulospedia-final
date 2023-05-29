@@ -3,34 +3,33 @@
     <Sidebar />
     <div class="ml-80 pt-10 gap-6 mr-8">
       <div class="flex flex-row justify-between items-center">
-        <h3 class="font-medium text-3xl text-left pb-6">Motif { Ulos name }</h3>
+        <h3 class="font-medium text-3xl text-left pb-6">Motif {{ ulosName }}</h3>
         <div class="flex flex-row gap-6">
           <AddMotif @data="handleAddMotif" />
-         
-            <button
-              class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <path
-                  stroke="#757575"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="10"
-                  stroke-width="1.5"
-                  d="m11.05 3-6.842 7.242c-.258.275-.508.816-.558 1.191l-.308 2.7c-.109.975.591 1.642 1.558 1.475l2.683-.458c.375-.067.9-.342 1.159-.625l6.841-7.242c1.184-1.25 1.717-2.675-.125-4.416C13.625 1.142 12.233 1.75 11.05 3Z"
-                />
-                <path
-                  stroke="#757575"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-miterlimit="10"
-                  stroke-width="1.5"
-                  d="M9.908 4.208A5.105 5.105 0 0 0 14.45 8.5M2.5 18.333h15"
-                />
-              </svg>
-              Sunting Konten
-            </button>
-          
+
+          <button
+            class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+              <path
+                stroke="#757575"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="m11.05 3-6.842 7.242c-.258.275-.508.816-.558 1.191l-.308 2.7c-.109.975.591 1.642 1.558 1.475l2.683-.458c.375-.067.9-.342 1.159-.625l6.841-7.242c1.184-1.25 1.717-2.675-.125-4.416C13.625 1.142 12.233 1.75 11.05 3Z"
+              />
+              <path
+                stroke="#757575"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-miterlimit="10"
+                stroke-width="1.5"
+                d="M9.908 4.208A5.105 5.105 0 0 0 14.45 8.5M2.5 18.333h15"
+              />
+            </svg>
+            Sunting Konten
+          </button>
         </div>
       </div>
     </div>
@@ -45,40 +44,44 @@
             <button
               type="button"
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white active"
-              id="segment-item-1"
-              data-hs-tab="#segment-1"
-              aria-controls="segment-1"
               role="tab"
+              @click="changeSize('')"
+              :class="{
+                'hs-tab-active:bg-primary_main': activeButton === ''
+              }"
             >
               Semua
             </button>
             <button
               type="button"
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
-              id="segment-item-2"
-              data-hs-tab="#segment-2"
-              aria-controls="segment-2"
               role="tab"
+              @click="changeSize('besar')"
+              :class="{
+                'hs-tab-active:bg-primary_main': activeButton === 'besar'
+              }"
             >
               Besar
             </button>
             <button
               type="button"
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
-              id="segment-item-3"
-              data-hs-tab="#segment-3"
-              aria-controls="segment-3"
               role="tab"
+              @click="changeSize('sedang')"
+              :class="{
+                'hs-tab-active:bg-primary_main': activeButton === 'sedang'
+              }"
             >
               Sedang
             </button>
             <button
               type="button"
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
-              id="segment-item-4"
-              data-hs-tab="#segment-4"
-              aria-controls="segment-4"
               role="tab"
+              @click="changeSize('kecil')"
+              :class="{
+                'hs-tab-active:bg-primary_main': activeButton === 'kecil'
+              }"
             >
               Kecil
             </button>
@@ -87,9 +90,12 @@
       </div>
     </div>
 
+    <div v-if="loading" class="ml-80 pt-10 gap-6 mr-8">
+      <CardSkeleton />
+    </div>
     <div class="ml-80 pt-10 gap-6 mr-8">
       <!-- semua -->
-      <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">
+      <div>
         <div v-if="motifUlos.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             <div v-for="motif in motifUlos" :key="motif.id">
@@ -114,23 +120,23 @@
           </div>
         </div>
 
-        <div v-else>
+        <div v-else-if="motifUlos.length === 0 && loading === false">
           <EmptyState :name="propName" />
         </div>
       </div>
 
       <!-- besar -->
-      <div id="segment-2" class="hidden" role="tabpanel" aria-labelledby="segment-item-2">
+      <!-- <div id="segment-2" class="hidden" role="tabpanel" aria-labelledby="segment-item-2">
         motif ulos besar
-      </div>
+      </div> -->
       <!-- sedang -->
-      <div id="segment-3" class="hidden" role="tabpanel" aria-labelledby="segment-item-3">
+      <!-- <div id="segment-3" class="hidden" role="tabpanel" aria-labelledby="segment-item-3">
         motif ulos sedang
-      </div>
+      </div> -->
       <!-- kecil -->
-      <div id="segment-4" class="hidden" role="tabpanel" aria-labelledby="segment-item-4">
+      <!-- <div id="segment-4" class="hidden" role="tabpanel" aria-labelledby="segment-item-4">
         motif ulos kecil
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -141,35 +147,43 @@ import Sidebar from '../../../components/Admin/Sidebar.vue'
 import EmptyState from '../../../components/Admin/EmptyState.vue'
 import AddMotif from '../../../components/Admin/GenerateMotif/AddMotif.vue'
 import DeleteUlos from '../../../components/Admin/Modals/Generate Motif/DeleteUlos.vue'
+import CardSkeleton from '../../../components/EndUser/CardSkeleton.vue'
 export default {
   components: {
     Sidebar,
     EmptyState,
     AddMotif,
-    DeleteUlos
+    DeleteUlos,
+    CardSkeleton
   },
   data: function () {
     return {
       motifUlos: [],
       propName: 'Motif Ulos',
-      ulosID: this.$route.params.id
+      ulosID: this.$route.params.id,
+      loading: false,
+      ulosName: '',
+      size: '',
+      activeButton: ''
     }
   },
   mounted() {
-    const token = localStorage.getItem('token')
-    const ulosID = this.$route.params.id
+    // const token = localStorage.getItem('token')
+    // const ulosID = this.$route.params.id
 
-    axios
-      .get(`http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then((response) => {
-        console.log(response.data)
-        this.motifUlos = response.data.data.motifs
-        console.log(this.motifUlos)
-      })
+    // axios
+    //   .get(`http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs?size=${this.size}`, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //     this.motifUlos = response.data.data.motifs.motifDashboardResponseList
+    //     this.ulosName = response.data.motifs.ulosName
+    //     console.log(this.motifUlos)
+    //   })
+    this.fetchMotifs()
   },
   methods: {
     handleAddMotif(data) {
@@ -178,6 +192,41 @@ export default {
     sendDataId(motifId) {
       console.log('card clicked motifId:', motifId)
       this.$router.push({ name: 'MotifUlosHasilGenerate', params: { motifId } })
+    },
+    async fetchMotifs(size) {
+      this.loading = true
+
+      try {
+        const token = localStorage.getItem('token')
+        const ulosID = this.$route.params.id
+        // const config = {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`
+        //   }
+        // }
+        const response = await axios.get(
+          `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs`,
+          {
+            params: {
+              size: this.size
+            },
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        )
+        this.motifUlos = response.data.data.motifs.motifDashboardResponseList
+        this.ulosName = response.data.data.motifs.ulosName
+        console.log(response)
+        console.log(this.size)
+      } catch (error) {
+        console.log(error)
+      }
+      this.loading = false
+    },
+    changeSize(newSize) {
+      this.size = newSize
+      this.fetchMotifs()
     }
   }
 }

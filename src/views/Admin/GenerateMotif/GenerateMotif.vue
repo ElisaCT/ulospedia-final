@@ -92,13 +92,17 @@
           </div>
         </div>
       </div>
+      <div v-if="loading">
+          <CardSkeleton />
+        </div>
 
       <!-- ulos -->
       <div class="flex justify-center py-8">
         <div v-if="ulosList.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             <div v-for="ulos in ulosList" :key="ulos.id">
-              <template v-if="!showDeleteUlos">
+              <!-- <template v-if="!showDeleteUlos"> -->
+              <div>
                 <router-link :to="'/admin/generate-motif/' + ulos.id + '/motif-ulos/'">
                   <div
                     class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
@@ -121,9 +125,11 @@
                     </div>
                   </div>
                 </router-link>
-              </template>
+              </div>
+              <DeleteUlos :ulos-id="ulos.id" @ulos-deleted="handleUlosDeleted" />
+              <!-- </template> -->
 
-              <template v-else>
+              <!-- <template v-else>
                 <div class="flex flex-col items-center gap-1">
                   <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
@@ -145,18 +151,24 @@
                     <p class="text-neutral_10">{{ ulos.ethnic }}</p>
                   </div>
                 </div>
-                <DeleteUlos />
+                <DeleteUlos 
+                :ulos-id="ulos.id"
+                @ulos-deleted="handleUlosDeleted"/>
+                
                 </div>
-              </template>
+              </template> -->
             </div>
           </div>
         </div>
 
-        <div v-else-if="ulosList.length === 0">
+        <div v-else-if="ulosList.length === 0 && loading!==true">
           <!-- Show empty state component when searchText is not empty and ulosList is empty -->
           <EmptySearch />
         </div>
+
+        
       </div>
+      
       <DeleteUlos />
       <AddMotif />
       <AddMotifHasilGenerate />
@@ -172,6 +184,7 @@ import AddUlos from '../../../components/Admin/GenerateMotif/AddUlos.vue'
 import AddMotif from '../../../components/Admin/GenerateMotif/AddMotif.vue'
 import AddMotifHasilGenerate from '../../../components/Admin/GenerateMotif/AddMotifHasilGenerate.vue'
 import DeleteUlos from '../../../components/Admin/Modals/Generate Motif/DeleteUlos.vue'
+import CardSkeleton from '../../../components/EndUser/CardSkeleton.vue'
 export default {
   components: {
     Sidebar,
@@ -179,19 +192,21 @@ export default {
     AddUlos,
     AddMotif,
     AddMotifHasilGenerate,
-    DeleteUlos
+    DeleteUlos,
+    CardSkeleton
   },
   data: function () {
     return {
       searchText: '',
       ulosList: [],
-      showDeleteUlos: false
+      showDeleteUlos: false,
+      loading: false
     }
   },
   mounted() {
     const token = localStorage.getItem('token')
     console.log(token)
-
+    this.loading = true
     axios
       .get('http://company.ditenun.com/api/v1/generate/ulos', {
         headers: {
@@ -201,6 +216,7 @@ export default {
       .then((response) => {
         console.log(response.data)
         this.ulosList = response.data.data.ulosDashboardList
+        this.loading = false
       })
       .catch((error) => {
         if (error.response && error.response.status === 403) {

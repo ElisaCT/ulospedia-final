@@ -18,11 +18,11 @@
     </div>
 
     <!-- Modal -->
-    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center bg-neutral_10">
+    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center">
       <!-- Background overlay -->
-      <div class="fixed inset-0 bg-neutral_10 opacity-10"></div>
+      <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
 
-      <div class="rounded-lg p-6 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
+      <div class="rounded-lg p-6 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-10">
         <div class="flex flex-row gap-4 w-full mr-4">
           <div>
             <svg class="" xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none">
@@ -75,12 +75,12 @@ export default {
       showModal: false
     }
   },
-  props: ['weaverId'],
+  props: ['UlosId'],
   methods: {
     async deleteItem() {
       const token = localStorage.getItem('token')
       const response = await axios.delete(
-        `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
+        `http://company.ditenun.com/api/v1/generate/ulos/${this.ulosId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -89,9 +89,8 @@ export default {
       )
       console.log(response.data)
       this.showModal = false
-      this.$emit('weaver-deleted', this.weaverId)
+      this.$emit('ulos-deleted', this.ulosId)
       console.log('deleted')
-      this.$router.push('/admin/penenun')
     }
   }
 }
