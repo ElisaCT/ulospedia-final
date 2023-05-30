@@ -9,6 +9,7 @@
 
           <button
             @click="toggleDeleteMotif"
+            :disabled="motifUlos.length===0 || loading"
             class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
@@ -47,7 +48,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('')"
-              :class="{ 'active': activeButton === '' }"
+              :class="{ active: activeButton === '' }"
             >
               Semua
             </button>
@@ -56,7 +57,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('besar')"
-              :class="{ 'active': activeButton === 'besar' }"
+              :class="{ active: activeButton === 'besar' }"
             >
               Besar
             </button>
@@ -65,7 +66,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('sedang')"
-              :class="{ 'active': activeButton === 'sedang' }"
+              :class="{ active: activeButton === 'sedang' }"
             >
               Sedang
             </button>
@@ -74,7 +75,7 @@
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
               @click="changeSize('kecil')"
-              :class="{ 'active': activeButton === 'kecil' }"
+              :class="{ active: activeButton === 'kecil' }"
             >
               Kecil
             </button>
@@ -96,21 +97,21 @@
                 <!-- <router-link
                   :to="'/generate-motif/' + ulosID + '/motif-ulos/' + motif.id + '/hasil-generate'"
                 > -->
-                  
-                  <div
-                    class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
-                  >
-                    <div class="h-[300px] w-[252px]">
-                      <div class="gradient"></div>
-                      <img
-                        class="h-full w-full object-cover transition-transform rounded-lg"
-                        :src="motif.imageUrl"
-                      />
-                    </div>
-                    <div
-                      class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
-                    ></div>
+
+                <div
+                  class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+                >
+                  <div class="h-[300px] w-[252px]">
+                    <div class="gradient"></div>
+                    <img
+                      class="h-full w-full object-cover transition-transform rounded-lg"
+                      :src="motif.imageUrl"
+                    />
                   </div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+                  ></div>
+                </div>
                 <!-- </router-link> -->
                 <!-- <DeleteMotif :motif-id="motif.id" @motif-deleted="handleMotifDeleted" class="z-10" /> -->
               </template>

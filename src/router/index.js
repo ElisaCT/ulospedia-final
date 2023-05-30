@@ -18,7 +18,9 @@ import AddUlos from '@/views/Admin/Ulos/AddUlos.vue'
 import AdminPenenun from '@/views/Admin/Penenun/Penenun.vue'
 import AddPenenun from '@/views/Admin/Penenun/AddPenenun.vue'
 import EditPenenun from '@/views/Admin/Penenun/EditPenenun.vue'
+import EditUlos from '@/views/Admin/Ulos/EditUlos.vue'
 import DetailPenenun from '@/views/Admin/Penenun/DetailPenenun.vue'
+import DetailUlos from '@/views/Admin/Ulos/DetailUlos.vue'
 import GenerateMotif from '@/views/Admin/GenerateMotif/GenerateMotif.vue'
 import MotifUlos from '@/views/Admin/GenerateMotif/MotifUlos.vue'
 import MotifUlosHasilGenerate from '@/views/Admin/GenerateMotif/MotifUlosHasilGenerate.vue'
@@ -116,11 +118,24 @@ const router = createRouter({
             meta: { requiresAuth: true }
         },
         {
+            path: '/admin/edit-ulos/:id',
+            name: 'EditUlos',
+            component: EditUlos,
+            meta: { requiresAuth: true }
+        },
+        {
+            path: '/admin/ulos/detail-ulos/:id',
+            name: 'DetailUlos',
+            component: DetailUlos,
+            meta: { requiresAuth: true }
+        },
+        {
             path: '/admin/penenun/detail-penenun/:id',
             name: 'DetailPenenun',
             component: DetailPenenun,
             meta: { requiresAuth: true }
-        }, {
+        },
+        {
             path: '/admin/generate-motif',
             name: 'GenerateMotif',
             component: GenerateMotif,
@@ -145,9 +160,9 @@ router.beforeEach((to, from, next) => {
     const isAuthenticated = JSON.parse(localStorage.getItem('authenticated'))
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
 
-    if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
-    if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
-    else next()
+    // if (to.name !== 'admin-login' && !isAuthenticated) next({ name: 'admin-login' })
+    // if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
+    // else next()
 
     if (requiresAuth && !isAuthenticated) {
         next({ name: 'admin-login' })
