@@ -196,7 +196,7 @@
                         <span class="file-input-text text-gray-500">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button v-if="index > 0" @click="removeField(index)" class="absolute">
+                    <button v-if="index > 0" @click="removeField('ulosFields',index)" class="absolute">
                       Remove
                     </button>
                   </div>
@@ -293,7 +293,7 @@
                         <span class="file-input-text text-gray-500">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button v-if="index > 0" @click="removeField(index)" class="absolute">
+                    <button v-if="index > 0" @click="removeField('potonganFields',index)" class="absolute">
                       Remove
                     </button>
                   </div>
@@ -391,7 +391,7 @@
                         <span class="file-input-text text-gray-500">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button v-if="index > 0" @click="removeField(index)" class="absolute">
+                    <button v-if="index > 0" @click="removeField('motifFields',index)" class="absolute">
                       Remove
                     </button>
                   </div>
