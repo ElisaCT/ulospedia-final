@@ -10,6 +10,7 @@
 
           <button
             @click="toggleDeleteUlos"
+            :disabled="loading || filteredUlos.length.length === 0"
             class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
