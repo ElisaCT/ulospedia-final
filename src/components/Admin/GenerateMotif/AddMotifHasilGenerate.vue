@@ -23,7 +23,7 @@
 
       <div class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
         <div class="flex flex-col gap-4 w-full mr-4">
-          <h5 class="font-bold text-left text-xl">Tambah Gambar Hasil Generate Motif</h5>
+          <h5 class="font-bold text-left text-xl">Tambah Gambar Motif Ulos</h5>
           <div class="flex flex-col gap-6 md:flex-row pb-6">
             <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
               >Gambar Motif Ulos*</label
@@ -59,6 +59,7 @@
                   </p>
                 </div>
                 <input
+                  @change="handleFileChange"
                   id="dropzone-file"
                   type="file"
                   class="hidden"
@@ -68,6 +69,39 @@
             </div>
           </div>
 
+          <!-- Asal suku -->
+          <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
+            <label for="ulos-ethnic" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+              >Ukuran Motif*</label
+            >
+            <div class="md:w-2/3 relative inline-block">
+              <select
+                v-model="size"
+                class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+                required
+              >
+                <option value="" disabled selected hidden>Pilih Ukuran Motif</option>
+                <option value="Besar" class="pb-3 hover:bg-primary_surface">Besar</option>
+                <option value="Sedang" class="pb-3 hover:bg-primary_surface">Sedang</option>
+                <option value="Kecil" class="pb-3 hover:bg-primary_surface">Kecil</option>
+              </select>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <g clip-path="url(#a)">
+                    <path
+                      fill="#323232"
+                      d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+          </div>
           <div class="flex flex-row gap-6 justify-end mt-6">
             <button
               @click="showModal = false"
@@ -76,7 +110,7 @@
               Batal
             </button>
             <button
-              @click="sumbit"
+              @click="submit"
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
@@ -89,18 +123,76 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
-      showModal: false
+      showModal: false,
+      image: null,
+      size: '',
+      ulosID: this.$route.params.id
+    }
+  },
+  watch: {
+    size(newValue) {
+      console.log(newValue)
+    },
+    image(newValue) {
+      console.log(newValue)
     }
   },
   methods: {
-    submit() {
-      // Perform the delete action here
-      // Example: Make an API call to delete the item
-      // Once the delete action is complete, you can close the modal
+    async submit() {
+      const token = localStorage.getItem('token')
+      const ulosID = this.$route.params.id
+
+      const responseDataText = await axios.post(
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs`,
+        {
+          size: this.size
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+
+      console.log(ulosID)
+      console.log(responseDataText.data)
+      const newMotifDataId = responseDataText.data.data.motif.id
+      console.log(newMotifDataId)
+      console.log(
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`
+      )
+
+      const formData = new FormData()
+      formData.append('motif-image', this.image)
+
+      const secondResponse = await axios.post(
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
+      console.log(secondResponse)
+
       this.showModal = false
+      console.log('hide')
+
+      this.$emit('data', {
+        id: newMotifDataId,
+        // size: responseDataText.data.data.motif,
+        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`
+      })
+    },
+    handleFileChange(event) {
+      this.image = event.target.files[0]
     }
   }
 }
