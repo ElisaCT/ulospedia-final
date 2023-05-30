@@ -7,13 +7,13 @@
       <div class="stepper">
         <div :hidden="currentStep != 1">
           <ol
-            class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base pb-6"
+            class="flex items-center w-full text-sm font-medium text-center text-neutral_80 dark:text-gray-400 sm:text-base pb-6"
           >
             <li
               class="flex md:w-full items-center text-primary_main dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
             >
               <span
-                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-neutral_80"
               >
                 <span class="mr-2">1</span>
                 Gambar <span class="hidden sm:inline-flex sm:ml-2">Ulos</span>
@@ -23,7 +23,7 @@
               class="flex md:w-full items-center after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
             >
               <span
-                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-neutral_80"
               >
                 <span class="mr-2">2</span>
                 Informasi <span class="hidden sm:inline-flex sm:ml-2">Ulos</span>
@@ -38,13 +38,13 @@
 
         <div :hidden="currentStep != 2">
           <ol
-            class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base pb-6"
+            class="flex items-center w-full text-sm font-medium text-center text-neutral_80 dark:text-gray-400 sm:text-base pb-6"
           >
             <li
               class="flex md:w-full items-center text-primary_main dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
             >
               <span
-                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-neutral_80"
               >
                 <svg
                   aria-hidden="true"
@@ -66,7 +66,7 @@
               class="flex md:w-full items-center text-primary_main after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
             >
               <span
-                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-neutral_80"
               >
                 <span class="mr-2">2</span>
                 Informasi <span class="hidden sm:inline-flex sm:ml-2">Ulos</span>
@@ -81,13 +81,13 @@
 
         <div :hidden="currentStep != 3">
           <ol
-            class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base pb-6"
+            class="flex items-center w-full text-sm font-medium text-center text-neutral_80 dark:text-gray-400 sm:text-base pb-6"
           >
             <li
               class="flex md:w-full items-center text-primary_main dark:text-blue-500 sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
             >
               <span
-                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-neutral_80"
               >
                 <svg
                   aria-hidden="true"
@@ -109,7 +109,7 @@
               class="flex md:w-full items-center text-primary_main after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700"
             >
               <span
-                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500"
+                class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-neutral_80"
               >
                 <svg
                   aria-hidden="true"
@@ -193,7 +193,9 @@
                             />
                           </defs>
                         </svg>
-                        <span class="file-input-text text-gray-500">{{ field.fileName }}</span>
+                        <span class="file-input-text text-neutral_80">{{
+                          index === 0 && field.fileName === '' ? 'Gambar Utama*' : field.fileName
+                        }}</span>
                       </div>
                     </label>
                     <button
@@ -294,14 +296,10 @@
                             />
                           </defs>
                         </svg>
-                        <span class="file-input-text text-gray-500">{{ field.fileName }}</span>
+                        <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button
-                      v-if="index > 0"
-                      @click="removeField('potonganFields', index)"
-                      class="absolute"
-                    >
+                    <button @click="removeField('potonganFields', index)" class="absolute">
                       Remove
                     </button>
                   </div>
@@ -336,7 +334,7 @@
                         />
                       </defs>
                     </svg>
-                    Add more images
+                    {{ index === 0 ? 'Add images' : 'Add more images' }}
                   </div>
                 </button>
               </div>
@@ -395,14 +393,10 @@
                             />
                           </defs>
                         </svg>
-                        <span class="file-input-text text-gray-500">{{ field.fileName }}</span>
+                        <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button
-                      v-if="index > 0"
-                      @click="removeField('motifFields', index)"
-                      class="absolute"
-                    >
+                    <button @click="removeField('motifFields', index)" class="absolute">
                       Remove
                     </button>
                   </div>
@@ -736,8 +730,18 @@
                   <label class="relative inline-flex items-center cursor-pointer">
                     <input v-model="state" type="checkbox" value="" class="sr-only peer" />
                     <div
-                      class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
+                      class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary_main rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
                     ></div>
+                  </label>
+
+                  <label for="toggleFour" class="flex cursor-pointer select-none items-center">
+                    <div class="relative">
+                      <input type="checkbox" id="toggleFour" class="sr-only" />
+                      <div class="box bg-dark block h-8 w-14 rounded-full"></div>
+                      <div
+                        class="dot absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white transition"
+                      ></div>
+                    </div>
                   </label>
                 </div>
                 <div class="flex flex-col gap-6 md:flex-row pb-6">

@@ -164,7 +164,14 @@ router.beforeEach((to, from, next) => {
   if (to.name === 'admin-login' && isAuthenticated) next({ name: 'dashboard' })
   else next()
 
-  if (requiresAuth && !isAuthenticated) {
+  // if (requiresAuth && !isAuthenticated) {
+  //     next({ name: 'admin-login' })
+  // } else {
+  //     next()
+  // }
+  if (to.name === 'admin-login' && isAuthenticated) {
+    next({ name: 'dashboard' })
+  } else if (requiresAuth && !isAuthenticated) {
     next({ name: 'admin-login' })
   } else {
     next()
