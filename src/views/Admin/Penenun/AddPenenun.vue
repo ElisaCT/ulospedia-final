@@ -294,8 +294,7 @@ export default {
       theLoom: '',
       technique: '',
       story: '',
-      image: null,
-
+      image: null
     }
   },
   watch: {
