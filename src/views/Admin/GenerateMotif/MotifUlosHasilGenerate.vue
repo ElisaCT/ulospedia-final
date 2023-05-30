@@ -111,32 +111,7 @@
                 </div>
               </template>
 
-              <template v-else>
-                <!-- @click="sendDataId(motif.id)" -->
-                <div class="flex flex-col items-center gap-1">
-                  <div
-                    class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
-                  >
-                    <div class="h-[300px] w-[252px]">
-                      <div class="gradient"></div>
-                      <img
-                        class="h-full w-full object-cover transition-transform rounded-lg"
-                        :src="motif.imageUrl"
-                      />
-                    </div>
-                    <div
-                      class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
-                    ></div>
-                  </div>
-                  <div>
-                    <DeleteMotif
-                      :motif-id="motif.id"
-                      @motif-deleted="handleMotifDeleted"
-                      class="z-10"
-                    />
-                  </div>
-                </div>
-              </template>
+              
             </div>
           </div>
         </div>
