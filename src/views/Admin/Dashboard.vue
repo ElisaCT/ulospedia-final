@@ -7,7 +7,7 @@
       <div class="col-span-6 relative">
         <img src="../../assets/images/Admin/dashboard-ulos.svg" class="w-full" />
         <div
-          class="absolute inset-0 left-9 top-6 flex flex-col text-left pl-6 gap-2 text-neutral_10"
+          class="absolute inset-0 left-9 top-12 flex flex-col text-left pl-6 gap-2 text-neutral_10"
         >
           <h2 class="font-semibold text-4xl">{{ totalUlos }}</h2>
           <h5 class="font-medium text-xl">Data Ulos</h5>
@@ -17,7 +17,7 @@
       <div class="col-span-6 relative">
         <img src="../../assets/images/Admin/dashboard-penenun.svg" class="w-full" />
         <div
-          class="absolute inset-0 left-9 top-6 flex flex-col text-left pl-6 gap-2 text-neutral_10"
+          class="absolute inset-0 left-9 top-12 flex flex-col text-left pl-6 gap-2 text-neutral_10"
         >
           <h2 class="font-semibold text-4xl">{{ totalWeaver }}</h2>
           <h5 class="font-medium text-xl">Data Penenun</h5>
@@ -50,7 +50,7 @@
         <div v-if="ulosData">
           <div class="grid grid-cols-2 gap-6">
             <div v-for="ulos in ulosData" :key="ulos.id">
-              <router-link :to="'/penenun-gedogan/' + ulos.id">
+              <router-link :to="'ulos/detail-ulos/' + ulos.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
@@ -101,7 +101,7 @@
         <div v-if="weavers">
           <div class="grid grid-cols-2 gap-5">
             <div v-for="weaver in weavers" :key="weaver.id">
-              <router-link :to="'/penenun-gedogan/' + weaver.id">
+              <router-link :to="'penenun/detail-penenun/' + weaver.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >

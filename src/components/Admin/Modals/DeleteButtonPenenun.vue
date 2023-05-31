@@ -89,9 +89,10 @@
         )
         console.log(response.data)
         this.showModal = false
+        this.$router.push('/admin/penenun')
         this.$emit('weaver-deleted', this.weaverId)
         console.log("deleted")
-        this.$router.push('/admin/penenun')
+        
       }
     }
   }

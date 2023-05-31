@@ -79,7 +79,7 @@ export default {
         `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
         {
           headers: {
-            Authorizatioon: `Bearer ${token}`
+            Authorization: `Bearer ${token}`
           }
         }
       )
