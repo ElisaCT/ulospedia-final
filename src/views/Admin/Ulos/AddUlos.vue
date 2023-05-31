@@ -947,6 +947,9 @@ export default {
     },
     state(value) {
       console.log(value)
+    },
+    ulosFields(value) {
+      console.log(value)
     }
   },
   data() {
@@ -980,7 +983,7 @@ export default {
       technics: ['Teknik Ikat Lungsi', 'Teknik Ikat Pakan', 'Teknik Ikat Ganda'],
       toggleStatus: false,
 
-      ulosFields: [{ fileName: '', image: null }],
+      ulosFields: [{ fileName: '', image: null, file: null }],
       potonganFields: [{ fileName: '', image: null }],
       motifFields: [{ fileName: '', image: null }]
     }
@@ -1015,10 +1018,11 @@ export default {
       console.log(response1.data)
       const ulosId = response1.data.data.ulos.id
 
+      // main image
       const url2 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`
 
       const formData = new FormData()
-      formData.append('main-image', this.mainImage)
+      formData.append('main-image', this.ulosFields[0].file)
       const response2 = await axios.post(url2, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -1027,6 +1031,30 @@ export default {
       })
 
       console.log(response2.data)
+
+      // other image
+      const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/other-images`
+
+      console.log('PANJANG', this.ulosFields.length)
+      if (this.ulosFields.length !== 1) {
+        console.log(this.ulosFields[1].file)
+        if (this.ulosFields[1].file !== null) {
+          for (let i = 1; i < this.ulosFields.length; i++) {
+            const formData = new FormData()
+            formData.append('other-image', this.ulosFields[i].file)
+            const response3 = await axios.post(url3, formData, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+
+            console.log(response3.data)
+          }
+        }
+      }
+
+      console.log('END')
     },
     handleMainImage(event) {
       this.mainImage = event.target.files[0]
@@ -1088,9 +1116,11 @@ export default {
     handleFileChange(formName, index, event) {
       const formFields = this[`${formName}`]
       const file = event.target.files[0]
-      this.mainImage = event.target.files[0]
+
+      // this.mainImage = event.target.files[0]
       formFields[index].fileName = file.name
       formFields[index].image = URL.createObjectURL(file)
+      formFields[index].file = event.target.files[0]
     }
   }
 }
