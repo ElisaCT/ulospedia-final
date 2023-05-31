@@ -452,6 +452,7 @@
                   >
                   <div class="md:w-2/3">
                     <input
+                      v-model="name"
                       type="text"
                       id="ulos-name"
                       class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -470,23 +471,24 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      v-model="ethnic"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
                       <option value="" disabled selected hidden>Pilih Suku Ulos</option>
-                      <option value="option1" class="pb-3 hover:bg-primary_surface">
+                      <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">
                         Batak Toba
                       </option>
-                      <option value="option2" class="pb-3 hover:bg-primary_surface">
+                      <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
                         Batak Simalungun
                       </option>
-                      <option value="option3" class="pb-3 hover:bg-primary_surface">
+                      <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">
                         Batak Karo
                       </option>
-                      <option value="option2" class="pb-3 hover:bg-primary_surface">
+                      <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
                         Batak Angkola
                       </option>
-                      <option value="option3" class="pb-3 hover:bg-primary_surface">
+                      <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
                         Batak Mandailing
                       </option>
                     </select>
@@ -553,6 +555,7 @@
                         class="form-radio text-primary_main"
                         name="radioGroup"
                         value="Tradisional"
+                        v-model="typeUlos"
                       />
                       <span class="ml-2 text-neutral_90">Tradisional</span>
                     </label>
@@ -562,6 +565,7 @@
                         class="form-radio text-primary_main"
                         name="radioGroup"
                         value="Pengembangan"
+                        v-model="typeUlos"
                       />
                       <span class="ml-2 text-neutral_90">Pengembangan</span>
                     </label>
@@ -576,6 +580,7 @@
                   >
                   <div class="md:w-2/3">
                     <input
+                      v-model="location"
                       type="text"
                       id="ulos-location"
                       class="bg-neutral_10 border border-primary_border text-neutral_70 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -597,6 +602,7 @@
                         id="ulos-legth"
                         class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
                         placeholder="Panjang"
+                        v-model="length"
                       />
                       <span
                         class="inline-flex items-center px-3 text-sm text-neutral_80 bg-neutral_20 border border-neutral_60 rounded"
@@ -606,11 +612,12 @@
                     </div>
                     <div class="flex md:w-2/3 gap-1">
                       <input
+                        v-model="width"
                         type="number"
                         min="0"
                         id="ulos-width"
                         class="bg-neutral_10 border border-primary_border text-neutral_70 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
-                        placeholder="lebar"
+                        placeholder="Lebar"
                       />
                       <span
                         class="inline-flex items-center px-3 text-sm text-neutral_80 bg-neutral_20 border border-neutral_60 rounded"
@@ -630,17 +637,18 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      v-model="technique"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
                       <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
-                      <option value="option1" class="pb-3 hover:bg-primary_surface">
+                      <option value="Teknik Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
                         Teknik Ikat Lungsi
                       </option>
-                      <option value="option2" class="pb-3 hover:bg-primary_surface">
+                      <option value="Teknik Ikat Pakan" class="pb-3 hover:bg-primary_surface">
                         Teknik Ikat Pakan
                       </option>
-                      <option value="option3" class="pb-3 hover:bg-primary_surface">
+                      <option value="Teknik Ikat Ganda" class="pb-3 hover:bg-primary_surface">
                         Teknik Ikat Ganda
                       </option>
                     </select>
@@ -671,6 +679,7 @@
                   >
                   <div class="md:w-2/3">
                     <textarea
+                      v-model="meaning"
                       type="text"
                       id="ulos-meaning"
                       rows="4"
@@ -687,6 +696,7 @@
                   >
                   <div class="md:w-2/3">
                     <textarea
+                      v-model="func"
                       type="text"
                       id="ulos-meaning"
                       rows="4"
@@ -893,7 +903,7 @@
             Selanjutnya
           </button>
           <button
-            @click="nextStep"
+            @click="save"
             :hidden="currentStep < totalSteps"
             class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
           >
@@ -906,13 +916,67 @@
 </template>
 <script>
 //import Multiselect from 'vue-multiselect'
+import axios from 'axios'
 
 export default {
   components: {
     //Multiselect
   },
+  watch: {
+    mainImage(value) {
+      console.log(value)
+    },
+    name(value) {
+      console.log(value)
+    },
+    ethnic(value) {
+      console.log(value)
+    },
+    color(value) {
+      console.log(value)
+    },
+    typeUlos(value) {
+      console.log(value)
+    },
+    location(value) {
+      console.log(value)
+    },
+    length(value) {
+      console.log(value)
+    },
+    width(value) {
+      console.log(value)
+    },
+    technique(value) {
+      console.log(value)
+    },
+    meaning(value) {
+      console.log(value)
+    },
+    func(value) {
+      console.log(value)
+    },
+    state(value) {
+      console.log(value)
+    },
+    ulosFields(value) {
+      console.log(value)
+    }
+  },
   data() {
     return {
+      mainImage: null,
+      name: '',
+      ethnic: null,
+      color: null,
+      typeUlos: null,
+      location: '',
+      length: null,
+      width: null,
+      technique: null,
+      meaning: '',
+      func: '',
+      state: false,
       currentStep: 1,
       totalSteps: 3, // Adjust this number based on the total number of steps in your form
       selectedEthnic: null, // Vue data property to store the selected values
@@ -929,7 +993,7 @@ export default {
       technics: ['Teknik Ikat Lungsi', 'Teknik Ikat Pakan', 'Teknik Ikat Ganda'],
       toggleStatus: false,
 
-      ulosFields: [{ fileName: '', image: null }],
+      ulosFields: [{ fileName: '', image: null, file: null }],
       potonganFields: [{ fileName: '', image: null }],
       motifFields: [{ fileName: '', image: null }],
       productImage: [{ fileName: '', image: null }],
@@ -943,6 +1007,76 @@ export default {
     }
   },
   methods: {
+    async save() {
+      console.log('CALLED')
+      const token = localStorage.getItem('token')
+
+      const request1 = {
+        name: this.name,
+        colors: [this.color],
+        originEthnic: this.ethnic,
+        type: this.typeUlos,
+        location: this.location,
+        length: this.length,
+        width: this.width,
+        technique: this.technique,
+        meaning: this.meaning,
+        func: this.func
+      }
+
+      console.log(request1)
+
+      const url1 = 'http://company.ditenun.com/api/v1/ulospedia/ulos'
+      const response1 = await axios.post(url1, request1, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      console.log(response1.data)
+      const ulosId = response1.data.data.ulos.id
+
+      // main image
+      const url2 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`
+
+      const formData = new FormData()
+      formData.append('main-image', this.ulosFields[0].file)
+      const response2 = await axios.post(url2, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      console.log(response2.data)
+
+      // other image
+      const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/other-images`
+
+      console.log('PANJANG', this.ulosFields.length)
+      if (this.ulosFields.length !== 1) {
+        console.log(this.ulosFields[1].file)
+        if (this.ulosFields[1].file !== null) {
+          for (let i = 1; i < this.ulosFields.length; i++) {
+            const formData = new FormData()
+            formData.append('other-image', this.ulosFields[i].file)
+            const response3 = await axios.post(url3, formData, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+
+            console.log(response3.data)
+          }
+        }
+      }
+
+      console.log('END')
+    },
+    handleMainImage(event) {
+      this.mainImage = event.target.files[0]
+    },
     nextStep() {
       if (this.currentStep < this.totalSteps) {
         this.currentStep++
@@ -984,8 +1118,10 @@ export default {
     handleFileChange(formName, index, event) {
       const formFields = this[`${formName}`]
       const file = event.target.files[0]
+      // this.mainImage = event.target.files[0]
       formFields[index].fileName = file.name
       formFields[index].image = URL.createObjectURL(file)
+      formFields[index].file = event.target.files[0]
     },
     addForm() {
       const nextId = this.forms.length > 0 ? this.forms[this.forms.length - 1].id + 1 : 1
