@@ -42,6 +42,8 @@
               <p class="text-neutral_70 text-left text-sm font-normal">
                 Apakah Anda yakin untuk menghapus item ini? Setelah dihapus item ini tidak bisa
                 dikembalikan.
+                
+                
               </p>
               <div class="mt-8 flex justify-end gap-3">
                 <!-- Cancel button -->
@@ -58,6 +60,7 @@
                 >
                   Hapus
                 </button>
+               
               </div>
             </div>
           </div>
@@ -74,14 +77,16 @@
       return {
         showModal: false,
         ulosId: this.$route.params.id,
+        motifId : this.$route.params.motifId
       }
     },
-    props: ['motifId'],
+    props: ['motifGeneratedId'],
     methods: {
       async deleteItem() {
         const token = localStorage.getItem('token')
+        //http://company.ditenun.com/api/v1/generate/ulos/10/motifs/13/motif-results/9
         const response = await axios.delete(
-          `http://company.ditenun.com/api/v1/generate/ulos/${this.ulosId}/motifs/${this.motifId}`,
+          `http://company.ditenun.com/api/v1/generate/ulos/${this.ulosId}/motifs/${this.motifId}/motif-results/${this.motifGeneratedId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -90,7 +95,7 @@
         )
         console.log(response.data)
         this.showModal = false
-        this.$emit('motif-deleted', this.motifId)
+        this.$emit('motifGenerated-deleted', this.motifGeneratedId)
         console.log('deleted')
       }
     }

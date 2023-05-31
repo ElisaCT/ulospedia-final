@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/no-reserved-component-names -->
+<!-- eslint-disable vue/no-unused-components -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="grid grid-cols-2">
@@ -14,9 +16,11 @@
             Masukkan kredensial yang valid untuk login
           </p>
         </div>
-
+        <div v-if="errorMessage" class="text-danger_main text-sm">
+  {{ errorMessage }}
+</div>
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" v-on:submit.prevent="login">
+          <Form class="space-y-6" @submit="loginUser">
             <div>
               <label
                 for="username-address-icon"
@@ -25,7 +29,7 @@
               >
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" >
                     <path
                       stroke="#404040"
                       stroke-linecap="round"
@@ -35,19 +39,23 @@
                     />
                   </svg>
                 </div>
-                <input
-                  v-model="username"
-                  type="text"
-                  id="username-address-icon"
-                  required
-                  class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_pressed block w-full pl-10 p-2.5"
-                  placeholder="Masukkan username anda"
-                />
-                <span v-if="username" class="invalid-feedback">Masukkan username anda</span>
-        
+                <div>
+                  <Field
+                    v-model="username"
+                    type="text"
+                    name="username"
+                    id="username-address-icon"
+                    class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_pressed block w-full pl-10 p-2.5"
+                    placeholder="Masukkan username anda"
+                    :rules="validateUsername"
+                  />
+                  <ErrorMessage name="username" class="text-danger_main text-s" />
+                </div>
               </div>
 
-              <label for="password-icon" class="block mb-2 text-base font-medium text-neutral_100 pt-4"
+              <label
+                for="password-icon"
+                class="block mb-2 text-base font-medium text-neutral_100 pt-4"
                 >Password</label
               >
               <div class="relative">
@@ -69,35 +77,17 @@
                     />
                   </svg>
                 </div>
-                <input
+                <Field
                   v-model="password"
                   id="password"
                   name="password"
                   type="password"
                   autocomplete="current-password"
-                  required
+                  :rules="validatePassword"
                   class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_main block w-full pl-10 p-2.5"
                   placeholder="Masukkan password anda"
                 />
-                
-                <!-- <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                    <path
-                      stroke="#404040"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M12.983 10A2.98 2.98 0 0 1 10 12.983 2.98 2.98 0 0 1 7.017 10 2.98 2.98 0 0 1 10 7.017 2.98 2.98 0 0 1 12.983 10Z"
-                    />
-                    <path
-                      stroke="#000"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M10 16.892c2.942 0 5.683-1.734 7.592-4.734.75-1.175.75-3.15 0-4.325-1.909-3-4.65-4.733-7.592-4.733-2.942 0-5.683 1.733-7.592 4.733-.75 1.175-.75 3.15 0 4.325 1.909 3 4.65 4.734 7.592 4.734Z"
-                    />
-                  </svg>
-                </div> -->
+                <ErrorMessage name="password" class="text-danger_main text-s"/>
               </div>
             </div>
 
@@ -110,7 +100,7 @@
                 Login
               </button>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </div>
@@ -118,36 +108,31 @@
 </template>
 <script>
 import axios from 'axios'
-//import { ref, computed } from 'vue'
-// import { reactive } from 'vue' // "from '@vue/composition-api'" if you are using Vue <2.7
-// import { useVuelidate } from '@vuelidate/core'
-// import { required } from '@vuelidate/validators'
-// import { useRouter } from 'vue-router'
-
-// const startValidation = ref(false);
-// const username = ref('');
-// const password = ref('');
+import { Form, Field, ErrorMessage } from 'vee-validate'
 
 export default {
   name: 'admin-login',
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      errorMessage:''
     }
   },
-  // validations:{
-  //   username: {required}
-  // },
+  components: {
+    Form,
+    Field,
+    ErrorMessage
+  },
   methods: {
-    login: function(){
-      this.$v.$touch();
-      if(this.$v.$pending || this.$v.$error) return;
+    login: function () {
+      this.$v.$touch()
+      if (this.$v.$pending || this.$v.$error) return
     },
-    async loginUser() {
+    async loginUser(values) {
       console.log(this.username)
       console.log(this.password)
-
+      console.log(JSON.stringify(values, null, 2))
 
       try {
         const response = await axios.post('http://company.ditenun.com/api/v1/auth/login', {
@@ -163,30 +148,35 @@ export default {
           localStorage.setItem('token', response.data.data.token)
           this.$router.push('/admin/dashboard')
         }
+        else{
+          this.errorMessage = "Username or password is incorrect";
+        }
         // Handle the response data as needed
       } catch (error) {
         console.error('Error:', error.response.data)
         // Handle the error response
       }
-
-     
+    },
+    validateUsername(value) {
+      if (!value) {
+        return 'Masukkan username anda'
+      }
+            return true
+    },
+    validatePassword(value){
+      if(!value){
+        return 'Masukkan password anda'
+      }
+      return true;
     }
   },
-  setup() {
-    // const state= reactive({
-    //   email:'',
-    //   password: ''
-    // })
-    // const rules = computed(() => {
-    //         email: { required },
-    //         password: { required
-    //         }
-    //     })
-    //return { v$: useVuelidate() }
-    //console.log('TEST')
-
-    // eslint-disable-next-line vue/no-dupe-keys
-    // return login
-  }
+  setup() {}
 }
 </script>
+
+<style>
+.vee-error-message {
+  color: red;
+  font-size: 12px;
+}
+</style>

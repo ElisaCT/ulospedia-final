@@ -47,10 +47,10 @@
           </router-link>
         </div>
 
-        <div v-if="penenuns">
+        <div v-if="ulosData">
           <div class="grid grid-cols-2 gap-6">
-            <div v-for="penenun in penenuns" :key="penenun.id">
-              <router-link :to="'/penenun-gedogan/' + penenun.id">
+            <div v-for="ulos in ulosData" :key="ulos.id">
+              <router-link :to="'/penenun-gedogan/' + ulos.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
@@ -58,7 +58,7 @@
                     <div class="gradient"></div>
                     <img
                       class="h-full w-full object-cover transition-transform rounded-lg"
-                      :src="penenun.imageUrl"
+                      :src="ulos.imageUrl"
                     />
                   </div>
                   <div
@@ -67,8 +67,8 @@
                   <div
                     class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
                   >
-                    <h1 class="text-xl font-medium text-neutral_10">{{ penenun.name }}</h1>
-                    <p class="text-neutral_10">{{ penenun.age }}</p>
+                    <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
+                    <p class="text-neutral_10">{{ ulos.age }}</p>
                   </div>
                 </div>
               </router-link>
@@ -98,10 +98,10 @@
           </router-link>
         </div>
 
-        <div v-if="penenuns">
+        <div v-if="weavers">
           <div class="grid grid-cols-2 gap-5">
-            <div v-for="penenun in penenuns" :key="penenun.id">
-              <router-link :to="'/penenun-gedogan/' + penenun.id">
+            <div v-for="weaver in weavers" :key="weaver.id">
+              <router-link :to="'/penenun-gedogan/' + weaver.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
@@ -109,7 +109,7 @@
                     <div class="gradient"></div>
                     <img
                       class="h-full w-full object-cover transition-transform rounded-lg"
-                      :src="penenun.imageUrl"
+                      :src="weaver.imageUrl"
                     />
                   </div>
                   <div
@@ -118,8 +118,8 @@
                   <div
                     class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
                   >
-                    <h1 class="text-xl font-medium text-neutral_10">{{ penenun.name }}</h1>
-                    <p class="text-neutral_10">{{ penenun.age }}</p>
+                    <h1 class="text-xl font-medium text-neutral_10">{{ weaver.name }}</h1>
+                    <p class="text-neutral_10">{{ weaver.age }}</p>
                   </div>
                 </div>
               </router-link>
@@ -139,21 +139,39 @@ export default {
   components: { Sidebar },
   data: function () {
     return {
-      penenuns: null,
+      weavers: [],
       totalWeaver:'',
-      totalUlos:''
+      totalUlos:'',
+      fourData:[],
+      ulosData:[]
     }
   },
   mounted() {
     const token = localStorage.getItem('token')
+    //get penenun data
     axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/client/weavers?theLoom=Gedogan&pageNo=1')
-      .then((response) => {
-        this.penenuns = response.data.data.weaverList.clientWeaverResponseList
-        console.log(this.penenuns)
+      .get('http://company.ditenun.com/api/v1/ulospedia/weavers?sortDir=desc', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
-      .catch((error) => {
-        console.log(error)
+      .then((response) => {
+        console.log(response.data)
+            this.weavers = response.data.data.weavers.weaversListAdminDashboard.slice(0,4)
+          
+      })
+      
+      //get ulos data
+      axios
+      .get('http://company.ditenun.com/api/v1/ulospedia/ulos?pageNo=1&sortDir=desc', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response) => {
+        console.log(response.data)
+            this.ulosData = response.data.data.ulos.ulosElDashboardResponseList.slice(0,4)
+          
       })
 
       axios.get('http://company.ditenun.com/api/v1/ulospedia/weavers/count', {

@@ -92,17 +92,17 @@
       <div>
         <div v-if="motifUlos.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-            <div v-for="motif in motifUlos" :key="motif.id" @click="sendDataId(motif.id)">
+            <div v-for="motif in motifUlos" :key="motif.id" >
               <template v-if="!showDeleteMotif">
                 <!-- <router-link
                   :to="'/generate-motif/' + ulosID + '/motif-ulos/' + motif.id + '/hasil-generate'"
                 > -->
 
                 <div
-                  class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+                @click="sendDataId(motif.id)" class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
-                  <div class="h-[300px] w-[252px]">
-                    <div class="gradient"></div>
+                  <div  class="h-[300px] w-[252px]">
+                    
                     <img
                       class="h-full w-full object-cover transition-transform rounded-lg"
                       :src="motif.imageUrl"
@@ -117,13 +117,13 @@
               </template>
 
               <template v-else>
-                <!-- @click="sendDataId(motif.id)" -->
+            
                 <div class="flex flex-col items-center gap-1">
                   <div
                     class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                   >
                     <div class="h-[300px] w-[252px]">
-                      <div class="gradient"></div>
+                      
                       <img
                         class="h-full w-full object-cover transition-transform rounded-lg"
                         :src="motif.imageUrl"
