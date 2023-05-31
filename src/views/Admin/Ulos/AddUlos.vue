@@ -523,11 +523,21 @@
                       required
                     >
                       <option value="" disabled selected hidden>Pilih Warna Ulos</option>
-                      <option value="Merah" class="pb-3 hover:bg-primary_surface">Merah</option>
-                      <option value="Hitam" class="pb-3 hover:bg-primary_surface">Hitam</option>
-                      <option value="Biru" class="pb-3 hover:bg-primary_surface">Biru</option>
-                      <option value="Hijau" class="pb-3 hover:bg-primary_surface">Hijau</option>
-                      <option value="Kuning" class="pb-3 hover:bg-primary_surface">Kuning</option>
+                      <option value="option1" class="pb-3 hover:bg-primary_surface">
+                        <input type="checkbox" name="color[]" value="Merah" /> Merah
+                      </option>
+                      <option value="option2" class="pb-3 hover:bg-primary_surface">
+                        <input type="checkbox" name="color[]" value="Hitam" /> Hitam
+                      </option>
+                      <option value="option3" class="pb-3 hover:bg-primary_surface">
+                        <input type="checkbox" name="color[]" value="Biru" /> Biru
+                      </option>
+                      <option value="option4" class="pb-3 hover:bg-primary_surface">
+                        <input type="checkbox" name="color[]" value="Hijau" /> Hijau
+                      </option>
+                      <option value="option5" class="pb-3 hover:bg-primary_surface">
+                        <input type="checkbox" name="color[]" value="Kuning" /> Kuning
+                      </option>
                     </select>
                     <div
                       class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
@@ -719,151 +729,166 @@
               <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">
                 Ketersedian Ulos pada E-commerce DiTenun
               </h5>
-              <form>
-                <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
-                  <label
-                    for="ulos-name"
-                    class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                    >Ulos Tersedia</label
-                  >
-
-                  <label class="relative inline-flex items-center cursor-pointer">
-                    <input v-model="state" type="checkbox" value="" class="sr-only peer" />
-                    <div
-                      class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary_main rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
-                    ></div>
-                  </label>
-
-                  <label for="toggleFour" class="flex cursor-pointer select-none items-center">
-                    <div class="relative">
-                      <input type="checkbox" id="toggleFour" class="sr-only" />
-                      <div class="box bg-dark block h-8 w-14 rounded-full"></div>
-                      <div
-                        class="dot absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white transition"
-                      ></div>
-                    </div>
-                  </label>
-                </div>
-                <div class="flex flex-col gap-6 md:flex-row pb-6">
-                  <label
-                    for="ulos-name"
-                    class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                    >Gambar Produk*</label
-                  >
-                  <div class="flex items-center">
+              <div>
+                <form>
+                  <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                     <label
-                      for="dropzone-file"
-                      :class="{
-                        'flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10': true,
-                        'opacity-50 border-neutral_50 cursor-not-allowed': !toggleStatus
-                      }"
-                      class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                      for="ulos-name"
+                      class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+                      >Ulos Tersedia</label
                     >
-                      <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlns:xlink="http://www.w3.org/1999/xlink"
-                          width="40"
-                          height="40"
-                          fill="none"
-                        >
-                          <path fill="url(#a)" d="M0 0h40v40H0z" />
-                          <defs>
-                            <pattern
-                              id="a"
-                              width="1"
-                              height="1"
-                              patternContentUnits="objectBoundingBox"
-                            >
-                              <use xlink:href="#b" transform="scale(.01)" />
-                            </pattern>
-                            <image
-                              xlink:href="data:image/png;base64,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"
-                              id="b"
-                              width="100"
-                              height="100"
-                            />
-                          </defs>
-                        </svg>
-                        <p class="my-2 text-sm text-neutral_70">
-                          <span class="font-normal">Gambar Produk</span>
-                        </p>
-                      </div>
-                      <input
-                        id="dropzone-file"
-                        type="file"
-                        class="hidden"
-                        accept="image/png, image/jpg, image/jpeg"
-                        :disabled="!toggleStatus"
-                      />
+
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" value="" class="sr-only peer" v-model="toggleStatus" />
+                      <div
+                        class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary_main rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
+                      ></div>
                     </label>
                   </div>
-                </div>
 
-                <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
-                  <label
-                    for="ulos-name"
-                    class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                    >Nama Produk*</label
-                  >
-                  <div class="md:w-2/3">
-                    <input
-                      type="text"
-                      id="ulos-name"
-                      :class="{
-                        'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
-                        'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
-                      }"
-                      class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
-                      placeholder="Masukkan nama produk"
-                      v-bind:disabled="!toggleStatus"
-                      required
-                    />
+                  <div v-for="(form, index) in forms" :key="form.id">
+                    <div class="flex flex-col gap-6 md:flex-row pb-8">
+                      <label
+                        for="ulos-name"
+                        class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+                        >Gambar Produk*</label
+                      >
+                      <div class="flex items-center">
+                        <label
+                          for="dropzone-file"
+                          :class="{
+                            'flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10': true,
+                            'opacity-50 border-neutral_50 cursor-not-allowed': !toggleStatus
+                          }"
+                          class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                        >
+                          <img
+                            :src="form.imagePreview"
+                            v-if="form.imagePreview"
+                            alt="Image Preview"
+                          />
+                          <div
+                            class="flex flex-col items-center justify-center pt-5 pb-6"
+                            v-if="!form.imagePreview"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              width="40"
+                              height="40"
+                              fill="none"
+                            >
+                              <path fill="url(#a)" d="M0 0h40v40H0z" />
+                              <defs>
+                                <pattern
+                                  id="a"
+                                  width="1"
+                                  height="1"
+                                  patternContentUnits="objectBoundingBox"
+                                >
+                                  <use xlink:href="#b" transform="scale(.01)" />
+                                </pattern>
+                                <image
+                                  xlink:href="data:image/png;base64,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"
+                                  id="b"
+                                  width="100"
+                                  height="100"
+                                />
+                              </defs>
+                            </svg>
+                            <p class="my-2 text-sm text-neutral_70">
+                              <span class="font-normal">Gambar Produk</span>
+                            </p>
+                          </div>
+                          <input
+                            id="dropzone-file"
+                            type="file"
+                            class="hidden"
+                            accept="image/png, image/jpg, image/jpeg"
+                            :disabled="!toggleStatus"
+                            @change="handleImagePreview($event, index)"
+                          />
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
+                      <label
+                        for="ulos-name"
+                        class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+                        >Nama Produk*</label
+                      >
+                      <div class="md:w-2/3">
+                        <input
+                          type="text"
+                          id="ulos-name"
+                          :class="{
+                            'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
+                            'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
+                          }"
+                          class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
+                          placeholder="Masukkan nama produk"
+                          v-bind:disabled="!toggleStatus"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
+                      <label
+                        for="ulos-name"
+                        class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+                        >Harga Produk*</label
+                      >
+                      <div class="md:w-2/3">
+                        <input
+                          type="text"
+                          id="ulos-name"
+                          :class="{
+                            'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
+                            'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
+                          }"
+                          class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
+                          placeholder="Masukkan harga produk"
+                          v-bind:disabled="!toggleStatus"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
+                      <label
+                        for="ulos-name"
+                        class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+                        >URL Produk*</label
+                      >
+                      <div class="md:w-2/3">
+                        <input
+                          type="text"
+                          id="ulos-name"
+                          :class="{
+                            'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
+                            'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
+                          }"
+                          class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
+                          placeholder="contoh: https://ditenun.com/product/menik-lanyard/"
+                          v-bind:disabled="!toggleStatus"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <button @click="removeForm(form.id)" :disabled="!toggleStatus">Remove</button>
                   </div>
-                </div>
-                <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
-                  <label
-                    for="ulos-name"
-                    class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                    >Harga Produk*</label
-                  >
-                  <div class="md:w-2/3">
-                    <input
-                      type="text"
-                      id="ulos-name"
-                      :class="{
-                        'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
-                        'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
-                      }"
-                      class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
-                      placeholder="Masukkan harga produk"
-                      v-bind:disabled="!toggleStatus"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
-                  <label
-                    for="ulos-name"
-                    class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                    >URL Produk*</label
-                  >
-                  <div class="md:w-2/3">
-                    <input
-                      type="text"
-                      id="ulos-name"
-                      :class="{
-                        'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
-                        'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
-                      }"
-                      class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
-                      placeholder="contoh: https://ditenun.com/product/menik-lanyard/"
-                      v-bind:disabled="!toggleStatus"
-                      required
-                    />
-                  </div>
-                </div>
-              </form>
+                </form>
+              </div>
+
+              <button
+                @click="addForm"
+                :class="{
+                  'text-xs text-primary_main border rounded-lg border-primary_main p-2 flex flex-row justify-end items-end': true,
+                  'opacity-50 border-neutral_50 cursor-not-allowed': !toggleStatus
+                }"
+              >
+                Tambah Produk
+              </button>
             </div>
           </div>
         </div>
@@ -977,7 +1002,6 @@ export default {
         'Batak Angkola'
       ], // Array of ethnics values for the dropdown
       selectedColors: [], // Vue data property to store the selected values
-
       colors: ['Hitam', 'Merah', 'Putih', 'Hijau', 'Biru', 'Kuning'],
       selectedTechnics: [],
       technics: ['Teknik Ikat Lungsi', 'Teknik Ikat Pakan', 'Teknik Ikat Ganda'],
@@ -985,7 +1009,15 @@ export default {
 
       ulosFields: [{ fileName: '', image: null, file: null }],
       potonganFields: [{ fileName: '', image: null }],
-      motifFields: [{ fileName: '', image: null }]
+      motifFields: [{ fileName: '', image: null }],
+      productImage: [{ fileName: '', image: null }],
+      forms: [
+        {
+          id: 1,
+          imagePreview: null
+        }
+      ]
+      //imagePreview:null,
     }
   },
   methods: {
@@ -1085,23 +1117,7 @@ export default {
       // Handle the file upload as desired (e.g., store the file in the files array)
       this.files[fileKey] = file
     },
-    // addField() {
-    //   if (this.fields.length < 5) {
-    //     this.fields.push({ fileName: '', image: null })
-    //   }
-    // },
-    // removeField(index) {
-    //   this.fields.splice(index, 1)
-    // },
-    // handleFileChange(index) {
-    //   const file = event.target.files[0]
-    //   this.fields[index].fileName = file.name
-    //   this.fields[index].image = URL.createObjectURL(file)
-    // },
-    // submitForm() {
-    //   // Handle form submission logic here
-    //   console.log(this.fields)
-    // }
+
     addField(formName) {
       const formFields = this[`${formName}`]
       console.log(formFields)
@@ -1116,11 +1132,38 @@ export default {
     handleFileChange(formName, index, event) {
       const formFields = this[`${formName}`]
       const file = event.target.files[0]
-
       // this.mainImage = event.target.files[0]
       formFields[index].fileName = file.name
       formFields[index].image = URL.createObjectURL(file)
       formFields[index].file = event.target.files[0]
+    },
+    addForm() {
+      const nextId = this.forms.length > 0 ? this.forms[this.forms.length - 1].id + 1 : 1
+      this.forms.push({ id: nextId, imagePreview: null })
+    },
+    removeForm(id) {
+      this.forms = this.forms.filter((form) => form.id !== id)
+    },
+    isRemoveDisabled() {
+      return this.forms.length === 1 // Disable the button if there is only one form
+    },
+    handleImagePreview(event, index) {
+      const file = event.target.files[0]
+      const reader = new FileReader()
+
+      reader.onload = () => {
+        // Update the imagePreview property of the corresponding form
+        this.$set(this.forms[index], 'imagePreview', reader.result)
+      }
+
+      if (file) {
+        reader.readAsDataURL(file)
+      }
+    }
+  },
+  mounted() {
+    if (this.forms.length === 0) {
+      this.addForm()
     }
   }
 }

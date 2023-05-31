@@ -35,8 +35,30 @@
       </div>
     </div>
 
+    <!-- parent motif -->
+    <div class="ml-80 pt-4 gap-6 mr-8">
+      <div class="flex flex-col items-center gap-2 p-2 border-neutral_60 border-dashed rounded-lg">
+        <div
+        class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+      >
+        <div class="h-[150] w-[200px]">
+          <!-- <div class="gradient"></div> -->
+          <img
+            class="h-full w-full object-cover transition-transform rounded-lg"
+            :src="parentMotif"
+          />
+        </div>
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
+        ></div>
+      </div>
+      <p class="text-center text-xl font-medium">Motif Asal</p>
+      </div>
+
+      <div class="divide-y"></div>
+    </div>
     <!-- navigation -->
-    <div class="ml-80 pt-10 gap-6 mr-8">
+    <div class="ml-80  gap-6 mr-8">
       <div class="flex place-content-center pb-10 pt-10">
         <div
           class="flex bg-primary_surface hover:bg-primary_surface rounded-[16px] transition dark:bg-primary_main dark:hover:bg-primary_hover"
@@ -81,25 +103,26 @@
           </nav>
         </div>
       </div>
+      
     </div>
 
     <div v-if="loading" class="ml-80 pt-10 gap-6 mr-8">
       <CardSkeleton />
     </div>
 
-    <div class="ml-80 pt-10 gap-6 mr-8">
+    <div class="ml-80 py-10 gap-6 mr-8">
       <!-- semua -->
-      
+
       <div>
         <div v-if="motifUlosGenerated.length > 0">
           <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
             <div v-for="motif in motifUlosGenerated" :key="motif.id">
-              <template v-if="!showDeleteMotif">
+              <div class="flex flex-col items-center gap-1">
                 <div
-                  class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+                  class="group relative items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
                   <div class="h-[300px] w-[252px]">
-                    <div class="gradient"></div>
+                    <!-- <div class="gradient"></div> -->
                     <img
                       class="h-full w-full object-cover transition-transform rounded-lg"
                       :src="motif.imageUrl"
@@ -109,11 +132,18 @@
                     class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
                   ></div>
                 </div>
-              </template>
-
-              
+                <div>
+                  <DeleteGeneratedMotif
+                    v-if="showDeleteMotif"
+                    :motifGenerated-id="motif.id"
+                    @motifGenerated-deleted="handleMotifDeleted"
+                    class="z-10"
+                  />
+                </div>
+              </div>
             </div>
           </div>
+          
         </div>
 
         <div v-else-if="motifUlosGenerated.length === 0 && loading === false">
@@ -129,12 +159,14 @@ import Sidebar from '../../../components/Admin/Sidebar.vue'
 import AddMotifHasilGenerate from '../../../components/Admin/GenerateMotif/AddMotifHasilGenerate.vue'
 import CardSkeleton from '../../../components/EndUser/CardSkeleton.vue'
 import EmptyState from '../../../components/Admin/EmptyState.vue'
+import DeleteGeneratedMotif from '../../../components/Admin/Modals/Generate Motif/DeleteGeneratedMotif.vue'
 export default {
   components: {
     Sidebar,
     AddMotifHasilGenerate,
     CardSkeleton,
-    EmptyState
+    EmptyState,
+    DeleteGeneratedMotif
   },
   data: function () {
     return {
@@ -148,9 +180,8 @@ export default {
       activeButton: '',
       showDeleteMotif: false
     }
-  }, 
+  },
   mounted() {
-   
     this.fetchMotifs('')
   },
   methods: {
@@ -194,7 +225,13 @@ export default {
     toggleDeleteMotif() {
       this.showDeleteMotif = !this.showDeleteMotif
       console.log(this.showDeleteMotif)
-    }
+    },
+    handleAddGeneratedMotif(data) {
+      this.motifUlosGenerated.unshift(data)
+    },
+    handleMotifDeleted(motifGeneratedId) {
+      this.motifUlosGenerated = this.motifUlosGenerated.filter((motif) => motif.id !== motifGeneratedId)
+    },
   }
 }
 </script>

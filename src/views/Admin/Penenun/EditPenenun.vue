@@ -249,38 +249,40 @@
           Batal
         </button>
         <button
-          @click="editWeaver(weaver)"
+          @click="editWeaver"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
-          Simpan
+          Update
         </button>
       </div>
     </div>
   </div>
 </template>
 <script>
-
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
 import axios from 'axios'
 export default {
   components: {
     YearPicker
   },
+  name: 'editWeaver',
   data() {
     return {
+      weaverId: '',
+      errorList: '',
       selectedTechnics: [],
       selectedTool: '',
       maxYear: new Date().getFullYear(),
       selectedYear: null,
       showDatepicker: false,
-      // domicile: '',
+      domicile: '',
       // name: '',
       // birthYear: null,
       // ethnic: '',
       // theLoom: '',
       // technique: '',
       // story: '',
-      // image: null,
+      // image: null
       weaverData: {
         name: '',
         birthYear: null,
@@ -319,21 +321,85 @@ export default {
       console.log(newValue)
     }
   },
+  mounted() {
+    // console.log(this.$route.params.id)
+    this.weaverId = this.$route.params.id
+    this.getWeaverData(this.$route.params.id)
+  },
   methods: {
-    async updateWeaver() {
+    getWeaverData(weaverId) {
       const token = localStorage.getItem('token')
 
+      axios
+        .get(`http://company.ditenun.com/api/v1/ulospedia/weavers/${weaverId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((res) => {
+          console.log(res.data.data.weaver)
+
+          this.weaverData = res.data.data.weaver
+        })
+        .catch(function (error) {
+          if (error.response) {
+            if (error.response.status == 404) {
+              alert(error.response.data.message)
+            }
+          }
+        })
+    },
+    // editWeaver() {
+    //   var mythis = this
+    //   axios
+    //     .put(
+    //       `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
+
+    //       this.getWeaverData.weaver
+    //     )
+    //     .then((res) => {
+    //       console.log(res.data)
+    //       alert(res.data.message)
+
+    //       this.errorList = ''
+    //     })
+    //     .catch(function (error) {
+    //       if (error.response) {
+    //         if (error.response.status == 422) {
+    //           mythis.errorList = error.response.data.errors
+    //         }
+    //         if (error.response.status == 404) {
+    //           alert(error.response.data.message)
+    //         }
+    //       } else if (error.message) {
+    //         console.log(error.request)
+    //       }
+    //     })
+    // },
+    async editWeaver() {
+      const token = localStorage.getItem('token')
+      console.log(token)
+      console.log(this.weaverId)
+      console.log(this.weaverData.name)
+
+      const bodyReq = {
+        id: this.weaverId,
+
+        name: this.weaverData.name,
+        yearOfBirth: this.birthYear,
+        ethnic: this.weaverData.ethnic,
+        domicile: this.weaverData.domicile,
+        theLoom: this.weaverData.theLoom,
+        technique: this.weaverData.technique,
+        story: this.weaverData.story
+      }
+
+      console.log(bodyReq)
+
       const responseDataText = await axios.put(
-        `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaver.id}`,
-        {
-          name: this.weaverData.name,
-          yearOfBirth: this.weaverData.birthYear,
-          ethnic: this.weaverData.ethnic,
-          domicile: this.weaverData.domicile,
-          theLoom: this.weaverData.theLoom,
-          technique: this.weaverData.technique,
-          story: this.weaverData.story
-        },
+        `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
+        bodyReq,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -341,38 +407,27 @@ export default {
           }
         }
       )
-      console.log(responseDataText.data)
-      const newWeaverId = responseDataText.data.data.weaver.id
-      console.log(newWeaverId)
-      console.log(`http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`)
+      // console.log(responseDataText.data)
+      // const newWeaverId = responseDataText.data.data.weaver.id
+      // console.log(newWeaverId)
+      // console.log(`http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`)
 
-      const formData = new FormData()
-      formData.append('weaver-image', this.image)
+      // const formData = new FormData()
+      // formData.append('weaver-image', this.image)
 
-      const responseDataImage = await axios.put(
-        `http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-      )
-      console.log(responseDataImage)
+      // const responseDataImage = await axios.post(
+      //   `http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`,
+      //   formData,
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //       'Content-Type': 'multipart/form-data'
+      //     }
+      //   }
+      // )
+      console.log(responseDataText)
 
       this.$router.push('/admin/penenun')
-    },
-    async editWeaver(weaverData) {
-      this.weaverData = {
-        name: weaverData.name,
-        birthYear: weaverData.birthYear,
-        domicile: weaverData.domicile,
-        ethnic: weaverData.ethnic,
-        theLoom: weaverData.theLoom,
-        technique: weaverData.theLoom,
-        story: weaverData.story
-      }
     },
     handleFileChange(event) {
       this.image = event.target.files[0]
@@ -398,6 +453,86 @@ export default {
       this.showDatepicker = !this.showDatepicker
     }
   }
+
+  // methods: {
+  //   async updateWeaver() {
+  //     const token = localStorage.getItem('token')
+
+  //     const responseDataText = await axios.put(
+  //       `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaver.id}`,
+  //       {
+  //         name: this.weaverData.name,
+  //         yearOfBirth: this.weaverData.birthYear,
+  //         ethnic: this.weaverData.ethnic,
+  //         domicile: this.weaverData.domicile,
+  //         theLoom: this.weaverData.theLoom,
+  //         technique: this.weaverData.technique,
+  //         story: this.weaverData.story
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           'Content-Type': 'application/json'
+  //         }
+  //       }
+  //     )
+  //     console.log(responseDataText.data)
+  //     const newWeaverId = responseDataText.data.data.weaver.id
+  //     console.log(newWeaverId)
+  //     console.log(`http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`)
+
+  //     const formData = new FormData()
+  //     formData.append('weaver-image', this.image)
+
+  //     const responseDataImage = await axios.put(
+  //       `http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`,
+  //       formData,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //           'Content-Type': 'multipart/form-data'
+  //         }
+  //       }
+  //     )
+  //     console.log(responseDataImage)
+
+  //     this.$router.push('/admin/penenun')
+  //   },
+  //   async editWeaver(weaverData) {
+  //     this.weaverData = {
+  //       name: weaverData.name,
+  //       birthYear: weaverData.birthYear,
+  //       domicile: weaverData.domicile,
+  //       ethnic: weaverData.ethnic,
+  //       theLoom: weaverData.theLoom,
+  //       technique: weaverData.theLoom,
+  //       story: weaverData.story
+  //     }
+  //   },
+  //   handleFileChange(event) {
+  //     this.image = event.target.files[0]
+  //   },
+  //   updateBirthYear(year) {
+  //     this.birthYear = year
+  //   },
+  //   backToPenenun() {
+  //     this.$router.push('/admin/penenun')
+  //   },
+  //   disableFutureDates(date) {
+  //     const today = new Date()
+  //     return date > today
+  //   },
+  //   getCurrentDate() {
+  //     const today = new Date()
+  //     const year = today.getFullYear()
+  //     const month = String(today.getMonth() + 1).padStart(2, '0')
+  //     const day = String(today.getDate()).padStart(2, '0')
+  //     return `${year}-${month}-${day}`
+  //   },
+  //   toggleDatepicker() {
+  //     this.showDatepicker = !this.showDatepicker
+  //   }
+  // }
 }
 </script>
 <style scoped></style>

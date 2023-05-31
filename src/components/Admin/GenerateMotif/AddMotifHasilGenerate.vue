@@ -34,7 +34,15 @@
                 class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
               >
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <img
+                  v-if="selectedImage"
+                  :src="selectedImage"
+                  alt="Preview"
+                  class="w-24 h-24 object-cover rounded-lg"
+                  
+                />
                   <svg
+                  v-if="!selectedImage"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="40"
@@ -114,6 +122,7 @@
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
+             
             </button>
           </div>
         </div>
@@ -130,7 +139,9 @@ export default {
       showModal: false,
       image: null,
       size: '',
-      ulosID: this.$route.params.id
+      ulosID: this.$route.params.id,
+      motifID: this.$route.params.motifId,
+      selectedImage: null,
     }
   },
   watch: {
@@ -145,9 +156,11 @@ export default {
     async submit() {
       const token = localStorage.getItem('token')
       const ulosID = this.$route.params.id
-
+      const motifID = this.$route.params.motifId
+      //http://company.ditenun.com/api/v1/generate/ulos/10/motifs/11
+//http://company.ditenun.com/api/v1/generate/ulos/10/motifs/11/motif-results/1
       const responseDataText = await axios.post(
-        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs`,
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}`,
         {
           size: this.size
         },
@@ -160,18 +173,19 @@ export default {
       )
 
       console.log(ulosID)
+      console.log(motifID)
       console.log(responseDataText.data)
-      const newMotifDataId = responseDataText.data.data.motif.id
+      const newMotifDataId = responseDataText.data.data.motifResult.id
       console.log(newMotifDataId)
       console.log(
-        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}/motif-results/${newMotifDataId}`
       )
 
       const formData = new FormData()
-      formData.append('motif-image', this.image)
+      formData.append('motif-result-image', this.image)
 
       const secondResponse = await axios.post(
-        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`,
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}/motif-results/${newMotifDataId}`,
         formData,
         {
           headers: {
@@ -188,11 +202,21 @@ export default {
       this.$emit('data', {
         id: newMotifDataId,
         // size: responseDataText.data.data.motif,
-        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`
+        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}/motif-results/${newMotifDataId}/image`
       })
     },
     handleFileChange(event) {
       this.image = event.target.files[0]
+      const image = event.target.files[0]
+      if (image) {
+        // Create a FileReader to read the file
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          // Set the selected image data to the component's data
+          this.selectedImage = e.target.result
+        }
+        reader.readAsDataURL(image) // Read the file as a data URL
+      }
     }
   }
 }
