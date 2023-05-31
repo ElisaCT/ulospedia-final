@@ -515,42 +515,28 @@
                     >Warna Pada Ulos*</label
                   >
                   <div class="md:w-2/3 relative inline-block">
-                    <select
-                      class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-                      required
-                    >
-                      <option value="" disabled selected hidden>Pilih Warna Ulos</option>
-                      <option value="option1" class="pb-3 hover:bg-primary_surface">
+                    
+                      
+                      <option value="Merah" class="pb-3 hover:bg-primary_surface">
                         <input type="checkbox" name="color[]" value="Merah" /> Merah
                       </option>
-                      <option value="option2" class="pb-3 hover:bg-primary_surface">
+                      <option value="Hitam" class="pb-3 hover:bg-primary_surface">
                         <input type="checkbox" name="color[]" value="Hitam" /> Hitam
                       </option>
-                      <option value="option3" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Biru" /> Biru
-                      </option>
-                      <option value="option4" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Hijau" /> Hijau
-                      </option>
-                      <option value="option5" class="pb-3 hover:bg-primary_surface">
+                      <option value="Putih" class="pb-3 hover:bg-primary_surface">
                         <input type="checkbox" name="color[]" value="Kuning" /> Kuning
                       </option>
-                    </select>
-                    <div
-                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                        <g clip-path="url(#a)">
-                          <path
-                            fill="#323232"
-                            d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                        </defs>
-                      </svg>
-                    </div>
+                      <option value="Biru" class="pb-3 hover:bg-primary_surface">
+                        <input type="checkbox" name="color[]" value="Biru" /> Biru
+                      </option>
+                      <option value="Hijau" class="pb-3 hover:bg-primary_surface">
+                        <input type="checkbox" name="color[]" value="Hijau" /> Hijau
+                      </option>
+                      <option value="Kuning" class="pb-3 hover:bg-primary_surface">
+                        <input type="checkbox" name="color[]" value="Kuning" /> Kuning
+                      </option>
+                    
+                    
                   </div>
                 </div>
 
@@ -870,6 +856,7 @@
               </div>
 
               <button
+              :disabled="!toggleStatus"
                 @click="addForm"
                 :class="{
                   'text-xs text-primary_main border rounded-lg border-primary_main p-2 flex flex-row justify-end items-end': true,

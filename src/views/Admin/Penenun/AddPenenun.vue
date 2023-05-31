@@ -312,13 +312,9 @@ export default {
       theLoom: '',
       technique: '',
       story: '',
-<<<<<<< HEAD
-      image: null
-=======
       image: null,
       selectedImage: null,
       showDelete: false
->>>>>>> eb307a9115d58a69713d6349cfdb8d1429e34dc4
     }
   },
   watch: {

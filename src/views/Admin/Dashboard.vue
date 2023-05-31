@@ -54,7 +54,7 @@
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
-                  <div class="h-[300px] w-auto">
+                  <div class="h-[350px] w-[auto]">
                     <div class="gradient"></div>
                     <img
                       class="h-full w-full object-cover transition-transform rounded-lg"
@@ -105,7 +105,7 @@
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
-                  <div class="h-[300px] w-auto">
+                  <div class="h-[350px] w-auto">
                     <div class="gradient"></div>
                     <img
                       class="h-full w-full object-cover transition-transform rounded-lg"
@@ -163,14 +163,10 @@ export default {
       
       //get ulos data
       axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/ulos?pageNo=1&sortDir=desc', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+      .get('http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=1')
       .then((response) => {
         console.log(response.data)
-            this.ulosData = response.data.data.ulos.ulosElDashboardResponseList.slice(0,4)
+            this.ulosData = response.data.data.ulosList.clientUlosResponseList.slice(0,4)
           
       })
 
