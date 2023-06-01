@@ -241,9 +241,17 @@
     </div>
   </div>
 
+  <div v-if="isLoading" class="mx-[180px]">
+    <CardSkeleton />
+  </div>
+
+  <div v-else-if="ulosData.length === 0 && !isLoading">
+      <!-- Show empty state component when searchText is not empty and ulosData is empty -->
+      <EmptySearch />
+    </div>
   <!-- card ulos -->
-  <div class="flex justify-center py-8">
-    <div v-if="ulosData.length > 0">
+  <div v-else>
+    <div class="flex justify-center py-8">
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         <div v-for="ulos in ulosData" :key="ulos.id">
           <router-link :to="'/ulos-detail/' + ulos.id">
@@ -273,14 +281,7 @@
       </div>
     </div>
 
-    <div v-else-if="ulosData.length === 0">
-      <!-- Show empty state component when searchText is not empty and ulosData is empty -->
-      <EmptySearch />
-    </div>
-
-    <div v-else>
-      <CardSkeleton />
-    </div>
+    
   </div>
 
   <!-- Load more -->
@@ -339,7 +340,9 @@ export default {
       selectedOptionEthnic: '',
       // selectedOptionColors: [],
       applyClickedEthnic: false,
-      applyClickedType: false
+      applyClickedType: false,
+
+      isLoading: false
     }
   },
   watch: {
@@ -352,6 +355,7 @@ export default {
     }
   },
   mounted() {
+    this.isLoading = true
     axios
       .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
       .then((response) => {
@@ -365,10 +369,14 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+      .finally(() => {
+      this.isLoading = false;
+    });
     if (this.$route.query.ethnic) {
       this.selectedOptionEthnic = this.$route.query.ethnic
       console.log(this.selectedOptionEthnic)
     }
+    console.log(this.isLoading)
   },
   computed: {
     convertColorsObjToArray() {
