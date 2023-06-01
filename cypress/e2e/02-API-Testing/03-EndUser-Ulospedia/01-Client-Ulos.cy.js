@@ -1,8 +1,12 @@
 //{ API ini digunakan untuk mengakses data ulos yang dibutuhkan pada gellery ulos web Ulospedia. }
 
 describe('Pengujian API: Data Ulos', () => {
-    
-    it('GET: Menampilkan semua data ulos denga parameter yang valid', () => {
+    const ulosId = 10;
+    const piecesImageId = 2;
+    const otherImageId = 1;
+    const motifImageId = 2;
+
+    it('GET: Menampilkan semua data ulos dengan parameter yang valid', () => {
         const pageNo = 1;
         // const ethnic = 'ethnic';
         // const type = 'type';
@@ -32,7 +36,6 @@ describe('Pengujian API: Data Ulos', () => {
     });
 
     it('GET: Mendapatkan Data Detail Ulos dan Relasinya', () => {
-        const ulosId = 10;
 
         cy.request({
             method: 'GET',
@@ -51,7 +54,6 @@ describe('Pengujian API: Data Ulos', () => {
 
 
     it('GET: Mendapatkan gambar ulos berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 10;
 
         cy.request({
             method: 'GET',
@@ -62,6 +64,59 @@ describe('Pengujian API: Data Ulos', () => {
         }).then((response) => {
             expect(response.status).to.eq(200);
             // Lakukan pengujian lebih lanjut terhadap response di sini
+        });
+    });
+    it("GET: Mendapatkan Gambar Potongan Ulos berdasarkan ulosId dan pieces imageId yang valid(tersedia)", () => {
+        const piecesImageId = 2;
+
+        cy.request({
+            method: 'GET',
+            url: `ulospedia/client/ulos/${ulosId}/pieces-image/${piecesImageId}`,
+            headers: {
+                'accept': '*/*'
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Perform additional assertions if needed
+        });
+    });
+
+    it("GET: Mendapatkan Gambar Lainnya berdasarkan ulosId dan otherImageId yang valid(tersedia)", () => {
+        cy.request({
+            method: 'GET',
+            url: `/ulospedia/client/ulos/${ulosId}/other-image/${otherImageId}`,
+            headers: {
+                'accept': '*/*'
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Perform additional assertions if needed
+        });
+    });
+
+    it("GET: Mendapatkan Gambar Motif berdasarkan ulosId dan motifImageId yang valid(tersedia)", () => {
+        cy.request({
+            method: 'GET',
+            url: `/ulospedia/client/ulos/${ulosId}/motif-image/${motifImageId}`,
+            headers: {
+                'accept': '*/*'
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Perform additional assertions if needed
+        });
+    });
+
+    it("GET: Mendapatkan Gambar Utama berdasarkan ulosId yang valid(tersedia)", () => {
+        cy.request({
+            method: 'GET',
+            url: `/ulospedia/client/ulos/${ulosId}/main-image`,
+            headers: {
+                'accept': '*/*'
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Perform additional assertions if needed
         });
     });
 });
