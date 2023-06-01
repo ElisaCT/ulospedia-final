@@ -7,15 +7,15 @@ describe('Pengujian API: Penenun invalid credentials', () => {
     // });
 
 
-    it('GET: Mendapatkan semua data penenun yang ada', () => {
-        const authToken = Cypress.env('authToken');
+    it('GET: Mendapatkan semua data penenun yang ada dengan invalid credentials', () => {
+        const invalidCredentials = 'invalidToken';
 
         cy.request({
             method: 'GET',
             url: 'ulospedia/weavers',
             failOnStatusCode: false,
             headers: {
-                'Authorization': `Bearer ${authToken}`, // Include the authToken in the Authorization header
+                'Authorization': `Bearer ${invalidCredentials}`, // Invalid token for testing purposes
                 'Accept': 'application/json'
             },
             qs: {
@@ -27,58 +27,49 @@ describe('Pengujian API: Penenun invalid credentials', () => {
             }
         }).then((response) => {
             cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Log the response body as JSON string
-            expect(response.status).to.equal(200);
-            expect(response.body).to.have.property('code', 200);
-            expect(response.body).to.have.property('status', 'success');
+            expect(response.status).to.equal(403); // Ensure the response status code is 403
         });
     });
 
-    it('GET: Mendapatkan data detail penenun berdasarkan ID', () => {
-        const authToken = Cypress.env('authToken');
+    it('GET: Mendapatkan data detail penenun berdasarkan ID dengan invalid credentials', () => {
+        const weaverId = 9;
+        const invalidCredentials = 'invalidToken';
+
         cy.request({
             method: 'GET',
-            url: 'ulospedia/weavers',
+            url: `ulospedia/weavers/${weaverId}`,
+            failOnStatusCode: false,
             headers: {
-                'Authorization': `Bearer ${authToken}`, // Include the authToken in the Authorization header
+                'Authorization': `Bearer ${invalidCredentials}`, // Invalid token for testing purposes
                 'Accept': 'application/json'
-            },
-            qs: {
-                'weaver-id': 9, // Replace '9' with the actual weaver ID
             }
         }).then((response) => {
             cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Log the response body as JSON string
-            expect(response.status).to.equal(200);
-            expect(response.body).to.have.property('code', 200);
-            expect(response.body).to.have.property('status', 'success');
-            expect(response.body).to.have.property('data');
-            expect(response.body.data).to.have.property('weavers');
-
+            expect(response.status).to.equal(403); // Ensure the response status code is 403
         });
     });
 
-    it('GET: Mendapatkan gambar/image penenun berdasarkan ID penenun', () => {
+    it('GET: Mendapatkan gambar/image penenun berdasarkan ID penenun dengan invalid credentials', () => {
         const weaverId = 10;
-        const authToken = Cypress.env('authToken');
+        const invalidCredentials = 'invalidToken';
 
         cy.request({
             method: 'GET',
             url: `ulospedia/weavers/${weaverId}/image`,
             headers: {
-                'Authorization': `Bearer ${authToken}`,
+                'Authorization': `Bearer ${invalidCredentials}`,
                 'Accept': '*/*'
             },
-            responseType: 'blob'
+            responseType: 'blob',
+            failOnStatusCode: false
         }).then((response) => {
-            //cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Log the response body as JSON string
-            expect(response.status).to.equal(200);
-            expect(response.headers['content-type']).to.equal('image/jpeg');
-            // Perform additional assertions or validations on the image if needed
+            expect(response.status).to.equal(403);
         });
     });
 
-    it('PUT: Memperbaharui/mengupload gambar penenun berdasarkan weaverID yang valid(Tersedia)', () => {
+    it('PUT: Memperbaharui/mengupload gambar penenun berdasarkan weaverID yang valid(Tersedia) dengan invalid credentials', () => {
         const weaverId = 10;
-        const authToken = Cypress.env('authToken');
+        const invalidCredentials = 'invalidToken';
 
         cy.fixture('penenun2.jpeg', 'binary')
             .then(Cypress.Blob.binaryStringToBlob)
@@ -90,73 +81,64 @@ describe('Pengujian API: Penenun invalid credentials', () => {
                     method: 'PUT',
                     url: `ulospedia/weavers/${weaverId}/image`,
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': `Bearer ${invalidCredentials}`,
                         'Accept': '*/*'
                     },
-                    body: formData
+                    body: formData,
+                    failOnStatusCode: false
                 }).then((response) => {
-                    expect(response.status).to.eq(200);
+                    expect(response.status).to.eq(403);
                     cy.log('Response Body:', JSON.stringify(response.body, null, 2));
                 });
             });
     });
 
+    it('GET: Mendapatkan jumlah penenun yang tersedia dengan invalid credentials', () => {
+        const invalidCredentials = 'invalidToken';
 
-    it('GET: Mendapatkan jumlah penenun yang tersedia', () => {
-        const authToken = Cypress.env('authToken');
         cy.request({
             method: 'GET',
             url: 'ulospedia/weavers/count',
             headers: {
-                'Authorization': `Bearer ${authToken}`,
+                'Authorization': `Bearer ${invalidCredentials}`,
                 'Accept': 'application/json'
-            }
+            },
+            failOnStatusCode: false
         }).then((response) => {
             cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Log the response body as JSON string
-            expect(response.status).to.equal(200);
-            expect(response.body.code).to.equal(200);
-            expect(response.body.status).to.equal('success');
-            expect(response.body.data.countOfWeaver).to.exist;
-            // Perform additional assertions or validations on the count if needed
+            expect(response.status).to.equal(403); // Ensure the response status code is 403
         });
     });
 
-    it('POST: Menambahkan/membuat data text penenun yang baru', () => {
-        const authToken = Cypress.env('authToken');
+    it('POST: Menambahkan/membuat data text penenun yang baru dengan invalid credentials', () => {
+        const invalidCredentials = 'invalidToken';
         const requestBody = {
-                "name": "James Doe",
-                "yearOfBirth": 2001,
-                "ethnic": "Batak Toba",
-                "domicile": "Balige",
-                "theLoom": "Gedongan",
-                "technique": "Ikat Lapis",
-                "story": "This is dummy story"
+            "name": "James Doe",
+            "yearOfBirth": 2001,
+            "ethnic": "Batak Toba",
+            "domicile": "Balige",
+            "theLoom": "Gedongan",
+            "technique": "Ikat Lapis",
+            "story": "This is dummy story"
         };
         cy.request({
             method: 'POST',
             url: 'ulospedia/weavers',
             failOnStatusCode: false,
             headers: {
-                'Authorization': `Bearer ${authToken}`, // Include the authToken in the Authorization header
+                'Authorization': `Bearer ${invalidCredentials}`, // Invalid token for testing purposes
                 'Accept': 'application/json' // You can include other headers if required
             },
             body: requestBody
         }).then((response) => {
-            cy.log('Response Body:', JSON.stringify(response.body, null, 2));// Log the response body as JSON string
-            expect(response.status).to.equal(201);
-            expect(response.body).to.have.property('code', 201);
-            expect(response.body).to.have.property('status', 'success');
-            expect(response.body).to.have.property('message', 'data penenun baru (text) berhasil dibuat');
-            expect(response.body.data).to.have.property('weaver');
-            expect(response.body.data.weaver).to.have.property('id');
-            expect(response.body.data.weaver).to.have.property('name', 'James Doe');
-            // Add more assertions as needed for the response body
+            cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Log the response body as JSON string
+            expect(response.status).to.equal(403); // Ensure the response status code is 403
         });
     });
 
-    it('POST: Menambah Data Penenun Baru (gambar/image)', () => {
+    it('POST: Menambah Data Penenun Baru (gambar/image) dengan invalid credentials', () => {
         const weaverId = 2;
-        const authToken = Cypress.env('authToken');
+        const invalidCredentials = 'invalidToken';
 
         cy.fixture('testgambar.jpg', 'binary')
             .then((fileContent) => {
@@ -165,7 +147,7 @@ describe('Pengujian API: Penenun invalid credentials', () => {
                     url: `ulospedia/weavers/${weaverId}/image`,
                     failOnStatusCode: false,
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': `Bearer ${invalidCredentials}`,
                         'Accept': 'application/json',
                         'Content-Type': 'multipart/form-data'
                     },
@@ -180,41 +162,31 @@ describe('Pengujian API: Penenun invalid credentials', () => {
                     }
                 }).then((response) => {
                     cy.log('Response Body:', JSON.stringify(response.body, null, 2));
-                    expect(response.status).to.equal(201);
-                    expect(response.body.code).to.equal(201);
-                    expect(response.body.status).to.equal('success');
-
-                    // Log the structure of response.body.data for debugging
-                    cy.log('response.body.data:', response.body.data);
-
-                    expect(response.body.data).to.have.property('weaverImageData');
-                    expect(response.body.data.weaverImageData).to.have.property('id');
-                    expect(response.body.data.weaverImageData).to.have.property('imageReference');
+                    expect(response.status).to.equal(403);
                 });
             });
     });
 
-    it('DELETE: Menghapus data penenun berdasarkan id penenun yang valid(tersedia)', () => {
-        const authToken = Cypress.env('authToken');
+    it('DELETE: Menghapus data penenun berdasarkan id penenun yang valid(tersedia) dengan invalid credentials', () => {
+        const invalidCredentials = 'invalidToken';
         const weaverId = 3;
 
         cy.request({
             method: 'DELETE',
             url: `ulospedia/weavers/${weaverId}`,
             headers: {
-                'Authorization': `Bearer ${authToken}`,
+                'Authorization': `Bearer ${invalidCredentials}`,
                 'Accept': '*/*'
-            }
+            },
+            failOnStatusCode: false
         }).then((response) => {
-            expect(response.status).to.eq(200);
-            expect(response.body.status).to.eq('success');
+            expect(response.status).to.eq(403);
             cy.log('Response Body:', JSON.stringify(response.body, null, 2));
         });
     });
-
-    it('POST: Menambahkan gambar penenun yang baru berdasarkan penenun ID yang valid(tersedia)', () => {
+    it('POST: Gagal Menambahkan gambar penenun yang baru dengan invalid credentials', () => {
         const weaverId = 10;
-        const authToken = Cypress.env('authToken');
+        const invalidAuthToken = 'invalidToken';
 
         cy.fixture('testgambar.jpg', 'binary')
             .then(Cypress.Blob.binaryStringToBlob)
@@ -226,20 +198,20 @@ describe('Pengujian API: Penenun invalid credentials', () => {
                     method: 'POST',
                     url: `ulospedia/weavers/${weaverId}/image`,
                     headers: {
-                        'Authorization': `Bearer ${authToken}`,
+                        'Authorization': `Bearer ${invalidAuthToken}`,
                         'Accept': '*/*'
                     },
-                    body: formData
+                    body: formData,
+                    failOnStatusCode: false
                 }).then((response) => {
-                    expect(response.status).to.eq(201);
-                    cy.log('Response Body:', JSON.stringify(response.body, null, 2));
+                    expect(response.status).to.eq(403); // Forbidden status code
                 });
             });
     });
 
-    it('PUT: Memperbaharui/Mengedit data text penenun berdasarkan ID penenun yang valid(Tersedia)', () => {
-        const authToken = Cypress.env('authToken');
+    it('PUT: Gagal Memperbaharui/Mengedit data text penenun dengan invalid credentials', () => {
         const weaverId = 3;
+        const invalidAuthToken = 'invalidToken';
 
         const updatedWeaverData = {
             name: 'Jhon Doe',
@@ -255,114 +227,92 @@ describe('Pengujian API: Penenun invalid credentials', () => {
             method: 'PUT',
             url: `ulospedia/weavers/${weaverId}`,
             headers: {
-                'Authorization': `Bearer ${authToken}`,
+                'Authorization': `Bearer ${invalidAuthToken}`,
                 'Content-Type': 'application/json'
             },
-            body: updatedWeaverData
+            body: updatedWeaverData,
+            failOnStatusCode: false
         }).then((response) => {
-            expect(response.status).to.equal(200);
-            expect(response.body).to.have.property('code', 200);
-            expect(response.body).to.have.property('status', 'success');
-            expect(response.body).to.have.property('data');
-            expect(response.body.data).to.have.property('weaver');
-
-            const updatedWeaver = response.body.data.weaver;
-            expect(updatedWeaver).to.have.property('name', updatedWeaverData.name);
-            const expectedAge =   2023 - updatedWeaverData.yearOfBirth;
-            expect(updatedWeaver).to.have.property('age', expectedAge);
-            expect(updatedWeaver).to.have.property('ethnic', updatedWeaverData.ethnic);
-            expect(updatedWeaver).to.have.property('domicile', updatedWeaverData.domicile);
-            expect(updatedWeaver).to.have.property('theLoom', updatedWeaverData.theLoom);
-            expect(updatedWeaver).to.have.property('technique', updatedWeaverData.technique);
-            expect(updatedWeaver).to.have.property('story', updatedWeaverData.story);
-
-            // cy.log('Name:', updatedWeaver.name);
-            // cy.log('Age:', updatedWeaver.age);
-            // cy.log('Ethnic:', updatedWeaver.ethnic);
-            // cy.log('Domicile:', updatedWeaver.domicile);
-            // cy.log('The Loom:', updatedWeaver.theLoom);
-            // cy.log('Technique:', updatedWeaver.technique);
-            // cy.log('Story:', updatedWeaver.story);
+            expect(response.status).to.equal(403); // Forbidden status code
         });
     });
 
-
-const invalidAuthToken = 'INVALID_TOKEN';
-it('GET: Mendapatkan data detail penenun berdasarkan ID dengan invalid credentials', () => {
-    cy.request({
-        method: 'GET',
-        url: 'ulospedia/weavers',
-        headers: {
-            'Authorization': `Bearer ${invalidAuthToken}`, // Invalid token for testing purposes
-            'Accept': 'application/json'
-        },
-        qs: {
-            'weaver-id': 9 // Ganti '9' dengan ID penenun yang sebenarnya
-        },
-        failOnStatusCode: false // Mengabaikan kesalahan status kode
-    }).then((response) => {
-        cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Menampilkan body respons dalam format JSON yang terstruktur
-        expect(response.status).to.equal(403); // Memastikan status kode respons adalah 403
+    const invalidAuthToken = 'INVALID_TOKEN';
+    it('GET: Mendapatkan data detail penenun berdasarkan ID dengan invalid credentials', () => {
+        cy.request({
+            method: 'GET',
+            url: 'ulospedia/weavers',
+            headers: {
+                'Authorization': `Bearer ${invalidAuthToken}`, // Invalid token for testing purposes
+                'Accept': 'application/json'
+            },
+            qs: {
+                'weaver-id': 9 // Ganti '9' dengan ID penenun yang sebenarnya
+            },
+            failOnStatusCode: false // Mengabaikan kesalahan status kode
+        }).then((response) => {
+            cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Menampilkan body respons dalam format JSON yang terstruktur
+            expect(response.status).to.equal(403); // Memastikan status kode respons adalah 403
+        });
     });
-});
 
-it('GET: Mendapatkan gambar/image penenun berdasarkan ID penenun dengan invalid credentials', () => {
-    const weaverId = 2;
-    //const authToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZXdpbmExMjMiLCJpYXQiOjE2ODQ5ODU1OTgsImV4cCI6MTY4NTA3MTk5OH0.ZsjZ4UoAGAJKBLvLMIY5u-KgIGocw1e15EclfQJ4X6A';
+    it('GET: Mendapatkan gambar/image penenun berdasarkan ID penenun dengan invalid credentials', () => {
+        const weaverId = 2;
+        //const authToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZXdpbmExMjMiLCJpYXQiOjE2ODQ5ODU1OTgsImV4cCI6MTY4NTA3MTk5OH0.ZsjZ4UoAGAJKBLvLMIY5u-KgIGocw1e15EclfQJ4X6A';
 
-    cy.request({
-        method: 'GET',
-        url: `ulospedia/weavers/${weaverId}/image`,
-        headers: {
-            'Authorization': `Bearer invalidToken`, // Kredensial yang tidak valid
-            'Accept': '*/*'
-        },
-        responseType: 'blob',
-        failOnStatusCode: false // Mengabaikan kesalahan status kode
-    }).then((response) => {
-        //cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Menampilkan body respons dalam format JSON yang terstruktur
-        expect(response.status).to.equal(403); // Memastikan status kode respons adalah 403
+        cy.request({
+            method: 'GET',
+            url: `ulospedia/weavers/${weaverId}/image`,
+            headers: {
+                'Authorization': `Bearer invalidToken`, // Kredensial yang tidak valid
+                'Accept': '*/*'
+            },
+            responseType: 'blob',
+            failOnStatusCode: false // Mengabaikan kesalahan status kode
+        }).then((response) => {
+            //cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Menampilkan body respons dalam format JSON yang terstruktur
+            expect(response.status).to.equal(403); // Memastikan status kode respons adalah 403
+        });
     });
-});
 
-it('GET: Mendapatkan jumlah penenun yang tersedia dengan invalid credentials', () => {
-    cy.request({
-        method: 'GET',
-        url: 'ulospedia/weavers/count',
-        headers: {
-            'Authorization': `Bearer ${invalidAuthToken}`, // Invalid token for testing purposes
-            'Accept': 'application/json'
-        },
-        failOnStatusCode: false // Mengabaikan kesalahan status kode
-    }).then((response) => {
-        cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Menampilkan body respons dalam format JSON yang terstruktur
-        expect(response.status).to.equal(403); // Memastikan status kode respons adalah 403
+    it('GET: Mendapatkan jumlah penenun yang tersedia dengan invalid credentials', () => {
+        cy.request({
+            method: 'GET',
+            url: 'ulospedia/weavers/count',
+            headers: {
+                'Authorization': `Bearer ${invalidAuthToken}`, // Invalid token for testing purposes
+                'Accept': 'application/json'
+            },
+            failOnStatusCode: false // Mengabaikan kesalahan status kode
+        }).then((response) => {
+            cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Menampilkan body respons dalam format JSON yang terstruktur
+            expect(response.status).to.equal(403); // Memastikan status kode respons adalah 403
+        });
     });
-});
 
-it('POST: menambahkan data penenun yang baru dengan invalid credentials:', () => {
-    const requestBody = {
-        "name": "James Doe",
-        "yearOfBirth": 2001,
-        "ethnic": "Batak Toba",
-        "domicile": "Balige",
-        "theLoom": "Gedongan",
-        "technique": "Ikat Lapis",
-        "story": "This is dummy story"
-    };
-    cy.request({
-        method: 'POST',
-        url: 'ulospedia/weavers',
-        failOnStatusCode: false,
-        headers: {
-            'Authorization': `Bearer ${invalidAuthToken}`, // Invalid token for testing purposes
-            'Content-Type': 'application/json'
-        },
-        body: requestBody
-    }).then((response) => {
-        cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Log the response body as JSON string
-        expect(response.status).to.equal(403); // Expecting Unauthorized status code
-        // Add more assertions or error handling based on the response
-    });
-})
+    it('POST: menambahkan data penenun yang baru dengan invalid credentials:', () => {
+        const requestBody = {
+            "name": "James Doe",
+            "yearOfBirth": 2001,
+            "ethnic": "Batak Toba",
+            "domicile": "Balige",
+            "theLoom": "Gedongan",
+            "technique": "Ikat Lapis",
+            "story": "This is dummy story"
+        };
+        cy.request({
+            method: 'POST',
+            url: 'ulospedia/weavers',
+            failOnStatusCode: false,
+            headers: {
+                'Authorization': `Bearer ${invalidAuthToken}`, // Invalid token for testing purposes
+                'Content-Type': 'application/json'
+            },
+            body: requestBody
+        }).then((response) => {
+            cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Log the response body as JSON string
+            expect(response.status).to.equal(403); // Expecting Unauthorized status code
+            // Add more assertions or error handling based on the response
+        });
+    })
 })
