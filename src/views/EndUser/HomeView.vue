@@ -18,11 +18,7 @@
         <div class="mt-8 md:mt-12">
           <a
             href="/galeri-ulos"
-<<<<<<< HEAD
-            id="btn-ekplore-ulos"
-=======
             id="btn-exploreUlos"
->>>>>>> admin/dashboard
             class="bg-primary_main hover:bg-primary_hover text-neutral_10 font-medium py-3 px-10 rounded-lg"
             >Eksplor Ulos</a
           >
@@ -52,12 +48,8 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
-<<<<<<< HEAD
-              href="#"
-=======
               id="span-btn-jelajahiUlos"
               href="/sejarah-ulos"
->>>>>>> admin/dashboard
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
               >Jelajahi Ulos</a
             >
@@ -91,12 +83,8 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
-<<<<<<< HEAD
-              href="#"
-=======
               id="span-btn-sejarahUlos"
               href="/sejarah-ulos"
->>>>>>> admin/dashboard
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
               >Telusuri Sejarah Ulos</a
             >

@@ -8,23 +8,6 @@
       </p>
     </div>
 
-<<<<<<< HEAD
-        <!-- Button -->
-        <div class="gap-6 font-[#0A0A0A] lg:text-2xl md:text-xl sm:text-base text-center">
-            <!-- first col -->
-            <div class="grid grid-cols-2 gap-6 pb-6"> 
-                <a id="text-batak-toba" class="bg-[#BBC6E6] lg:col-span-1 md:col-span-2  sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Toba</a>
-                <a id="text-batak-simalungun" class="bg-[#FBEFD2] lg:col-span-1 md:col-span-2  sm:col-span-3 h-[140px] rounded-[20px]  flex justify-center items-center" href=#>Batak Simalungun</a>
-            </div>
-
-            <!-- second col -->
-            <div class="grid md:grid-cols-3 sm:flex-row gap-6 h-[140px] ">
-                <a id="text-batak-mandailing" class="bg-[#FBEFD2] rounded-[20px]  flex justify-center items-center" href=#>Batak Mandailing</a>
-                <a id="text-batak-karo"  class="bg-[#BBC6E6] rounded-[20px]  flex justify-center items-center" href=#>Batak Karo</a>
-                <a id="text-batak-angkola"  class="bg-[#FBEFD2] rounded-[20px]  flex justify-center items-center" href=#>Batak Angkola</a>
-            </div>
-        </div>
-=======
     <!-- Button -->
     <div class="gap-6 font-[#0A0A0A] lg:text-2xl md:text-xl sm:text-base text-center">
       <!-- first col -->
@@ -69,7 +52,6 @@
           >Batak Angkola</a
         >
       </div>
->>>>>>> admin/dashboard
     </div>
   </div>
 </template>

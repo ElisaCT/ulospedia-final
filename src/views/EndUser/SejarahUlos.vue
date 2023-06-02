@@ -60,11 +60,7 @@
             />
           </div>
           <!-- End Col -->
-<<<<<<< HEAD
-          <div id="text-sejarah-ulos" class="lg:col-span-6 lg:mt-0">
-=======
           <div id="text-sejarahUlos" class="lg:col-span-6 lg:mt-0">
->>>>>>> admin/dashboard
             <h1 class="font-bold lg:text-4xl text-neutral_100 text-justify">Sejarah Ulos</h1>
             <p class="mt-3 text-md text-neutral_80 dark:text-gray-400 text-justify pt-2">
               Dikutip dari penelitian Hasibuan dan Rochmat yang berjudul Ulos sebagai Kearifan
@@ -109,11 +105,7 @@
             <img class="w-full rounded-xl" src="../../assets/arti-ulos.png" alt="Image Description" />
           </div>
           <!-- End Col -->
-<<<<<<< HEAD
-          <div id="text-arti-ulos" class="lg:col-span-6 lg:mt-0">
-=======
           <div id="text-artiUlos" class="lg:col-span-6 lg:mt-0">
->>>>>>> admin/dashboard
             <h1 class="font-bold lg:text-4xl text-neutral_100 text-justify">Arti Ulos</h1>
             <p class="mt-3 text-md text-neutral_80 dark:text-gray-400 text-justify pt-2">
               Ulos merupakan kain tenun tradisional khas dari suku Batak. Ulos awalnya bermakna
@@ -157,11 +149,7 @@
             />
           </div>
           <!-- End Col -->
-<<<<<<< HEAD
-          <div id="text-ulos-di-zaman-modern" class="lg:col-span-6 lg:mt-0">
-=======
           <div id="text-ulosModern" class="lg:col-span-6 lg:mt-0">
->>>>>>> admin/dashboard
             <h1 class="font-bold lg:text-4xl text-neutral_100 text-justify">
               Ulos di zaman modern
             </h1>

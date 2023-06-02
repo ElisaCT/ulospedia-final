@@ -167,11 +167,7 @@
 
         <div class="flex flex-row gap-4 justify-end">
           <button
-<<<<<<< HEAD
-          id="btn-filter"
-=======
             id="btn-batal"
->>>>>>> admin/dashboard
             class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
             @click="isDropdownVisible = false"
           >
