@@ -67,10 +67,10 @@
         <div class="col-span-3 relative inline-block">
           <select
             class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-            v-model="selectedOptionEthnic"
+            v-model="selectedOptionEthnic" @change="handleSearch"
           >
-            <option value="" disabled selected hidden>Pilih Asal Suku</option>
-            <option value="batak toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
+            <option value="">Pilih Asal Suku</option>
+            <option value="batak toba"  class="pb-3 hover:bg-primary_surface">Batak Toba</option>
             <option value="batak simalungun" class="pb-3 hover:bg-primary_surface">
               Batak Simalungun
             </option>
@@ -244,9 +244,14 @@ export default {
       this.showDeleteUlos = !this.showDeleteUlos
     },
     getUrlPath(searchText, selectedOptionEthnic) {
-      return `http://company.ditenun.com/api/v1/generate/ulos${
+      if(searchText=== ''){
+        return `http://company.ditenun.com/api/v1/generate/ulos${selectedOptionEthnic !== '' ? '?ethnic=' + selectedOptionEthnic : ''}`
+      }
+      else{
+        return `http://company.ditenun.com/api/v1/generate/ulos${
         searchText !== '' ? '?search-data=' + searchText : ''
       }${selectedOptionEthnic !== '' ? '&ethnic=' + selectedOptionEthnic : ''}`
+      }
     },
     handleSearch() {
       const url = this.getUrlPath(this.searchText, this.selectedOptionEthnic)
