@@ -1,20 +1,24 @@
 <template>
   <div>
     <!-- Delete button -->
-    <button @click="showModal = true" class="p-[10px] bg-danger_surface rounded">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
-        <path
-          stroke="#CB3A31"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M14 3.987a67.801 67.801 0 0 0-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987M5.667 3.313l.146-.873C5.92 1.807 6 1.333 7.127 1.333h1.746c1.127 0 1.214.5 1.314 1.114l.146.866M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714M6.887 11h2.22M6.333 8.333h3.334"
-        />
-      </svg>
-    </button>
+    <div class="">
+      <!-- <div class="fixed inset-0 bg-neutral_100 opacity-50"></div> -->
+      <button @click="showModal = true" class="relative justify-center pt-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="124" height="44" fill="none">
+          <rect width="124" height="44" fill="#CB3A31" rx="8" />
+          <path
+            stroke="#fff"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M68 17.988a67.8 67.8 0 0 0-6.68-.334c-1.32 0-2.64.067-3.96.2l-1.36.134M59.666 17.314l.147-.873c.107-.634.187-1.107 1.313-1.107h1.747c1.127 0 1.214.5 1.313 1.113l.147.867M66.566 20.094l-.433 6.713c-.073 1.047-.133 1.86-1.993 1.86h-4.28c-1.86 0-1.92-.813-1.994-1.86l-.433-6.713M60.887 25h2.22M60.334 22.334h3.333"
+          />
+        </svg>
+      </button>
+    </div>
 
     <!-- Modal -->
-    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center">
+    <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-10">
       <!-- Background overlay -->
       <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
 
@@ -71,12 +75,12 @@ export default {
       showModal: false
     }
   },
-  props: ['weaverId'],
+  props: ['ulosId'],
   methods: {
     async deleteItem() {
       const token = localStorage.getItem('token')
       const response = await axios.delete(
-        `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
+        `http://company.ditenun.com/api/v1/generate/ulos/${this.ulosId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -85,7 +89,8 @@ export default {
       )
       console.log(response.data)
       this.showModal = false
-      this.$emit('weaver-deleted', this.weaverId)
+      this.$emit('ulos-deleted', this.ulosId)
+      console.log('deleted')
     }
   }
 }

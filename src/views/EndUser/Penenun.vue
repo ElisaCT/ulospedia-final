@@ -10,7 +10,7 @@
   <div class="flex justify-center">
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       <div class="group relative cursor-pointer items-center justify-center overflow-hidden">
-        <router-link to="/penenun-gedogan">
+        <router-link to="/penenun-gedogan" id="penenun-Gedongan">
           <div class="relative">
             <img
               class="h-80 w-90 rounded-xl object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
@@ -46,7 +46,7 @@
       </div>
 
       <div class="group relative cursor-pointer items-center justify-center overflow-hidden">
-        <router-link to="/penenun-atbm">
+        <router-link to="/penenun-atbm" id="penenun-ATBM">
             <div class="">
               <img
                 class="h-80 w-90 object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
@@ -78,7 +78,7 @@
         </router-link>
       </div>
       <div class="group relative cursor-pointer items-center justify-center overflow-hidden">
-        <router-link to="/penenun-atm">
+        <router-link to="/penenun-atm" id="penenun-ATM">
           <div class="relative">
           <img
             class="h-80 w-90 object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
