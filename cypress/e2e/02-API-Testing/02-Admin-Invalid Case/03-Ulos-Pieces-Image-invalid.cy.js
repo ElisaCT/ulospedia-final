@@ -9,7 +9,7 @@ describe('Pengujian API: Invalid', () => {
     const invalidAuthToken = 'INVALID_TOKEN';
     const imagePath = 'ulosUtuh1.jpeg';
 
-    describe('Pengujian API - Gambar Potongan Ulos', () => {
+    describe('Pengujian API - Gambar Potongan Ulos dengan invalid case', () => {
         //precondition mengisi token dengan fungsi loginandserauthtoken
         before(() => {
             cy.loginAndSetAuthToken();

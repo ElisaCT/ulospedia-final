@@ -49,7 +49,7 @@ describe('Pengujian API - Gambar motif Ulos', () => {
         });
     });
 
-    // it('DELETE: Menghapus gambar motif ulos berdasarkan ulosId yang valid(Tersedia', () => {
+    // it('DELETE: Menghapus gambar motif ulos berdasarkan ulosId yang valid(Tersedia)', () => {
     //     const ulosId = 9;
     //     const motifImageId = 2;
     //     const authToken = Cypress.env('authToken'); 

@@ -36,7 +36,7 @@ describe('Pengujian API: Invalid Fitur Generate motif', () => {
                 });
         });
 
-        it('GET: Menampilkan data ulos pada fitur generate motif berdasarkan Id uloa yang tidak valid(tidak tersedia', () => {
+        it('GET: Menampilkan data ulos pada fitur generate motif berdasarkan Id uloa yang tidak valid(tidak tersedia)', () => {
             const authToken = Cypress.env('authToken');
 
             cy.request({
@@ -54,7 +54,7 @@ describe('Pengujian API: Invalid Fitur Generate motif', () => {
             });
         });
 
-        it('DELETE: Mengahapus gambar ulos utuh pada generate motif berdasarkan yang tidak valid(tidak tersedia', () => {
+        it('DELETE: Mengahapus gambar ulos utuh pada generate motif berdasarkan yang tidak valid(tidak tersedia)', () => {
             const authToken = Cypress.env('authToken');
 
             cy.request({
