@@ -19,6 +19,7 @@
           <form class="space-y-6" v-on:submit.prevent="login">
             <div>
               <label
+                id="field-username"
                 for="username-address-icon"
                 class="block mb-2 text-base font-medium text-neutral_100"
                 >username</label
@@ -103,6 +104,7 @@
 
             <div>
               <button
+                id="btn-login"
                 @click="loginUser"
                 type="submit"
                 class="flex w-full justify-center rounded-lg bg-primary_main px-4 py-2 text-lg font-medium leading-6 text-neutral_10 hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

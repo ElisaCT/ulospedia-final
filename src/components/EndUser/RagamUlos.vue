@@ -13,12 +13,14 @@
       <!-- first col -->
       <div class="grid grid-cols-2 gap-6 pb-6">
         <a
+        id="btn-ragamUlos-BatakToba"
           class="bg-[#BBC6E6] lg:col-span-1 md:col-span-2 sm:col-span-3 h-[140px] rounded-[20px] flex justify-center items-center"
           href=""
           @click="selectFilter('Batak Toba')"
           >Batak Toba</a
         >
         <a
+        id="btn-ragamUlos-BatakSimalungun"
           class="bg-[#FBEFD2] lg:col-span-1 md:col-span-2 sm:col-span-3 h-[140px] rounded-[20px] flex justify-center items-center"
           href=""
           @click="selectFilter('Batak Simalungun')"
@@ -29,18 +31,21 @@
       <!-- second col -->
       <div class="grid md:grid-cols-3 sm:flex-row gap-6 h-[140px]">
         <a
+        id="btn-ragamUlos-BatakMandailing"
           class="bg-[#FBEFD2] rounded-[20px] flex justify-center items-center"
           href=""
           @click="selectFilter('Batak Mandailing')"
           >Batak Mandailing</a
         >
         <a
+        id="btn-ragamUlos-BatakKaro"
           class="bg-[#BBC6E6] rounded-[20px] flex justify-center items-center"
           href=""
           @click="selectFilter('Batak Karo')"
           >Batak Karo</a
         >
         <a
+        id="btn-ragamUlos-BatakAngkola"
           class="bg-[#FBEFD2] rounded-[20px] flex justify-center items-center"
           href=""
           @click="selectFilter('Batak Angkola')"

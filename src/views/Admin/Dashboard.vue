@@ -32,7 +32,7 @@
           <p class="font-bold text-lg text-left pb-4">Data Ulos Terbaru</p>
           <router-link to="ulos">
             <button class="flex flex-row items-center gap-2 justify-center">
-            <span class="text-primary_main">selengkapnya</span>
+            <span class="text-primary_main" id="span-btn-ulosSelengkapnya" >selengkapnya</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
               <path
                 stroke="#3355B5"
@@ -83,7 +83,7 @@
           <p class="font-bold text-lg text-left pb-4">Data Penenun Terbaru</p>
           <router-link to="penenun">
             <button class="flex flex-row items-center gap-2 justify-center">
-            <span class="text-primary_main">selengkapnya</span>
+            <span class="text-primary_main" id="span-btn-penenunSelengkapnya">selengkapnya</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
               <path
                 stroke="#3355B5"
