@@ -247,7 +247,7 @@ export default {
     const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
       this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
     }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
-      this.search !== '' ? '&search=' + this.search : ''
+      this.search !== '' ? '&searchByName=' + this.search : ''
     }`
     axios
       .get(apiUrl, {
@@ -278,7 +278,7 @@ export default {
       sortDir: 'asc',
       pageNo: 1,
       search: '',
-      sortBy: '',
+      sortBy: 'updatedAt',
 
     }
   },
