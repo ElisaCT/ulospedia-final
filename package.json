@@ -15,6 +15,7 @@
         "pinia": "^2.0.32",
         "preline": "^1.8.0",
         "swiper": "^9.3.2",
+        "vee-validate": "^4.9.6",
         "vue": "^3.2.47",
         "vue-router": "^4.1.6"
     },

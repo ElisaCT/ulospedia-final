@@ -6,6 +6,7 @@ import router from './router'
 import './assets/style.css'
 import 'swiper/css';
 import 'swiper/css/navigation';
+import './stores/validator'
 //import Vuelidate from 'vuelidate'
 
 //Vue.use(Vuelidate);

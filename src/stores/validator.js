@@ -34,6 +34,13 @@ defineRule('fileSize', (value) => {
     return true;
 })
 
+defineRule('required', (value) => {
+    if (!value || !value.length) {
+      return 'This field is required';
+    }
+    return true;
+  });
+
 // Customize the error messages
 // localize({
 //     en: {

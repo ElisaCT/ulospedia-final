@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
-    <div class="">
+    <Form @submit="submit">
       <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Tambah Penenun</h3>
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6 mb-8">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Penenun</h5>
@@ -9,7 +9,7 @@
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Gambar Penenun*</label
           >
-          <div class="flex items-center">
+          <div class="flex gap-2 flex-col">
             <label
               for="dropzone-file"
               class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
@@ -22,25 +22,8 @@
                   class="w-24 h-24 object-cover rounded-lg"
                  
                 />
-                <!-- <button
-                  v-if="showDelete"
-                  @click="deleteImage"
-                  class="absolute top-1 right-1 bg-red-500 rounded-full p-1 z-10"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-5 w-5"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M13.707 6.293a1 1 0 010 1.414L11.414 10l2.293 2.293a1 1 0 01-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 01-1.414-1.414L8.586 10 6.293 7.707a1 1 0 011.414-1.414L10 8.586l2.293-2.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </button> -->
-                <div v-else>
+                
+                <div class="flex flex-col items-center justify-center">
                   <svg
                   v-if="!selectedImage"
                     xmlns="http://www.w3.org/2000/svg"
@@ -67,14 +50,18 @@
                   </p>
                 </div>
               </div>
-              <input
+              <Field name="file"  :rules="validateFile">
+                <input
                 @change="handleFileChange"
                 id="dropzone-file"
                 type="file"
                 class="hidden"
                 accept="image/png, image/jpg, image/jpeg"
               />
+              </Field>
+              
             </label>
+            <ErrorMessage name="file" class="text-danger_main text-s"/>
           </div>
         </div>
       </div>
@@ -86,20 +73,21 @@
             >Nama Penenun*</label
           >
           <div class="md:w-2/3">
-            <input
+            <Field
+            name="weaverName"
               v-model="name"
               type="text"
               id="ulos-name"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan nama penenun"
-              required
+              :rules="['required']"
             />
           </div>
+          <ErrorMessage name="weaverName"/>
         </div>
 
         <!-- born year -->
-        <!-- <DatePicker v-model="selectedDate" :disabled-dates="disableFutureDates"></DatePicker> -->
-        <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
+          <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Tahun Lahir Penenun*</label
           >
@@ -277,25 +265,31 @@
           Batal
         </button>
         <button
-          @click="submit"
+         
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
           Simpan
         </button>
       </div>
-    </div>
+    </Form>
   </div>
 </template>
 <script>
-// import Datepicker from '@vuepic/vue-datepicker';
-// import '@vuepic/vue-datepicker/dist/main.css';
+import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
+import { required, email, min } from '@vee-validate/rules';
+//import { required, fileSize, fileType } from '../../../stores/validator';
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
 import axios from 'axios'
+
+defineRule('required', required);
+
 export default {
   components: {
-    //Multiselect
-    //Datepicker
-    YearPicker
+    YearPicker,
+    Form,
+    Field,
+    ErrorMessage
+  
   },
   data() {
     return {
@@ -419,16 +413,36 @@ export default {
     toggleDatepicker() {
       this.showDatepicker = !this.showDatepicker
     },
-    // showDeleteButton() {
-    //   this.showDelete = true;
-    // },
-    // hideDeleteButton() {
-    //   this.showDelete = false;
-    // },
-    // deleteImage() {
-    //   this.selectedImage = null;
-    // }
-  }
+    validateFile(){
+      if(!this.selectedFile){
+        return 'Gambar penenun tidak boleh kosong'
+      } 
+
+      const allowedExtensions = ['jpg', 'jpeg', 'png'];
+      const maxSizeInBytes = 5 * 1024 * 1024;
+
+      const fileExtension = this.selectedImage.split('.').pop().toLowerCase();
+      const fileSize = this.selectedImage.size;
+
+         
+      if (!allowedExtensions.includes(fileExtension)) {
+        return 'Format gambar harus .jpg, .jpeg, atau .png';
+      }
+
+      if (fileSize > maxSizeInBytes) {
+        return 'Ukuran gambar tidak boleh lebih dari 5 MB';
+      }
+
+      return true;
+    },
+    defineRule('required', (value) => {
+    if (!value || !value.length) {
+      return 'This field is required';
+    }
+    return true;
+  });
+  },
+  
 }
 </script>
 <style scoped></style>
