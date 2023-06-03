@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
-    <Form @submit="submit">
+    <Form @submit="submit" :validation-schema="schema" v-slot="{handleSubmit, errors}">
       <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Tambah Penenun</h3>
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6 mb-8">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Penenun</h5>
@@ -50,18 +50,20 @@
                   </p>
                 </div>
               </div>
-              <Field name="file"  :rules="validateFile">
-                <input
+              <!-- <Field name="image"  > -->
+                <Field
+                name="image"
                 @change="handleFileChange"
+                :rules="validateFile"
                 id="dropzone-file"
                 type="file"
                 class="hidden"
                 accept="image/png, image/jpg, image/jpeg"
               />
-              </Field>
+              <!-- </Field> -->
               
             </label>
-            <ErrorMessage name="file" class="text-danger_main text-s"/>
+            <ErrorMessage name="image" class="text-danger_main text-s"/>
           </div>
         </div>
       </div>
@@ -72,18 +74,19 @@
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Nama Penenun*</label
           >
-          <div class="md:w-2/3">
+          <div class="md:w-2/3 flex flex-col gap-2">
             <Field
-            name="weaverName"
+              name="name"
               v-model="name"
               type="text"
               id="ulos-name"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan nama penenun"
-              :rules="['required']"
+              
             />
+            <ErrorMessage name="name" class="text-danger_main text-s"/>
           </div>
-          <ErrorMessage name="weaverName"/>
+          
         </div>
 
         <!-- born year -->
@@ -91,11 +94,13 @@
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Tahun Lahir Penenun*</label
           >
-          <div class="w-2/3 relative inline-block">
-            <div>
+          <div class="w-2/3 inline-block">
+            <div name="birthYear" rules="required" >
               <YearPicker v-on:updateYear="updateBirthYear"></YearPicker>
             </div>
+            <!-- <ErrorMessage name="birthYear" class="text-danger_main text-s" /> -->
           </div>
+          
         </div>
 
         <!-- suku penenun -->
@@ -105,9 +110,14 @@
             class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Suku Penenun*</label
           >
-          <div class="md:w-2/3 relative inline-block">
-            <select
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <div class="w-full relative inline-block">
+            <!-- <Field name="ethnic" v-slot="{ field }" rules="required" > -->
+              <Field
+              name="ethnic"
+              as="select"
               v-model="ethnic"
+              :value="ethnic"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
             >
@@ -123,7 +133,8 @@
               <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
                 Batak Mandailing
               </option>
-            </select>
+            </Field>
+            <!-- </Field> -->
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral_80"
             >
@@ -140,6 +151,8 @@
               </svg>
             </div>
           </div>
+          <ErrorMessage name="ethnic" class="text-danger_main text-s"/>
+          </div>
         </div>
 
         <!-- domisisli penenun -->
@@ -147,15 +160,16 @@
           <label for="domicile" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Domisili Penenun*</label
           >
-          <div class="md:w-2/3">
-            <input
+          <div class="md:w-2/3 gap-2 flex flex-col">
+            <Field
               v-model="domicile"
               type="text"
               id="domicile"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Contoh:Balige"
-              required
+              name="domicile"
             />
+            <ErrorMessage name="domicile" class="text-danger_main text-s"/>
           </div>
         </div>
         <!-- alat tenun -->
@@ -165,11 +179,15 @@
             class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Alat Tenun*</label
           >
-          <div class="md:w-2/3 relative inline-block">
-            <select
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <div class="w-full relative inline-block">
+            <!-- <Field name="theLoom"  rules="required" > -->
+              <Field 
+              name="theLoom"
               v-model="theLoom"
+              as="select"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-              required
+              
             >
               <option value="" disabled selected hidden>Pilih Alat Tenun</option>
               <option value="Gedogan" class="pb-3 hover:bg-primary_surface">Gedogan</option>
@@ -179,7 +197,8 @@
               <option value="ATM" class="pb-3 hover:bg-primary_surface">
                 Alat Tenun Mesin (ATM)
               </option>
-            </select>
+            </Field>
+            <!-- </Field> -->
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
             >
@@ -196,6 +215,8 @@
               </svg>
             </div>
           </div>
+          <ErrorMessage name="theLoom" class="text-danger_main text-s"/>
+          </div>
         </div>
 
         <!-- teknik tenun -->
@@ -203,12 +224,14 @@
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Teknik Tenun yang digunakan*</label
           >
-          <div class="md:w-2/3 relative inline-block">
-            <select
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <div class="w-full relative inline-block">
+            <Field  as="select" name="technique" rules="required" v-model="technique" class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5">
+              <!-- <select
               v-model="technique"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
-            >
+            > -->
               <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
               <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
                 Teknik Ikat Lungsi
@@ -219,7 +242,9 @@
               <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
                 Teknik Ikat Ganda
               </option>
-            </select>
+            <!-- </select> -->
+            </Field>
+            
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
             >
@@ -236,6 +261,8 @@
               </svg>
             </div>
           </div>
+          <ErrorMessage name="technique" class="text-danger_main text-s"/>
+          </div>
         </div>
 
         <!-- story penenun -->
@@ -243,29 +270,38 @@
           <label for="ulos-meaning" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Cerita Penenun*</label
           >
-          <div class="md:w-2/3">
-            <textarea
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <!-- <Field name="story" as="TextArea"  rules="required" > -->
+              <Field
+              name="story"
+              as="TextArea"
               v-model="story"
               type="text"
               id="ulos-meaning"
               rows="4"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan cerita yang ingin dibagikan penenun"
-              required
-            ></textarea>
+              
+            ></Field>
+            <!-- </Field> -->
+            <ErrorMessage name="story" class="text-danger_main text-s"/>
           </div>
+          
+
         </div>
       </div>
 
       <div class="flex flex-row gap-6 justify-end mt-6">
         <button
           @click="backToPenenun"
+          type="button"
           class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
         >
           Batal
         </button>
         <button
-         
+         type="submit"
+         @click="submit"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
           Simpan
@@ -275,24 +311,58 @@
   </div>
 </template>
 <script>
-import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
-import { required, email, min } from '@vee-validate/rules';
-//import { required, fileSize, fileType } from '../../../stores/validator';
+import { Form, Field, ErrorMessage} from 'vee-validate'
+import * as yup from 'yup';
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
 import axios from 'axios'
-
-defineRule('required', required);
 
 export default {
   components: {
     YearPicker,
     Form,
     Field,
-    ErrorMessage
+    ErrorMessage,
+    
   
   },
+  props:{
+    params:{
+      required:true,
+      type: Object
+    }
+  },
   data() {
+    const schema = yup.object().shape({
+      name: yup.string().required('Nama penenun harus diisi'),
+      birthYear: yup.string().required('Tahun lahir penenun harus diisi'),
+      domicile: yup.string().required('Domisili penenun harus diisi'),
+      ethnic: yup.string().required('Suku penenun harus diisi'),
+      theLoom: yup.string().required('Alat tenun penenun harus diisi'),
+      story: yup.string().required('Cerita penenun harus diisi'),
+      technique: yup.string().required('Teknik tenun penenun harus diisi'),
+
+  //     image: yup.object().shape({
+  //       file: yup.mixed()
+  //         .required('Gambar penenun harus diisi')
+  //         .test('fileType', 'Format gambar harus .jpg, .jpeg, .png', (value) => {
+  //           if (value) {
+  //             const supportedFormats = ['image/png', 'image/jpg', 'image/jpeg'];
+  //             return supportedFormats.includes(value.type);
+  //           }
+  //           return true;
+  //         })
+  //         .test('fileSize', 'Ukuran gambar harus kurang dari 5MB', (value) => {
+  //           if (value) {
+  //             const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+  //             return value.size <= maxSize;
+  //           }
+  //           return true;
+  //         }),
+  // }),
+    })
+    
     return {
+      schema,
       selectedTechnics: [],
       selectedTool: '',
       maxYear: new Date().getFullYear(),
@@ -337,7 +407,7 @@ export default {
     }
   },
   methods: {
-    async submit() {
+    async submit(values) {
       const token = localStorage.getItem('token')
 
       const responseDataText = await axios.post(
@@ -435,13 +505,9 @@ export default {
 
       return true;
     },
-    defineRule('required', (value) => {
-    if (!value || !value.length) {
-      return 'This field is required';
-    }
-    return true;
-  });
+    
   },
+  
   
 }
 </script>
