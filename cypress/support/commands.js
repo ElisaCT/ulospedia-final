@@ -43,3 +43,31 @@ Cypress.Commands.add("loginAndSetAuthToken", () => {
         Cypress.env('authToken', authToken);
     });
 });
+
+Cypress.Commands.add('getById', (selector) => {
+    return cy.get(`[id="${selector}"]`);
+});
+
+Cypress.Commands.add('getInputById', (id, value) => {
+    return cy
+        .get(`[id=${id}]`)
+        .should('exist')
+        .type(value)
+        .should('have.value', value)
+})
+
+Cypress.Commands.add('getByData', (selector) => {
+    return cy.get(`[data-cy=${selector}]`)
+})
+
+Cypress.Commands.add('getByName', (selector) => {
+    return cy.get(`[name=${selector}]`)
+})
+
+Cypress.Commands.add('getByType', (selector) => {
+    return cy.get(`[type=${selector}]`)
+})
+
+Cypress.Commands.add('getByTestDataId', (selector) => {
+    return cy.get(`[test-data-id="${selector}"]`);
+});

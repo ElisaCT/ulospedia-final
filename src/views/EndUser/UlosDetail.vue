@@ -313,21 +313,9 @@
                 <h5 class="font-normal text-xl">Rp350.000</h5>
               </div>
 
-<<<<<<< HEAD
-                                    <button 
-                                    id="btn-beli-sekarang" 
-                                    class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2">
-                                        Beli sekarang
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-=======
               <button class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2">
                 Beli sekarang
               </button>
->>>>>>> admin/dashboard
             </div>
           </div>
         </div>
