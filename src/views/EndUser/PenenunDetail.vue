@@ -5,33 +5,33 @@
       <div class="flex flex-col gap-12 items-center px-44 p-12">
         <div class="flex gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
-            <h3 class="font-semibold text-lg">{{ penenunDetail.name }}</h3>
+            <h3 id="nama-penenun" class="font-semibold text-lg">{{ penenunDetail.name }}</h3>
             <div class="flex flex-row gap-2">
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-primary_main"
+                <span class="text-sm font-normal text-primary_main" id="teknik-tenun-penenun"
                   >Penenun {{ penenunDetail.theLoom }}</span
                 >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-primary_main">{{
+                <span id="suku-penenun" class="text-sm font-normal text-primary_main">{{
                   penenunDetail.ethnic
                 }}</span>
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-primary_main"
+                <span id="usia-penenun" class="text-sm font-normal text-primary_main"
                   >Usia {{ penenunDetail.age }}</span
                 >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main"
+                <span id="domisili-penenun" class="text-sm font-normal text-gray-800 text-primary_main"
                   >Asal {{ penenunDetail.domicile }}</span
                 >
               </span>
@@ -42,14 +42,14 @@
         <!-- image -->
         <div>
           <div class="w-full flex justify-center h-72">
-            <img :src="penenunDetail.imageUrl" class="mx-auto w-8/12 rounded-lg object-cover" />
+            <img id="gambar-penenun" :src="penenunDetail.imageUrl" class="mx-auto w-8/12 rounded-lg object-cover" />
           </div>
         </div>
 
         <!-- story -->
         <div class="flex flex-col col-span-12">
           <div class="flex flex-col gap-3">
-            <p class="font-normal text-sm text-neutral_90 text-left">
+            <p id="cerita-penenun" class="font-normal text-sm text-neutral_90 text-left">
               {{ penenunDetail.story }}
             </p>
           </div>

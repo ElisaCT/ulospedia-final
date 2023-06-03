@@ -67,6 +67,7 @@
                 <li class="py-2">
                   <label>
                     <input
+                      id="label-batakToba"
                       type="radio"
                       value="Batak Toba"
                       v-model="selectedOptionEthnic"
@@ -210,7 +211,7 @@
       v-if="selectedOptionEthnic !== ''"
       class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
     >
-      <span class="text-sm font-normal text-primary_main mr-2">{{ selectedOptionEthnic }}</span>
+      <span id="label-asal-ulos" class="text-sm font-normal text-primary_main mr-2">{{ selectedOptionEthnic }}</span>
       <button @click="deleteSelectedOptionEthnic">
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
           <path
@@ -271,12 +272,12 @@
               <div
                 class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
               ></div>
-              <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
-                <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
-                <p class="text-neutral_10">{{ ulos.originEthnic }}</p>
+              <div id="card-ulos" class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
+                <h1 id="ulos-nama" class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
+                <p id="ulos-asal" class="text-neutral_10">{{ ulos.originEthnic }}</p>
               </div>
               <div v-if="ulos.isAvailableOnEcommerce === true">
-                <ecommerceAvailable class="absolute top-6 right-6 z-[3]" />
+                <ecommerceAvailable id="icon-produk-available" class="absolute top-6 right-6 z-[3]" />
               </div>
             </div>
           </router-link>

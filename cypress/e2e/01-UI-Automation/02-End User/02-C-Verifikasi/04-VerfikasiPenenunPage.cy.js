@@ -124,4 +124,29 @@ describe('Verifikasi Home Page - End User', () => {
             });
         })
     })
+
+    it.only('Verifikasi halaman detail penenun', () => {
+        cy.get('#penenun-Gedongan > .bg-gradient-to-b').click()
+        cy.getById('card-penenun').eq(0).click()
+        // Memastikan elemen nama penenun ditampilkan
+        cy.get('#nama-penenun').should('be.visible');
+
+        // Memastikan elemen teknik tenun penenun ditampilkan
+        cy.get('#teknik-tenun-penenun').should('be.visible');
+
+        // Memastikan elemen suku penenun ditampilkan
+        cy.get('#suku-penenun').should('be.visible');
+
+        // Memastikan elemen usia penenun ditampilkan
+        cy.get('#usia-penenun').should('be.visible');
+
+        // Memastikan elemen domisili penenun ditampilkan
+        cy.get('#domisili-penenun').should('be.visible');
+
+        // Memastikan elemen gambar penenun ditampilkan
+        cy.get('#gambar-penenun').should('be.visible');
+
+        // Memastikan elemen cerita penenun ditampilkan
+        cy.get('#cerita-penenun').should('be.visible');
+    });
 });
