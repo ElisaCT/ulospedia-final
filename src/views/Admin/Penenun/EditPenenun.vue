@@ -385,9 +385,8 @@ export default {
 
       const bodyReq = {
         id: this.weaverId,
-
         name: this.weaverData.name,
-        yearOfBirth: this.birthYear,
+        yearOfBirth: this.weaverData.birthYear,
         ethnic: this.weaverData.ethnic,
         domicile: this.weaverData.domicile,
         theLoom: this.weaverData.theLoom,

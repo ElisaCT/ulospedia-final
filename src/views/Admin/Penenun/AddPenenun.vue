@@ -43,7 +43,7 @@
                 </button>
                 <div v-else>
                   <svg
-                  v-if="!selectedImage"
+                    v-if="!selectedImage"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="40"
@@ -312,13 +312,9 @@ export default {
       theLoom: '',
       technique: '',
       story: '',
-<<<<<<< HEAD
-      image: null
-=======
       image: null,
       selectedImage: null,
       showDelete: false
->>>>>>> eb307a9115d58a69713d6349cfdb8d1429e34dc4
     }
   },
   watch: {
@@ -425,13 +421,13 @@ export default {
       this.showDatepicker = !this.showDatepicker
     },
     showDeleteButton() {
-      this.showDelete = true;
+      this.showDelete = true
     },
     hideDeleteButton() {
-      this.showDelete = false;
+      this.showDelete = false
     },
     deleteImage() {
-      this.selectedImage = null;
+      this.selectedImage = null
     }
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <Navbar />
+  <SliderUlos :data="imageList" />
   <div v-if="ulosDetails">
     <div v-for="ulosDetail in ulosDetails" :key="ulosDetail.id">
       <div class="flex flex-col items-center gap-12 px-32">
@@ -151,12 +152,12 @@
             </div>
           </div>
            If we need navigation buttons -->
-          <!-- <div class="swiper-button-prev swiper-button-white"></div>
+      <!-- <div class="swiper-button-prev swiper-button-white"></div>
           <div class="swiper-button-next swiper-button-white"></div>
         </div> -->
 
-        <!-- Thumbnail navigation -->
-        <!-- <div class="swiper-container nav-slider loading">
+      <!-- Thumbnail navigation -->
+      <!-- <div class="swiper-container nav-slider loading">
           <div class="swiper-wrapper" role="navigation">
             <div class="swiper-slide">
               <figure
@@ -241,7 +242,7 @@
           </div>
         </div> 
       </div> -->
-      <ImageDetail/>
+      <ImageDetail />
 
       <div class="grid grid-cols-12 gap-6 px-32">
         <!-- makna dan fungsi -->
@@ -329,15 +330,25 @@ import Navbar from '../../components/EndUser/Navbar.vue'
 import Footer from '../../components/EndUser/Footer.vue'
 import axios from 'axios'
 import ImageDetail from '../../components/EndUser/ImageDetail.vue'
+import SliderUlos from '../../components/EndUser/SliderUlos.vue'
+
 export default {
-  // eslint-disable-next-line vue/no-reserved-component-names
-  components: { Navbar, Footer, ImageDetail },
+  // eslint-disable-next-line vue/no-reserved-component-names, no-undef
+  components: { Navbar, Footer, ImageDetail, SliderUlos },
   data: function () {
     return {
-      ulosDetails: null
+      imageList: []
     }
   },
   mounted() {
+    console.log('TESTT')
+
+    axios.get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos/19`).then((response) => {
+      console.log(response.data)
+      this.imageList = response.data.data.ulosDetail.clientUlosRelatedImageResponseList
+      console.log(this.imageList)
+    })
+
     axios
       .get('http://company.ditenun.com/api/v1/ulospedia/client/ulos/' + this.$route.params.id)
       .then((response) => {
@@ -355,6 +366,4 @@ export default {
 .aspect-ratio {
   padding-top: 75%; /* 4:3 aspect ratio (75% = 3/4 * 100%) */
 }
-
-
 </style>
