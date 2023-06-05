@@ -11,6 +11,7 @@
           >
           <div class="flex items-center">
             <label
+              id="gambar-penenun"
               for="dropzone-file"
               class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
             >
@@ -20,10 +21,8 @@
                   :src="selectedImage"
                   alt="Preview"
                   class="w-24 h-24 object-cover rounded-lg"
-                  @mouseover="showDeleteButton"
-                  @mouseout="hideDeleteButton"
                 />
-                <button
+                <!-- <button
                   v-if="showDelete"
                   @click="deleteImage"
                   class="absolute top-1 right-1 bg-red-500 rounded-full p-1 z-10"
@@ -40,10 +39,10 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                </button>
+                </button> -->
                 <div v-else>
                   <svg
-                  v-if="!selectedImage"
+                    v-if="!selectedImage"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="40"
@@ -106,7 +105,7 @@
           >
           <div class="w-2/3 relative inline-block">
             <div>
-              <YearPicker v-on:updateYear="updateBirthYear"></YearPicker>
+              <YearPicker id="tahun-lahir-penenun" v-on:updateYear="updateBirthYear"></YearPicker>
             </div>
           </div>
         </div>
@@ -120,6 +119,7 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
+              id="dropdown-suku-penenun"
               v-model="ethnic"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
@@ -180,6 +180,7 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
+              id="dropdown-alat-tenun"
               v-model="theLoom"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
@@ -218,6 +219,7 @@
           >
           <div class="md:w-2/3 relative inline-block">
             <select
+              id="dropdown-teknik-tenun"
               v-model="technique"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
               required
@@ -272,12 +274,14 @@
 
       <div class="flex flex-row gap-6 justify-end mt-6">
         <button
+          id="btn-batal"
           @click="backToPenenun"
           class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
         >
           Batal
         </button>
         <button
+          id="btn-simpan"
           @click="submit"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
@@ -421,13 +425,13 @@ export default {
       this.showDatepicker = !this.showDatepicker
     },
     showDeleteButton() {
-      this.showDelete = true;
+      this.showDelete = true
     },
     hideDeleteButton() {
-      this.showDelete = false;
+      this.showDelete = false
     },
     deleteImage() {
-      this.selectedImage = null;
+      this.selectedImage = null
     }
   }
 }

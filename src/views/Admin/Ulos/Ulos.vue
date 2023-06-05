@@ -7,7 +7,7 @@
         <h3 class="font-medium text-3xl text-left pb-6">Daftar Ulos</h3>
         <router-link to="add-ulos">
           <button
-            class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
+           id="btn-tambah-ulos" class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
               <path
@@ -55,7 +55,7 @@
           <thead class="text-neutral_70 font-bold bg-[#F8F7FA] w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3" @click="sortedBy('name')">
+                <button id="btn-sort-nama-ulos" class="flex flex-row items-center gap-3" @click="sortedBy('name')">
                   Nama Ulos
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -70,7 +70,7 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3" @click="sortedBy('ethnic')">
+                <button id="btn-sort-suku-ulos" class="flex flex-row items-center gap-3" @click="sortedBy('ethnic')">
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -86,7 +86,7 @@
               </th>
               <th scope="col" class="px-6 py-3">Ukuran</th>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3" @click="sortedBy('technique')">
+                <button id="btn-sort-teknik-tenun" class="flex flex-row items-center gap-3" @click="sortedBy('technique')">
                   Teknik Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -107,6 +107,7 @@
           <template v-if="sortedItems.length > 0">
             <tbody class="divide-y divide-neutral_30 text-neutral_90">
               <tr
+                id="baris-daftar-ulos"
                 class="hover:bg-primary_surface hover:cursor-pointer"
                 v-for="(ulos, id) in sortedItems"
                 :key="id"
@@ -119,7 +120,7 @@
                 <td class="px-6 py-4" @click="goToDetailPage(ulos.id)">{{ ulos.technique }}</td>
                 <td class="px-6 py-4">
                   <div class="flex gap-4">
-                    <button class="p-[10px] bg-secondary_surface rounded">
+                    <button  id="btn-edit-ulos"  class="p-[10px] bg-secondary_surface rounded">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                         <path
                           stroke="#ECB11F"
@@ -148,7 +149,7 @@
                     </button>
 
                     <router-link :to="'/admin/edit-ulos/' + ulos.id">
-                      <button class="p-[10px] bg-danger_surface rounded">
+                      <button id="btn-hapus-ulos" class="p-[10px] bg-danger_surface rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                           <path
                             stroke="#CB3A31"
@@ -181,6 +182,7 @@
           </p>
           <div class="flex flex-row gap-4 items-center">
             <button
+              id="btn-prev-pagination"
               @click="previousPage"
               :disabled="isLoading || pageNo === 1"
               class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
@@ -200,6 +202,7 @@
               <span class="p-1 w-5 h-5">{{ pageNo }}</span>
             </div>
             <button
+            id="btn-next-pagination"
               @click="nextPage"
               :disabled="isLoading || lastPage"
               class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
