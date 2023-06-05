@@ -1,4 +1,4 @@
-describe('Verifikasi Home Page - End User', () => {
+describe('Verifikasi Sejarah Ulos - End User', () => {
 
     //pre condition
     beforeEach(() => {
