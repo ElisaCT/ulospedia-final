@@ -124,6 +124,7 @@ export default {
       .then((response) => {
         this.weaverDetails = response.data.data
         console.log(this.weaverDetails)
+        
       })
   },
   methods: {

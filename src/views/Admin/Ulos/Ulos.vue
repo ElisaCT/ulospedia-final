@@ -7,7 +7,7 @@
         <h3 class="font-medium text-3xl text-left pb-6">Daftar Ulos</h3>
         <router-link to="add-ulos">
           <button
-            class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
+           id="btn-tambah-ulos" class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
               <path
@@ -44,17 +44,18 @@
               <input
                 type="text"
                 id="table-search"
-                class="block p-2 pl-10 text-base font-normal text-neutral_30 rounded-lg w-80 bg-neutral_20 focus:ring-neutral_50 focus:border-neutral_80"
+                class="block p-2 pl-10 text-base font-normal text-neutral_80 rounded-lg w-80 bg-neutral_20 focus:ring-neutral_50 focus:border-neutral_80"
                 placeholder="Cari berdasarkan nama ulos"
+                v-model="search"
               />
             </div>
           </div>
         </div>
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead class="text-neutral_70 font-bold bg-[#F8F7FA] uppercase w-full rounded">
+          <thead class="text-neutral_70 font-bold bg-[#F8F7FA] w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3">
+                <button id="btn-sort-nama-ulos" class="flex flex-row items-center gap-3" @click="sortedBy('name')">
                   Nama Ulos
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -69,7 +70,7 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3">
+                <button id="btn-sort-suku-ulos" class="flex flex-row items-center gap-3" @click="sortedBy('ethnic')">
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -83,11 +84,9 @@
                   </svg>
                 </button>
               </th>
+              <th scope="col" class="px-6 py-3">Ukuran</th>
               <th scope="col" class="px-6 py-3">
-                ukuran
-              </th>
-              <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3">
+                <button id="btn-sort-teknik-tenun" class="flex flex-row items-center gap-3" @click="sortedBy('technique')">
                   Teknik Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -105,20 +104,23 @@
               <th scope="col" class="px-6 py-3"></th>
             </tr>
           </thead>
-          <template v-if="filteredUlos.length > 0">
+          <template v-if="sortedItems.length > 0">
             <tbody class="divide-y divide-neutral_30 text-neutral_90">
               <tr
+                id="baris-daftar-ulos"
                 class="hover:bg-primary_surface hover:cursor-pointer"
-                v-for="(ulos, id) in filteredUlos"
+                v-for="(ulos, id) in sortedItems"
                 :key="id"
               >
                 <td class="px-6 py-4" @click="goToDetailPage(ulos.id)">{{ ulos.name }}</td>
                 <td class="px-6 py-4" @click="goToDetailPage(ulos.id)">{{ ulos.ethnic }}</td>
-                <td class="px-6 py-4" @click="goToDetailPage(ulos.id)">{{ ulos.width }}x{{ ulos.length }} cm</td>
+                <td class="px-6 py-4" @click="goToDetailPage(ulos.id)">
+                  {{ ulos.width }}x{{ ulos.length }} cm
+                </td>
                 <td class="px-6 py-4" @click="goToDetailPage(ulos.id)">{{ ulos.technique }}</td>
                 <td class="px-6 py-4">
                   <div class="flex gap-4">
-                    <button class="p-[10px] bg-secondary_surface rounded">
+                    <button  id="btn-edit-ulos"  class="p-[10px] bg-secondary_surface rounded">
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                         <path
                           stroke="#ECB11F"
@@ -147,7 +149,7 @@
                     </button>
 
                     <router-link :to="'/admin/edit-ulos/' + ulos.id">
-                      <button class="p-[10px] bg-danger_surface rounded">
+                      <button id="btn-hapus-ulos" class="p-[10px] bg-danger_surface rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                           <path
                             stroke="#CB3A31"
@@ -180,6 +182,7 @@
           </p>
           <div class="flex flex-row gap-4 items-center">
             <button
+              id="btn-prev-pagination"
               @click="previousPage"
               :disabled="isLoading || pageNo === 1"
               class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
@@ -199,6 +202,7 @@
               <span class="p-1 w-5 h-5">{{ pageNo }}</span>
             </div>
             <button
+            id="btn-next-pagination"
               @click="nextPage"
               :disabled="isLoading || lastPage"
               class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
@@ -234,20 +238,28 @@ export default {
       ulosList: [],
       totalElement: 0,
       totalElementOnPage: 0,
-      sortDir: 'asc',
-      pageNo: 1,
-      searchQuery: '',
-      sortBy: '',
+
       lastPage: true,
       moveState: false,
       isLoading: false,
-      propName: 'Ulos'
+      propName: 'Ulos',
+
+      // utk sorting
+      pageNo: 1,
+      sortBy: 'updatedAt',
+      sortDir: 'asc',
+      search: ''
     }
   },
   mounted() {
     const token = localStorage.getItem('token')
+    const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/ulos?pageNo=${this.pageNo}${
+      this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
+    }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
+      this.search !== '' ? '&search=' + this.search : ''
+    }`
     axios
-      .get(`http://company.ditenun.com/api/v1/ulospedia/ulos?pageNo=${this.pageNo}`, {
+      .get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -259,23 +271,37 @@ export default {
         this.totalElement = response.data.data.ulos.totalEl
         this.totalElementOnPage = response.data.data.ulos.lastElOfPage
       })
+    
   },
   computed: {
-    filteredUlos() {
-      return this.ulosList.filter((ulos) =>
-        ulos.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
+    sortedItems() {
+      const sorted = [...this.ulosList]
+
+      // search result
+      const filtered = sorted.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
+      console.log(this.search)
+
+      filtered.sort((a, b) => {
+        if (a[this.sortBy] > b[this.sortBy]) {
+          return this.sortDir === 'asc' ? 1 : -1
+        }
+        if (a[this.sortBy] < b[this.sortBy]) {
+          return this.sortDir === 'asc' ? -1 : 1
+        }
+        return 0
+      })
+      return filtered;
     }
   },
   methods: {
     goToDetailPage(ulosId) {
-        this.$router.push(`/admin/ulos/detail-ulos/${ulosId}`)
+      this.$router.push(`/admin/ulos/detail-ulos/${ulosId}`)
     },
     defineParam(pageNo, sortBy, sortDir, search) {
       return `http://company.ditenun.com/api/v1/ulospedia/ulos?pageNo=${pageNo}${
         sortBy !== '' ? '&sortBy=' + sortBy : ''
       }${sortDir !== '' ? '&sortDir=' + sortDir : ''}${
-        search !== '' ? '&searchByName=' + search : ''
+        search !== '' ? '&search=' + search : ''
       }`
     },
     async nextPage() {
@@ -351,6 +377,13 @@ export default {
         this.isLoading = false
       }
     },
+    sortedBy(key) {
+      this.sortDir = this.sortBy === key ? (this.sortDir === 'asc' ? 'desc' : 'asc') : 'asc'
+
+      this.sortBy = key
+      console.log(key)
+      console.log(this.sortDir)
+    }
   }
 }
 </script>

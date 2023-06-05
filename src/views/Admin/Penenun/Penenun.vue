@@ -42,7 +42,7 @@
                 </svg>
               </div>
               <input
-                v-model="searchQuery"
+                v-model="search"
                 type="text"
                 id="table-search"
                 class="block p-2 pl-10 text-base font-normal text-neutral_90 rounded-lg w-80 bg-neutral_20 focus:ring-neutral_50 focus:border-neutral_80"
@@ -55,7 +55,7 @@
           <thead class="text-neutral_70 font-bold bg-[#F8F7FA] uppercase w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <button v-on:click="sortTable('name')" class="flex flex-row items-center gap-3">
+                <button @click="sortedBy('name')" class="flex flex-row items-center gap-3">
                   Nama Penenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -70,7 +70,7 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button v-on:click="sortTable('theLoom')" class="flex flex-row items-center gap-3">
+                <button @click="sortedBy('theLoom')" class="flex flex-row items-center gap-3">
                   Alat Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -86,7 +86,7 @@
               </th>
               <th scope="col" class="px-6 py-3">
                 <button
-                  v-on:click="sortTable('technique')"
+                  @click="sortedBy('technique')"
                   class="flex flex-row items-center gap-3"
                 >
                   Teknik Tenun
@@ -103,7 +103,7 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button v-on:click="sortTable('ethnic')" class="flex flex-row items-center gap-3">
+                <button @click="sortedBy('ethnic')" class="flex flex-row items-center gap-3">
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -121,11 +121,11 @@
               <th scope="col" class="px-6 py-3"></th>
             </tr>
           </thead>
-          <template v-if="filteredWeavers.length > 0">
+          <template v-if="sortedItems.length > 0">
             <tbody class="divide-y divide-neutral_30 text-neutral_90">
               <tr
                 class="hover:bg-primary_surface hover:cursor-pointer"
-                v-for="(weavers, id) in filteredWeavers"
+                v-for="(weavers, id) in sortedItems"
                 :key="id"
               >
                 <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.name }}</td>
@@ -244,9 +244,13 @@ export default {
   // ini udah deploy di server del
   mounted() {
     const token = localStorage.getItem('token')
-    console.log(token)
+    const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
+      this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
+    }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
+      this.search !== '' ? '&searchByName=' + this.search : ''
+    }`
     axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/weavers?sortDir=desc', {
+      .get(apiUrl, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -264,17 +268,24 @@ export default {
       weavers: [],
       totalElement: 0,
       totalElementOnPage: 0,
-      sortDir: 'asc',
-      pageNo: 1,
-      searchQuery: '',
-      sortBy: '',
+      
       lastPage: true,
       moveState: false,
       isLoading: false,
-      propName: 'Penenun'
+      propName: 'Penenun',
+
+      // sort
+      sortDir: 'asc',
+      pageNo: 1,
+      search: '',
+      sortBy: 'updatedAt',
+
     }
   },
   methods: {
+    goToDetailPage(weaverId) {
+      this.$router.push(`/admin/penenun/detail-penenun/${weaverId}`)
+    },
     handleWeaverDeleted(weaverId) {
       this.weavers = this.weavers.filter((weaver) => weaver.id !== weaverId)
     },
@@ -285,34 +296,34 @@ export default {
         search !== '' ? '&searchByName=' + search : ''
       }`
     },
-    async sortByName() {
-      if (!this.moveState) {
-        this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc'
-      } else {
-        this.moveState = false
-        this.sortDir = 'asc'
-      }
-      const token = localStorage.getItem('token')
-      const url = this.defineParam(this.pageNo, 'name', 'asc', '')
-      console.log(url)
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      console.log(response)
-      this.weavers = response.data.data.weavers.weaversListAdminDashboard
-      this.totalElement = response.data.data.weavers.totalAllElements
-      this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
+    // async sortByName() {
+    //   if (!this.moveState) {
+    //     this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc'
+    //   } else {
+    //     this.moveState = false
+    //     this.sortDir = 'asc'
+    //   }
+    //   const token = localStorage.getItem('token')
+    //   const url = this.defineParam(this.pageNo, 'name', 'asc', '')
+    //   console.log(url)
+    //   const response = await axios.get(url, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   })
+    //   console.log(response)
+    //   this.weavers = response.data.data.weavers.weaversListAdminDashboard
+    //   this.totalElement = response.data.data.weavers.totalAllElements
+    //   this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
 
-      // cek apakah current page adalah page terakhir
-      if (!response.data.data.weavers.lastPage) {
-        this.pageNo = this.pageNo + 1
-        this.lastPage = false
-      } else {
-        this.lastPage = true
-      }
-    },
+    //   // cek apakah current page adalah page terakhir
+    //   if (!response.data.data.weavers.lastPage) {
+    //     this.pageNo = this.pageNo + 1
+    //     this.lastPage = false
+    //   } else {
+    //     this.lastPage = true
+    //   }
+    // },
     async nextPage() {
       console.log('DITEKAN')
       console.log(this.lastPage)
@@ -405,25 +416,34 @@ export default {
         console.error(error)
       }
     },
-    sortTable(sortBy) {
-      if (this.sortBy === sortBy) {
-        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc'
-      } else {
-        this.sortBy = sortBy
-        this.sortOrder = 'asc'
-      }
-      this.fetchWeavers()
-    },
-    goToDetailPage(weaverId) {
-      this.$router.push(`/admin/penenun/detail-penenun/${weaverId}`)
+    sortedBy(key) {
+      this.sortDir = this.sortBy === key ? (this.sortDir === 'asc' ? 'desc' : 'asc') : 'asc'
+
+      this.sortBy = key
+      console.log(key)
+      console.log(this.sortDir)
     }
   },
   computed: {
-    filteredWeavers() {
-      return this.weavers.filter((weaver) =>
-        weaver.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-      )
+    sortedItems() {
+      const sorted = [...this.weavers]
+
+      // search result
+      const filtered = sorted.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
+      console.log(this.search)
+
+      filtered.sort((a, b) => {
+        if (a[this.sortBy] > b[this.sortBy]) {
+          return this.sortDir === 'asc' ? 1 : -1
+        }
+        if (a[this.sortBy] < b[this.sortBy]) {
+          return this.sortDir === 'asc' ? -1 : 1
+        }
+        return 0
+      })
+      return filtered;
     }
+
   },
   components: {
     Sidebar,
