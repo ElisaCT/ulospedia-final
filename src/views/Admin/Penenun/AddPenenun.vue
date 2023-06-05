@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
-    <Form @submit="submit" :validation-schema="schema" v-slot="{handleSubmit, errors}">
+    <Form @submit="submit">
       <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Tambah Penenun</h3>
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6 mb-8">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Penenun</h5>
@@ -50,9 +50,9 @@
                   </p>
                 </div>
               </div>
-              <!-- <Field name="image"  > -->
+              <!-- <Field name="image" > -->
                 <Field
-                name="image"
+               name="image"
                 @change="handleFileChange"
                 :rules="validateFile"
                 id="dropzone-file"
@@ -67,6 +67,7 @@
           </div>
         </div>
       </div>
+      <Form @submit="submit" :validation-schema="schema" v-slot="{handleSubmit, errors}">
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Informasi Penenun</h5>
 
@@ -308,6 +309,7 @@
         </button>
       </div>
     </Form>
+    </Form>
   </div>
 </template>
 <script>
@@ -315,6 +317,9 @@ import { Form, Field, ErrorMessage} from 'vee-validate'
 import * as yup from 'yup';
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
 import axios from 'axios'
+import { reactive } from 'vue';
+import { useField, useForm } from 'vee-validate';
+
 
 export default {
   components: {
@@ -334,31 +339,31 @@ export default {
   data() {
     const schema = yup.object().shape({
       name: yup.string().required('Nama penenun harus diisi'),
-      birthYear: yup.string().required('Tahun lahir penenun harus diisi'),
+      //birthYear: yup.string().required('Tahun lahir penenun harus diisi'),
       domicile: yup.string().required('Domisili penenun harus diisi'),
       ethnic: yup.string().required('Suku penenun harus diisi'),
       theLoom: yup.string().required('Alat tenun penenun harus diisi'),
       story: yup.string().required('Cerita penenun harus diisi'),
       technique: yup.string().required('Teknik tenun penenun harus diisi'),
-
-  //     image: yup.object().shape({
-  //       file: yup.mixed()
-  //         .required('Gambar penenun harus diisi')
-  //         .test('fileType', 'Format gambar harus .jpg, .jpeg, .png', (value) => {
-  //           if (value) {
-  //             const supportedFormats = ['image/png', 'image/jpg', 'image/jpeg'];
-  //             return supportedFormats.includes(value.type);
-  //           }
-  //           return true;
-  //         })
-  //         .test('fileSize', 'Ukuran gambar harus kurang dari 5MB', (value) => {
-  //           if (value) {
-  //             const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-  //             return value.size <= maxSize;
-  //           }
-  //           return true;
-  //         }),
-  // }),
+//       image: yup.object().shape({
+//   file: yup
+//     .mixed()
+//     .required('Gambar penenun harus diisi')
+//     .test('fileType', 'Format gambar harus .jpg, .jpeg, .png', (value) => {
+//       if (value) {
+//         const supportedFormats = ['image/png', 'image/jpg', 'image/jpeg'];
+//         return supportedFormats.includes(value.type);
+//       }
+//       return true;
+//     })
+//     .test('fileSize', 'Ukuran gambar harus kurang dari 5MB', (value) => {
+//       if (value) {
+//         const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+//         return value.size <= maxSize;
+//       }
+//       return true;
+//     }),
+// })
     })
     
     return {
@@ -483,31 +488,69 @@ export default {
     toggleDatepicker() {
       this.showDatepicker = !this.showDatepicker
     },
-    validateFile(){
-      if(!this.selectedFile){
-        return 'Gambar penenun tidak boleh kosong'
-      } 
+    validateFile() {
+    if (!this.selectedImage) {
+      return 'Gambar penenun tidak boleh kosong';
+    }
 
-      const allowedExtensions = ['jpg', 'jpeg', 'png'];
-      const maxSizeInBytes = 5 * 1024 * 1024;
+    const allowedExtensions = ['jpg', 'jpeg', 'png'];
+    const maxSizeInBytes = 5 * 1024 * 1024;
 
-      const fileExtension = this.selectedImage.split('.').pop().toLowerCase();
-      const fileSize = this.selectedImage.size;
+    const fileExtension = this.selectedImage.name.split('.').pop().toLowerCase();
+    const fileSize = this.selectedImage.size;
 
-         
-      if (!allowedExtensions.includes(fileExtension)) {
-        return 'Format gambar harus .jpg, .jpeg, atau .png';
-      }
+    if (!allowedExtensions.includes(fileExtension)) {
+      return 'Format gambar harus .jpg, .jpeg, atau .png';
+    }
 
-      if (fileSize > maxSizeInBytes) {
-        return 'Ukuran gambar tidak boleh lebih dari 5 MB';
-      }
+    if (fileSize > maxSizeInBytes) {
+      return 'Ukuran gambar tidak boleh lebih dari 5 MB';
+    }
 
-      return true;
-    },
+    return true;
+  },
     
   },
-  
+  // setup() {
+  //   const { value: selectedImage, errorMessage, handleBlur, handleInput } = useField(
+  //     'image',
+  //     (value) => {
+  //       if (!value) {
+  //         return 'Gambar penenun harus diisi';
+  //       }
+  //       const supportedFormats = ['image/png', 'image/jpg', 'image/jpeg'];
+  //       if (!supportedFormats.includes(value.type)) {
+  //         return 'Format gambar harus .jpg, .jpeg, .png';
+  //       }
+  //       const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+  //       if (value.size > maxSize) {
+  //         return 'Ukuran gambar harus kurang dari 5MB';
+  //       }
+  //       return true;
+  //     }
+  //   );
+  //   const { validate } = useForm();
+
+  //   const handleFileChange = (event) => {
+  //     const image = event.target.files[0];
+  //     if (image) {
+  //       const reader = new FileReader();
+  //       reader.onload = (e) => {
+  //         selectedImage.value = e.target.result;
+  //         validate('image'); // Trigger validation for the 'image' field
+  //       };
+  //       reader.readAsDataURL(image);
+  //     }
+  //   };
+
+  //   return {
+  //     selectedImage,
+  //     handleFileChange,
+  //     errorMessage,
+  //     handleBlur,
+  //     handleInput,
+  //   };
+  // },
   
 }
 </script>

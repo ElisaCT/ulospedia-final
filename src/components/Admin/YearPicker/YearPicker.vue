@@ -31,28 +31,31 @@
   </div>
 </template>
 <script>
+import { Form, Field, ErrorMessage, FieldArray} from 'vee-validate'
+import * as yup from 'yup';
 export default {
-  data() {
-    return {
-      selectedYear: new Date().getFullYear(),
-      years: []
-    }
-  },
-  created() {
-    this.populateYears()
-  },
-  methods: {
-    populateYears() {
-      this.years = []
-      const currentYear = new Date().getFullYear()
-      for (let year = currentYear; year >= 1950; year--) {
-        this.years.push(year)
-      }
+    data() {
+        return {
+            selectedYear: new Date().getFullYear(),
+            years: []
+        };
     },
-    emitYear() {
-      this.$emit('updateYear', this.selectedYear)
-    }
-  }
+    created() {
+        this.populateYears();
+    },
+    methods: {
+        populateYears() {
+            this.years = [];
+            const currentYear = new Date().getFullYear();
+            for (let year = currentYear; year >= 1950; year--) {
+                this.years.push(year);
+            }
+        },
+        emitYear() {
+            this.$emit("updateYear", this.selectedYear);
+        }
+    },
+    components: { FieldArray }
 }
 </script>
 <style lang=""></style>
