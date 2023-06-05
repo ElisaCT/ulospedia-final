@@ -6,8 +6,8 @@
         </div>
 
       <div class="md:w-1/2 text-center md:text-left md:text-xl">
-        <h1 class="text-5xl font-bold text-[#141414] leading-tight">Ulos Tradisional</h1>
-        <p class="mt-4 text-gray-600 text-lg md:text-xl">Ulos tradisional merupakan ulos yang dibuat menggunakan alat tenun tangan (gedogan) dan bahan alami, seperti kapas dan pewarna alami. Penenun membutuhkan waktu berminggu-minggu hingga berbulan-bulan untuk menghasilkan sebuah ulos, tergantung kompleksitas dan ukurannya.</p>
+        <h1 id="text-ulosTradisional" class="text-5xl font-bold text-[#141414] leading-tight">Ulos Tradisional</h1>
+        <p id="text-defenisiUlosTradisional" class="mt-4 text-gray-600 text-lg md:text-xl">Ulos tradisional merupakan ulos yang dibuat menggunakan alat tenun tangan (gedogan) dan bahan alami, seperti kapas dan pewarna alami. Penenun membutuhkan waktu berminggu-minggu hingga berbulan-bulan untuk menghasilkan sebuah ulos, tergantung kompleksitas dan ukurannya.</p>
       </div>
 
     </div>
@@ -15,8 +15,8 @@
     <!-- ulos pengembangan -->
     <div class="flex flex-wrap items-center justify-center md:flex-row py-16 px-6">
       <div class="md:w-1/2 text-center md:text-left md:text-xl">
-        <h1 class="text-5xl font-bold text-[#141414] leading-tight">Ulos Pengembangan</h1>
-        <p class="mt-4 text-gray-600 text-lg md:text-xl">Ulos pengembangan adalah kain ulos yang diproduksi menggunakan teknologi modern (alat tenun mesin) dan menggunakan bahan-bahan sintetis. Ulos pengembangan dibuat untuk memenuhi permintaan pasar yang meningkat.</p>
+        <h1 id="text-ulosPengembangan" class="text-5xl font-bold text-[#141414] leading-tight">Ulos Pengembangan</h1>
+        <p id="text-defenisiUlosPengembangan" class="mt-4 text-gray-600 text-lg md:text-xl">Ulos pengembangan adalah kain ulos yang diproduksi menggunakan teknologi modern (alat tenun mesin) dan menggunakan bahan-bahan sintetis. Ulos pengembangan dibuat untuk memenuhi permintaan pasar yang meningkat.</p>
       </div>
 
       <div class="md:w-1/2 mt-12 md:mt-0">

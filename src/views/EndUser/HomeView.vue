@@ -11,14 +11,14 @@
           Lebih dekat dengan <span class="text-primary_main">Ulos</span> bersama
           <span class="text-primary_main">Ulospedia</span>
         </h1>
-        <p class="mt-4 text-neutral_90 text-lg md:text-xl">
+        <p id="text-highlightUlos1" class="mt-4 text-neutral_90 text-lg md:text-xl">
           Kembangkan pengetahuanmu tentang ulos <br />
           bersama Ditenun Ulospedia
         </p>
         <div class="mt-8 md:mt-12">
           <a
             href="/galeri-ulos"
-            id="btn-ekplore-ulos"
+            id="btn-exploreUlos"
             class="bg-primary_main hover:bg-primary_hover text-neutral_10 font-medium py-3 px-10 rounded-lg"
             >Eksplor Ulos</a
           >
@@ -40,7 +40,7 @@
         >
           <div class="px-6 py-4">
             <h4 class="font-bold text-2xl mb-2">Apa itu ulos?</h4>
-            <p class="text-gray-700 text-lg">
+            <p id="text-defenisiUlos" class="text-gray-700 text-lg">
               Ulos merupakan selendang tenun tradisional Batak yang berasal dari Sumatera Utara.
               Kain ini berperan penting dalam setiap tahap kehidupan budaya Batak, yaitu kelahiran,
               kehidupan, dan kematian.
@@ -48,7 +48,8 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
-              href="#"
+              id="span-btn-jelajahiUlos"
+              href="/sejarah-ulos"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
               >Jelajahi Ulos</a
             >
@@ -74,7 +75,7 @@
         >
           <div class="px-6 py-4">
             <h4 class="font-bold text-2xl mb-2">Lahir, hidup, dan mati</h4>
-            <p class="text-gray-700 text-lg">
+            <p id="text-lahirHidupMati" class="text-gray-700 text-lg">
               Ulos merupakan simbol kesuburan dalam upacara kelahiran, bagian penting dari tata cara
               pelaksanaan upacara adat selama hidup, serta tanda berkabung dan penghormatan terakhir
               pada saat kematian.
@@ -82,7 +83,8 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
-              href="#"
+              id="span-btn-sejarahUlos"
+              href="/sejarah-ulos"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
               >Telusuri Sejarah Ulos</a
             >
@@ -106,6 +108,11 @@
   <div class="mx-[180px]">
     <!-- jenis Ulos -->
     <JenisUlos />
+  </div>
+
+  <div class="home">
+    <h1>Welcome to My YouTube Channel</h1>
+    <VideoPlayer videoId="ywWLIckWVtk" />
   </div>
 
   <Footer />
@@ -132,3 +139,11 @@ export default {
   }
 }
 </script>
+
+<style>
+iframe {
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+}
+</style>

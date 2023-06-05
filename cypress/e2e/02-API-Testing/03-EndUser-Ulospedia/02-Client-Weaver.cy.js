@@ -1,6 +1,7 @@
 // API ini digunakan untuk mengakses data penenun yang dibutuhkan pada fitur penenun padaweb Ulospedia. }
 
 describe('Pengujian API: Data Penenun', () => {
+    const weaverId = 10;
 
     it('GET: Mendapatkan semua data penenun', () => {
         const theLoom = 'Gedongan';
@@ -19,9 +20,7 @@ describe('Pengujian API: Data Penenun', () => {
         });
     });
 
-    it('GET: Mendapatkan data penenun berdasarkan penenun ID yang valid(Tersedia)', () => {
-        const weaverId = 33;
-
+    it('GET: Mendapatkan data detail penenun berdasarkan penenun ID yang valid(Tersedia)', () => {
         cy.request({
             method: 'GET',
             url: `ulospedia/client/weavers/${weaverId}`,
@@ -41,4 +40,18 @@ describe('Pengujian API: Data Penenun', () => {
             expect(response.body.data.weaver).to.have.property('story');
         });
     });
+
+    it("GET: Mendapatkan Gambar/Image Penenun berdasarkan id yang valid(tersedia)", () => {
+        cy.request({
+            method: 'GET',
+            url: `ulospedia/client/weavers/${weaverId}/image`,
+            headers: {
+                'accept': '*/*'
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Add additional assertions for the response body if needed
+        });
+    });
+
 });
