@@ -694,7 +694,7 @@
                 </div>
                 <div class="flex flex-col gap-6 md:flex-row pb-6">
                   <label
-                    for="ulos-meaning"
+                    for="ulos-function"
                     class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                     >Fungsi Ulos</label
                   >
@@ -702,7 +702,7 @@
                     <textarea
                       v-model="func"
                       type="text"
-                      id="ulos-meaning"
+                      id="ulos-function"
                       rows="4"
                       class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
                       placeholder="Masukkan fungsi ulos"
@@ -728,8 +728,9 @@
                     >
 
                     <label class="relative inline-flex items-center cursor-pointer">
-                      <input id="status-togel-eccommerce" type="checkbox" value="" class="sr-only peer" v-model="toggleStatus" />
+                      <input  type="checkbox" value="" class="sr-only peer" v-model="toggleStatus" />
                       <div
+                        id="status-togel-eccommerce"
                         class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary_main rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
                       ></div>
                     </label>
@@ -770,6 +771,7 @@
                               <path fill="url(#a)" d="M0 0h40v40H0z" />
                               <defs>
                                 <pattern
+                                  data-test-id="gambar-produk"
                                   id="a"
                                   width="1"
                                   height="1"
@@ -810,7 +812,7 @@
                       <div class="md:w-2/3">
                         <input
                           type="text"
-                          id="ulos-name"
+                          id="ulos-name-produk"
                           :class="{
                             'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                             'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -911,6 +913,7 @@
             Selanjutnya
           </button>
           <button
+            id="btn-simpan"
             @click="save"
             :hidden="currentStep < totalSteps"
             class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
