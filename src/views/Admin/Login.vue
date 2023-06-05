@@ -18,7 +18,6 @@
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form class="space-y-6" v-on:submit.prevent="login">
-          <form class="space-y-6" v-on:submit.prevent="login">
             <div>
               <label
                 id="field-username"
@@ -28,7 +27,7 @@
               >
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"></svg>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
                     <path
                       stroke="#404040"
@@ -73,13 +72,11 @@
                   </svg>
                 </div>
                 <input
-                <input
                   v-model="password"
                   id="password"
                   name="password"
                   type="password"
                   autocomplete="current-password"
-                  required
                   required
                   class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_main block w-full pl-10 p-2.5"
                   placeholder="Masukkan password anda"
@@ -139,7 +136,6 @@ export default {
   data() {
     return {
       username: '',
-      password: ''
       password: ''
     }
   },
