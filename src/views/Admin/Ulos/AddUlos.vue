@@ -137,7 +137,7 @@
         <div class="step-content">
           <!-- image -->
           <div v-show="currentStep === 1" class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6">
-            <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Ulos</h5>
+            <h5 id="stepper-tambah-ulos" class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Ulos</h5>
             <div class="flex flex-row gap-6">
               <div class="text-sm text-left text-neutral_80 gap-3 w-56">
                 <p class="font-medium pb-3">Gambar Ulos Utuh*</p>
@@ -159,7 +159,7 @@
                         :required="index === 0"
                       />
                       <div
-                        class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                        id="btn-tambah-gambar-utama"  class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
                           v-if="field.image"
@@ -210,7 +210,7 @@
 
                 <button @click="addField('ulosFields')" :hidden="ulosFields.length >= 5">
                   <div
-                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                    id="btn-tambah-gambar-lainnya-gambar-utama" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -262,7 +262,7 @@
                         :required="index === 0"
                       />
                       <div
-                        class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                          id="btn-tambah-gambar-potongan" class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
                           v-if="field.image"
@@ -299,7 +299,7 @@
                         <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button @click="removeField('potonganFields', index)" class="absolute">
+                    <button id="btn-remove-gambar" @click="removeField('potonganFields', index)" class="absolute">
                       Remove
                     </button>
                   </div>
@@ -307,7 +307,7 @@
 
                 <button @click="addField('potonganFields')" :hidden="potonganFields.length >= 5">
                   <div
-                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                    id="btn-tambah-gambar-lainnya-gambar-potongan" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -359,7 +359,7 @@
                         @change="handleFileChange('motifFields', index, $event)"
                       />
                       <div
-                        class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                        id="btn-tambah-gambar-motif" class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
                           v-if="field.image"
@@ -404,7 +404,7 @@
 
                 <button @click="addField('motifFields')" :hidden="motifFields.length >= 5">
                   <div
-                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                    id="btn-tambah-gambar-lainnya-gambar-motif" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -471,24 +471,25 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="dropdown-suku-ulos"
                       v-model="ethnic"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
                       <option value="" disabled selected hidden>Pilih Suku Ulos</option>
-                      <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">
+                      <option id="dropdown-batak-toba" value="Batak Toba" class="pb-3 hover:bg-primary_surface">
                         Batak Toba
                       </option>
-                      <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
+                      <option id="dropdown-batak-simalungun" value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
                         Batak Simalungun
                       </option>
-                      <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">
+                      <option id="dropdown-batak-karo" value="Batak Karo" class="pb-3 hover:bg-primary_surface">
                         Batak Karo
                       </option>
-                      <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
+                      <option id="dropdown-batak-angkola" value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
                         Batak Angkola
                       </option>
-                      <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
+                      <option id="dropdown-batak-mandailing" value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
                         Batak Mandailing
                       </option>
                     </select>
@@ -520,22 +521,22 @@
                     
                       
                       <option value="Merah" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Merah" /> Merah
+                        <input id="checkbox-merah" type="checkbox" name="color[]" value="Merah" /> Merah
                       </option>
                       <option value="Hitam" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Hitam" /> Hitam
+                        <input id="checkbox-hitam" type="checkbox" name="color[]" value="Hitam" /> Hitam
                       </option>
                       <option value="Putih" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Kuning" /> Kuning
+                        <input id="checkbox-kuning" type="checkbox" name="color[]" value="Kuning" /> Kuning
                       </option>
                       <option value="Biru" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Biru" /> Biru
+                        <input id="checkbox-biru" type="checkbox" name="color[]" value="Biru" /> Biru
                       </option>
                       <option value="Hijau" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Hijau" /> Hijau
+                        <input id="checkbox-hijau" type="checkbox" name="color[]" value="Hijau" /> Hijau
                       </option>
                       <option value="Kuning" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Kuning" /> Kuning
+                        <input id="checkbox-kuning" type="checkbox" name="color[]" value="Kuning" /> Kuning
                       </option>
                     
                     
@@ -551,6 +552,7 @@
                   <div class="space-y-2">
                     <label class="inline-flex items-center pr-8">
                       <input
+                        id="jenis-ulos-tradisional"
                         type="radio"
                         class="form-radio text-primary_main"
                         name="radioGroup"
@@ -561,6 +563,7 @@
                     </label>
                     <label class="inline-flex items-center">
                       <input
+                        id="jenis-ulos-pengembangan"
                         type="radio"
                         class="form-radio text-primary_main"
                         name="radioGroup"
@@ -637,18 +640,19 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="dropdown-teknik-tenun"
                       v-model="technique"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
                       <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
-                      <option value="Teknik Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
+                      <option id="teknik-ikat-lungsi" value="Teknik Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
                         Teknik Ikat Lungsi
                       </option>
-                      <option value="Teknik Ikat Pakan" class="pb-3 hover:bg-primary_surface">
+                      <option  id="teknik-ikat-pakan" value="Teknik Ikat Pakan" class="pb-3 hover:bg-primary_surface">
                         Teknik Ikat Pakan
                       </option>
-                      <option value="Teknik Ikat Ganda" class="pb-3 hover:bg-primary_surface">
+                      <option  id="teknik-ikat-ganda" value="Teknik Ikat Ganda" class="pb-3 hover:bg-primary_surface">
                         Teknik Ikat Ganda
                       </option>
                     </select>
@@ -724,7 +728,7 @@
                     >
 
                     <label class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" value="" class="sr-only peer" v-model="toggleStatus" />
+                      <input id="status-togel-eccommerce" type="checkbox" value="" class="sr-only peer" v-model="toggleStatus" />
                       <div
                         class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary_main rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
                       ></div>
@@ -820,14 +824,14 @@
                     </div>
                     <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                       <label
-                        for="ulos-name"
+                        for="ulos-price"
                         class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                         >Harga Produk*</label
                       >
                       <div class="md:w-2/3">
                         <input
                           type="text"
-                          id="ulos-name"
+                          id="ulos-price"
                           :class="{
                             'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                             'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -841,14 +845,14 @@
                     </div>
                     <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                       <label
-                        for="ulos-name"
+                        for="ulos-url"
                         class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                         >URL Produk*</label
                       >
                       <div class="md:w-2/3">
                         <input
                           type="text"
-                          id="ulos-name"
+                          id="ulos-url"
                           :class="{
                             'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                             'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -860,12 +864,13 @@
                         />
                       </div>
                     </div>
-                    <button @click="removeForm(form.id)" :disabled="!toggleStatus">Remove</button>
+                    <button id="btn-remove-produk" @click="removeForm(form.id)" :disabled="!toggleStatus">Remove</button>
                   </div>
                 </form>
               </div>
 
               <button
+              id="btn-tambah-produk-eccomerce"
               :disabled="!toggleStatus"
                 @click="addForm"
                 :class="{
@@ -882,6 +887,7 @@
         <div class="flex flex-row gap-6 justify-end mt-6">
           <!-- Stepper navigation buttons -->
           <button
+            id="btn-batal"
             @click="backToUlos"
             :hidden="currentStep > 1"
             class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
@@ -889,6 +895,7 @@
             Batal
           </button>
           <button
+            id="btn-kembali"
             @click="previousStep"
             :hidden="currentStep === 1"
             class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
@@ -896,6 +903,7 @@
             Kembali
           </button>
           <button
+            id="btn-selanjutnya"
             @click="nextStep"
             :hidden="currentStep === totalSteps"
             class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
