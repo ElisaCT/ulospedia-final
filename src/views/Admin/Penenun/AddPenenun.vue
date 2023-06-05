@@ -42,7 +42,7 @@
                 </button> -->
                 <div v-else>
                   <svg
-                  v-if="!selectedImage"
+                    v-if="!selectedImage"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="40"
@@ -424,15 +424,15 @@ export default {
     toggleDatepicker() {
       this.showDatepicker = !this.showDatepicker
     },
-    // showDeleteButton() {
-    //   this.showDelete = true;
-    // },
-    // hideDeleteButton() {
-    //   this.showDelete = false;
-    // },
-    // deleteImage() {
-    //   this.selectedImage = null;
-    // }
+    showDeleteButton() {
+      this.showDelete = true
+    },
+    hideDeleteButton() {
+      this.showDelete = false
+    },
+    deleteImage() {
+      this.selectedImage = null
+    }
   }
 }
 </script>
