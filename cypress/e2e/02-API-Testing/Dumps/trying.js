@@ -1,3 +1,105 @@
+describe('Fungsionalitas Login - Admin', () => {
+
+    //pre condition
+    beforeEach(() => {
+        cy.visit('http://127.0.0.1:1753/admin/login');
+    });
+    //Admin login dengan username dan katasandi yang benar/valid
+    it('Admin login dengan username dan katasandi yang benar/valid', () => {
+        cy.get('#username-address-icon').type('rewina123')
+        cy.get('#password').type('12345')
+        cy.get('#btn-login').click()
+
+    })
+
+    describe('Login dengan Invalid credentials', () => {
+        const testData = [{
+                //username valid, password kosong
+                username: 'rewina123',
+                errorMessage: 'password can not be empty'
+            },
+            {
+                //username valid, password salah
+                username: 'rewina123',
+                password: 'test123',
+                errorMessage: 'username atau password salah'
+            },
+            {
+                //username tidak terdaftar,password benar
+                username: 'testttt',
+                password: '12345',
+                errorMessage: 'username atau password salah'
+            },
+            {
+                //username tidak terdaftar,password kosong
+                username: 'testttt',
+                errorMessage: 'password can not be empty'
+            },
+            {
+                //username tidak terdaftar,password salah
+                username: 'testttt',
+                password: 'passwordsalah',
+                errorMessage: 'username atau password salah'
+            }
+        ]
+
+        testData.forEach(data => {
+            it(`Menampilkan pesan error ketika ${data.username ? `username = ${data.username}` : 'username kosong'} and ${data.password ? `password = ${data.password}` : 'password kosong'}`, () => {
+                // cy.contains('Login with Password instead').should('exist').click()
+                if (data.username) {
+                    cy.get('#username-address-icon').type(data.username)
+                }
+                if (data.password) {
+                    cy.get('#password').type(data.password)
+                }
+                cy.get('#btn-login').click()
+
+                cy.contains(data.errorMessage).should('exist')
+            })
+        })
+    })
+    // //Admin login dengan username dan katasandi yang benar/valid
+    // it('Admin login dengan username dan katasandi yang benar/valid', () => {
+
+    // })
+
+    // it('Admin login dengan username yang valid dan katasandi yang kosong', () => {
+
+    // })
+
+    // it('Admin login dengan username yang valid dan kata sandi yang salah', () => {
+
+    // })
+
+    // it('Admin login dengan username tidak terdaftar dan katasandi yang benar/valid', () => {
+
+    // })
+
+    // it('Admin login dengan username tidak terdaftar dan katasandi yang kosong', () => {
+
+    // })
+
+    // it('Admin login dengan username tidak terdaftar dan kata sandi yang salah', () => {
+
+    // })
+
+    // it('', () => {
+
+    // })
+    // it('', () => {
+
+    // })
+    // it('', () => {
+
+    // })
+    // it('', () => {
+
+    // })
+    // it('', () => {
+
+    // })
+
+})
 describe('Weaver API Tests', () => {
     it('should retrieve all weavers', () => {
         cy.request({

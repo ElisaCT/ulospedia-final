@@ -38,7 +38,7 @@
           class="bg-[#D6DDF0] overflow-hidden justify-items-start text-left"
           style="box-shadow: 18px 18px 0px #000000"
         >
-          <div class="px-6 py-4">
+          <div id="card-apa-itu-ulos" class="px-6 py-4">
             <h4 class="font-bold text-2xl mb-2">Apa itu ulos?</h4>
             <p id="text-defenisiUlos" class="text-gray-700 text-lg">
               Ulos merupakan selendang tenun tradisional Batak yang berasal dari Sumatera Utara.
@@ -73,7 +73,7 @@
           class="bg-[#FBEFD2] overflow-hidden justify-items-start text-left"
           style="box-shadow: 18px 18px 0px #000000"
         >
-          <div class="px-6 py-4">
+          <div id="card-lahir-hidup-mati" class="px-6 py-4">
             <h4 class="font-bold text-2xl mb-2">Lahir, hidup, dan mati</h4>
             <p id="text-lahirHidupMati" class="text-gray-700 text-lg">
               Ulos merupakan simbol kesuburan dalam upacara kelahiran, bagian penting dari tata cara

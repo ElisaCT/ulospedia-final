@@ -5,33 +5,33 @@
       <div class="flex flex-col items-center gap-12 px-32">
         <div class="flex gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
-            <h3 class="font-semibold text-lg">{{ ulosDetail.name }}</h3>
+            <h3 id="nama-ulos" class="font-semibold text-lg">{{ ulosDetail.name }}</h3>
             <div class="flex flex-row gap-2">
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main">{{
+                <span id="suku-ulos" class="text-sm font-normal text-gray-800 text-primary_main">{{
                   ulosDetail.ethnic
                 }}</span>
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main">{{
+                <span id="lokasi-ulos" class="text-sm font-normal text-gray-800 text-primary_main">{{
                   ulosDetail.location
                 }}</span>
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main">{{
+                <span id="teknik-tenun-ulos" class="text-sm font-normal text-gray-800 text-primary_main">{{
                   ulosDetail.technique
                 }}</span>
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span class="text-sm font-normal text-gray-800 text-primary_main"
+                <span id="ukuran-ulos" class="text-sm font-normal text-gray-800 text-primary_main"
                   >{{ ulosDetail.length }}cm x {{ ulosDetail.width }}cm</span
                 >
               </span>
@@ -259,7 +259,7 @@
               </svg>
               <h4 class="font-medium text-base text-neutral_100">Makna Ulos</h4>
             </div>
-            <p class="font-normal text-sm text-neutral_90 text-left">
+            <p id="makna-ulos" class="font-normal text-sm text-neutral_90 text-left">
               {{ ulosDetail.meaning }}
             </p>
           </div>
@@ -292,7 +292,7 @@
               </svg>
               <h4 class="font-medium text-base text-neutral_100">Fungsi Ulos</h4>
             </div>
-            <p class="font-normal text-sm text-neutral_90 text-left">
+            <p id="fungsi-ulos" class="font-normal text-sm text-neutral_90 text-left">
               {{ ulosDetail.func }}
             </p>
           </div>
@@ -313,21 +313,9 @@
                 <h5 class="font-normal text-xl">Rp350.000</h5>
               </div>
 
-<<<<<<< HEAD
-                                    <button 
-                                    id="btn-beli-sekarang" 
-                                    class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2">
-                                        Beli sekarang
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-=======
               <button class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2">
                 Beli sekarang
               </button>
->>>>>>> admin/dashboard
             </div>
           </div>
         </div>

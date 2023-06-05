@@ -54,6 +54,7 @@
         <div class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
           <div class="lg:col-span-4 mt-10 lg:mt-0">
             <img
+              id="gambar-sejarah-ulos"
               class="w-full rounded-xl"
               src="../../assets/sejarah-ulos.png"
               alt="Image Description"
@@ -102,7 +103,7 @@
         <!-- Grid -->
         <div class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
           <div class="lg:col-span-4 mt-10 lg:mt-0">
-            <img class="w-full rounded-xl" src="../../assets/arti-ulos.png" alt="Image Description" />
+            <img id="gambar-arti-ulos" class="w-full rounded-xl" src="../../assets/arti-ulos.png" alt="Image Description" />
           </div>
           <!-- End Col -->
           <div id="text-artiUlos" class="lg:col-span-6 lg:mt-0">
@@ -140,9 +141,10 @@
       <!-- Hero -->
       <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Grid -->
-        <div class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
+        <div id="section-arti-ulos" class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
           <div class="lg:col-span-4 mt-10 lg:mt-0">
             <img
+              id="gambar-ulos-modern"
               class="w-full rounded-xl"
               src="../../assets/ulos-modern.png"
               alt="Image Description"
