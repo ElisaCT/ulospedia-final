@@ -19,7 +19,7 @@
           <form class="space-y-6" v-on:submit.prevent="login">
             <div>
               <label
-                for="username-address-icon"
+                for="username-address-icon
                 class="block mb-2 text-base font-medium text-neutral_100"
                 >username</label
               >

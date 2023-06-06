@@ -243,25 +243,27 @@ export default {
   // ini waktu di mau hit api nya
   // ini udah deploy di server del
   mounted() {
-    const token = localStorage.getItem('token')
-    const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
-      this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
-    }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
-      this.search !== '' ? '&search=' + this.search : ''
-    }`
-    axios
-      .get(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then((response) => {
-        console.log(response.data)
-        this.lastPage = response.data.data.weavers.lastPage
-        this.weavers = response.data.data.weavers.weaversListAdminDashboard
-        this.totalElement = response.data.data.weavers.totalAllElements
-        this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
-      })
+    // const token = localStorage.getItem('token')
+    // const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
+    //   this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
+    // }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
+    //   this.search !== '' ? '&searchByName=' + this.search : ''
+    // }`
+    // axios
+    //   .get(apiUrl, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //     console.log(apiUrl)
+    //     this.lastPage = response.data.data.weavers.lastPage
+    //     this.weavers = response.data.data.weavers.weaversListAdminDashboard
+    //     this.totalElement = response.data.data.weavers.totalAllElements
+    //     this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
+    //   })
+    this.fetchWeavers()
   },
   data() {
     return {
@@ -278,7 +280,7 @@ export default {
       sortDir: 'asc',
       pageNo: 1,
       search: '',
-      sortBy: '',
+      sortBy: 'updatedAt',
 
     }
   },
@@ -402,16 +404,20 @@ export default {
         const token = localStorage.getItem('token')
         const response = await axios.get('http://company.ditenun.com/api/v1/ulospedia/weavers', {
           params: {
-            pageNo: 1,
+            pageNo: this.pageNo,
             pageSize: 10,
             sortBy: this.sortBy,
-            sortOrder: this.sortOrder
+            sortOrder: this.sortOrder,
+            searchByName: this.search
           },
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
-        this.weavers = response.data
+        this.lastPage = response.data.data.weavers.lastPage
+        this.weavers = response.data.data.weavers.weaversListAdminDashboard
+        this.totalElement = response.data.data.weavers.totalAllElements
+        this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
       } catch (error) {
         console.error(error)
       }
@@ -426,10 +432,10 @@ export default {
   },
   computed: {
     sortedItems() {
-      const sorted = [...this.weavers]
+      // const sorted = [...this.weavers]
 
       // search result
-      const filtered = sorted.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
+      const filtered = this.weavers.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
       console.log(this.search)
 
       filtered.sort((a, b) => {
