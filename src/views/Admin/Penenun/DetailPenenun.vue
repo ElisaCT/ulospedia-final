@@ -8,7 +8,7 @@
           <div class="flex flex-row gap-6">
             <router-link to="">
               <button
-                class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
+                id="btn-edit-penenun" class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
                   <path
@@ -45,33 +45,33 @@
         <div class="flex flex-col gap-12 items-center px-44 p-12">
           <div class="flex gap-6 items-center">
             <div class="flex flex-col items-center gap-2">
-              <h3 class="font-semibold text-lg">{{ weaverDetail.name }}</h3>
+              <h3 id="nama-penenun" class="font-semibold text-lg">{{ weaverDetail.name }}</h3>
               <div class="flex flex-row gap-2">
                 <span
                   class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
                 >
-                  <span class="text-sm font-normal text-primary_main"
+                  <span id="teknik-tenun-penenun" class="text-sm font-normal text-primary_main"
                     >Penenun {{ weaverDetail.theLoom }}</span
                   >
                 </span>
                 <span
                   class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
                 >
-                  <span class="text-sm font-normal text-primary_main">{{
+                  <span id="suku-penenun" class="text-sm font-normal text-primary_main">{{
                     weaverDetail.ethnic
                   }}</span>
                 </span>
                 <span
                   class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
                 >
-                  <span class="text-sm font-normal text-primary_main"
+                  <span id="usia-penenun" class="text-sm font-normal text-primary_main"
                     >Usia {{ weaverDetail.age }}</span
                   >
                 </span>
                 <span
                   class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
                 >
-                  <span class="text-sm font-normal text-gray-800 text-primary_main"
+                  <span id="domisili-penenun" class="text-sm font-normal text-gray-800 text-primary_main"
                     >Asal {{ weaverDetail.domicile }}</span
                   >
                 </span>
@@ -82,14 +82,14 @@
           <!-- image -->
           <div>
             <div class="w-full flex justify-center h-72">
-              <img :src="weaverDetail.imageUrl" class="mx-auto w-8/12 rounded-lg object-cover" />
+              <img id="gambar-penenun" :src="weaverDetail.imageUrl" class="mx-auto w-8/12 rounded-lg object-cover" />
             </div>
           </div>
 
           <!-- story -->
           <div class="flex flex-col col-span-12">
             <div class="flex flex-col gap-3">
-              <p class="font-normal text-sm text-neutral_90 text-left">
+              <p id="cerita-penenun" class="font-normal text-sm text-neutral_90 text-left">
                 {{ weaverDetail.story }}
               </p>
             </div>
