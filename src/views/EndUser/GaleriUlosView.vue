@@ -78,25 +78,45 @@
                 </li>
                 <li class="py-2">
                   <label>
-                    <input id="label-batakKaro" type="radio" value="Batak Karo" v-model="selectedOptionEthnic" />
+                    <input
+                      id="label-batakKaro"
+                      type="radio"
+                      value="Batak Karo"
+                      v-model="selectedOptionEthnic"
+                    />
                     Batak Karo
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input id="label-batakSimalungun" type="radio" value="Batak Simalungun" v-model="selectedOptionEthnic" />
+                    <input
+                      id="label-batakSimalungun"
+                      type="radio"
+                      value="Batak Simalungun"
+                      v-model="selectedOptionEthnic"
+                    />
                     Batak Simalungun
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input id="label-Mandailing" type="radio" value="Batak Mandailing" v-model="selectedOptionEthnic" />
+                    <input
+                      id="label-Mandailing"
+                      type="radio"
+                      value="Batak Mandailing"
+                      v-model="selectedOptionEthnic"
+                    />
                     Batak Mandailing
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input id="label-batakAngkola" type="radio" value="Batak Angkola" v-model="selectedOptionEthnic" />
+                    <input
+                      id="label-batakAngkola"
+                      type="radio"
+                      value="Batak Angkola"
+                      v-model="selectedOptionEthnic"
+                    />
                     Batak Angkola
                   </label>
                 </li>
@@ -111,13 +131,23 @@
               >
                 <li class="py-2">
                   <label>
-                    <input id="label-ulosTradisional" type="radio" value="Tradisional" v-model="selectedOptionType" />
+                    <input
+                      id="label-ulosTradisional"
+                      type="radio"
+                      value="Tradisional"
+                      v-model="selectedOptionType"
+                    />
                     Tradisional
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input id="label-ulosPengembangan" type="radio" value="Pengembangan" v-model="selectedOptionType" />
+                    <input
+                      id="label-ulosPengembangan"
+                      type="radio"
+                      value="Pengembangan"
+                      v-model="selectedOptionType"
+                    />
                     Pengembangan
                   </label>
                 </li>
@@ -126,39 +156,64 @@
           </div>
 
           <div>
-            <label class="font-normal text-left text-base text-neutral_90 pb-2">Jenis Ulos</label>
+            <label class="font-normal text-left text-base text-neutral_90 pb-2">Warna Ulos</label>
             <ul
               class="text-base text-neutral_80 font-normal gap-2 pl-3"
               aria-labelledby="dropdownDefaultButton"
             >
               <li class="py-2">
                 <label>
-                  <input id="label-Merah" type="checkbox" v-model="colors.Merah" @change="showChips" />
+                  <input
+                    id="label-Merah"
+                    type="checkbox"
+                    v-model="colors.Merah"
+                    @change="showChips"
+                  />
                   Merah
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input id="label-Hitam" type="checkbox" v-model="colors.Hitam" @change="showChips" />
+                  <input
+                    id="label-Hitam"
+                    type="checkbox"
+                    v-model="colors.Hitam"
+                    @change="showChips"
+                  />
                   Hitam
                 </label>
               </li>
 
               <li class="py-2">
                 <label>
-                  <input id="label-Biru" type="checkbox" v-model="colors.Biru" @change="showChips" />
+                  <input
+                    id="label-Biru"
+                    type="checkbox"
+                    v-model="colors.Biru"
+                    @change="showChips"
+                  />
                   Biru
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input id="label-Hijau" type="checkbox" v-model="colors.Hijau" @change="showChips" />
+                  <input
+                    id="label-Hijau"
+                    type="checkbox"
+                    v-model="colors.Hijau"
+                    @change="showChips"
+                  />
                   Hijau
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input id="label-Kuning" type="checkbox" v-model="colors.Kuning" @change="showChips" />
+                  <input
+                    id="label-Kuning"
+                    type="checkbox"
+                    v-model="colors.Kuning"
+                    @change="showChips"
+                  />
                   Kuning
                 </label>
               </li>
@@ -211,7 +266,9 @@
       v-if="selectedOptionEthnic !== ''"
       class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
     >
-      <span id="label-asal-ulos" class="text-sm font-normal text-primary_main mr-2">{{ selectedOptionEthnic }}</span>
+      <span id="label-asal-ulos" class="text-sm font-normal text-primary_main mr-2">{{
+        selectedOptionEthnic
+      }}</span>
       <button @click="deleteSelectedOptionEthnic">
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
           <path
@@ -250,9 +307,9 @@
   </div>
 
   <div v-else-if="ulosData.length === 0 && !isLoading">
-      <!-- Show empty state component when searchText is not empty and ulosData is empty -->
-      <EmptySearch />
-    </div>
+    <!-- Show empty state component when searchText is not empty and ulosData is empty -->
+    <EmptySearch />
+  </div>
   <!-- card ulos -->
   <div v-else>
     <div class="flex justify-center py-8">
@@ -272,20 +329,24 @@
               <div
                 class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
               ></div>
-              <div id="card-ulos" class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
+              <div
+                id="card-ulos"
+                class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
+              >
                 <h1 id="ulos-nama" class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
                 <p id="ulos-asal" class="text-neutral_10">{{ ulos.originEthnic }}</p>
               </div>
               <div v-if="ulos.isAvailableOnEcommerce === true">
-                <ecommerceAvailable id="icon-produk-available" class="absolute top-6 right-6 z-[3]" />
+                <ecommerceAvailable
+                  id="icon-produk-available"
+                  class="absolute top-6 right-6 z-[3]"
+                />
               </div>
             </div>
           </router-link>
         </div>
       </div>
     </div>
-
-    
   </div>
 
   <!-- Load more -->
@@ -375,8 +436,8 @@ export default {
         console.log(error)
       })
       .finally(() => {
-      this.isLoading = false;
-    });
+        this.isLoading = false
+      })
     if (this.$route.query.ethnic) {
       this.selectedOptionEthnic = this.$route.query.ethnic
       console.log(this.selectedOptionEthnic)

@@ -41,32 +41,32 @@ export default {
   data() {
     return {
       slideIndex: 1,
-      slides: [
-        {
-          image: 'https://www.w3schools.com/w3css/img_mountains_wide.jpg',
-          caption: 'The Woods'
-        },
-        {
-          image: 'https://www.w3schools.com/w3css/img_snow_wide.jpg',
-          caption: 'Cinque Terre'
-        },
-        {
-          image: 'https://www.w3schools.com/w3css/img_nature_wide.jpg',
-          caption: 'Mountains and fjords'
-        },
-        {
-          image: 'https://www.w3schools.com/howto/img_woods_wide.jpg',
-          caption: 'Northern Lights'
-        },
-        {
-          image: 'https://www.w3schools.com/howto/img_5terre_wide.jpg',
-          caption: 'Nature and sunrise'
-        },
-        {
-          image: 'https://www.quanzhanketang.com/w3css/img_fjords_wide.jpg',
-          caption: 'Snowy Mountains'
-        }
-      ]
+      // slides: [
+      //   {
+      //     image: 'https://www.w3schools.com/w3css/img_mountains_wide.jpg',
+      //     caption: 'The Woods'
+      //   },
+      //   {
+      //     image: 'https://www.w3schools.com/w3css/img_snow_wide.jpg',
+      //     caption: 'Cinque Terre'
+      //   },
+      //   {
+      //     image: 'https://www.w3schools.com/w3css/img_nature_wide.jpg',
+      //     caption: 'Mountains and fjords'
+      //   },
+      //   {
+      //     image: 'https://www.w3schools.com/howto/img_woods_wide.jpg',
+      //     caption: 'Northern Lights'
+      //   },
+      //   {
+      //     image: 'https://www.w3schools.com/howto/img_5terre_wide.jpg',
+      //     caption: 'Nature and sunrise'
+      //   },
+      //   {
+      //     image: 'https://www.quanzhanketang.com/w3css/img_fjords_wide.jpg',
+      //     caption: 'Snowy Mountains'
+      //   }
+      // ]
     }
   },
   props: {

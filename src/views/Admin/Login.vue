@@ -25,10 +25,7 @@
               >
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-<<<<<<< HEAD
-=======
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"></svg>
->>>>>>> 7bffdb9c4a8107b0ca400080017f119ec37d5299
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
                     <path
                       stroke="#404040"
