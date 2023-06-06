@@ -110,6 +110,30 @@
     <!-- jenis Ulos -->
     <JenisUlos />
   </div>
+
+  <div class="flex justify-center">
+    <div class="mx-[180px]">
+      <section>
+        <div class="flex flex-row pb-6">
+          <h2
+            id="text-fakta-menarik"
+            class="lg:text-4xl md:text-3xl sm:text-2xl text-center grow font-medium"
+          >
+            Temukan Kekayaan Warisan Ulos
+          </h2>
+        </div>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Yb6H-XB6dDM"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </section>
+    </div>
+  </div>
   <Footer />
 </template>
 

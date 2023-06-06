@@ -3,10 +3,13 @@
   <div class="carousel">
     <!-- title -->
     <div class="flex flex-row pb-6">
-      <h2 id="text-fakta-menarik" class="lg:text-4xl md:text-3xl sm:text-2xl text-left grow font-medium">Temukan Fakta Menarik Ulos</h2>
-      <h2 class="lg:text-4xl md:text-3xl sm:text-2xl text-left grow font-medium">
+      <h2
+        id="text-fakta-menarik"
+        class="lg:text-4xl md:text-3xl sm:text-2xl text-left grow font-medium"
+      >
         Temukan Fakta Menarik Ulos
       </h2>
+
       <!-- button -->
       <div class="flex flex-row gap-6">
         <!-- prev -->

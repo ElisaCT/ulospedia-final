@@ -85,10 +85,7 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button
-                  @click="sortedBy('technique')"
-                  class="flex flex-row items-center gap-3"
-                >
+                <button @click="sortedBy('technique')" class="flex flex-row items-center gap-3">
                   Teknik Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -268,7 +265,7 @@ export default {
       weavers: [],
       totalElement: 0,
       totalElementOnPage: 0,
-      
+
       lastPage: true,
       moveState: false,
       isLoading: false,
@@ -278,8 +275,7 @@ export default {
       sortDir: 'asc',
       pageNo: 1,
       search: '',
-      sortBy: 'updatedAt',
-
+      sortBy: 'updatedAt'
     }
   },
   methods: {
@@ -429,7 +425,9 @@ export default {
       const sorted = [...this.weavers]
 
       // search result
-      const filtered = sorted.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
+      const filtered = sorted.filter((item) =>
+        item.name.toLowerCase().includes(this.search.toLowerCase())
+      )
       console.log(this.search)
 
       filtered.sort((a, b) => {
@@ -441,9 +439,8 @@ export default {
         }
         return 0
       })
-      return filtered;
+      return filtered
     }
-
   },
   components: {
     Sidebar,

@@ -137,7 +137,9 @@
         <div class="step-content">
           <!-- image -->
           <div v-show="currentStep === 1" class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6">
-            <h5 id="stepper-tambah-ulos" class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Ulos</h5>
+            <h5 id="stepper-tambah-ulos" class="font-medium text-xl text-neutral_90 text-left pb-6">
+              Gambar Ulos
+            </h5>
             <div class="flex flex-row gap-6">
               <div class="text-sm text-left text-neutral_80 gap-3 w-56">
                 <p class="font-medium pb-3">Gambar Ulos Utuh*</p>
@@ -159,7 +161,8 @@
                         :required="index === 0"
                       />
                       <div
-                        id="btn-tambah-gambar-utama"  class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                        id="btn-tambah-gambar-utama"
+                        class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
                           v-if="field.image"
@@ -210,7 +213,8 @@
 
                 <button @click="addField('ulosFields')" :hidden="ulosFields.length >= 5">
                   <div
-                    id="btn-tambah-gambar-lainnya-gambar-utama" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                    id="btn-tambah-gambar-lainnya-gambar-utama"
+                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -262,7 +266,8 @@
                         :required="index === 0"
                       />
                       <div
-                          id="btn-tambah-gambar-potongan" class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                        id="btn-tambah-gambar-potongan"
+                        class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
                           v-if="field.image"
@@ -299,7 +304,11 @@
                         <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button id="btn-remove-gambar" @click="removeField('potonganFields', index)" class="absolute">
+                    <button
+                      id="btn-remove-gambar"
+                      @click="removeField('potonganFields', index)"
+                      class="absolute"
+                    >
                       Remove
                     </button>
                   </div>
@@ -307,7 +316,8 @@
 
                 <button @click="addField('potonganFields')" :hidden="potonganFields.length >= 5">
                   <div
-                    id="btn-tambah-gambar-lainnya-gambar-potongan" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                    id="btn-tambah-gambar-lainnya-gambar-potongan"
+                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -359,7 +369,8 @@
                         @change="handleFileChange('motifFields', index, $event)"
                       />
                       <div
-                        id="btn-tambah-gambar-motif" class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                        id="btn-tambah-gambar-motif"
+                        class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
                           v-if="field.image"
@@ -404,7 +415,8 @@
 
                 <button @click="addField('motifFields')" :hidden="motifFields.length >= 5">
                   <div
-                    id="btn-tambah-gambar-lainnya-gambar-motif" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                    id="btn-tambah-gambar-lainnya-gambar-motif"
+                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -477,19 +489,39 @@
                       required
                     >
                       <option value="" disabled selected hidden>Pilih Suku Ulos</option>
-                      <option id="dropdown-batak-toba" value="Batak Toba" class="pb-3 hover:bg-primary_surface">
+                      <option
+                        id="dropdown-batak-toba"
+                        value="Batak Toba"
+                        class="pb-3 hover:bg-primary_surface"
+                      >
                         Batak Toba
                       </option>
-                      <option id="dropdown-batak-simalungun" value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
+                      <option
+                        id="dropdown-batak-simalungun"
+                        value="Batak Simalungun"
+                        class="pb-3 hover:bg-primary_surface"
+                      >
                         Batak Simalungun
                       </option>
-                      <option id="dropdown-batak-karo" value="Batak Karo" class="pb-3 hover:bg-primary_surface">
+                      <option
+                        id="dropdown-batak-karo"
+                        value="Batak Karo"
+                        class="pb-3 hover:bg-primary_surface"
+                      >
                         Batak Karo
                       </option>
-                      <option id="dropdown-batak-angkola" value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
+                      <option
+                        id="dropdown-batak-angkola"
+                        value="Batak Angkola"
+                        class="pb-3 hover:bg-primary_surface"
+                      >
                         Batak Angkola
                       </option>
-                      <option id="dropdown-batak-mandailing" value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
+                      <option
+                        id="dropdown-batak-mandailing"
+                        value="Batak Mandailing"
+                        class="pb-3 hover:bg-primary_surface"
+                      >
                         Batak Mandailing
                       </option>
                     </select>
@@ -517,29 +549,61 @@
                     class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                     >Warna Pada Ulos*</label
                   >
-                  <div class="md:w-2/3 relative inline-block">
-                    
-                      
-                      <option value="Merah" class="pb-3 hover:bg-primary_surface">
-                        <input id="checkbox-merah" type="checkbox" name="color[]" value="Merah" /> Merah
-                      </option>
-                      <option value="Hitam" class="pb-3 hover:bg-primary_surface">
-                        <input id="checkbox-hitam" type="checkbox" name="color[]" value="Hitam" /> Hitam
-                      </option>
-                      <option value="Putih" class="pb-3 hover:bg-primary_surface">
-                        <input id="checkbox-kuning" type="checkbox" name="color[]" value="Kuning" /> Kuning
-                      </option>
-                      <option value="Biru" class="pb-3 hover:bg-primary_surface">
-                        <input id="checkbox-biru" type="checkbox" name="color[]" value="Biru" /> Biru
-                      </option>
-                      <option value="Hijau" class="pb-3 hover:bg-primary_surface">
-                        <input id="checkbox-hijau" type="checkbox" name="color[]" value="Hijau" /> Hijau
-                      </option>
-                      <option value="Kuning" class="pb-3 hover:bg-primary_surface">
-                        <input id="checkbox-kuning" type="checkbox" name="color[]" value="Kuning" /> Kuning
-                      </option>
-                    
-                    
+                  <div class="md:w-2/3 flex flex-row gap-3 text-neutral_90">
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-merah"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="merah"
+                      />
+                      <span>Merah</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-hitam"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="hitam"
+                      />
+                      <span>Hitam</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-putih"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="putih"
+                      />
+                      <span>Putih</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-kuning"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="kuning"
+                      />
+                      <span>Kuning</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-biru"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="biru"
+                      />
+                      <span>Biru</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-hijau"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="hijau"
+                      />
+                      <span>Hijau</span>
+                    </div>
                   </div>
                 </div>
 
@@ -646,13 +710,25 @@
                       required
                     >
                       <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
-                      <option id="teknik-ikat-lungsi" value="Teknik Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
+                      <option
+                        id="teknik-ikat-lungsi"
+                        value="Teknik Ikat Lungsi"
+                        class="pb-3 hover:bg-primary_surface"
+                      >
                         Teknik Ikat Lungsi
                       </option>
-                      <option  id="teknik-ikat-pakan" value="Teknik Ikat Pakan" class="pb-3 hover:bg-primary_surface">
+                      <option
+                        id="teknik-ikat-pakan"
+                        value="Teknik Ikat Pakan"
+                        class="pb-3 hover:bg-primary_surface"
+                      >
                         Teknik Ikat Pakan
                       </option>
-                      <option  id="teknik-ikat-ganda" value="Teknik Ikat Ganda" class="pb-3 hover:bg-primary_surface">
+                      <option
+                        id="teknik-ikat-ganda"
+                        value="Teknik Ikat Ganda"
+                        class="pb-3 hover:bg-primary_surface"
+                      >
                         Teknik Ikat Ganda
                       </option>
                     </select>
@@ -728,14 +804,21 @@
                     >
 
                     <label class="relative inline-flex items-center cursor-pointer">
-                      <input id="status-togel-eccommerce" type="checkbox" value="" class="sr-only peer" v-model="toggleStatus" />
+                      <input
+                        id="status-togel-eccommerce"
+                        type="checkbox"
+                        value=""
+                        class="sr-only peer"
+                        v-model="toggleStatus"
+                      />
                       <div
                         class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary_main rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
                       ></div>
                     </label>
                   </div>
 
-                  <div v-for="(form, index) in forms" :key="form.id">
+                  <div v-for="(form, formIndex) in forms" :key="formIndex">
+                    <h1>{{ formIndex }}</h1>
                     <div class="flex flex-col gap-6 md:flex-row pb-8">
                       <label
                         for="ulos-name"
@@ -789,13 +872,14 @@
                               <span class="font-normal">Gambar Produk</span>
                             </p>
                           </div>
+                          INDEX {{ formIndex }}
                           <input
                             id="dropzone-file"
                             type="file"
                             class="hidden"
                             accept="image/png, image/jpg, image/jpeg"
                             :disabled="!toggleStatus"
-                            @change="handleImagePreview($event, index)"
+                            @change="handleImagePreview($event, formIndex)"
                           />
                         </label>
                       </div>
@@ -864,14 +948,20 @@
                         />
                       </div>
                     </div>
-                    <button id="btn-remove-produk" @click="removeForm(form.id)" :disabled="!toggleStatus">Remove</button>
+                    <button
+                      id="btn-remove-produk"
+                      @click="removeForm(form.id)"
+                      :disabled="!toggleStatus"
+                    >
+                      Remove
+                    </button>
                   </div>
                 </form>
               </div>
 
               <button
-              id="btn-tambah-produk-eccomerce"
-              :disabled="!toggleStatus"
+                id="btn-tambah-produk-eccomerce"
+                :disabled="!toggleStatus"
                 @click="addForm"
                 :class="{
                   'text-xs text-primary_main border rounded-lg border-primary_main p-2 flex flex-row justify-end items-end': true,
@@ -949,6 +1039,9 @@ export default {
     location(value) {
       console.log(value)
     },
+    selectedColors(value) {
+      console.log(value)
+    },
     length(value) {
       console.log(value)
     },
@@ -968,6 +1061,9 @@ export default {
       console.log(value)
     },
     ulosFields(value) {
+      console.log(value)
+    },
+    forms(value) {
       console.log(value)
     }
   },
@@ -996,7 +1092,14 @@ export default {
         'Batak Angkola'
       ], // Array of ethnics values for the dropdown
       selectedColors: [], // Vue data property to store the selected values
-      colors: ['Hitam', 'Merah', 'Putih', 'Hijau', 'Biru', 'Kuning'],
+      colors: {
+        Hitam: false,
+        Merah: false,
+        Putih: false,
+        Hijau: false,
+        Biru: false,
+        Kuning: false
+      },
       selectedTechnics: [],
       technics: ['Teknik Ikat Lungsi', 'Teknik Ikat Pakan', 'Teknik Ikat Ganda'],
       toggleStatus: false,
@@ -1005,12 +1108,7 @@ export default {
       potonganFields: [{ fileName: '', image: null }],
       motifFields: [{ fileName: '', image: null }],
       productImage: [{ fileName: '', image: null }],
-      forms: [
-        {
-          id: 1,
-          imagePreview: null
-        }
-      ]
+      forms: []
       //imagePreview:null,
     }
   },
@@ -1061,9 +1159,7 @@ export default {
       // other image
       const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/other-images`
 
-      console.log('PANJANG', this.ulosFields.length)
       if (this.ulosFields.length !== 1) {
-        console.log(this.ulosFields[1].file)
         if (this.ulosFields[1].file !== null) {
           for (let i = 1; i < this.ulosFields.length; i++) {
             const formData = new FormData()
@@ -1079,8 +1175,7 @@ export default {
           }
         }
       }
-
-      console.log('END')
+      this.$router.push('/admin/ulos')
     },
     handleMainImage(event) {
       this.mainImage = event.target.files[0]
@@ -1132,8 +1227,10 @@ export default {
       formFields[index].file = event.target.files[0]
     },
     addForm() {
-      const nextId = this.forms.length > 0 ? this.forms[this.forms.length - 1].id + 1 : 1
+      const nextId = this.forms.length > 0 ? this.forms[this.forms.length - 1].id + 1 : 0
+      console.log(nextId)
       this.forms.push({ id: nextId, imagePreview: null })
+      console.log(this.forms)
     },
     removeForm(id) {
       this.forms = this.forms.filter((form) => form.id !== id)
@@ -1141,18 +1238,16 @@ export default {
     isRemoveDisabled() {
       return this.forms.length === 1 // Disable the button if there is only one form
     },
-    handleImagePreview(event, index) {
+    handleImagePreview(event, formIndex) {
+      console.log(event)
+      console.log(typeof formIndex)
+      console.log(formIndex)
       const file = event.target.files[0]
       const reader = new FileReader()
-
       reader.onload = () => {
-        // Update the imagePreview property of the corresponding form
-        this.$set(this.forms[index], 'imagePreview', reader.result)
+        this.forms[formIndex].imagePreview = reader.result
       }
-
-      if (file) {
-        reader.readAsDataURL(file)
-      }
+      reader.readAsDataURL(file)
     }
   },
   mounted() {
