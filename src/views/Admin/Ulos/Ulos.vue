@@ -177,7 +177,7 @@
 
         <!-- pagination -->
         <div class="flex flex-row justify-between items-center w-full pt-3">
-          <p class="font-normal text-sm text-neutral_60">
+          <p id="info-pagination" class="font-normal text-sm text-neutral_60">
             Menampilkan 1 sampai {{ totalElementOnPage }} dari {{ totalElement }} data
           </p>
           <div class="flex flex-row gap-4 items-center">

@@ -69,7 +69,7 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
 
         cy.request({
             method: 'GET',
-            url: `generate/ulos/${id}/image`,
+            url: `generate/ulos/${id}/image/public`,
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Accept': '*/*'
@@ -106,6 +106,96 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
             expect(response.body.data.ulosData.ethnic).to.eq(ulosData.ethnic);
         });
     });
+
+    it.only('PUT: Memperbarui Gambar generate ulos berdasarkan ulos ID', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 66;
+
+        cy.fixture('ulosUtuh1.jpeg', 'binary')
+            .then(Cypress.Blob.binaryStringToBlob)
+            .then((ulosImage) => {
+                const formData = new FormData();
+                formData.append('ulos-image', ulosImage, 'ulosUtuh1.jpeg');
+
+                cy.request({
+                    method: 'PUT',
+                    url: `generate/ulos/${ulosId}/image`,
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'multipart/form-data',
+                        'Accept': '*/*',
+                    },
+                    body: formData,
+                    failOnStatusCode: false,
+                }).then((response) => {
+                    expect(response.status).to.eq(200);
+
+                });
+            });
+    });
+
+    it.only('PUT: Memperbarui data teks generate ulos berdasarkan ID', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 66;
+
+        cy.request({
+            method: 'PUT',
+            url: `generate/ulos/${ulosId}`,
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json',
+                'Accept': '*/*',
+            },
+            body: {
+                name: 'Ulos Ragi Hotang',
+                ethnic: 'Batak Toba',
+            },
+            failOnStatusCode: false,
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            expect(response.body.data.ulosData.name).to.eq('Ulos Ragi Hotang');
+            expect(response.body.data.ulosData.ethnic).to.eq('Batak Toba');
+        });
+    });
+
+    it('DELETE: Menghapus Data Ulos & Semua Data Motif Terkait', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 64; // ID ulos yang ingin dihapus
+
+        cy.request({
+            method: 'DELETE',
+            url: `generate/ulos/${ulosId}`,
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Accept': '*/*',
+            },
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Tambahkan assertions tambahan sesuai kebutuhan
+        });
+    });
+
+
+
+    // it('DELETE: Menghapus Gambar Generate Ulos', () => {
+    //     const authToken = Cypress.env('authToken');
+    //     const ulosId = 64;
+
+    //     cy.request({
+    //         method: 'DELETE',
+    //         url: `generate/ulos/${ulosId}/image`,
+    //         headers: {
+    //             'Authorization': `Bearer ${authToken}`,
+    //             'Accept': '*/*',
+    //         },
+    //         failOnStatusCode: false,
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         expect(response.body.data).to.be.null;
+    //         expect(response.body.message).to.eq('gambar ulos berhasil dihapus');
+    //     });
+    // });
+
 
     // it('DELETE: Mengahapus gambar ulos utuh pada generate motif berdasarkan id yang valid(tersedia)', () => {
     //     const authToken = Cypress.env('authToken');

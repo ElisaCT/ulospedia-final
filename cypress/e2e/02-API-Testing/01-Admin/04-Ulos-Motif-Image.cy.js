@@ -37,7 +37,7 @@ describe('Pengujian API - Gambar motif Ulos', () => {
 
         cy.request({
             method: 'GET',
-            url: `ulospedia/ulos/${ulosId}/motif-images/${motifImageId}`,
+            url: `ulospedia/ulos/${ulosId}/motif-images/${motifImageId}/public`,
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Accept': '*/*'
@@ -48,6 +48,32 @@ describe('Pengujian API - Gambar motif Ulos', () => {
             cy.log('Response Body:', response.body);
         });
     });
+
+    it('PUT: Memperbarui Gambar Motif Ulos Baru', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 10;
+
+        cy.fixture('ulosUtuh1.jpeg', 'binary')
+            .then(Cypress.Blob.binaryStringToBlob)
+            .then((blob) => {
+                const formData = new FormData();
+                formData.append('ulos-motif-image', blob, 'ulosUtuh1.jpeg');
+
+                cy.request({
+                    method: 'PUT',
+                    url: `ulospedia/ulos/${ulosId}/motif-images`,
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    body: formData,
+                    failOnStatusCode: false,
+                }).then((response) => {
+                    expect(response.status).to.eq(200);
+                });
+            });
+    });
+
 
     // it('DELETE: Menghapus gambar motif ulos berdasarkan ulosId yang valid(Tersedia', () => {
     //     const ulosId = 9;

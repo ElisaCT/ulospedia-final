@@ -138,7 +138,7 @@
             </div>
           </div>
           <button
-            id="btn-logout  "
+            id="btn-logout"
             @click="logout"
             type="button"
             class="py-[.688rem] px-4 inline-flex justify-center items-center gap-2 rounded-md font-semibold border-2 text-primary_main hover:text-neutral_10 hover:bg-primary_main hover:border-blue-500 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:border-gray-700 dark:hover:border-blue-500"

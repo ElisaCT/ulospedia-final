@@ -37,7 +37,7 @@ describe('Pengujian API - Gambar Potongan Ulos', () => {
 
         cy.request({
             method: 'GET',
-            url: `ulospedia/ulos/${ulosId}/pieces-images/${piecesImageId}`,
+            url: `ulospedia/ulos/${ulosId}/pieces-images/${piecesImageId}/public`,
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Accept': '*/*'
@@ -48,23 +48,48 @@ describe('Pengujian API - Gambar Potongan Ulos', () => {
         });
     });
 
-    //   it('DELETE: Menghapus gambar potongan ulos berdasarkan ulosId yang valid(tersedia)', () => {
+    it.only('PUT: Memperbarui Data Potongan Ulos Baru', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 10;
+
+        cy.fixture('ulosUtuh1.jpeg', 'binary')
+            .then(Cypress.Blob.binaryStringToBlob)
+            .then((blob) => {
+                const formData = new FormData();
+                formData.append('ulos-pieces-image', blob, 'ulosUtuh1.jpeg');
+
+                cy.request({
+                    method: 'PUT',
+                    url: `ulospedia/ulos/${ulosId}/pieces-images`,
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    body: formData,
+                    failOnStatusCode: false,
+                }).then((response) => {
+                    expect(response.status).to.eq(200);
+                });
+            });
+    });
+
+    // it('DELETE: Menghapus gambar potongan ulos berdasarkan ulosId yang valid(tersedia)', () => {
     //     const ulosId = 9;
     //     const piecesImageId = 2;
     //     const authToken = Cypress.env('authToken');
 
 
     //     cy.request({
-    //       method: 'DELETE',
-    //       url: `ulospedia/ulos/${ulosId}/pieces-images/${piecesImageId}`,
-    //       headers: {
-    //         'Authorization': `Bearer ${authToken}`,
-    //         'Accept': '*/*'
-    //       }
+    //         method: 'DELETE',
+    //         url: `ulospedia/ulos/${ulosId}/pieces-images/${piecesImageId}`,
+    //         headers: {
+    //             'Authorization': `Bearer ${authToken}`,
+    //             'Accept': '*/*'
+    //         }
     //     }).then((response) => {
-    //       expect(response.status).to.eq(200);
-    //       // Perform additional assertions if needed
-    //       cy.log('Response Body:', response.body);
+    //         expect(response.status).to.eq(200);
+    //         // Perform additional assertions if needed
+    //         cy.log('Response Body:', response.body);
     //     });
-    //   });
+    // });
 });

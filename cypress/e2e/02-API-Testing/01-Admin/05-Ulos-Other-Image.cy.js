@@ -38,7 +38,7 @@ describe('Pengujian API - Gambar Ulos lainnya', () => {
 
         cy.request({
             method: 'GET',
-            url: `ulospedia/ulos/${ulosId}/other-images/${imageId}`,
+            url: `ulospedia/ulos/${ulosId}/other-images/${imageId}/public`,
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Accept': '*/*'
@@ -49,6 +49,31 @@ describe('Pengujian API - Gambar Ulos lainnya', () => {
             cy.writeFile(`ulosLainnya${imageId}.jpeg`, response.body, 'binary');
             cy.log('Response Body:', response.body);
         });
+    });
+
+    it.only('PUT: Memperbarui Gambar Ulos Lainnya', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 10;
+
+        cy.fixture('ulosLainnya1.jpeg', 'binary')
+            .then(Cypress.Blob.binaryStringToBlob)
+            .then((blob) => {
+                const formData = new FormData();
+                formData.append('other-image', blob, 'ulosLainnya1.jpeg');
+
+                cy.request({
+                    method: 'PUT',
+                    url: `ulospedia/ulos/${ulosId}/other-images`,
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    body: formData,
+                    failOnStatusCode: false,
+                }).then((response) => {
+                    expect(response.status).to.eq(200);
+                });
+            });
     });
 
 

@@ -6,6 +6,23 @@ describe('Pengujian API: Ulos Product', () => {
         cy.loginAndSetAuthToken();
     });
 
+    it('GET: Mendapatkan Gambar/Image dari Produk', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 19;
+        const productId = 6;
+
+        cy.request({
+            method: 'GET',
+            url: `ulospedia/ulos/${ulosId}/products/${productId}/image`,
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'accept': '*/*'
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Do assertions with the response body as needed
+        });
+    });
 
     it('PUT: Memperbaharui Ketersediaan Produk yang Berkaitan dengan Ulos', () => {
         const ulosId = 10;
@@ -103,23 +120,7 @@ describe('Pengujian API: Ulos Product', () => {
         });
     });
 
-    it('GET: Mendapatkan Gambar/Image dari Produk', () => {
-        const authToken = Cypress.env('authToken');
-        const ulosId = 19;
-        const productId = 6;
-
-        cy.request({
-            method: 'GET',
-            url: `ulospedia/ulos/${ulosId}/products/${productId}/image`,
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-                'accept': '*/*'
-            }
-        }).then((response) => {
-            expect(response.status).to.eq(200);
-            // Do assertions with the response body as needed
-        });
-    });
+    
 
 
 })

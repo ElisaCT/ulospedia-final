@@ -2,11 +2,9 @@
     <div>
       <!-- Delete button -->
       <button
-      id="btn-hapus-penenun"
       @click="showModal = true"
-            class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+            class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70">
+            <svg  id="btn-hapus-penenun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
               <path
                 stroke="#757575"
                 stroke-linecap="round"

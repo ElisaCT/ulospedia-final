@@ -1,8 +1,8 @@
 <template>
     <div>
       <!-- Delete button -->
-      <button @click="showModal = true" class="p-[10px] bg-danger_surface rounded">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+      <button @click="showModal = true" class="btn-delete p-[10px] bg-danger_surface rounded">
+        <svg id="delete-button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
           <path
             stroke="#CB3A31"
             stroke-linecap="round"
@@ -43,6 +43,7 @@
                 <!-- Cancel button -->
                 <button
                   @click="showModal = false"
+                  id="btn-batal"
                   class="mr-2 rounded-lg border border-primary_surface px-4 py-2 text-neutral_80"
                 >
                   Batal
@@ -50,6 +51,7 @@
                 <!-- Delete button -->
                 <button
                   @click="deleteItem"
+                  id="btn-hapus"
                   class="text-neutral_10 rounded-lg bg-danger_main px-4 py-2"
                 >
                   Hapus

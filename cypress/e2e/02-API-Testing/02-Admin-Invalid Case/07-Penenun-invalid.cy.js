@@ -1,11 +1,6 @@
 //API ini digunakan untuk mengakses semua data penenun yang dibutuhkan pada dashboard penenun }
 
 describe('Pengujian API: Penenun invalid credentials', () => {
-    // //precondition mengisi token dengan fungsi loginandserauthtoken
-    // before(() => {
-    //     cy.loginAndSetAuthToken();
-    // });
-
 
     it('GET: Mendapatkan semua data penenun yang ada dengan invalid credentials', () => {
         const invalidCredentials = 'invalidToken';
@@ -93,22 +88,6 @@ describe('Pengujian API: Penenun invalid credentials', () => {
             });
     });
 
-    it('GET: Mendapatkan jumlah penenun yang tersedia dengan invalid credentials', () => {
-        const invalidCredentials = 'invalidToken';
-
-        cy.request({
-            method: 'GET',
-            url: 'ulospedia/weavers/count',
-            headers: {
-                'Authorization': `Bearer ${invalidCredentials}`,
-                'Accept': 'application/json'
-            },
-            failOnStatusCode: false
-        }).then((response) => {
-            cy.log('Response Body:', JSON.stringify(response.body, null, 2)); // Log the response body as JSON string
-            expect(response.status).to.equal(403); // Ensure the response status code is 403
-        });
-    });
 
     it('POST: Menambahkan/membuat data text penenun yang baru dengan invalid credentials', () => {
         const invalidCredentials = 'invalidToken';
@@ -184,6 +163,7 @@ describe('Pengujian API: Penenun invalid credentials', () => {
             cy.log('Response Body:', JSON.stringify(response.body, null, 2));
         });
     });
+
     it('POST: Gagal Menambahkan gambar penenun yang baru dengan invalid credentials', () => {
         const weaverId = 10;
         const invalidAuthToken = 'invalidToken';

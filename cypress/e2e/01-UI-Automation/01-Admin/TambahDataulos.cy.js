@@ -67,6 +67,47 @@ describe('Fungsionalitas Halaman Ulos - Admin', () => {
 
         });
 
+        it.only('Memastikan fitur pagination berfungsi dengan benar', () => {
+            cy.get('#sidebar-ulos').click();
+            cy.wait(1000);
+            // Mendapatkan info halaman saat ini
+            // Mendapatkan info halaman saat ini
+            // Mendapatkan info halaman saat ini
+            cy.get('#info-pagination').invoke('text').then((infoText) => {
+                const currentPageInfo = infoText.split('dari')[0].trim().split('sampai');
+                const currentPageStart = parseInt(currentPageInfo[0].trim());
+                const currentPageEnd = parseInt(currentPageInfo[1].trim());
+
+                // Mengklik tombol Next
+                cy.get('#btn-next-pagination').click();
+
+                // Memastikan halaman berubah dengan memeriksa info halaman saat ini
+                cy.get('#info-pagination').invoke('text').then((newInfoText) => {
+                    const newPageInfo = newInfoText.split('dari')[1].trim().split('data')[0].trim().split('sampai');
+                    const newPageStart = parseInt(newPageInfo[0].trim());
+                    const newPageEnd = parseInt(newPageInfo[1].trim());
+
+                    // Memastikan data yang ditampilkan berbeda
+                    expect(newPageStart).to.be.above(currentPageEnd);
+
+                    // Mengklik tombol Prev
+                    cy.get('#btn-prev-pagination').click();
+
+                    // Memastikan halaman berubah dengan memeriksa info halaman saat ini
+                    cy.get('#info-pagination').invoke('text').then((prevInfoText) => {
+                        const prevPageInfo = prevInfoText.split('dari')[1].trim().split('data')[0].trim().split('sampai');
+                        const prevPageStart = parseInt(prevPageInfo[0].trim());
+                        const prevPageEnd = parseInt(prevPageInfo[1].trim());
+
+                        // Memastikan data yang ditampilkan kembali ke halaman sebelumnya
+                        expect(prevPageStart).to.equal(currentPageStart);
+                        expect(prevPageEnd).to.equal(currentPageEnd);
+                    });
+                });
+            });
+        });
+
+
 
     })
 

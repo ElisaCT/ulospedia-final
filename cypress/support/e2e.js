@@ -17,5 +17,7 @@
 import './commands'
 import 'cypress-xpath';
 import 'cypress-file-upload';
+import 'chai-string';
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

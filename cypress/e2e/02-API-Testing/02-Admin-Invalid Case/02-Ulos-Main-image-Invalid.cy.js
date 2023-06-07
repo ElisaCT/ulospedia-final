@@ -17,14 +17,14 @@ describe('Pengujian API: Invalid', () => {
             cy.request({
                 method: 'GET',
                 failOnStatusCode: false,
-                url: `ulospedia/ulos/${ulosId}/main-image`,
+                url: `ulospedia/ulos/${ulosId}/main-image/public`,
                 headers: {
                     'Authorization': `Bearer ${authToken}`,
                     'Accept': '*/*'
                 }
             }).then((response) => {
                 cy.log('Response Body:', JSON.stringify(response.body, null, 2));
-                expect(response.body).to.have.property('message', 'ulos dengan id {1011} tidak ditemukan');
+                expect(response.body).to.have.property('message', 'ulos dengan id 1011 tidak ditemukan');
                 expect(response.status).to.eq(404);
             });
         });
@@ -35,7 +35,7 @@ describe('Pengujian API: Invalid', () => {
             cy.request({
                 method: 'GET',
                 failOnStatusCode: false,
-                url: `ulospedia/ulos/${ulosId}/main-image`,
+                url: `ulospedia/ulos/${ulosId}/main-image/public`,
                 headers: {
                     'Authorization': `Bearer ${authToken}`,
                     'Accept': '*/*'
@@ -44,7 +44,7 @@ describe('Pengujian API: Invalid', () => {
                 cy.log('Response Body:', JSON.stringify(response.body, null, 2));
                 expect(response.body).to.have.property('code', 404);
                 expect(response.body).to.have.property('status', 'error');
-                expect(response.body).to.have.property('message', 'ulos dengan id {1011} tidak ditemukan');
+                expect(response.body).to.have.property('message', 'ulos dengan id 1011 tidak ditemukan');
                 expect(response.status).to.eq(404);
             });
         });
@@ -90,7 +90,7 @@ describe('Pengujian API: Invalid', () => {
             }).then((response) => {
                 expect(response.body).to.have.property('code', 404);
                 expect(response.body).to.have.property('status', 'error');
-                expect(response.body).to.have.property('message', 'ulos dengan id {1011} tidak ditemukan');
+                expect(response.body).to.have.property('message', 'ulos dengan id 1011 tidak ditemukan');
 
                 cy.log('Response Body:', JSON.stringify(response.body, null, 2))
             });
@@ -111,7 +111,7 @@ describe('Pengujian API: Invalid', () => {
                     'Accept': '*/*'
                 }
             }).then((response) => {
-                expect(response.status).to.eq(403);
+                expect(response.status).to.eq(401);
             });
         });
 
@@ -125,7 +125,7 @@ describe('Pengujian API: Invalid', () => {
                     'Accept': '*/*'
                 }
             }).then((response) => {
-                expect(response.status).to.eq(403);
+                expect(response.status).to.eq(401);
             });
         });
 
@@ -146,10 +146,35 @@ describe('Pengujian API: Invalid', () => {
                     body: formData
                 }).then((response) => {
                     cy.log('Response Body:', JSON.stringify(response.body, null, 2))
-                    expect(response.status).to.eq(403);
+                    expect(response.status).to.eq(401);
                 });
             });
 
+        });
+
+        it('PUT: Memperbarui gambar utama ulos dengan ID ulos yang valid dan menggunakan invalid credentials', () => {
+            const ulosId = 10;
+
+            cy.fixture('ulosUtuh1.jpeg', 'binary')
+                .then(Cypress.Blob.binaryStringToBlob)
+                .then((mainImage) => {
+                    const formData = new FormData();
+                    formData.append('main-image', mainImage, 'ulosUtuh1.jpeg');
+
+                    cy.request({
+                        method: 'PUT',
+                        url: `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`,
+                        headers: {
+                            'Authorization': `Bearer ${invalidAuthToken}`,
+                            'Content-Type': 'multipart/form-data',
+                            'accept': '*/*'
+                        },
+                        body: formData,
+                        failOnStatusCode: false // Prevent Cypress from failing the test on non-2xx status code
+                    }).then((response) => {
+                        expect(response.status).to.eq(401);
+                    });
+                });
         });
 
 
@@ -163,7 +188,7 @@ describe('Pengujian API: Invalid', () => {
                     'Accept': '*/*'
                 }
             }).then((response) => {
-                expect(response.status).to.eq(403);
+                expect(response.status).to.eq(401);
             });
         });
     });

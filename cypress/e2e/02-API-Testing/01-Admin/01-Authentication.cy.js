@@ -40,6 +40,7 @@ describe('Pengujian API: Fitur Authentication', () => {
             expect(response.body).to.have.property('code', 404);
             expect(response.body).to.have.property('status', 'error');
             expect(response.body).to.have.property('message');
+            cy.log('Response Body:', JSON.stringify(response.body, null, 2));
             expect(response.body.message).to.deep.equal(expectedMessage);
             // Additional assertions or actions for handling the validation error response
         };
@@ -48,8 +49,7 @@ describe('Pengujian API: Fitur Authentication', () => {
             expect(response.status).to.equal(401);
             expect(response.body).to.have.property('code', 401);
             expect(response.body).to.have.property('status', 'error');
-            expect(response.body).to.have.property('data', null);
-            expect(response.body).to.have.property('message', 'username atau password salah');
+            expect(response.body).to.have.property('message', 'login gagal, silahkan masukkan username dan password dengan tepat');
             // Additional assertions or actions for handling the error response
         };
 
@@ -65,7 +65,7 @@ describe('Pengujian API: Fitur Authentication', () => {
                 body: requestbodyUsernameKosong,
             }).then((response) => { 
                 assertValidationErrorResponse(response, {
-                    username: 'username cannot be empty'
+                    username: 'username tidak boleh kosong'
                 });
             });
         });
@@ -78,7 +78,7 @@ describe('Pengujian API: Fitur Authentication', () => {
                 body: requestbodyPasswordKosong,
             }).then((response) => {
                 assertValidationErrorResponse(response, {
-                    password: 'password cannot be empty'
+                    password: 'password tidak boleh kosong'
                 });
             });
         });

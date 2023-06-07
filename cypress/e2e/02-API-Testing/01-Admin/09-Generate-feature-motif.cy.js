@@ -8,7 +8,7 @@ describe('Pengujian API - Fitur Generate untuk motif ulos', () => {
 
 
     it('GET: Mendapatkan semua motif untuk dashboard', () => {
-        const ulosId = 10;
+        const ulosId = 12;
         const authToken = Cypress.env('authToken');
 
         cy.request({
@@ -25,9 +25,27 @@ describe('Pengujian API - Fitur Generate untuk motif ulos', () => {
         });
     });
 
+    it('GET: Mendapatkan gambar motif berdasarkan ulosId dan motifId yang valid(tersedia)', () => {
+        const ulosId = 12;
+        const motifId = 29;
+        const authToken = Cypress.env('authToken');
+
+        cy.request({
+            method: 'GET',
+            url: `generate/ulos/${ulosId}/motifs/${motifId}/image/public`,
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Accept': '*/*'
+            },
+            encoding: 'binary'
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            cy.log('Response Body:', JSON.stringify(response.body, null, 2));
+        });
+    });
 
     it('POST: Menambahkan/membuat sebuah data teks baru berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 11;
+        const ulosId = 12;
         const size = 'Sedang';
         const authToken = Cypress.env('authToken');
 
@@ -47,10 +65,9 @@ describe('Pengujian API - Fitur Generate untuk motif ulos', () => {
         });
     });
 
-
     it('POST: Membuat/mengupload gambar motif baru berdasarkan ulos id dan motif id yang valid(tersedia)', () => {
-        const ulosId = 11;
-        const motifId = 15;
+        const ulosId = 12;
+        const motifId = 29;
         const imagePath = 'motifUlos1.jpeg';
         const authToken = Cypress.env('authToken');
 
@@ -73,26 +90,78 @@ describe('Pengujian API - Fitur Generate untuk motif ulos', () => {
         });
     });
 
-    it('GET: Mendapatkan gambar motif berdasarkan ulosId dan motifId yang valid(tersedia)', () => {
-        const ulosId = 10;
-        const motifId = 11;
+    it('PUT: Memperbarui data text motif berdasarkan ulos ID dan motif ID', () => {
         const authToken = Cypress.env('authToken');
+        const ulosId = 12;
+        const motifId = 29;
 
         cy.request({
-            method: 'GET',
-            url: `generate/ulos/${ulosId}/motifs/${motifId}/image`,
+            method: 'PUT',
+            url: `generate/ulos/${ulosId}/motifs/${motifId}`,
             headers: {
                 'Authorization': `Bearer ${authToken}`,
-                'Accept': '*/*'
+                'Content-Type': 'application/json',
+                'Accept': '*/*',
             },
-            encoding: 'binary'
+            body: {
+                "size": "Kecil"
+            },
+            failOnStatusCode: false,
         }).then((response) => {
             expect(response.status).to.eq(200);
-            cy.log('Response Body:', JSON.stringify(response.body, null, 2));
+            expect(response.body.data.motif.size).to.eq('Kecil');
+            expect(response.body.message).to.eq('data text motif berhasil diubah');
         });
     });
 
-    // it('DELETE: Menhapus motif yang ada berdasarkan ulosId dan motifId yang valid(tersedia)', () => {
+    it('PUT: Memperbarui gambar motif berdasarkan ulos ID dan motif ID', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 12;
+        const motifId = 29;
+
+        cy.fixture('motifUlos1.jpeg', 'binary')
+            .then(Cypress.Blob.binaryStringToBlob)
+            .then((motifImage) => {
+                const formData = new FormData();
+                formData.append('motif-image', motifImage, 'motifUlos1.jpeg');
+
+                cy.request({
+                    method: 'PUT',
+                    url: `generate/ulos/${ulosId}/motifs/${motifId}/image`,
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'multipart/form-data',
+                        'Accept': '*/*',
+                    },
+                    body: formData,
+                    failOnStatusCode: false,
+                }).then((response) => {
+                    expect(response.status).to.eq(200);
+                });
+            });
+    });
+
+    // it('DELETE: Menghapus gambar motif berdasarkan ulos ID dan motif ID', () => {
+    //     const authToken = Cypress.env('authToken');
+    //     const ulosId = 57;
+    //     const motifId = 40;
+
+    //     cy.request({
+    //         method: 'DELETE',
+    //         url: `generate/ulos/${ulosId}/motifs/${motifId}/image`,
+    //         headers: {
+    //             'Authorization': `Bearer ${authToken}`,
+    //             'Accept': '*/*',
+    //         },
+    //         failOnStatusCode: false,
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         // Additional assertions if needed
+    //     });
+    // });
+
+
+    // it('DELETE: Menghapus motif yang ada berdasarkan ulosId dan motifId yang valid(tersedia)', () => {
     //     const ulosId = 9;
     //     const motifId = 10;
     //     const authToken = Cypress.env('authToken');

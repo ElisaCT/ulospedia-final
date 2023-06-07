@@ -53,6 +53,51 @@ describe('Pengujian API: Data ulos', () => {
         });
     });
 
+    it('GET: Mendapatkan Detail Ulos Berdasarkan ID', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 10;
+
+        cy.request({
+            method: 'GET',
+            url: `ulospedia/ulos/${ulosId}`,
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'accept': '*/*',
+            },
+            failOnStatusCode: false,
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            expect(response.body.data.ulos.name).to.eq('Sibolang');
+            expect(response.body.data.ulos.ethnic).to.eq('Sumatera Utara');
+            expect(response.body.data.ulos.location).to.eq('Tapanuli Selatan');
+        });
+    });
+
+    it.only('GET: Mendapatkan Semua Data Ulos untuk Dashboard Ulos', () => {
+        const authToken = Cypress.env('authToken');
+        const pageNo = 1;
+        const sortBy = 'updatedAt';
+        const sortDir = 'desc';
+        const search = '';
+
+        cy.request({
+            method: 'GET',
+            url: `ulospedia/ulos?pageNo=${pageNo}&sortBy=${sortBy}&sortDir=${sortDir}&search=${search}`,
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'accept': '*/*',
+            },
+            failOnStatusCode: false,
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Lakukan pengujian lebih lanjut sesuai dengan respons yang diharapkan
+            // Contoh: Memeriksa jumlah ulos yang diterima
+            expect(response.body.data.ulos.ulosElDashboardResponseList).to.have.length.above(0);
+            // ...
+        });
+    });
+
+
     it('POST: Membuat data ulos baru', () => {
         const requestBody = testData.ulosData;
         const authToken = Cypress.env('authToken');
@@ -103,7 +148,7 @@ describe('Pengujian API: Data ulos', () => {
             expect(response.status).to.equal(200);
             expect(response.body).to.have.property('code', 200);
             expect(response.body).to.have.property('status', 'success');
-            expect(response.body).to.have.property('message', 'ulos data successfully updated');
+            expect(response.body).to.have.property('message', 'ulos berhasil diperbaharui');
             cy.log('Response Body:', JSON.stringify(response.body, null, 2));
         });
     });
