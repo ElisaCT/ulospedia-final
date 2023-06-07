@@ -1,3 +1,6 @@
+<!-- eslint-disable vue/no-reserved-component-names -->
+<!-- eslint-disable vue/no-reserved-component-names -->
+<!-- eslint-disable vue/no-unused-components -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="grid grid-cols-2">
@@ -14,9 +17,11 @@
             Masukkan kredensial yang valid untuk login
           </p>
         </div>
-
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" v-on:submit.prevent="login">
+        <div v-if="hasErrorMessage" class="text-danger_main text-base font-semibold w-full sm:mx-auto sm:w-full sm:max-w-sm mt-2 pl-2 p-2.5 items-center bg-danger_surface border-l-4 border-danger_main">
+          {{ errorMessage }}
+        </div>
+        <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
+          <Form class="space-y-6" @submit="loginUser">
             <div>
               <label
                 for="username-address-icon"
@@ -25,8 +30,7 @@
               >
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"></svg>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" >
                     <path
                       stroke="#404040"
                       stroke-linecap="round"
@@ -36,16 +40,20 @@
                     />
                   </svg>
                 </div>
-                <input
-                  v-model="username"
-                  type="text"
-                  id="username-address-icon"
-                  required
-                  class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_pressed block w-full pl-10 p-2.5"
-                  placeholder="Masukkan username anda"
-                />
-                <span v-if="username" class="invalid-feedback">Masukkan username anda</span>
+                <div>
+                  <Field
+                    v-model="username"
+                    type="text"
+                    name="username"
+                    id="username-address-icon"
+                    class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_pressed block w-full pl-10 p-2.5"
+                    placeholder="Masukkan username anda"
+                    :rules="validateUsername"
+                  />
+                  
+                </div>
               </div>
+              <ErrorMessage name="username" class="text-danger_main text-s" />
 
               <label
                 for="password-icon"
@@ -71,48 +79,31 @@
                     />
                   </svg>
                 </div>
-                <input
+                <Field
                   v-model="password"
                   id="password"
                   name="password"
                   type="password"
                   autocomplete="current-password"
-                  required
+                  :rules="validatePassword"
                   class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_main block w-full pl-10 p-2.5"
                   placeholder="Masukkan password anda"
                 />
-
-                <!-- <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                    <path
-                      stroke="#404040"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M12.983 10A2.98 2.98 0 0 1 10 12.983 2.98 2.98 0 0 1 7.017 10 2.98 2.98 0 0 1 10 7.017 2.98 2.98 0 0 1 12.983 10Z"
-                    />
-                    <path
-                      stroke="#000"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M10 16.892c2.942 0 5.683-1.734 7.592-4.734.75-1.175.75-3.15 0-4.325-1.909-3-4.65-4.733-7.592-4.733-2.942 0-5.683 1.733-7.592 4.733-.75 1.175-.75 3.15 0 4.325 1.909 3 4.65 4.734 7.592 4.734Z"
-                    />
-                  </svg>
-                </div> -->
+               
               </div>
+              <ErrorMessage name="password" class="text-danger_main text-s"/>
             </div>
 
             <div>
               <button
-                @click="loginUser"
+               
                 type="submit"
                 class="flex w-full justify-center rounded-lg bg-primary_main px-4 py-2 text-lg font-medium leading-6 text-neutral_10 hover:bg-primary_hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Login
               </button>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </div>
@@ -120,35 +111,29 @@
 </template>
 <script>
 import axios from 'axios'
-//import { ref, computed } from 'vue'
-// import { reactive } from 'vue' // "from '@vue/composition-api'" if you are using Vue <2.7
-// import { useVuelidate } from '@vuelidate/core'
-// import { required } from '@vuelidate/validators'
-// import { useRouter } from 'vue-router'
-
-// const startValidation = ref(false);
-// const username = ref('');
-// const password = ref('');
+import { Form, Field, ErrorMessage } from 'vee-validate'
 
 export default {
   name: 'admin-login',
   data() {
     return {
       username: '',
-      password: ''
+      password: '',
+      errorMessage:''
     }
   },
-  // validations:{
-  //   username: {required}
-  // },
+  components: {
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Form,
+    Field,
+    ErrorMessage
+  },
   methods: {
-    login: function () {
-      this.$v.$touch()
-      if (this.$v.$pending || this.$v.$error) return
-    },
+    
     async loginUser() {
       console.log(this.username)
       console.log(this.password)
+      //console.log(JSON.stringify(values, null, 2))
 
       try {
         const response = await axios.post('http://company.ditenun.com/api/v1/auth/login', {
@@ -158,33 +143,48 @@ export default {
         })
 
         console.log(response.data)
-
         if (response.data.code === 200) {
-          localStorage.setItem('authenticated', true)
-          localStorage.setItem('token', response.data.data.token)
-          this.$router.push('/admin/dashboard')
-        }
-        // Handle the response data as needed
-      } catch (error) {
-        console.error('Error:', error.response.data)
-        // Handle the error response
+      localStorage.setItem('authenticated', true)
+      localStorage.setItem('token', response.data.data.token)
+      this.$router.push('/admin/dashboard')
+    } 
+  } catch (error) {
+    console.error('Error:', error.response.data)
+    // Handle the error response
+    this.errorMessage = 'Username atau password anda salah'
+    console.log(this.errorMessage)
+  }
+    },
+    validateUsername(value) {
+      if (!value) {
+        return 'Masukkan username anda'
       }
+            return true
+    },
+    validatePassword(value){
+      if(!value){
+        return 'Masukkan password anda'
+      }
+      return true;
     }
   },
-  setup() {
-    // const state= reactive({
-    //   email:'',
-    //   password: ''
-    // })
-    // const rules = computed(() => {
-    //         email: { required },
-    //         password: { required
-    //         }
-    //     })
-    //return { v$: useVuelidate() }
-    //console.log('TEST')
-    // eslint-disable-next-line vue/no-dupe-keys
-    // return login
-  }
+  setup() {},
+  computed: {
+    hasErrorMessage() {
+      return this.errorMessage !== '';
+    }
+  },
 }
 </script>
+
+<style>
+.vee-error-message {
+  color: red;
+  font-size: 12px;
+}
+
+.ErrorMessage{
+  font-size: medium;
+  color: red;
+}
+</style>
