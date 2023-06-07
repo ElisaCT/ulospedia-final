@@ -31,7 +31,7 @@
                 d="M9.908 4.208A5.105 5.105 0 0 0 14.45 8.5M2.5 18.333h15"
               />
             </svg>
-            {{ showDeleteUlos ? 'Save' : 'Sunting Konten' }}
+            {{ showDeleteUlos ? 'Simpan' : 'Sunting Konten' }}
           </button>
         </div>
       </div>
