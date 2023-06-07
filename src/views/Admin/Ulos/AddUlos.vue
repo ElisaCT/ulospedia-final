@@ -201,16 +201,16 @@
                     <button
                       v-if="index > 0"
                       @click="removeField('ulosFields', index)"
-                      class="absolute"
+                      class="absolute text-neutral_80"
                     >
-                      Remove
+                      Hapus
                     </button>
                   </div>
                 </form>
 
                 <button @click="addField('ulosFields')" :hidden="ulosFields.length >= 5">
                   <div
-                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10 text-neutral_80"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -237,7 +237,7 @@
                         />
                       </defs>
                     </svg>
-                    Add more images
+                    Tambah Gambar Ulos
                   </div>
                 </button>
               </div>
@@ -299,7 +299,7 @@
                         <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button @click="removeField('potonganFields', index)" class="absolute">
+                    <button @click="removeField('potonganFields', index)" class="absolute text-neutral_80">
                       Remove
                     </button>
                   </div>
@@ -334,7 +334,7 @@
                         />
                       </defs>
                     </svg>
-                    {{ index === 0 ? 'Add images' : 'Add more images' }}
+                    {{ index === 0 ? 'Tambah Gambar Ulos' : 'Tambah lebih Banyak' }}
                   </div>
                 </button>
               </div>
@@ -396,15 +396,15 @@
                         <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button @click="removeField('motifFields', index)" class="absolute">
-                      Remove
+                    <button @click="removeField('motifFields', index)" class="absolute text-neutral_80">
+                      Hapus
                     </button>
                   </div>
                 </form>
 
                 <button @click="addField('motifFields')" :hidden="motifFields.length >= 5">
                   <div
-                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
+                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10 text-neutral_80"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -431,7 +431,7 @@
                         />
                       </defs>
                     </svg>
-                    Add more images
+                    Tambah Gambar Ulos
                   </div>
                 </button>
               </div>
@@ -546,7 +546,7 @@
                   <label
                     for="ulos-location"
                     class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                    >Lokasi Asal Ulos</label
+                    >Jenis Ulos</label
                   >
                   <div class="space-y-2">
                     <label class="inline-flex items-center pr-8">
@@ -630,45 +630,43 @@
 
                 <!-- teknik tenun -->
                 <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
-                  <label
-                    for="ulos-name"
-                    class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                    >Teknik Tenun</label
-                  >
-                  <div class="md:w-2/3 relative inline-block">
-                    <select
-                      v-model="technique"
-                      class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-                      required
-                    >
-                      <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
-                      <option value="Teknik Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
-                        Teknik Ikat Lungsi
-                      </option>
-                      <option value="Teknik Ikat Pakan" class="pb-3 hover:bg-primary_surface">
-                        Teknik Ikat Pakan
-                      </option>
-                      <option value="Teknik Ikat Ganda" class="pb-3 hover:bg-primary_surface">
-                        Teknik Ikat Ganda
-                      </option>
-                    </select>
-                    <div
-                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                        <g clip-path="url(#a)">
-                          <path
-                            fill="#323232"
-                            d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                        </defs>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
+          <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+            >Teknik Tenun yang digunakan*</label
+          >
+          <div class="md:w-2/3 relative inline-block">
+            <select
+              v-model="technique"
+              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              required
+            >
+              <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
+              <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
+                Teknik Ikat Lungsi
+              </option>
+              <option value="Ikat Pakan" class="pb-3 hover:bg-primary_surface">
+                Teknik Ikat Pakan
+              </option>
+              <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
+                Teknik Ikat Ganda
+              </option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                <g clip-path="url(#a)">
+                  <path
+                    fill="#323232"
+                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                </defs>
+              </svg>
+            </div>
+          </div>
+        </div>
 
                 <!-- makna dan fungsi ulos -->
                 <div class="flex flex-col gap-6 md:flex-row pb-6">
@@ -845,7 +843,7 @@
                         class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                         >URL Produk*</label
                       >
-                      <div class="md:w-2/3">
+                      <div class="md:w-2/3 text-neutral_80">
                         <input
                           type="text"
                           id="ulos-name"
@@ -860,7 +858,7 @@
                         />
                       </div>
                     </div>
-                    <button @click="removeForm(form.id)" :disabled="!toggleStatus">Remove</button>
+                    <button @click="removeForm(form.id)" :disabled="!toggleStatus">Hapus</button>
                   </div>
                 </form>
               </div>
@@ -987,12 +985,9 @@ export default {
         'Batak Mandailing',
         'Batak Angkola'
       ], // Array of ethnics values for the dropdown
-      selectedColors: [], // Vue data property to store the selected values
-      colors: ['Hitam', 'Merah', 'Putih', 'Hijau', 'Biru', 'Kuning'],
+      selectedColors: [], 
       selectedTechnics: [],
-      technics: ['Teknik Ikat Lungsi', 'Teknik Ikat Pakan', 'Teknik Ikat Ganda'],
       toggleStatus: false,
-
       ulosFields: [{ fileName: '', image: null, file: null }],
       potonganFields: [{ fileName: '', image: null }],
       motifFields: [{ fileName: '', image: null }],
