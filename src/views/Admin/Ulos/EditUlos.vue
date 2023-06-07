@@ -2,7 +2,7 @@
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
     <div class="">
-      <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Tambah Ulos</h3>
+      <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Edit Ulos</h3>
       <!-- stepper -->
       <div class="stepper">
         <div :hidden="currentStep != 1">
@@ -833,6 +833,7 @@
                   >
                   <div class="md:w-2/3">
                     <input
+                      v-model="ulosData.name"
                       type="text"
                       id="ulos-name"
                       class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -851,6 +852,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      v-model="ulosData.ethnic"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
@@ -929,7 +931,7 @@
                   <label
                     for="ulos-location"
                     class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-                    >Lokasi Asal Ulos</label
+                    >Jenis Ulos</label
                   >
                   <div class="space-y-2">
                     <label class="inline-flex items-center pr-8">
@@ -961,6 +963,7 @@
                   >
                   <div class="md:w-2/3">
                     <input
+                      v-model="ulosData.location"
                       type="text"
                       id="ulos-location"
                       class="bg-neutral_10 border border-primary_border text-neutral_70 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -977,6 +980,7 @@
                   <div class="flex flex-row gap-6 w-auto">
                     <div class="flex md:w-2/3 gap-1">
                       <input
+                        v-model="ulosData.length"
                         type="number"
                         min="0"
                         id="ulos-legth"
@@ -991,6 +995,7 @@
                     </div>
                     <div class="flex md:w-2/3 gap-1">
                       <input
+                        v-model="ulosData.width"
                         type="number"
                         min="0"
                         id="ulos-width"
@@ -1015,6 +1020,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      v-model="ulosData.technique"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
@@ -1056,6 +1062,7 @@
                   >
                   <div class="md:w-2/3">
                     <textarea
+                      v-model="ulosData.meaning"
                       type="text"
                       id="ulos-meaning"
                       rows="4"
@@ -1072,6 +1079,7 @@
                   >
                   <div class="md:w-2/3">
                     <textarea
+                      v-model="ulosData.func"
                       type="text"
                       id="ulos-meaning"
                       rows="4"
@@ -1263,15 +1271,17 @@
     </div>
   </div>
 </template>
-<script>
-//import Multiselect from 'vue-multiselect'
 
+<script>
+import axios from 'axios'
+//import Multiselect from 'vue-multiselect'
 export default {
   components: {
     //Multiselect
   },
   data() {
     return {
+      ulosId: '',
       currentStep: 1,
       totalSteps: 3, // Adjust this number based on the total number of steps in your form
       selectedEthnic: null, // Vue data property to store the selected values
@@ -1286,10 +1296,48 @@ export default {
       colors: ['Hitam', 'Merah', 'Putih', 'Hijau', 'Biru', 'Kuning'], // Array of ethnics values for the dropdown
       selectedTechnics: [],
       technics: ['Teknik Ikat Lungsi', 'Teknik Ikat Pakan', 'Teknik Ikat Ganda'],
-      toggleStatus: false
+      toggleStatus: false,
+
+      ulosData: {
+        name: '',
+        ethnic: '',
+        location: '',
+        technique: '',
+        length: '',
+        width: '',
+        meaning: '',
+        func: ''
+      }
     }
   },
+  mounted() {
+    this.ulosId = this.$route.params.id
+    this.getUlosData(this.$route.params.id)
+  },
   methods: {
+    getUlosData() {
+      const token = localStorage.getItem('token')
+
+      axios
+        .get(`http://company.ditenun.com/api/v1/ulospedia/ulos/19`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        .then((res) => {
+          console.log(res.data.data.ulos)
+
+          this.ulosData = res.data.data.ulos
+        })
+        .catch(function (error) {
+          if (error.response) {
+            if (error.response.status == 404) {
+              alert(error.response.data.message)
+            }
+          }
+        })
+    },
     nextStep() {
       if (this.currentStep < this.totalSteps) {
         this.currentStep++

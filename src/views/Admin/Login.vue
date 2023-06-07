@@ -25,6 +25,7 @@
               >
               <div class="relative">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"></svg>
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
                     <path
                       stroke="#404040"
@@ -44,10 +45,11 @@
                   placeholder="Masukkan username anda"
                 />
                 <span v-if="username" class="invalid-feedback">Masukkan username anda</span>
-        
               </div>
 
-              <label for="password-icon" class="block mb-2 text-base font-medium text-neutral_100 pt-4"
+              <label
+                for="password-icon"
+                class="block mb-2 text-base font-medium text-neutral_100 pt-4"
                 >Password</label
               >
               <div class="relative">
@@ -79,7 +81,7 @@
                   class="border border-primary_border text-neutral_90 text-base rounded-lg focus:border-primary_main block w-full pl-10 p-2.5"
                   placeholder="Masukkan password anda"
                 />
-                
+
                 <!-- <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
                     <path
@@ -140,14 +142,13 @@ export default {
   //   username: {required}
   // },
   methods: {
-    login: function(){
-      this.$v.$touch();
-      if(this.$v.$pending || this.$v.$error) return;
+    login: function () {
+      this.$v.$touch()
+      if (this.$v.$pending || this.$v.$error) return
     },
     async loginUser() {
       console.log(this.username)
       console.log(this.password)
-
 
       try {
         const response = await axios.post('http://company.ditenun.com/api/v1/auth/login', {
@@ -168,8 +169,6 @@ export default {
         console.error('Error:', error.response.data)
         // Handle the error response
       }
-
-     
     }
   },
   setup() {
@@ -184,7 +183,6 @@ export default {
     //     })
     //return { v$: useVuelidate() }
     //console.log('TEST')
-
     // eslint-disable-next-line vue/no-dupe-keys
     // return login
   }

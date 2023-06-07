@@ -20,10 +20,8 @@
                   :src="selectedImage"
                   alt="Preview"
                   class="w-24 h-24 object-cover rounded-lg"
-                  @mouseover="showDeleteButton"
-                  @mouseout="hideDeleteButton"
                 />
-                <button
+                <!-- <button
                   v-if="showDelete"
                   @click="deleteImage"
                   class="absolute top-1 right-1 bg-red-500 rounded-full p-1 z-10"
@@ -40,10 +38,10 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                </button>
+                </button> -->
                 <div v-else>
                   <svg
-                  v-if="!selectedImage"
+                    v-if="!selectedImage"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="40"
@@ -421,13 +419,13 @@ export default {
       this.showDatepicker = !this.showDatepicker
     },
     showDeleteButton() {
-      this.showDelete = true;
+      this.showDelete = true
     },
     hideDeleteButton() {
-      this.showDelete = false;
+      this.showDelete = false
     },
     deleteImage() {
-      this.selectedImage = null;
+      this.selectedImage = null
     }
   }
 }

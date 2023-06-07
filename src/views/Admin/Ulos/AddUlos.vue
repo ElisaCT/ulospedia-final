@@ -137,7 +137,9 @@
         <div class="step-content">
           <!-- image -->
           <div v-show="currentStep === 1" class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6">
-            <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Ulos</h5>
+            <h5 id="stepper-tambah-ulos" class="font-medium text-xl text-neutral_90 text-left pb-6">
+              Gambar Ulos
+            </h5>
             <div class="flex flex-row gap-6">
               <div class="text-sm text-left text-neutral_80 gap-3 w-56">
                 <p class="font-medium pb-3">Gambar Ulos Utuh*</p>
@@ -159,6 +161,7 @@
                         :required="index === 0"
                       />
                       <div
+                        id="btn-tambah-gambar-utama"
                         class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
@@ -210,6 +213,7 @@
 
                 <button @click="addField('ulosFields')" :hidden="ulosFields.length >= 5">
                   <div
+                    id="btn-tambah-gambar-lainnya-gambar-utama"
                     class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10 text-neutral_80"
                   >
                     <svg
@@ -262,6 +266,7 @@
                         :required="index === 0"
                       />
                       <div
+                        id="btn-tambah-gambar-potongan"
                         class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
@@ -299,111 +304,19 @@
                         <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
                       </div>
                     </label>
-                    <button @click="removeField('potonganFields', index)" class="absolute text-neutral_80">
-                      Remove
+                    <button
+                      id="btn-remove-gambar"
+                      @click="removeField('potonganFields', index)"
+                      class="absolute text-neutral_80"
+                    >
+                      Hapus
                     </button>
                   </div>
                 </form>
 
                 <button @click="addField('potonganFields')" :hidden="potonganFields.length >= 5">
                   <div
-                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      width="40"
-                      height="40"
-                      fill="none"
-                    >
-                      <path fill="url(#a)" d="M0 0h40v40H0z" />
-                      <defs>
-                        <pattern
-                          id="a"
-                          width="1"
-                          height="1"
-                          patternContentUnits="objectBoundingBox"
-                        >
-                          <use xlink:href="#b" transform="scale(.01)" />
-                        </pattern>
-                        <image
-                          xlink:href="data:image/png;base64,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"
-                          id="b"
-                          width="100"
-                          height="100"
-                        />
-                      </defs>
-                    </svg>
-                    {{ index === 0 ? 'Tambah Gambar Ulos' : 'Tambah lebih Banyak' }}
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            <!-- motif ulos -->
-            <div class="flex flex-row gap-6 pt-6">
-              <div class="text-sm text-left text-neutral_80 gap-3 w-56">
-                <p class="font-medium pb-3">Gambar Motif Ulos</p>
-                <p class="font-normal">
-                  Gambar motif ulos merupakan bagian yang lebih detail dari potongan ulos
-                </p>
-              </div>
-              <div class="flex flex-row gap-6 pt-6">
-                <form @submit.prevent="submitForm" class="flex flex-row gap-6">
-                  <div v-for="(field, index) in motifFields" :key="index">
-                    <label class="relative block">
-                      <input
-                        type="file"
-                        accept="image/jpeg, image/png"
-                        class="hidden"
-                        @change="handleFileChange('motifFields', index, $event)"
-                      />
-                      <div
-                        class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
-                      >
-                        <img
-                          v-if="field.image"
-                          :src="field.image"
-                          alt="Image Preview"
-                          class="mt-2 w-24 h-auto"
-                        />
-                        <svg
-                          v-if="!field.image"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlns:xlink="http://www.w3.org/1999/xlink"
-                          width="40"
-                          height="40"
-                          fill="none"
-                        >
-                          <path fill="url(#a)" d="M0 0h40v40H0z" />
-                          <defs>
-                            <pattern
-                              id="a"
-                              width="1"
-                              height="1"
-                              patternContentUnits="objectBoundingBox"
-                            >
-                              <use xlink:href="#b" transform="scale(.01)" />
-                            </pattern>
-                            <image
-                              xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAH+UlEQVR4nO1da6hUVRQ+vV8G2YuKDPpT9sQkLdAgiAh/SCE9jULMHlQU3R4WFFdNKNSsG5di7pzv286NazoVlpJIFmpFZV4rH6VYEpSmvdTUSk2dWN0tDNOcc/Z5zTlzZ3+wYH4c9mN9c/Zee62113EcCwsLCwsLCwsLCwsLCwsLCwuLFkV7e/vhJIe5rns7yTaSE/uZtMncXNe9XObq5BWu654F4GUAW0hWWkR+ItlRKBTOdPKCSqVyGMmnSP6ZAwVVshAAu+XtEV1kSka5XD4OQDlrhTA/Mld0kgkZ8m8A8HoOlFDJmbyZyZuil6msJ1/JowB4ouEbuMGesQvA5yQX9ydB35x2Bc1dKXVGwwgRa8rn37GN5PiOjo5jnH4KpdSxJCcA2O6jh5caMhixvb1MWyEDwIVOi2DWrFkX+ZCyuSF7SbFYHO7zqo53WgxKqbu99CGHx9QHQHKsxwB29udlKmD5qrunALjNSRskH/MgZIXToiC5woOQR1PvHMAkj86XOC0KAEs8dDKpEZ1bQmpgCckZLCERAeA0APcAmEfyK5I/AlhNcgHJB+XAG7Fdu2RFsITatVfW74S9h+Q013VPDNO+JSQElFInAfgwpD9qTVdX19mmfVhCDNHe3n4kgI8jOgjXmrrSLSGGIPl0TK+tkT/KEmIA2Qf8nH+GssckPGsJMQCAO33++VsAPEnyFvE8APjeh5Q2g76slRUEksqDjD9IDqp+tlgsnuyTnLEgqC9LiAFILvVQ8Csez0/2eP7roL4sIQYA8KWHS/zxes+7rjvOg5DNBn3ZJSuqkki6Hs8/73UmidqXdS5WgWTBQ0l/FYvFC2qeHUTyd4/n33ICYAkxgLagKj4b+wwAj+g34xefZx8I6ssSYgCJXupUzzgHw92lUumUoL4sIYYA8FDMg+Fkw37sHhIi73hhxLfj00KhcJRJP5aQ8EvXGyEJ+cRkqToES0hIlMvlI1zXvc9v89ayQ1wp5XL56DDtW0IiQtzpSqkbxCQGsAhAr04PFdzc2dk5IEq7lpCcwRKSM5C8CsAcHQK2J/W8oFAonCo3qXTCuXWd5AU9PT0DxQMgMZeWSZRzXfcyANNJLhePLIAf9O8ZJC+JmCJ0I8kX9Ya/Qf/T/9FLkfi6vgHwNsnnAIwKMgIacks3a0J6enoGyl0+AAd9DnUHZU2XZ/3a6u7uPgHAXSSX+bXn089eTdAYSahwskCWhHR1dZ1L8ltDZW0HcIVXvF0nQPwa07VSLRslCa/hxGRFSKlUOk8yDQ3J+FkpNaReO0qpmwBsSpCI2r5XKaVGOP2ZkFl9N5W2hHgz/neLS9Z7kq+lRUSNHCA5RTwETn8jRCk1xMDlcUhkA762to1SqXSObMgNIqNaJ++FTUvNNSEkhx2y6X0mvVrXHhlX78aSRAdNl7o6ba8Ul4pc1dNWXJQ2euV84jQ7IUqpEdrZ5zfhZX7/QP1mRCJDTN3u7u7Tq+Y9MsbbslwsOqdZCVFKXW1wF3xxoVA43qsNvWdEXqYArKtuT/aDmMvX/FRu5aZNCMnrJBEhYIILgxKhAXTHVODaOmOrxBGvFKTcEkJydK2Drk4/84LiFWLaxlVeGoSQ3Oe67sVOMxBiQgbJuUFhVZ1kvSmnhIh8lOjSlQYhSqlbtcla8ZHZJqdgAM8kobgUCREZHVVXqRMiJiuA/QHK6TJx1IklE+LMkiUhy508EkLyXn2q9Rv8q6ZeUykIk5TSUiZEZJiTJ0JI3h/kYQUwPWSby5qFEKmo5OSFEJPiZwCejRDPONhEhGwKM7/UCNGlVoMG3B52XEmYuo0kRMR13fOdLAmRO+ABSjgYtWCLRPqajZBEyllFIUSndPoqTC83D8cY16ImJGRa1PlGJkRXoOsKGJhYWhNijuu7gFDravG8hpBynT56Q8o6P5NevA5x5hyaEO2QKwX8E/crpe6IOy56X7hZWe21bTSUUoNJbvWY/7KGESIuDp085vdm7JN4Q+xBOf8Rss9jXIm0H3NsXhdKv2gIIeL80xV3/N6MvSSvdxICvf1gmdeBJDnTQwe9qRMilXcAvBtAxt+S1+QkCHpkkEikT4JdDYlv10D+mJIi5FXjOJGQhR8hOs/p/QAydiulrklkxlWQDTRgecydlVXPcEiyCOYagzJIOyUxOfYg6oDkO81GCMmpToplYoMmuF0pdWXsAXhA0jubkJCxTlyIlzLC5H4jOdRJEQBGNRshYYqkBX3SyPi6sWQRFovFS52U0dnZOUBbbs1CyPrEJi+f+THsdHNt1YQ0gb7E52YhZEpiE5eiXgYFJUU2pvzpiJE1ChvTDISI305ylRMjJIQbPVUBMKd6TBJz13+CXBNiUoMrNLQHd27GpOypTdOUKwF5J8TrmkRsSLJaDkiZWKcS6aocEzLbSRPypkhGnkHqZyoCYJuU6KuTF3wgh4TsaNg3D+WbS1JWVSyrDEh5oY7ypuSNELnD6DQaem8Zqk/0bfo2aqpCcnJtEp04E+V+RgzlbahTMyUOITOdVofbl1baG5EQCZwNTsKkFidirr+bm8Fl/uURlblVB5dmRv20rJDRip+C8oUOC8yPuwdEWabsmxFsDdYN9SYsOzLZwJsRpb7r1YtTJGNBbeVsCzNLUO6jfJYECTqnbEFqJ/BWQrFYHC6JzxEv+ayX807ijkKLPoiZq2ufTNMh4aVVSW8f6NqNU+WMlUhwycLCwsLCwkkO/wKU32vtpJt5YwAAAABJRU5ErkJggg=="
-                              id="b"
-                              width="100"
-                              height="100"
-                            />
-                          </defs>
-                        </svg>
-                        <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
-                      </div>
-                    </label>
-                    <button @click="removeField('motifFields', index)" class="absolute text-neutral_80">
-                      Hapus
-                    </button>
-                  </div>
-                </form>
-
-                <button @click="addField('motifFields')" :hidden="motifFields.length >= 5">
-                  <div
+                    id="btn-tambah-gambar-lainnya-gambar-potongan"
                     class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10 text-neutral_80"
                   >
                     <svg
@@ -431,7 +344,109 @@
                         />
                       </defs>
                     </svg>
-                    Tambah Gambar Ulos
+                    {{ index === 0 ? 'Gambar Potongan Ulos' : 'Tambah Potongan Ulos' }}
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- motif ulos -->
+            <div class="flex flex-row gap-6 pt-6">
+              <div class="text-sm text-left text-neutral_80 gap-3 w-56">
+                <p class="font-medium pb-3">Gambar Motif Ulos</p>
+                <p class="font-normal">
+                  Gambar motif ulos merupakan bagian yang lebih detail dari potongan ulos
+                </p>
+              </div>
+              <div class="flex flex-row gap-6 pt-6">
+                <form @submit.prevent="submitForm" class="flex flex-row gap-6">
+                  <div v-for="(field, index) in motifFields" :key="index">
+                    <label class="relative block">
+                      <input
+                        type="file"
+                        accept="image/jpeg, image/png"
+                        class="hidden"
+                        @change="handleFileChange('motifFields', index, $event)"
+                      />
+                      <div
+                        id="btn-tambah-gambar-motif"
+                        class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10 text-neutral_80"
+                      >
+                        <img
+                          v-if="field.image"
+                          :src="field.image"
+                          alt="Image Preview"
+                          class="mt-2 w-24 h-auto"
+                        />
+                        <svg
+                          v-if="!field.image"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          width="40"
+                          height="40"
+                          fill="none"
+                        >
+                          <path fill="url(#a)" d="M0 0h40v40H0z" />
+                          <defs>
+                            <pattern
+                              id="a"
+                              width="1"
+                              height="1"
+                              patternContentUnits="objectBoundingBox"
+                            >
+                              <use xlink:href="#b" transform="scale(.01)" />
+                            </pattern>
+                            <image
+                              xlink:href="data:image/png;base64,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"
+                              id="b"
+                              width="100"
+                              height="100"
+                            />
+                          </defs>
+                        </svg>
+                        <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
+                      </div>
+                    </label>
+                    <button
+                      @click="removeField('motifFields', index)"
+                      class="absolute text-neutral_80"
+                    >
+                      Hapus
+                    </button>
+                  </div>
+                </form>
+
+                <button @click="addField('motifFields')" :hidden="motifFields.length >= 5">
+                  <div
+                    id="btn-tambah-gambar-lainnya-gambar-motif"
+                    class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10 text-neutral_80"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      width="40"
+                      height="40"
+                      fill="none"
+                    >
+                      <path fill="url(#a)" d="M0 0h40v40H0z" />
+                      <defs>
+                        <pattern
+                          id="a"
+                          width="1"
+                          height="1"
+                          patternContentUnits="objectBoundingBox"
+                        >
+                          <use xlink:href="#b" transform="scale(.01)" />
+                        </pattern>
+                        <image
+                          xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAH+UlEQVR4nO1da6hUVRQ+vV8G2YuKDPpT9sQkLdAgiAh/SCE9jULMHlQU3R4WFFdNKNSsG5di7pzv286NazoVlpJIFmpFZV4rH6VYEpSmvdTUSk2dWN0tDNOcc/Z5zTlzZ3+wYH4c9mN9c/Zee62113EcCwsLCwsLCwsLCwsLCwsLCwuLFkV7e/vhJIe5rns7yTaSE/uZtMncXNe9XObq5BWu654F4GUAW0hWWkR+ItlRKBTOdPKCSqVyGMmnSP6ZAwVVshAAu+XtEV1kSka5XD4OQDlrhTA/Mld0kgkZ8m8A8HoOlFDJmbyZyZuil6msJ1/JowB4ouEbuMGesQvA5yQX9ydB35x2Bc1dKXVGwwgRa8rn37GN5PiOjo5jnH4KpdSxJCcA2O6jh5caMhixvb1MWyEDwIVOi2DWrFkX+ZCyuSF7SbFYHO7zqo53WgxKqbu99CGHx9QHQHKsxwB29udlKmD5qrunALjNSRskH/MgZIXToiC5woOQR1PvHMAkj86XOC0KAEs8dDKpEZ1bQmpgCckZLCERAeA0APcAmEfyK5I/AlhNcgHJB+XAG7Fdu2RFsITatVfW74S9h+Q013VPDNO+JSQElFInAfgwpD9qTVdX19mmfVhCDNHe3n4kgI8jOgjXmrrSLSGGIPl0TK+tkT/KEmIA2Qf8nH+GssckPGsJMQCAO33++VsAPEnyFvE8APjeh5Q2g76slRUEksqDjD9IDqp+tlgsnuyTnLEgqC9LiAFILvVQ8Csez0/2eP7roL4sIQYA8KWHS/zxes+7rjvOg5DNBn3ZJSuqkki6Hs8/73UmidqXdS5WgWTBQ0l/FYvFC2qeHUTyd4/n33ICYAkxgLagKj4b+wwAj+g34xefZx8I6ssSYgCJXupUzzgHw92lUumUoL4sIYYA8FDMg+Fkw37sHhIi73hhxLfj00KhcJRJP5aQ8EvXGyEJ+cRkqToES0hIlMvlI1zXvc9v89ayQ1wp5XL56DDtW0IiQtzpSqkbxCQGsAhAr04PFdzc2dk5IEq7lpCcwRKSM5C8CsAcHQK2J/W8oFAonCo3qXTCuXWd5AU9PT0DxQMgMZeWSZRzXfcyANNJLhePLIAf9O8ZJC+JmCJ0I8kX9Ya/Qf/T/9FLkfi6vgHwNsnnAIwKMgIacks3a0J6enoGyl0+AAd9DnUHZU2XZ/3a6u7uPgHAXSSX+bXn089eTdAYSahwskCWhHR1dZ1L8ltDZW0HcIVXvF0nQPwa07VSLRslCa/hxGRFSKlUOk8yDQ3J+FkpNaReO0qpmwBsSpCI2r5XKaVGOP2ZkFl9N5W2hHgz/neLS9Z7kq+lRUSNHCA5RTwETn8jRCk1xMDlcUhkA762to1SqXSObMgNIqNaJ++FTUvNNSEkhx2y6X0mvVrXHhlX78aSRAdNl7o6ba8Ul4pc1dNWXJQ2euV84jQ7IUqpEdrZ5zfhZX7/QP1mRCJDTN3u7u7Tq+Y9MsbbslwsOqdZCVFKXW1wF3xxoVA43qsNvWdEXqYArKtuT/aDmMvX/FRu5aZNCMnrJBEhYIILgxKhAXTHVODaOmOrxBGvFKTcEkJydK2Drk4/84LiFWLaxlVeGoSQ3Oe67sVOMxBiQgbJuUFhVZ1kvSmnhIh8lOjSlQYhSqlbtcla8ZHZJqdgAM8kobgUCREZHVVXqRMiJiuA/QHK6TJx1IklE+LMkiUhy508EkLyXn2q9Rv8q6ZeUykIk5TSUiZEZJiTJ0JI3h/kYQUwPWSby5qFEKmo5OSFEJPiZwCejRDPONhEhGwKM7/UCNGlVoMG3B52XEmYuo0kRMR13fOdLAmRO+ABSjgYtWCLRPqajZBEyllFIUSndPoqTC83D8cY16ImJGRa1PlGJkRXoOsKGJhYWhNijuu7gFDravG8hpBynT56Q8o6P5NevA5x5hyaEO2QKwX8E/crpe6IOy56X7hZWe21bTSUUoNJbvWY/7KGESIuDp085vdm7JN4Q+xBOf8Rss9jXIm0H3NsXhdKv2gIIeL80xV3/N6MvSSvdxICvf1gmdeBJDnTQwe9qRMilXcAvBtAxt+S1+QkCHpkkEikT4JdDYlv10D+mJIi5FXjOJGQhR8hOs/p/QAydiulrklkxlWQDTRgecydlVXPcEiyCOYagzJIOyUxOfYg6oDkO81GCMmpToplYoMmuF0pdWXsAXhA0jubkJCxTlyIlzLC5H4jOdRJEQBGNRshYYqkBX3SyPi6sWQRFovFS52U0dnZOUBbbs1CyPrEJi+f+THsdHNt1YQ0gb7E52YhZEpiE5eiXgYFJUU2pvzpiJE1ChvTDISI305ylRMjJIQbPVUBMKd6TBJz13+CXBNiUoMrNLQHd27GpOypTdOUKwF5J8TrmkRsSLJaDkiZWKcS6aocEzLbSRPypkhGnkHqZyoCYJuU6KuTF3wgh4TsaNg3D+WbS1JWVSyrDEh5oY7ypuSNELnD6DQaem8Zqk/0bfo2aqpCcnJtEp04E+V+RgzlbahTMyUOITOdVofbl1baG5EQCZwNTsKkFidirr+bm8Fl/uURlblVB5dmRv20rJDRip+C8oUOC8yPuwdEWabsmxFsDdYN9SYsOzLZwJsRpb7r1YtTJGNBbeVsCzNLUO6jfJYECTqnbEFqJ/BWQrFYHC6JzxEv+ayX807ijkKLPoiZq2ufTNMh4aVVSW8f6NqNU+WMlUhwycLCwsLCwkkO/wKU32vtpJt5YwAAAABJRU5ErkJggg=="
+                          id="b"
+                          width="100"
+                          height="100"
+                        />
+                      </defs>
+                    </svg>
+                    Tambah Motif Ulos
                   </div>
                 </button>
               </div>
@@ -465,7 +480,7 @@
                 <!-- Asal suku -->
                 <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                   <label
-                    for="ulos-ethnic"
+                    for="penenun-ethnic"
                     class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                     >Asal Suku Ulos*</label
                   >
@@ -475,7 +490,7 @@
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
-                      <option value="" disabled selected hidden>Pilih Suku Ulos</option>
+                      <option value="" disabled selected hidden>Pilih Asal Suku Ulos</option>
                       <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">
                         Batak Toba
                       </option>
@@ -493,7 +508,7 @@
                       </option>
                     </select>
                     <div
-                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral_80"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
                         <g clip-path="url(#a)">
@@ -516,32 +531,64 @@
                     class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                     >Warna Pada Ulos*</label
                   >
-                  <div class="md:w-2/3 relative inline-block">
-                    
-                      
-                      <option value="Merah" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Merah" /> Merah
-                      </option>
-                      <option value="Hitam" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Hitam" /> Hitam
-                      </option>
-                      <option value="Putih" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Kuning" /> Kuning
-                      </option>
-                      <option value="Biru" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Biru" /> Biru
-                      </option>
-                      <option value="Hijau" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Hijau" /> Hijau
-                      </option>
-                      <option value="Kuning" class="pb-3 hover:bg-primary_surface">
-                        <input type="checkbox" name="color[]" value="Kuning" /> Kuning
-                      </option>
-                    
-                    
+                  <div class="md:w-2/3 flex flex-row gap-3 text-neutral_90">
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-merah"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="merah"
+                      />
+                      <span>Merah</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-hitam"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="hitam"
+                      />
+                      <span>Hitam</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-putih"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="putih"
+                      />
+                      <span>Putih</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-kuning"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="kuning"
+                      />
+                      <span>Kuning</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-biru"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="biru"
+                      />
+                      <span>Biru</span>
+                    </div>
+                    <div class="flex flex-row gap-2 pr-3">
+                      <input
+                        id="checkbox-hijau"
+                        type="checkbox"
+                        v-model="selectedColors"
+                        value="hijau"
+                      />
+                      <span>Hijau</span>
+                    </div>
                   </div>
                 </div>
-
+                <!-- JENIS ULOS -->
                 <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                   <label
                     for="ulos-location"
@@ -551,6 +598,7 @@
                   <div class="space-y-2">
                     <label class="inline-flex items-center pr-8">
                       <input
+                        id="jenis-ulos-tradisional"
                         type="radio"
                         class="form-radio text-primary_main"
                         name="radioGroup"
@@ -561,6 +609,7 @@
                     </label>
                     <label class="inline-flex items-center">
                       <input
+                        id="jenis-ulos-pengembangan"
                         type="radio"
                         class="form-radio text-primary_main"
                         name="radioGroup"
@@ -571,7 +620,7 @@
                     </label>
                   </div>
                 </div>
-
+                <!-- LOKASI ULOS -->
                 <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                   <label
                     for="ulos-location"
@@ -588,6 +637,7 @@
                     />
                   </div>
                 </div>
+                <!-- UKURAN ULOS -->
                 <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                   <label
                     for="ulos-size"
@@ -630,43 +680,45 @@
 
                 <!-- teknik tenun -->
                 <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
-          <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
-            >Teknik Tenun yang digunakan*</label
-          >
-          <div class="md:w-2/3 relative inline-block">
-            <select
-              v-model="technique"
-              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-              required
-            >
-              <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
-              <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Lungsi
-              </option>
-              <option value="Ikat Pakan" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Pakan
-              </option>
-              <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Ganda
-              </option>
-            </select>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <g clip-path="url(#a)">
-                  <path
-                    fill="#323232"
-                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                </defs>
-              </svg>
-            </div>
-          </div>
-        </div>
+                  <label
+                    for="ulos-name"
+                    class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+                    >Teknik Tenun yang digunakan*</label
+                  >
+                  <div class="md:w-2/3 relative inline-block">
+                    <select
+                      v-model="technique"
+                      class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+                      required
+                    >
+                      <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
+                      <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
+                        Teknik Ikat Lungsi
+                      </option>
+                      <option value="Ikat Pakan" class="pb-3 hover:bg-primary_surface">
+                        Teknik Ikat Pakan
+                      </option>
+                      <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
+                        Teknik Ikat Ganda
+                      </option>
+                    </select>
+                    <div
+                      class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                        <g clip-path="url(#a)">
+                          <path
+                            fill="#323232"
+                            d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
                 <!-- makna dan fungsi ulos -->
                 <div class="flex flex-col gap-6 md:flex-row pb-6">
@@ -722,14 +774,21 @@
                     >
 
                     <label class="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" value="" class="sr-only peer" v-model="toggleStatus" />
+                      <input
+                        id="status-togel-eccommerce"
+                        type="checkbox"
+                        value=""
+                        class="sr-only peer"
+                        v-model="toggleStatus"
+                      />
                       <div
                         class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary_main rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
                       ></div>
                     </label>
                   </div>
 
-                  <div v-for="(form, index) in forms" :key="form.id">
+                  <div v-for="(form, formIndex) in forms" :key="formIndex">
+                    <h1>{{ formIndex }}</h1>
                     <div class="flex flex-col gap-6 md:flex-row pb-8">
                       <label
                         for="ulos-name"
@@ -746,13 +805,13 @@
                           class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                         >
                           <img
-                            :src="form.imagePreview"
-                            v-if="form.imagePreview"
+                            :src="form.image"
+                            v-if="form.image"
                             alt="Image Preview"
                           />
                           <div
                             class="flex flex-col items-center justify-center pt-5 pb-6"
-                            v-if="!form.imagePreview"
+                            v-if="!form.image"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -783,13 +842,14 @@
                               <span class="font-normal">Gambar Produk</span>
                             </p>
                           </div>
+                          INDEX {{ formIndex }}
                           <input
                             id="dropzone-file"
                             type="file"
                             class="hidden"
                             accept="image/png, image/jpg, image/jpeg"
                             :disabled="!toggleStatus"
-                            @change="handleImagePreview($event, index)"
+                            @change="handleFileChange('productImage', index, $event)"
                           />
                         </label>
                       </div>
@@ -818,14 +878,14 @@
                     </div>
                     <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                       <label
-                        for="ulos-name"
+                        for="ulos-price"
                         class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                         >Harga Produk*</label
                       >
                       <div class="md:w-2/3">
                         <input
                           type="text"
-                          id="ulos-name"
+                          id="ulos-price"
                           :class="{
                             'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                             'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -839,14 +899,14 @@
                     </div>
                     <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
                       <label
-                        for="ulos-name"
+                        for="ulos-url"
                         class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
                         >URL Produk*</label
                       >
                       <div class="md:w-2/3 text-neutral_80">
                         <input
                           type="text"
-                          id="ulos-name"
+                          id="ulos-url"
                           :class="{
                             'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                             'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -858,13 +918,20 @@
                         />
                       </div>
                     </div>
-                    <button @click="removeForm(form.id)" :disabled="!toggleStatus">Hapus</button>
+                    <button
+                      id="btn-remove-produk"
+                      @click="removeForm(form.id)"
+                      :disabled="!toggleStatus"
+                    >
+                      Remove
+                    </button>
                   </div>
                 </form>
               </div>
 
               <button
-              :disabled="!toggleStatus"
+                id="btn-tambah-produk-eccomerce"
+                :disabled="!toggleStatus"
                 @click="addForm"
                 :class="{
                   'text-xs text-primary_main border rounded-lg border-primary_main p-2 flex flex-row justify-end items-end': true,
@@ -880,6 +947,7 @@
         <div class="flex flex-row gap-6 justify-end mt-6">
           <!-- Stepper navigation buttons -->
           <button
+            id="btn-batal"
             @click="backToUlos"
             :hidden="currentStep > 1"
             class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
@@ -887,6 +955,7 @@
             Batal
           </button>
           <button
+            id="btn-kembali"
             @click="previousStep"
             :hidden="currentStep === 1"
             class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
@@ -894,6 +963,7 @@
             Kembali
           </button>
           <button
+            id="btn-selanjutnya"
             @click="nextStep"
             :hidden="currentStep === totalSteps"
             class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
@@ -939,6 +1009,9 @@ export default {
     location(value) {
       console.log(value)
     },
+    selectedColors(value) {
+      console.log(value)
+    },
     length(value) {
       console.log(value)
     },
@@ -958,6 +1031,9 @@ export default {
       console.log(value)
     },
     ulosFields(value) {
+      console.log(value)
+    },
+    forms(value) {
       console.log(value)
     }
   },
@@ -985,19 +1061,22 @@ export default {
         'Batak Mandailing',
         'Batak Angkola'
       ], // Array of ethnics values for the dropdown
-      selectedColors: [], 
+      selectedColors: [], // Vue data property to store the selected values
+      colors: {
+        Hitam: false,
+        Merah: false,
+        Putih: false,
+        Hijau: false,
+        Biru: false,
+        Kuning: false
+      },
       selectedTechnics: [],
       toggleStatus: false,
       ulosFields: [{ fileName: '', image: null, file: null }],
       potonganFields: [{ fileName: '', image: null }],
       motifFields: [{ fileName: '', image: null }],
       productImage: [{ fileName: '', image: null }],
-      forms: [
-        {
-          id: 1,
-          imagePreview: null
-        }
-      ]
+      forms: []
       //imagePreview:null,
     }
   },
@@ -1048,9 +1127,7 @@ export default {
       // other image
       const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/other-images`
 
-      console.log('PANJANG', this.ulosFields.length)
       if (this.ulosFields.length !== 1) {
-        console.log(this.ulosFields[1].file)
         if (this.ulosFields[1].file !== null) {
           for (let i = 1; i < this.ulosFields.length; i++) {
             const formData = new FormData()
@@ -1066,8 +1143,7 @@ export default {
           }
         }
       }
-
-      console.log('END')
+      this.$router.push('/admin/ulos')
     },
     handleMainImage(event) {
       this.mainImage = event.target.files[0]
@@ -1119,8 +1195,10 @@ export default {
       formFields[index].file = event.target.files[0]
     },
     addForm() {
-      const nextId = this.forms.length > 0 ? this.forms[this.forms.length - 1].id + 1 : 1
+      const nextId = this.forms.length > 0 ? this.forms[this.forms.length - 1].id + 1 : 0
+      console.log(nextId)
       this.forms.push({ id: nextId, imagePreview: null })
+      console.log(this.forms)
     },
     removeForm(id) {
       this.forms = this.forms.filter((form) => form.id !== id)
@@ -1129,17 +1207,22 @@ export default {
       return this.forms.length === 1 // Disable the button if there is only one form
     },
     handleImagePreview(event, index) {
-      const file = event.target.files[0]
-      const reader = new FileReader()
-
+      // console.log(event)
+      // console.log(typeof formIndex)
+      // console.log(formIndex)
+      // const file = event.target.files[0]
+      // const reader = new FileReader()
+      // reader.onload = () => {
+      //   this.forms[formIndex].imagePreview = reader.result
+      // }
+      // reader.readAsDataURL(file)
+      const file = event.target.files[0];
+      const reader = new FileReader();
       reader.onload = () => {
-        // Update the imagePreview property of the corresponding form
-        this.$set(this.forms[index], 'imagePreview', reader.result)
-      }
-
-      if (file) {
-        reader.readAsDataURL(file)
-      }
+        const previewUrl = reader.result;
+        this.forms[index].previewUrl = previewUrl;
+      };
+      reader.readAsDataURL(file);
     }
   },
   mounted() {

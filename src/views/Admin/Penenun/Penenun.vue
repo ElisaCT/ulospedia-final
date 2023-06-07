@@ -7,6 +7,7 @@
         <h3 class="font-medium text-3xl text-left pb-6">Daftar Penenun</h3>
         <router-link to="add-penenun">
           <button
+            id="btn-tambah-penenun"
             class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
@@ -55,7 +56,11 @@
           <thead class="text-neutral_70 font-bold bg-[#F8F7FA] uppercase w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <button @click="sortedBy('name')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-nama-penenun"
+                  @click="sortedBy('name')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Nama Penenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -70,7 +75,11 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button @click="sortedBy('theLoom')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-alat-tenun"
+                  @click="sortedBy('theLoom')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Alat Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -86,6 +95,7 @@
               </th>
               <th scope="col" class="px-6 py-3">
                 <button
+                  id="btn-sort-teknik-tenun"
                   @click="sortedBy('technique')"
                   class="flex flex-row items-center gap-3"
                 >
@@ -103,7 +113,11 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button @click="sortedBy('ethnic')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-suku-penenun"
+                  @click="sortedBy('ethnic')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -124,6 +138,7 @@
           <template v-if="sortedItems.length > 0">
             <tbody class="divide-y divide-neutral_30 text-neutral_90">
               <tr
+                id="baris-daftar-penenun"
                 class="hover:bg-primary_surface hover:cursor-pointer"
                 v-for="(weavers, id) in sortedItems"
                 :key="id"
@@ -138,7 +153,7 @@
                 <td class="px-6 py-4">
                   <div class="flex gap-4">
                     <router-link :to="'/admin/edit-penenun/' + weavers.id">
-                      <button class="p-[10px] bg-secondary_surface rounded">
+                      <button id="btn-edit-penenun" class="p-[10px] bg-secondary_surface rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                           <path
                             stroke="#ECB11F"
@@ -270,7 +285,7 @@ export default {
       weavers: [],
       totalElement: 0,
       totalElementOnPage: 0,
-      
+
       lastPage: true,
       moveState: false,
       isLoading: false,
@@ -432,10 +447,12 @@ export default {
   },
   computed: {
     sortedItems() {
-      // const sorted = [...this.weavers]
+       const sorted = [...this.weavers]
 
       // search result
-      const filtered = this.weavers.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
+      const filtered = sorted.filter((item) =>
+        item.name.toLowerCase().includes(this.search.toLowerCase())
+      )
       console.log(this.search)
 
       filtered.sort((a, b) => {
@@ -447,9 +464,8 @@ export default {
         }
         return 0
       })
-      return filtered;
+      return filtered
     }
-
   },
   components: {
     Sidebar,

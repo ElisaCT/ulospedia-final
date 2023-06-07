@@ -9,7 +9,7 @@
         <div
           class="absolute inset-0 left-9 top-12 flex flex-col text-left pl-6 gap-2 text-neutral_10"
         >
-          <h2 class="font-semibold text-4xl">{{ totalUlos }}</h2>
+          <h2 id="text-totalUlos" class="font-semibold text-4xl">{{ totalUlos }}</h2>
           <h5 class="font-medium text-xl">Data Ulos</h5>
         </div>
       </div>
@@ -19,7 +19,7 @@
         <div
           class="absolute inset-0 left-9 top-12 flex flex-col text-left pl-6 gap-2 text-neutral_10"
         >
-          <h2 class="font-semibold text-4xl">{{ totalWeaver }}</h2>
+          <h2 id="text-totalPenenun" class="font-semibold text-4xl">{{ totalWeaver }}</h2>
           <h5 class="font-medium text-xl">Data Penenun</h5>
         </div>
       </div>
@@ -32,7 +32,7 @@
           <p class="font-bold text-lg text-left pb-4">Data Ulos Terbaru</p>
           <router-link to="ulos">
             <button class="flex flex-row items-center gap-2 justify-center">
-            <span class="text-primary_main">selengkapnya</span>
+            <span class="text-primary_main" id="span-btn-ulosSelengkapnya" >selengkapnya</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
               <path
                 stroke="#3355B5"
@@ -49,7 +49,7 @@
 
         <div v-if="ulosData">
           <div class="grid grid-cols-2 gap-6">
-            <div v-for="ulos in ulosData" :key="ulos.id">
+            <div id="card-ulos-dashboard" v-for="ulos in ulosData" :key="ulos.id">
               <router-link :to="'ulos/detail-ulos/' + ulos.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
@@ -57,6 +57,7 @@
                   <div class="h-[350px] w-[auto]">
                     <div class="gradient"></div>
                     <img
+                      id="gambar-ulos"
                       class="h-full w-full object-cover transition-transform rounded-lg"
                       :src="ulos.imageUrl"
                     />
@@ -67,8 +68,8 @@
                   <div
                     class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
                   >
-                    <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
-                    <p class="text-neutral_10">{{ ulos.age }}</p>
+                    <h1 id="nama-ulos-dashboard" class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
+                    <p id="umur-ulos-dashboard" class="text-neutral_10">{{ ulos.age }}</p>
                   </div>
                 </div>
               </router-link>
@@ -83,7 +84,7 @@
           <p class="font-bold text-lg text-left pb-4">Data Penenun Terbaru</p>
           <router-link to="penenun">
             <button class="flex flex-row items-center gap-2 justify-center">
-            <span class="text-primary_main">selengkapnya</span>
+            <span class="text-primary_main" id="span-btn-penenunSelengkapnya">selengkapnya</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
               <path
                 stroke="#3355B5"
@@ -100,7 +101,7 @@
 
         <div v-if="weavers">
           <div class="grid grid-cols-2 gap-5">
-            <div v-for="weaver in weavers" :key="weaver.id">
+            <div id="card-penenun-dashboard" v-for="weaver in weavers" :key="weaver.id">
               <router-link :to="'penenun/detail-penenun/' + weaver.id">
                 <div
                   class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
@@ -108,6 +109,7 @@
                   <div class="h-[350px] w-auto">
                     <div class="gradient"></div>
                     <img
+                      id="gambar-penenun-dashboard"
                       class="h-full w-full object-cover transition-transform rounded-lg"
                       :src="weaver.imageUrl"
                     />
@@ -118,8 +120,8 @@
                   <div
                     class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
                   >
-                    <h1 class="text-xl font-medium text-neutral_10">{{ weaver.name }}</h1>
-                    <p class="text-neutral_10">{{ weaver.age }}</p>
+                    <h1 id="nama-penenun-dashboard" class="text-xl font-medium text-neutral_10">{{ weaver.name }}</h1>
+                    <p id="umur-penenun-dashboard" class="text-neutral_10">{{ weaver.age }}</p>
                   </div>
                 </div>
               </router-link>
