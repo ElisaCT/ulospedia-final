@@ -258,7 +258,7 @@
           @click="editWeaver"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
-          Update
+          Simpan Perubahan
         </button>
       </div>
     </div>
