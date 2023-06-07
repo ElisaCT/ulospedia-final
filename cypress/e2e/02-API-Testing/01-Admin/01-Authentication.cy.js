@@ -1,7 +1,7 @@
 //{ API ini digunakan untuk proses autentikasi ke dalam web Ulospedia. }
 
-describe('Pengujian API: Fitur Authentication', () => {
-    describe('Login dengan valid dan Invalid credentials', () => {
+dscribe('Pengujian API: Fitur Authentication', () => { //test suite
+    describe('Login dengan valid dan Invalid credentials', () => { // desc ke-2 scenario
         const baseUrl = 'http://company.ditenun.com/api/v1/auth/login';
 
         const requestBodyBerhasil = {
@@ -33,6 +33,7 @@ describe('Pengujian API: Fitur Authentication', () => {
             expect(response.body.data.token).to.be.a('string');
             expect(response.body).to.have.property('message', 'login berhasil dan token baru berhasil didapatkan');
             // Additional assertions or actions after successful login
+            // input expected result --> status code dan message
         };
 
         const assertValidationErrorResponse = (response, expectedMessage) => {

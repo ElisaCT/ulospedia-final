@@ -1,6 +1,6 @@
 //{ API ini digunakan untuk mengakses data ulos yang dibutuhkan pada gellery ulos web Ulospedia. }
 
-describe('Pengujian API: Data Ulos', () => {
+describe('Pengujian API: Data Ulos case Invalid', () => {
 
     const invalidUlosId = 1011;
     const invalidPiecesImageId = 22;

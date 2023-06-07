@@ -6,7 +6,7 @@ describe('Pengujian API - Ulos utuh', () => {
         cy.loginAndSetAuthToken();
     });
 
-    it('GET: Mendapatkan Gambar Utama Ulos berdasarkan ulosID yang valid(tersedia)', () => {
+    it('GET: Mendapatkan Gambar Utama Ulos berdasarkan ulosID yang valid(tersedia)', () => { // Test title
         const ulosId = 10;
         const authToken = Cypress.env('authToken');
         // console.log('authToken:', authToken);

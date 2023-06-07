@@ -1,6 +1,6 @@
 // API ini digunakan untuk mengakses data penenun yang dibutuhkan pada fitur penenun padaweb Ulospedia. }
 
-describe('Pengujian API: Data Penenun Invalid', () => {
+describe('Pengujian API: Data Penenun case Invalid', () => {
     it('GET: Mendapatkan data detail penenun berdasarkan penenun ID yang tidak valid', () => {
         const invalidWeaverId = 1011;
 
