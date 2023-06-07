@@ -4,6 +4,7 @@
 <template>
   <Navbar />
   <div class="mx-[180px]">
+    <SliderUlos />
     <!-- Hero section -->
     <div class="flex flex-wrap items-center justify-center md:flex-row pt-8 pb-10 px-6">
       <div class="md:w-1/2 text-center md:text-left md:text-xl">
@@ -110,11 +111,29 @@
     <JenisUlos />
   </div>
 
-  <div class="home">
-    <h1>Welcome to My YouTube Channel</h1>
-    <VideoPlayer videoId="ywWLIckWVtk" />
+  <div class="flex justify-center">
+    <div class="mx-[180px]">
+      <section>
+        <div class="flex flex-row pb-6">
+          <h2
+            id="text-fakta-menarik"
+            class="lg:text-4xl md:text-3xl sm:text-2xl text-center grow font-medium"
+          >
+            Temukan Kekayaan Warisan Ulos
+          </h2>
+        </div>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Yb6H-XB6dDM"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </section>
+    </div>
   </div>
-
   <Footer />
 </template>
 
@@ -125,9 +144,17 @@ import JenisUlos from '../../components/EndUser/JenisUlos.vue'
 import Carousel from '../../components/EndUser/Carousel.vue'
 import Navbar from '../../components/EndUser/Navbar.vue'
 import Footer from '../../components/EndUser/Footer.vue'
+// import SliderUlos from '../../components/EndUser/SliderUlos.vue'
+import axios from 'axios'
 
 export default {
   name: 'HomeView',
+  mounted() {
+    console.log(`TESTTTTTTTT`)
+    axios
+      .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos/19`)
+      .then((response) => console.log(response.data))
+  },
   components: {
     // eslint-disable-next-line vue/no-unused-components, vue/no-reserved-component-names
     RagamUlos,
@@ -136,6 +163,8 @@ export default {
     // eslint-disable-next-line vue/no-reserved-component-names
     Footer,
     Navbar
+    // eslint-disable-next-line vue/no-unused-components
+    // SliderUlos
   }
 }
 </script>

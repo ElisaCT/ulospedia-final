@@ -15,14 +15,14 @@
         <a
         id="btn-ragamUlos-BatakToba"
           class="bg-[#BBC6E6] lg:col-span-1 md:col-span-2 sm:col-span-3 h-[140px] rounded-[20px] flex justify-center items-center"
-          href=""
+          href="http://127.0.0.1:1753/galeri-ulos?pageNo=1&ethnic=Batak+Toba"
           @click="selectFilter('Batak Toba')"
           >Batak Toba</a
         >
         <a
         id="btn-ragamUlos-BatakSimalungun"
           class="bg-[#FBEFD2] lg:col-span-1 md:col-span-2 sm:col-span-3 h-[140px] rounded-[20px] flex justify-center items-center"
-          href=""
+          href="http://127.0.0.1:1753/galeri-ulos?pageNo=1&ethnic=Batak+Simalungun"
           @click="selectFilter('Batak Simalungun')"
           >Batak Simalungun</a
         >
@@ -33,21 +33,21 @@
         <a
         id="btn-ragamUlos-BatakMandailing"
           class="bg-[#FBEFD2] rounded-[20px] flex justify-center items-center"
-          href=""
+          href="http://127.0.0.1:1753/galeri-ulos?pageNo=1&ethnic=Batak+Mandailing"
           @click="selectFilter('Batak Mandailing')"
           >Batak Mandailing</a
         >
         <a
         id="btn-ragamUlos-BatakKaro"
           class="bg-[#BBC6E6] rounded-[20px] flex justify-center items-center"
-          href=""
+          href="http://127.0.0.1:1753/galeri-ulos?pageNo=1&ethnic=Batak+Karo"
           @click="selectFilter('Batak Karo')"
           >Batak Karo</a
         >
         <a
         id="btn-ragamUlos-BatakAngkola"
           class="bg-[#FBEFD2] rounded-[20px] flex justify-center items-center"
-          href=""
+          href="http://127.0.0.1:1753/galeri-ulos?pageNo=1&ethnic=Batak+Angkola"
           @click="selectFilter('Batak Angkola')"
           >Batak Angkola</a
         >

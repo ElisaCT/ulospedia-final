@@ -2,13 +2,14 @@
   <div class="year-picker">
     <div class="md:w-full relative inline-block max-h-40 overflow-y-auto">
       <select
+        id="dropdown-pilih-tahun-lahir-penenun"
         v-model="selectedYear"
         @change="emitYear"
         class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
         required
       >
         <option value="" disabled selected hidden>Pilih Tahun Lahir Penenun</option>
-        <option v-for="year in years" :key="year" :value="year">
+        <option id="tahun-lahir" v-for="year in years" :key="year" :value="year">
           {{ year }}
         </option>
       </select>

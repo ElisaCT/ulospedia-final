@@ -35,14 +35,13 @@
               >
                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
                   <img
-                  v-if="selectedImage"
-                  :src="selectedImage"
-                  alt="Preview"
-                  class="w-24 h-24 object-cover rounded-lg"
-                  
-                />
+                    v-if="selectedImage"
+                    :src="selectedImage"
+                    alt="Preview"
+                    class="w-24 h-24 object-cover rounded-lg"
+                  />
                   <svg
-                  v-if="!selectedImage"
+                    v-if="!selectedImage"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="40"
@@ -119,10 +118,10 @@
             </button>
             <button
               @click="submit"
+              :disabled="isLoading"
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
-             
             </button>
           </div>
         </div>
@@ -142,6 +141,7 @@ export default {
       ulosID: this.$route.params.id,
       motifID: this.$route.params.motifId,
       selectedImage: null,
+      isLoading: false
     }
   },
   watch: {
@@ -154,13 +154,14 @@ export default {
   },
   methods: {
     async submit() {
+      this.isLoading = true
       const token = localStorage.getItem('token')
       const ulosID = this.$route.params.id
       const motifID = this.$route.params.motifId
       //http://company.ditenun.com/api/v1/generate/ulos/10/motifs/11
-//http://company.ditenun.com/api/v1/generate/ulos/10/motifs/11/motif-results/1
+      //http://company.ditenun.com/api/v1/generate/ulos/10/motifs/11/motif-results/1
       const responseDataText = await axios.post(
-        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}`,
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}/motif-results`,
         {
           size: this.size
         },
@@ -185,7 +186,7 @@ export default {
       formData.append('motif-result-image', this.image)
 
       const secondResponse = await axios.post(
-        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}/motif-results/${newMotifDataId}`,
+        `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}/motif-results/${newMotifDataId}/image`,
         formData,
         {
           headers: {
@@ -204,6 +205,7 @@ export default {
         // size: responseDataText.data.data.motif,
         imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${motifID}/motif-results/${newMotifDataId}/image`
       })
+      this.isLoading = false
     },
     handleFileChange(event) {
       this.image = event.target.files[0]

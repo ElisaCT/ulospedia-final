@@ -7,6 +7,7 @@
         <h3 class="font-medium text-3xl text-left pb-6">Daftar Ulos</h3>
         <router-link to="add-ulos">
           <button
+            id="btn-tambah-ulos"
             class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
@@ -55,7 +56,11 @@
           <thead class="text-neutral_70 font-bold bg-[#F8F7FA] w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3" @click="sortedBy('name')">
+                <button
+                  id="btn-sort-nama-ulos"
+                  class="flex flex-row items-center gap-3"
+                  @click="sortedBy('name')"
+                >
                   Nama Ulos
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -70,7 +75,11 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3" @click="sortedBy('ethnic')">
+                <button
+                  id="btn-sort-suku-ulos"
+                  class="flex flex-row items-center gap-3"
+                  @click="sortedBy('ethnic')"
+                >
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -86,7 +95,11 @@
               </th>
               <th scope="col" class="px-6 py-3">Ukuran</th>
               <th scope="col" class="px-6 py-3">
-                <button class="flex flex-row items-center gap-3" @click="sortedBy('technique')">
+                <button
+                  id="btn-sort-teknik-tenun"
+                  class="flex flex-row items-center gap-3"
+                  @click="sortedBy('technique')"
+                >
                   Teknik Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -107,6 +120,7 @@
           <template v-if="sortedItems.length > 0">
             <tbody class="divide-y divide-neutral_30 text-neutral_90">
               <tr
+                id="baris-daftar-ulos"
                 class="hover:bg-primary_surface hover:cursor-pointer"
                 v-for="(ulos, id) in sortedItems"
                 :key="id"
@@ -119,36 +133,44 @@
                 <td class="px-6 py-4" @click="goToDetailPage(ulos.id)">{{ ulos.technique }}</td>
                 <td class="px-6 py-4">
                   <div class="flex gap-4">
-                    <button class="p-[10px] bg-secondary_surface rounded">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
-                        <path
-                          stroke="#ECB11F"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M7.333 1.333H6C2.667 1.333 1.333 2.667 1.333 6v4c0 3.333 1.334 4.667 4.667 4.667h4c3.333 0 4.667-1.334 4.667-4.667V8.667"
-                        />
-                        <path
-                          stroke="#ECB11F"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-miterlimit="10"
-                          stroke-width="1.5"
-                          d="M10.693 2.013 5.44 7.267c-.2.2-.4.593-.44.88l-.287 2.006c-.106.727.407 1.234 1.134 1.134L7.853 11c.28-.04.674-.24.88-.44l5.254-5.253c.906-.907 1.333-1.96 0-3.294-1.334-1.333-2.387-.906-3.294 0Z"
-                        />
-                        <path
-                          stroke="#ECB11F"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-miterlimit="10"
-                          stroke-width="1.5"
-                          d="M9.94 2.767a4.763 4.763 0 0 0 3.293 3.293"
-                        />
-                      </svg>
-                    </button>
-
                     <router-link :to="'/admin/edit-ulos/' + ulos.id">
-                      <button class="p-[10px] bg-danger_surface rounded">
+                      <button id="btn-edit-ulos" class="p-[10px] bg-secondary_surface rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+                          <path
+                            stroke="#ECB11F"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.5"
+                            d="M7.333 1.333H6C2.667 1.333 1.333 2.667 1.333 6v4c0 3.333 1.334 4.667 4.667 4.667h4c3.333 0 4.667-1.334 4.667-4.667V8.667"
+                          />
+                          <path
+                            stroke="#ECB11F"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-miterlimit="10"
+                            stroke-width="1.5"
+                            d="M10.693 2.013 5.44 7.267c-.2.2-.4.593-.44.88l-.287 2.006c-.106.727.407 1.234 1.134 1.134L7.853 11c.28-.04.674-.24.88-.44l5.254-5.253c.906-.907 1.333-1.96 0-3.294-1.334-1.333-2.387-.906-3.294 0Z"
+                          />
+                          <path
+                            stroke="#ECB11F"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-miterlimit="10"
+                            stroke-width="1.5"
+                            d="M9.94 2.767a4.763 4.763 0 0 0 3.293 3.293"
+                          />
+                        </svg>
+                      </button>
+                    </router-link>
+
+                    <DeleteConfirmation
+                      :ulos-id="ulos.id"
+                      @ulos-deleted="handleUlosDeleted"
+                      class="z-10"
+                    />
+
+                    <!-- <router-link :to="'/admin/edit-ulos/' + ulos.id">
+                      <button id="btn-hapus-ulos" class="p-[10px] bg-danger_surface rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                           <path
                             stroke="#CB3A31"
@@ -159,7 +181,7 @@
                           />
                         </svg>
                       </button>
-                    </router-link>
+                    </router-link> -->
                   </div>
                 </td>
               </tr>
@@ -181,6 +203,7 @@
           </p>
           <div class="flex flex-row gap-4 items-center">
             <button
+              id="btn-prev-pagination"
               @click="previousPage"
               :disabled="isLoading || pageNo === 1"
               class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
@@ -200,6 +223,7 @@
               <span class="p-1 w-5 h-5">{{ pageNo }}</span>
             </div>
             <button
+              id="btn-next-pagination"
               @click="nextPage"
               :disabled="isLoading || lastPage"
               class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
@@ -224,11 +248,14 @@
 <script>
 import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
+import DeleteConfirmation from '../../../components/Admin/Modals/DeleteConfirmation.vue'
 import EmptyState from '../../../components/Admin/EmptyState.vue'
 export default {
   components: {
     Sidebar,
-    EmptyState
+    EmptyState,
+    // eslint-disable-next-line vue/no-unused-components
+    DeleteConfirmation
   },
   data() {
     return {
@@ -268,14 +295,15 @@ export default {
         this.totalElement = response.data.data.ulos.totalEl
         this.totalElementOnPage = response.data.data.ulos.lastElOfPage
       })
-    
   },
   computed: {
     sortedItems() {
       const sorted = [...this.ulosList]
 
       // search result
-      const filtered = sorted.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
+      const filtered = sorted.filter((item) =>
+        item.name.toLowerCase().includes(this.search.toLowerCase())
+      )
       console.log(this.search)
 
       filtered.sort((a, b) => {
@@ -287,19 +315,20 @@ export default {
         }
         return 0
       })
-      return filtered;
+      return filtered
     }
   },
   methods: {
     goToDetailPage(ulosId) {
       this.$router.push(`/admin/ulos/detail-ulos/${ulosId}`)
     },
+    handleUlosDeleted(ulosId) {
+      this.ulos = this.ulos.filter((ulos) => ulos.id !== ulosId)
+    },
     defineParam(pageNo, sortBy, sortDir, search) {
       return `http://company.ditenun.com/api/v1/ulospedia/ulos?pageNo=${pageNo}${
         sortBy !== '' ? '&sortBy=' + sortBy : ''
-      }${sortDir !== '' ? '&sortDir=' + sortDir : ''}${
-        search !== '' ? '&search=' + search : ''
-      }`
+      }${sortDir !== '' ? '&sortDir=' + sortDir : ''}${search !== '' ? '&search=' + search : ''}`
     },
     async nextPage() {
       console.log('DITEKAN')

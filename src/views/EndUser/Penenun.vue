@@ -17,7 +17,9 @@
               src="../../assets/gedogan.png"
               alt=""
             />
-            <div class="absolute inset-0 flex items-center justify-center">
+            <div 
+            id="gedongan"
+            class="absolute inset-0 flex items-center justify-center">
               <p
                 class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2 opacity-100 hover:opacity-0 transition duration-300 ease-in"
               >
@@ -32,7 +34,7 @@
             class="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0"
           >
             <p
-              class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              id="text-gedongan" class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             >
               Gedogan merupakan salah satu jenis alat tenun tradisional yang sudah sejak lama
               digunakan oleh para leluhur di berbagai daerah Indonesia dalam proses penenunan kain.
@@ -66,7 +68,7 @@
               class="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0"
             >
               <p
-                class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              id="text-atbm" class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               >
                 Alat tenun bukan mesin (ATBM) merupakan alat untuk melakukan penenunan yang digerakkan
                 oleh manusia. ATBM dapat dipergunakan sambil duduk maupun berdiri. Alat ini biasa
@@ -83,7 +85,7 @@
             src="../../assets/atm.png"
             alt=""
           />
-          <div class="absolute inset-0 flex items-center justify-center">
+          <div   id="atm" class="absolute inset-0 flex items-center justify-center">
             <p
               class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2"
             >
@@ -98,7 +100,7 @@
           class="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0"
         >
           <p
-            class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            id="text-atm" class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           >
             Alat tenun mesin (ATM) merupakan alat tenun yang dilengkapi dengan motor penggerak
             sehingga proses pengerjaan kain tenun menjadi relatif lebih cepat karena sepenuhnya

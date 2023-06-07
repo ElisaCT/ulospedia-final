@@ -20,12 +20,11 @@
                   :src="selectedImage"
                   alt="Preview"
                   class="w-24 h-24 object-cover rounded-lg"
-                 
                 />
-                
+
                 <div class="flex flex-col items-center justify-center">
                   <svg
-                  v-if="!selectedImage"
+                    v-if="!selectedImage"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink"
                     width="40"
@@ -51,23 +50,21 @@
                 </div>
               </div>
               <!-- <Field name="image" > -->
-                <Field
-               name="image"
+              <input
+                name="image"
                 @change="handleFileChange"
-                :rules="validateFile"
                 id="dropzone-file"
                 type="file"
                 class="hidden"
                 accept="image/png, image/jpg, image/jpeg"
               />
               <!-- </Field> -->
-              
             </label>
-            <ErrorMessage name="image" class="text-danger_main text-s"/>
+            <!-- <ErrorMessage name="image" class="text-danger_main text-s" /> -->
           </div>
         </div>
       </div>
-      
+
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Informasi Penenun</h5>
 
@@ -83,25 +80,22 @@
               id="ulos-name"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan nama penenun"
-              
             />
-            <ErrorMessage name="name" class="text-danger_main text-s"/>
+            <ErrorMessage name="name" class="text-danger_main text-s" />
           </div>
-          
         </div>
 
         <!-- born year -->
-          <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
+        <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Tahun Lahir Penenun*</label
           >
           <div class="w-2/3 inline-block">
-            <div name="birthYear" rules="required" >
+            <div name="birthYear">
               <YearPicker v-on:updateYear="updateBirthYear"></YearPicker>
             </div>
             <!-- <ErrorMessage name="birthYear" class="text-danger_main text-s" /> -->
           </div>
-          
         </div>
 
         <!-- suku penenun -->
@@ -113,46 +107,45 @@
           >
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
-            <!-- <Field name="ethnic" v-slot="{ field }" rules="required" > -->
               <Field
-              name="ethnic"
-              as="select"
-              v-model="ethnic"
-              :value="ethnic"
-              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-              required
-            >
-              <option value="" disabled selected hidden>Pilih Suku Penenun</option>
-              <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
-              <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
-                Batak Simalungun
-              </option>
-              <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
-              <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
-                Batak Angkola
-              </option>
-              <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
-                Batak Mandailing
-              </option>
-            </Field>
-            <!-- </Field> -->
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral_80"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <g clip-path="url(#a)">
-                  <path
-                    fill="#323232"
-                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                </defs>
-              </svg>
+                name="ethnic"
+                as="select"
+                v-model="ethnic"
+                :value="ethnic"
+                class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+                required
+              >
+                <option value="" disabled selected hidden>Pilih Suku Penenun</option>
+                <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
+                <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
+                  Batak Simalungun
+                </option>
+                <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
+                <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
+                  Batak Angkola
+                </option>
+                <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
+                  Batak Mandailing
+                </option>
+              </Field>
+
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral_80"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <g clip-path="url(#a)">
+                    <path
+                      fill="#323232"
+                      d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                  </defs>
+                </svg>
+              </div>
             </div>
-          </div>
-          <ErrorMessage name="ethnic" class="text-danger_main text-s"/>
+            <ErrorMessage name="ethnic" class="text-danger_main text-s" />
           </div>
         </div>
 
@@ -170,7 +163,7 @@
               placeholder="Contoh:Balige"
               name="domicile"
             />
-            <ErrorMessage name="domicile" class="text-danger_main text-s"/>
+            <ErrorMessage name="domicile" class="text-danger_main text-s" />
           </div>
         </div>
         <!-- alat tenun -->
@@ -182,41 +175,40 @@
           >
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
-            <!-- <Field name="theLoom"  rules="required" > -->
-              <Field 
-              name="theLoom"
-              v-model="theLoom"
-              as="select"
-              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-              
-            >
-              <option value="" disabled selected hidden>Pilih Alat Tenun</option>
-              <option value="Gedogan" class="pb-3 hover:bg-primary_surface">Gedogan</option>
-              <option value="ATBM" class="pb-3 hover:bg-primary_surface">
-                Alat Tenun Bukan Mesin (ATBM)
-              </option>
-              <option value="ATM" class="pb-3 hover:bg-primary_surface">
-                Alat Tenun Mesin (ATM)
-              </option>
-            </Field>
-            <!-- </Field> -->
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <g clip-path="url(#a)">
-                  <path
-                    fill="#323232"
-                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                </defs>
-              </svg>
+              <!-- <Field name="theLoom"  rules="required" > -->
+              <Field
+                name="theLoom"
+                v-model="theLoom"
+                as="select"
+                class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              >
+                <option value="" disabled selected hidden>Pilih Alat Tenun</option>
+                <option value="Gedogan" class="pb-3 hover:bg-primary_surface">Gedogan</option>
+                <option value="ATBM" class="pb-3 hover:bg-primary_surface">
+                  Alat Tenun Bukan Mesin (ATBM)
+                </option>
+                <option value="ATM" class="pb-3 hover:bg-primary_surface">
+                  Alat Tenun Mesin (ATM)
+                </option>
+              </Field>
+              <!-- </Field> -->
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <g clip-path="url(#a)">
+                    <path
+                      fill="#323232"
+                      d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                  </defs>
+                </svg>
+              </div>
             </div>
-          </div>
-          <ErrorMessage name="theLoom" class="text-danger_main text-s"/>
+            <ErrorMessage name="theLoom" class="text-danger_main text-s" />
           </div>
         </div>
 
@@ -227,42 +219,42 @@
           >
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
-            <Field  as="select" name="technique" rules="required" v-model="technique" class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5">
-              <!-- <select
-              v-model="technique"
-              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-              required
-            > -->
-              <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
-              <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Lungsi
-              </option>
-              <option value="Ikat Pakan" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Pakan
-              </option>
-              <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Ganda
-              </option>
-            <!-- </select> -->
-            </Field>
-            
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <g clip-path="url(#a)">
-                  <path
-                    fill="#323232"
-                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                </defs>
-              </svg>
+              <Field
+                as="select"
+                name="technique"
+                rules="required"
+                v-model="technique"
+                class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              >
+                <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
+                <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
+                  Teknik Ikat Lungsi
+                </option>
+                <option value="Ikat Pakan" class="pb-3 hover:bg-primary_surface">
+                  Teknik Ikat Pakan
+                </option>
+                <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
+                  Teknik Ikat Ganda
+                </option>
+              </Field>
+
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <g clip-path="url(#a)">
+                    <path
+                      fill="#323232"
+                      d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                  </defs>
+                </svg>
+              </div>
             </div>
-          </div>
-          <ErrorMessage name="technique" class="text-danger_main text-s"/>
+            <ErrorMessage name="technique" class="text-danger_main text-s" />
           </div>
         </div>
 
@@ -273,7 +265,7 @@
           >
           <div class="md:w-2/3 flex flex-col gap-2">
             <!-- <Field name="story" as="TextArea"  rules="required" > -->
-              <Field
+            <Field
               name="story"
               as="TextArea"
               v-model="story"
@@ -282,13 +274,10 @@
               rows="4"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan cerita yang ingin dibagikan penenun"
-              
             ></Field>
             <!-- </Field> -->
-            <ErrorMessage name="story" class="text-danger_main text-s"/>
+            <ErrorMessage name="story" class="text-danger_main text-s" />
           </div>
-          
-
         </div>
       </div>
 
@@ -301,8 +290,8 @@
           Batal
         </button>
         <button
-         type="submit"
-         @click="submit"
+          type="submit"
+          @click="submit"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
           Simpan
@@ -312,13 +301,10 @@
   </div>
 </template>
 <script>
-import { Form, Field, ErrorMessage} from 'vee-validate'
-import * as yup from 'yup';
+import { Form, Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
 import axios from 'axios'
-// import { reactive } from 'vue';
-// import { useField, useForm } from 'vee-validate';
-
 
 export default {
   components: {
@@ -326,13 +312,11 @@ export default {
     // eslint-disable-next-line vue/no-reserved-component-names
     Form,
     Field,
-    ErrorMessage,
-    
-  
+    ErrorMessage
   },
-  props:{
-    params:{
-      required:true,
+  props: {
+    params: {
+      required: true,
       type: Object
     }
   },
@@ -344,28 +328,28 @@ export default {
       ethnic: yup.string().required('Suku penenun harus diisi'),
       theLoom: yup.string().required('Alat tenun penenun harus diisi'),
       story: yup.string().required('Cerita penenun harus diisi'),
-      technique: yup.string().required('Teknik tenun penenun harus diisi'),
-//       image: yup.object().shape({
-//   file: yup
-//     .mixed()
-//     .required('Gambar penenun harus diisi')
-//     .test('fileType', 'Format gambar harus .jpg, .jpeg, .png', (value) => {
-//       if (value) {
-//         const supportedFormats = ['image/png', 'image/jpg', 'image/jpeg'];
-//         return supportedFormats.includes(value.type);
-//       }
-//       return true;
-//     })
-//     .test('fileSize', 'Ukuran gambar harus kurang dari 5MB', (value) => {
-//       if (value) {
-//         const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-//         return value.size <= maxSize;
-//       }
-//       return true;
-//     }),
-// })
+      technique: yup.string().required('Teknik tenun penenun harus diisi')
+      //       image: yup.object().shape({
+      //   file: yup
+      //     .mixed()
+      //     .required('Gambar penenun harus diisi')
+      //     .test('fileType', 'Format gambar harus .jpg, .jpeg, .png', (value) => {
+      //       if (value) {
+      //         const supportedFormats = ['image/png', 'image/jpg', 'image/jpeg'];
+      //         return supportedFormats.includes(value.type);
+      //       }
+      //       return true;
+      //     })
+      //     .test('fileSize', 'Ukuran gambar harus kurang dari 5MB', (value) => {
+      //       if (value) {
+      //         const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+      //         return value.size <= maxSize;
+      //       }
+      //       return true;
+      //     }),
+      // })
     })
-    
+
     return {
       schema,
       selectedTechnics: [],
@@ -489,28 +473,27 @@ export default {
       this.showDatepicker = !this.showDatepicker
     },
     validateFile() {
-    if (!this.selectedImage) {
-      return 'Gambar penenun tidak boleh kosong';
+      if (!this.selectedImage) {
+        return 'Gambar penenun tidak boleh kosong'
+      }
+
+      const allowedExtensions = ['jpg', 'jpeg', 'png']
+      const maxSizeInBytes = 5 * 1024 * 1024
+
+      const fileExtension = this.selectedImage.name.split('.').pop().toLowerCase()
+      const fileSize = this.selectedImage.size
+
+      if (!allowedExtensions.includes(fileExtension)) {
+        return 'Format gambar harus .jpg, .jpeg, atau .png'
+      }
+
+      if (fileSize > maxSizeInBytes) {
+        return 'Ukuran gambar tidak boleh lebih dari 5 MB'
+      }
+
+      return true
     }
-
-    const allowedExtensions = ['jpg', 'jpeg', 'png'];
-    const maxSizeInBytes = 5 * 1024 * 1024;
-
-    const fileExtension = this.selectedImage.name.split('.').pop().toLowerCase();
-    const fileSize = this.selectedImage.size;
-
-    if (!allowedExtensions.includes(fileExtension)) {
-      return 'Format gambar harus .jpg, .jpeg, atau .png';
-    }
-
-    if (fileSize > maxSizeInBytes) {
-      return 'Ukuran gambar tidak boleh lebih dari 5 MB';
-    }
-
-    return true;
-  },
-    
-  },
+  }
   // setup() {
   //   const { value: selectedImage, errorMessage, handleBlur, handleInput } = useField(
   //     'image',
@@ -551,7 +534,6 @@ export default {
   //     handleInput,
   //   };
   // },
-  
 }
 </script>
 <style scoped></style>
