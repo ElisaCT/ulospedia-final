@@ -13,7 +13,7 @@ describe('Pengujian API: Ulos Product', () => {
 
         cy.request({
             method: 'GET',
-            url: `ulospedia/ulos/${ulosId}/products/${productId}/image`,
+            url: `ulospedia/ulos/${ulosId}/products/${productId}/image/public`,
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'accept': '*/*'
@@ -120,7 +120,65 @@ describe('Pengujian API: Ulos Product', () => {
         });
     });
 
-    
+    //dari sini request yang nambah
+    it('PUT: Update Gambar/Image Produk Baru', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 19;
+        const productId = 6;
+        const imageFilePath = 'potonganUlos1.jpeg';
+
+        cy.fixture(imageFilePath, 'binary')
+            .then(Cypress.Blob.binaryStringToBlob)
+            .then((imageBlob) => {
+                const formData = new FormData();
+                formData.append('product-image', imageBlob, imageFilePath);
+
+                cy.request({
+                    method: 'PUT',
+                    url: `ulospedia/ulos/${ulosId}/products/${productId}/image`,
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'multipart/form-data'
+                    },
+                    body: formData
+                }).then((response) => {
+                    expect(response.status).to.eq(200);
+                });
+            });
+    });
+
+    it('PUT: Memperbaharui Data Produk Baru', () => {
+        const authToken = Cypress.env('authToken');
+        const ulosId = 19;
+        const productId = 6;
+        const updatedProductData = {
+            name: 'Ulos ragi hotang',
+            price: 0,
+            url: 'https://ditenun.com/'
+        };
+
+        cy.request({
+            method: 'PUT',
+            url: `ulospedia/ulos/${ulosId}/products/${productId}`,
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedProductData)
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            expect(response.body.code).to.eq(200);
+            expect(response.body.status).to.eq('success');
+            expect(response.body.data.product.id).to.eq(productId);
+            expect(response.body.data.product.ulosId).to.eq(ulosId);
+            expect(response.body.data.product.name).to.eq(updatedProductData.name);
+            expect(response.body.data.product.price).to.eq(updatedProductData.price);
+            expect(response.body.data.product.productUrl).to.eq(updatedProductData.url);
+        });
+    });
+
+
+
 
 
 })
