@@ -1097,9 +1097,15 @@ export default {
         func: this.func
       }
 
+      const request2 = {
+        name: this.name,
+        price: this.price,
+        url: this.url
+      }
+
       console.log(request1)
 
-      const url1 = 'http://company.ditenun.com/api/v1/ulospedia/ulos'
+      const url1 = `http://company.ditenun.com/api/v1/ulospedia/ulos`
       const response1 = await axios.post(url1, request1, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -1120,28 +1126,85 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       })
-
       console.log(response2.data)
 
-      // other image
-      const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/other-images`
+      // pieces image
+      const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/pieces-images`
+      formData.append('pieces-image', this.ulosFields[0].file)
+      const response3 = await axios.post(url3, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log(response3.data)
 
-      if (this.ulosFields.length !== 1) {
-        if (this.ulosFields[1].file !== null) {
-          for (let i = 1; i < this.ulosFields.length; i++) {
-            const formData = new FormData()
-            formData.append('other-image', this.ulosFields[i].file)
-            const response3 = await axios.post(url3, formData, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-                'Content-Type': 'multipart/form-data'
-              }
-            })
+      // motif image
+      const url4 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`
+      formData.append('pieces-image', this.ulosFields[0].file)
+      const response4 = await axios.post(url4, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log(response4.data)
 
-            console.log(response3.data)
+      //Availability product
+      const url5 = `http://company.ditenun.com/api/v1/ulospedia/ulos/1/products/availability?state=true`
+      const response5 = await axios.post(url5, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log(response5.data)
+
+      //image product
+      const responseDataImage = await axios.post(
+        `http://company.ditenun.com/api/v1/ulospedia/ulos/1/products/${ulosId}/image`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
           }
         }
-      }
+      )
+      console.log(responseDataImage)
+
+      //detail text product
+      const responseDataText = await axios.post(
+        `http://company.ditenun.com/api/v1/ulospedia/ulos/1/products`,
+        request2,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+      console.log(responseDataText)
+
+      // other image
+      // const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/other-images`
+
+      // if (this.ulosFields.length !== 1) {
+      //   if (this.ulosFields[1].file !== null) {
+      //     for (let i = 1; i < this.ulosFields.length; i++) {
+      //       const formData = new FormData()
+      //       formData.append('other-image', this.ulosFields[i].file)
+      //       const response3 = await axios.post(url3, formData, {
+      //         headers: {
+      //           Authorization: `Bearer ${token}`,
+      //           'Content-Type': 'multipart/form-data'
+      //         }
+      //       })
+
+      //       console.log(response3.data)
+      //     }
+      //   }
+      // }
       this.$router.push('/admin/ulos')
     },
     handleMainImage(event) {

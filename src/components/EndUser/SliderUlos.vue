@@ -7,7 +7,7 @@
       v-show="index + 1 === slideIndex"
     >
       <div class="numbertext">{{ index + 1 }} / {{ data.length }}</div>
-      <img :src="slide.url" style="width: 100%" />
+      <img class="flex justify-center" :src="slide.url" style="width: 100%; height: 400px" />
     </div>
 
     <a class="prev" @click="plusSlides(-1)">❮</a>
@@ -27,7 +27,7 @@
         <img
           class="demo cursor"
           :src="slide.url"
-          style="width: 100%"
+          style="width: 200px; height: 100px"
           @click="currentSlide(index + 1)"
           :alt="slide.imagePart"
         />
@@ -40,7 +40,7 @@
 export default {
   data() {
     return {
-      slideIndex: 1,
+      slideIndex: 1
       // slides: [
       //   {
       //     image: 'https://www.w3schools.com/w3css/img_mountains_wide.jpg',

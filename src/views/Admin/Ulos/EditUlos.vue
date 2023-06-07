@@ -1312,31 +1312,67 @@ export default {
   },
   mounted() {
     this.ulosId = this.$route.params.id
-    this.getUlosData(this.$route.params.id)
+    // this.getUlosData(this.$route.params.id)
   },
   methods: {
-    getUlosData() {
-      const token = localStorage.getItem('token')
+    // getUlosData() {
+    //   const token = localStorage.getItem('token')
 
-      axios
-        .get(`http://company.ditenun.com/api/v1/ulospedia/ulos/19`, {
+    //   axios
+    //     .get(`http://company.ditenun.com/api/v1/ulospedia/ulos/10`, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         'Content-Type': 'application/json'
+    //       }
+    //     })
+    //     .then((res) => {
+    //       console.log(res.data.data.ulos)
+
+    //       this.ulosData = res.data.data.ulos
+    //     })
+    //     .catch(function (error) {
+    //       if (error.response) {
+    //         if (error.response.status == 404) {
+    //           alert(error.response.data.message)
+    //         }
+    //       }
+    //     })
+    // },
+    async editUlos() {
+      const token = localStorage.getItem('token')
+      console.log(token)
+      console.log(this.ulosId)
+      console.log(this.ulosData.name)
+
+      const bodyReq = {
+        id: this.ulosId,
+        name: this.ulosData.name,
+        colors: this.ulosData.colors,
+        originEthnic: this.ulosData.originEthnic,
+        type: this.ulosData.type,
+        location: this.ulosData.location,
+        length: this.ulosData.length,
+        width: this.ulosData.width,
+        technique: this.ulosData.technique,
+        meaning: this.ulosData.meaning,
+        func: this.ulosData.func
+      }
+
+      console.log(bodyReq)
+
+      const responseDataText = await axios.put(
+        `http://company.ditenun.com/api/v1/ulospedia/ulos/${this.ulosId}`,
+        bodyReq,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
-        })
-        .then((res) => {
-          console.log(res.data.data.ulos)
+        }
+      )
+      console.log(responseDataText)
 
-          this.ulosData = res.data.data.ulos
-        })
-        .catch(function (error) {
-          if (error.response) {
-            if (error.response.status == 404) {
-              alert(error.response.data.message)
-            }
-          }
-        })
+      this.$router.push('/admin/ulos')
     },
     nextStep() {
       if (this.currentStep < this.totalSteps) {

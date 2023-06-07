@@ -3,9 +3,10 @@
   <!-- <div class="mx-[180px]">
     <SliderUlos :data="imageList" />
   </div> -->
+
   <div v-if="ulosDetails">
     <div v-for="ulosDetail in ulosDetails" :key="ulosDetail.id">
-      <div class="flex flex-col items-center gap-12 px-32">
+      <div class="flex flex-col items-center gap-12 px-32 pb-12">
         <div class="flex gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
             <h3 id="nama-ulos" class="font-semibold text-lg">{{ ulosDetail.name }}</h3>
@@ -45,11 +46,6 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Image -->
-      <div class="mx-[180px]">
-        <SliderUlos :data="imageList" />
       </div>
       <!-- <div class="">
         <div class="swiper-container main-slider loading">
@@ -252,8 +248,17 @@
         </div> 
       </div> -->
       <!-- <ImageDetail /> -->
+    </div>
+  </div>
 
-      <div class="grid grid-cols-12 gap-6 px-32">
+  <!-- Image -->
+  <div class="mx-[180px]">
+    <SliderUlos :data="imageList" />
+  </div>
+
+  <div v-if="ulosDetails">
+    <div v-for="ulosDetail in ulosDetails" :key="ulosDetail.id">
+      <div class="grid grid-cols-12 gap-6 px-32 pt-12">
         <!-- makna dan fungsi -->
         <div class="flex flex-col gap-8 col-span-7">
           <div class="flex flex-col gap-3">
