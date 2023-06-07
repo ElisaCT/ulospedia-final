@@ -1,4 +1,5 @@
 <!-- eslint-disable vue/no-reserved-component-names -->
+<!-- eslint-disable vue/no-reserved-component-names -->
 <!-- eslint-disable vue/no-unused-components -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
@@ -122,13 +123,14 @@ export default {
     }
   },
   components: {
+    // eslint-disable-next-line vue/no-reserved-component-names
     Form,
     Field,
     ErrorMessage
   },
   methods: {
     
-    async loginUser(values) {
+    async loginUser() {
       console.log(this.username)
       console.log(this.password)
       //console.log(JSON.stringify(values, null, 2))

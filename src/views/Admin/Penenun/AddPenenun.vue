@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
-    <Form @submit="submit">
+    <Form @submit="submit" :validation-schema="schema">
       <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Tambah Penenun</h3>
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6 mb-8">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Penenun</h5>
@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-      <Form @submit="submit" :validation-schema="schema" v-slot="{handleSubmit, errors}">
+      
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Informasi Penenun</h5>
 
@@ -309,7 +309,6 @@
         </button>
       </div>
     </Form>
-    </Form>
   </div>
 </template>
 <script>
@@ -317,13 +316,14 @@ import { Form, Field, ErrorMessage} from 'vee-validate'
 import * as yup from 'yup';
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
 import axios from 'axios'
-import { reactive } from 'vue';
-import { useField, useForm } from 'vee-validate';
+// import { reactive } from 'vue';
+// import { useField, useForm } from 'vee-validate';
 
 
 export default {
   components: {
     YearPicker,
+    // eslint-disable-next-line vue/no-reserved-component-names
     Form,
     Field,
     ErrorMessage,
@@ -412,7 +412,7 @@ export default {
     }
   },
   methods: {
-    async submit(values) {
+    async submit() {
       const token = localStorage.getItem('token')
 
       const responseDataText = await axios.post(
