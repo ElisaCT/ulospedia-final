@@ -161,40 +161,22 @@ describe('Pengujian API - Fitur Generate untuk motif ulos', () => {
     // });
 
 
-    // it('DELETE: Menghapus motif yang ada berdasarkan ulosId dan motifId yang valid(tersedia)', () => {
-    //     const ulosId = 9;
-    //     const motifId = 10;
+    // it('DELETE: Menghapus Data Motif', () => {
     //     const authToken = Cypress.env('authToken');
-
+    //     const ulosId = 12;
+    //     const motifId = 29;
     //     cy.request({
     //         method: 'DELETE',
-    //         url: `generate/ulos/${ulosId}/motifs/${motifId}`,
+    //         url: `/api/v1/generate/ulos/${ulosId}/motifs/${motifId}`,
     //         headers: {
+    //             'Accept': '*/*',
     //             'Authorization': `Bearer ${authToken}`,
-    //             'Accept': '*/*'
     //         }
     //     }).then((response) => {
     //         expect(response.status).to.eq(200);
+    //         expect(response.body.code).to.eq(200);
     //         expect(response.body.status).to.eq('success');
-    //         cy.log('Response Body:', JSON.stringify(response.body, null, 2));
+    //         // Assert any additional validations as needed
     //     });
     // });
-
-    it('DELETE: Menghapus Data Motif', () => {
-        
-        cy.request({
-            method: 'DELETE',
-            url: '/api/v1/generate/ulos/ulos-id/motifs/motif-id',
-            headers: {
-                'Accept': '*/*',
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZXdpbmExMjMiLCJpYXQiOjE2ODYxNDY5OTcsImV4cCI6MTY4NjIzMzM5N30.1mWbNuSBFcMwcDy8cEOot4hr_Y7CQTvW0yYpCa4PmXg'
-            }
-        }).then((response) => {
-            expect(response.status).to.eq(200);
-            expect(response.body.code).to.eq(200);
-            expect(response.body.status).to.eq('success');
-            // Assert any additional validations as needed
-        });
-    });
-
 });

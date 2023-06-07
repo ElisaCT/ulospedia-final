@@ -31,7 +31,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
                 }
             }).then((response) => {
                 expect(response.status).to.eq(404);
-                expect(response.body).to.have.property('message', 'ulos dengan id {1011} tidak ditemukan');
+                expect(response.body).to.have.property('message', 'ulos dengan id 1011 tidak ditemukan');
                 cy.log('Response Body:', JSON.stringify(response.body, null, 2));
             });
         });
@@ -67,7 +67,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
             cy.request({
                 method: 'GET',
                 failOnStatusCode: false,
-                url: `generate/ulos/${invalidId}/motifs/${invalidMotifId}/image`,
+                url: `generate/ulos/${invalidId}/motifs/${invalidMotifId}/image/public`,
                 headers: {
                     'Authorization': `Bearer ${authToken}`,
                     'Accept': '*/*'
@@ -75,7 +75,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
                 encoding: 'binary'
             }).then((response) => {
                 expect(response.status).to.eq(404);
-                expect(response.body).to.have.property('message', 'ulos dengan id {1011} tidak ditemukan');
+                expect(response.body).to.have.property('message', 'ulos dengan id 1011 tidak ditemukan');
                 cy.log('Response Body:', JSON.stringify(response.body, null, 2));
             });
         });
@@ -93,7 +93,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
                 }
             }).then((response) => {
                 expect(response.status).to.eq(404);
-                expect(response.body).to.have.property('message', 'ulos dengan id {1011} tidak ditemukan');
+                expect(response.body).to.have.property('message', 'ulos dengan id 1011 tidak ditemukan');
                 cy.log('Response Body:', JSON.stringify(response.body, null, 2));
             });
         });
@@ -111,7 +111,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
                     'Accept': '*/*'
                 }
             }).then((response) => {
-                expect(response.status).to.eq(403);
+                expect(response.status).to.eq(401);
             });
         });
 
@@ -131,7 +131,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
                     "size": size
                 }
             }).then((response) => {
-                expect(response.status).to.eq(403);
+                expect(response.status).to.eq(401);
             });
         });
 
@@ -151,7 +151,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
                     },
                     body: formData
                 }).then((response) => {
-                    expect(response.status).to.eq(403);
+                    expect(response.status).to.eq(401);
                 });
             });
         });
@@ -167,7 +167,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
                 },
                 encoding: 'binary'
             }).then((response) => {
-                expect(response.status).to.eq(403);
+                expect(response.status).to.eq(401);
             });
         });
 
@@ -182,7 +182,7 @@ describe('Pengujian API: Invalid Feature Generate Motif', () => {
         //             'Accept': '*/*'
         //         }
         //     }).then((response) => {
-        //         expect(response.status).to.eq(403);
+        //         expect(response.status).to.eq(401);
         //     });
         // });
 

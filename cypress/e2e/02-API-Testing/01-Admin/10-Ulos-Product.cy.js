@@ -177,6 +177,45 @@ describe('Pengujian API: Ulos Product', () => {
         });
     });
 
+    // it('DELETE: Menghapus Gambar Ulos Lainnya', () => {
+    //     const authToken = Cypress.env('authToken');
+    //     const ulosId = 10;
+    //     const imageId = 23;
+
+    //     cy.request({
+    //         method: 'DELETE',
+    //         url: `ulospedia/ulos/${ulosId}/other-images/${imageId}`,
+    //         headers: {
+    //             'Accept': '*/*',
+    //             'Authorization': `Bearer ${authToken}`,    
+    //         }
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         expect(response.body.code).to.eq(200);
+    //         expect(response.body.status).to.eq('success');
+    //         // Assert any additional validations as needed
+    //     });
+    // });
+
+    // it('DELETE: Menghapus Gambar Produk', () => {
+    //     const authToken = Cypress.env('authToken');
+    //     const ulosId = 10;
+    //     const productId = 23;
+
+    //     cy.request({
+    //         method: 'DELETE',
+    //         url: `ulospedia/ulos/${ulosId}/products/${productId}/image`,
+    //         headers: {
+    //             'Accept': '*/*',
+    //             'Authorization': `Bearer ${authToken}`,
+    //         }
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         expect(response.body.code).to.eq(200);
+    //         expect(response.body.status).to.eq('success');
+    //         // Assert any additional validations as needed
+    //     });
+    // });
 
 
 
