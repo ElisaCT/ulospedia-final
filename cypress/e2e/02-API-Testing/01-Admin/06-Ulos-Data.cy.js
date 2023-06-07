@@ -73,7 +73,7 @@ describe('Pengujian API: Data ulos', () => {
         });
     });
 
-    it.only('GET: Mendapatkan Semua Data Ulos untuk Dashboard Ulos', () => {
+    it('GET: Mendapatkan Semua Data Ulos untuk Dashboard Ulos', () => {
         const authToken = Cypress.env('authToken');
         const pageNo = 1;
         const sortBy = 'updatedAt';
@@ -119,7 +119,6 @@ describe('Pengujian API: Data ulos', () => {
         });
     });
 
-
     it('PUT: Memperbaharui/Mengedit data ulos berdasarkan ulosId yang valid(tersedia)', () => {
         const ulosId = 10;
         const authToken = Cypress.env('authToken');
@@ -152,4 +151,55 @@ describe('Pengujian API: Data ulos', () => {
             cy.log('Response Body:', JSON.stringify(response.body, null, 2));
         });
     });
+
+    //baru dari sini
+    it('GET: Mendapatkan 4 Data Ulos Terbaru', () => {
+        const authToken = Cypress.env('authToken');
+        cy.request({
+            method: 'GET',
+            url: 'ulospedia/ulos/4-home-dashboard',
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+                'Accept': '*/*'
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            // Assert any additional validations as needed
+        });
+    });
+
+    it('GET: Mendapatkan Formulir Data Ulos Lama', () => {
+        const authToken = Cypress.env('authToken');
+        cy.request({
+            method: 'GET',
+            url: 'ulospedia/ulos/10/old-data-update-form',
+            headers: {
+                'Accept': '*/*',
+                Authorization: `Bearer ${authToken}`,
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            expect(response.body.code).to.eq(200);
+            expect(response.body.status).to.eq('success');
+            expect(response.body.data.ulosList.ulosId).to.eq(10);
+            // Assert any additional validations as needed
+        });
+    });
+
+
+    // it('DELETE: Menghapus Ulos', () => {
+    //     const authToken = Cypress.env('authToken');
+    //     cy.request({
+    //         method: 'DELETE',
+    //         url: 'ulospedia/ulos/21',
+    //         headers: {
+    //             'Accept': '*/*',
+    //             Authorization: `Bearer ${authToken}`,
+    //         }
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         // Assert any additional validations as needed
+    //     });
+    // });
+
 });

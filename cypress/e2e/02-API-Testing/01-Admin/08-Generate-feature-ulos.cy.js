@@ -107,7 +107,7 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
         });
     });
 
-    it.only('PUT: Memperbarui Gambar generate ulos berdasarkan ulos ID', () => {
+    it('PUT: Memperbarui Gambar generate ulos berdasarkan ulos ID', () => {
         const authToken = Cypress.env('authToken');
         const ulosId = 66;
 
@@ -134,7 +134,7 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
             });
     });
 
-    it.only('PUT: Memperbarui data teks generate ulos berdasarkan ID', () => {
+    it('PUT: Memperbarui data teks generate ulos berdasarkan ID', () => {
         const authToken = Cypress.env('authToken');
         const ulosId = 66;
 
@@ -174,8 +174,6 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
             // Tambahkan assertions tambahan sesuai kebutuhan
         });
     });
-
-
 
     // it('DELETE: Menghapus Gambar Generate Ulos', () => {
     //     const authToken = Cypress.env('authToken');

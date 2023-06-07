@@ -180,4 +180,21 @@ describe('Pengujian API - Fitur Generate untuk motif ulos', () => {
     //     });
     // });
 
+    it('DELETE: Menghapus Data Motif', () => {
+        
+        cy.request({
+            method: 'DELETE',
+            url: '/api/v1/generate/ulos/ulos-id/motifs/motif-id',
+            headers: {
+                'Accept': '*/*',
+                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZXdpbmExMjMiLCJpYXQiOjE2ODYxNDY5OTcsImV4cCI6MTY4NjIzMzM5N30.1mWbNuSBFcMwcDy8cEOot4hr_Y7CQTvW0yYpCa4PmXg'
+            }
+        }).then((response) => {
+            expect(response.status).to.eq(200);
+            expect(response.body.code).to.eq(200);
+            expect(response.body.status).to.eq('success');
+            // Assert any additional validations as needed
+        });
+    });
+
 });

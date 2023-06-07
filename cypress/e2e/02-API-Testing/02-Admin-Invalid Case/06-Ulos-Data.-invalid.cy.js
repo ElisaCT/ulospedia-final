@@ -204,7 +204,7 @@ describe('Pengujian API: Invalid', () => {
             },
         };
 
-        it.only('POST: Membuat data ulos baru dengan invalid credentials', () => {
+        it('POST: Membuat data ulos baru dengan invalid credentials', () => {
             const requestBody = testData.ulosData;
 
             cy.request({

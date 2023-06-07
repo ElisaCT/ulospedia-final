@@ -48,7 +48,7 @@ describe('Pengujian API - Gambar Potongan Ulos', () => {
         });
     });
 
-    it.only('PUT: Memperbarui Data Potongan Ulos Baru', () => {
+    it('PUT: Memperbarui Data Potongan Ulos Baru', () => {
         const authToken = Cypress.env('authToken');
         const ulosId = 10;
 

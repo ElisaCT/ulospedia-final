@@ -95,7 +95,7 @@ describe('Pengujian API: Penenun', () => {
         });
     });
 
-    it.only('GET: Mendapatkan Data Penenun untuk Home Dashboard', () => {
+    it('GET: Mendapatkan Data Penenun untuk Home Dashboard', () => {
         const authToken = Cypress.env('authToken');
 
         cy.request({
@@ -111,7 +111,7 @@ describe('Pengujian API: Penenun', () => {
         });
     });
 
-    it.only('GET: Mendapatkan Data Penenun untuk Form Update', () => {
+    it('GET: Mendapatkan Data Penenun untuk Form Update', () => {
         const authToken = Cypress.env('authToken');
         const weaverId = 99;
 
