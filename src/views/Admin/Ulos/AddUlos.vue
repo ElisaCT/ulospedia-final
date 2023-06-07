@@ -804,11 +804,7 @@
                           }"
                           class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                         >
-                          <img
-                            :src="form.image"
-                            v-if="form.image"
-                            alt="Image Preview"
-                          />
+                          <img :src="form.previewUrl" v-if="form.previewUrl" alt="Image Preview" />
                           <div
                             class="flex flex-col items-center justify-center pt-5 pb-6"
                             v-if="!form.image"
@@ -849,7 +845,7 @@
                             class="hidden"
                             accept="image/png, image/jpg, image/jpeg"
                             :disabled="!toggleStatus"
-                            @change="handleFileChange('productImage', index, $event)"
+                            @change="handleImagePreview($event, formIndex)"
                           />
                         </label>
                       </div>
@@ -863,6 +859,7 @@
                       >
                       <div class="md:w-2/3">
                         <input
+                          v-model="form.productName"
                           type="text"
                           id="ulos-name"
                           :class="{
@@ -884,6 +881,7 @@
                       >
                       <div class="md:w-2/3">
                         <input
+                          v-model="form.productPrice"
                           type="text"
                           id="ulos-price"
                           :class="{
@@ -905,6 +903,7 @@
                       >
                       <div class="md:w-2/3 text-neutral_80">
                         <input
+                          v-model="form.urlProduct"
                           type="text"
                           id="ulos-url"
                           :class="{
@@ -1197,8 +1196,12 @@ export default {
     addForm() {
       const nextId = this.forms.length > 0 ? this.forms[this.forms.length - 1].id + 1 : 0
       console.log(nextId)
-      this.forms.push({ id: nextId, imagePreview: null })
-      console.log(this.forms)
+      this.forms.push({
+        previewUrl: '',
+        productName: '',
+        productPrice: '',
+        urlProduct: ''
+      })
     },
     removeForm(id) {
       this.forms = this.forms.filter((form) => form.id !== id)
@@ -1216,13 +1219,13 @@ export default {
       //   this.forms[formIndex].imagePreview = reader.result
       // }
       // reader.readAsDataURL(file)
-      const file = event.target.files[0];
-      const reader = new FileReader();
+      const file = event.target.files[0]
+      const reader = new FileReader()
       reader.onload = () => {
-        const previewUrl = reader.result;
-        this.forms[index].previewUrl = previewUrl;
-      };
-      reader.readAsDataURL(file);
+        const previewUrl = reader.result
+        this.forms[index].previewUrl = previewUrl
+      }
+      reader.readAsDataURL(file)
     }
   },
   mounted() {
