@@ -326,9 +326,9 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      name: yup.string().required('Nama penenun harus diisi'),
+      name: yup.string().required('Nama penenun harus diisi').max(100, 'Nama penenun tidak boleh lebih dari 100 karakter'),
       //birthYear: yup.string().required('Tahun lahir penenun harus diisi'),
-      domicile: yup.string().required('Domisili penenun harus diisi'),
+      domicile: yup.string().required('Domisili penenun harus diisi').max(50, 'Domisili penenun tidak boleh lebih dari 50 karakter'),
       ethnic: yup.string().required('Suku penenun harus diisi'),
       theLoom: yup.string().required('Alat tenun penenun harus diisi'),
       story: yup.string().required('Cerita penenun harus diisi'),
