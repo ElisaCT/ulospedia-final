@@ -69,7 +69,7 @@
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Informasi Penenun</h5>
 
         <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
-          <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+          <label for="penenun-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Nama Penenun*</label
           >
           <div class="md:w-2/3 flex flex-col gap-2">
@@ -77,7 +77,7 @@
               name="name"
               v-model="name"
               type="text"
-              id="ulos-name"
+              id="penenun-name"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan nama penenun"
             />
@@ -108,6 +108,7 @@
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
               <Field
+              id="dropdown-suku-penenun"
                 name="ethnic"
                 as="select"
                 v-model="ethnic"
@@ -177,6 +178,7 @@
             <div class="w-full relative inline-block">
               <!-- <Field name="theLoom"  rules="required" > -->
               <Field
+                id="dropdown-alat-tenun"
                 name="theLoom"
                 v-model="theLoom"
                 as="select"
@@ -220,6 +222,7 @@
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
               <Field
+                id="dropdown-teknik-tenun"
                 as="select"
                 name="technique"
                 rules="required"
@@ -260,7 +263,7 @@
 
         <!-- story penenun -->
         <div class="flex flex-col gap-6 md:flex-row pb-6">
-          <label for="ulos-meaning" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+          <label for="penenun-story" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Cerita Penenun*</label
           >
           <div class="md:w-2/3 flex flex-col gap-2">
@@ -270,7 +273,7 @@
               as="TextArea"
               v-model="story"
               type="text"
-              id="ulos-meaning"
+              id="penenun-story"
               rows="4"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan cerita yang ingin dibagikan penenun"
@@ -290,6 +293,7 @@
           Batal
         </button>
         <button
+        id="btn-simpan"
           type="submit"
           @click="submit"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
