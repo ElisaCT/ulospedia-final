@@ -34,7 +34,6 @@ export const LoginAndGoToGenerateMotifPage = () => {
 }
 
 export const uploadUlosImage = () =>{
-    LoginAndGoToUlosPage()
     cy.get('#btn-tambah-ulos').click();
     //stepper 1: menambahkan data gambar ulos
     cy.get('form').find('input[type="file"]').eq(0).attachFile('ulosUtuh1.jpeg');

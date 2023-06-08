@@ -223,9 +223,8 @@ describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () =>
 
     testCases.forEach((testCase) => {
         it(testCase.testCase, () => {
-            if (condition) {
-
-            }
+            // cy.get('#ulos-name').type('Ulos Harungguan')
+            // cy.get('#dropdown-suku-ulos').select('Batak Toba')
         });
     });
 
