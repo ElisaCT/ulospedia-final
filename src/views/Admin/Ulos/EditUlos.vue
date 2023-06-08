@@ -852,6 +852,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="dropdown-suku-ulos"
                       v-model="ulosData.ethnic"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
@@ -936,6 +937,7 @@
                   <div class="space-y-2">
                     <label class="inline-flex items-center pr-8">
                       <input
+                        id="jenis-ulos-tradisional"
                         type="radio"
                         class="form-radio text-primary_main"
                         name="radioGroup"
@@ -945,6 +947,7 @@
                     </label>
                     <label class="inline-flex items-center">
                       <input
+                        id="jenis-ulos-pengembangan"
                         type="radio"
                         class="form-radio text-primary_main"
                         name="radioGroup"
@@ -1020,6 +1023,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="dropdown-teknik-tenun"
                       v-model="ulosData.technique"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
@@ -1177,7 +1181,7 @@
                   <div class="md:w-2/3">
                     <input
                       type="text"
-                      id="ulos-name"
+                      id="nama-produk-ulos"
                       :class="{
                         'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                         'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -1198,7 +1202,7 @@
                   <div class="md:w-2/3">
                     <input
                       type="text"
-                      id="ulos-name"
+                      id="harga-produk-ulos"
                       :class="{
                         'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                         'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -1219,7 +1223,7 @@
                   <div class="md:w-2/3">
                     <input
                       type="text"
-                      id="ulos-name"
+                      id="url-produk-ulos"
                       :class="{
                         'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                         'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -1239,6 +1243,7 @@
         <div class="flex flex-row gap-6 justify-end mt-6">
           <!-- Stepper navigation buttons -->
           <button
+            id="btn-batal"
             @click="backToUlos"
             :hidden="currentStep > 1"
             class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
@@ -1246,6 +1251,7 @@
             Batal
           </button>
           <button
+            id="btn-kembali"
             @click="previousStep"
             :hidden="currentStep === 1"
             class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
@@ -1253,6 +1259,7 @@
             Kembali
           </button>
           <button
+            id="btn-selanjutnya"
             @click="nextStep"
             :hidden="currentStep === totalSteps"
             class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
@@ -1260,6 +1267,7 @@
             Selanjutnya
           </button>
           <button
+            id="btn-simpan-perubahan"
             @click="nextStep"
             :hidden="currentStep < totalSteps"
             class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"

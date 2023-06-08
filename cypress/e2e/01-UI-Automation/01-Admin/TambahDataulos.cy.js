@@ -44,7 +44,7 @@ describe('Fungsionalitas Halaman Ulos - Admin', () => {
 
             cy.get('#ulos-meaning').type('Ulos Harungguan disebut sebagai “Raja” Ulos di Tanah Tapanuli karena di masa lampau hanya dipakai oleh Raja dan kalangan terpandang')
 
-            cy.get('#ulos-function').type('Ulos berarti kain dalam bahasa Batak Toba.   ')
+            cy.get('#ulos-function').type('Ulos berarti kain dalam bahasa Batak Toba.')
 
             cy.get('#btn-selanjutnya').click()
 

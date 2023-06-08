@@ -1,6 +1,6 @@
 import {
     LoginAndGoToUlosPage
-} from "../../PreCondition";
+} from "../../01-UI-Automation/01-Admin/PreCondition";
 describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () => {
     //pre condition
     beforeEach(() => {

@@ -24,7 +24,6 @@ describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () =>
             teknikTenun: 'Teknik Ikat Lungsi',
             ulosMeaning: 'Ulos Harungguan disebut sebagai “Raja” Ulos di Tanah Tapanuli karena di masa lampau hanya dipakai oleh Raja dan kalangan terpandang',
             ulosFunction: 'Ulos berarti kain dalam bahasa Batak Toba.',
-            expectedErrorMessage: ''
         },
         {
             testCase: "Admin menambahkan data ulos dengan inputan nama ulos kosong dan inputan lain terisi dengan valid input",
@@ -223,8 +222,37 @@ describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () =>
 
     testCases.forEach((testCase) => {
         it(testCase.testCase, () => {
-            // cy.get('#ulos-name').type('Ulos Harungguan')
-            // cy.get('#dropdown-suku-ulos').select('Batak Toba')
+            if (testCase.ulosName) {
+                cy.get('#ulos-name').type(testCase.ulosName)
+            }
+            if (testCase.sukuUlos) {
+                cy.get('#dropdown-suku-ulos').select(testCase.sukuUlos)
+            }
+            cy.get('#checkbox-merah').check(); // Tekan checkbox Merah
+            cy.get('#jenis-ulos-pengembangan').check();
+            if (testCase.ulosLocation) {
+                cy.get('#ulos-location').type(testCase.ulosLocation)
+            }
+            if (testCase.ulosLength) {
+                cy.get('#ulos-legth').type(testCase.ulosLength)
+            }
+            if (testCase.ulosWidth) {
+                cy.get('#ulos-width').type('89')
+            }
+            if (testCase.teknikTenun) {
+                cy.get('#dropdown-teknik-tenun').select(testCase.teknikTenun);
+            }
+            if (testCase.ulosMeaning) {
+                cy.get('#ulos-meaning').type(testCase.ulosMeaning)
+            }
+            cy.get('#btn-selanjutnya').click()
+
+            if (testCase.expectedErrorMessage) {
+                cy.contains(testCase.expectedErrorMessage).should('exist');
+            } else {
+                cy.get('#status-togel-eccommerce').should('be.visible');
+            }
+
         });
     });
 
