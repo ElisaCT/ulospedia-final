@@ -24,49 +24,49 @@ describe('Fungsionalitas Login - Metode Category Partitioning Method', () => {
             testName: 'Admin login dengan username yang valid dan katasandi yang kosong',
             username: validUsername,
             password: '',
-            expectedErrorMessage: 'password can not be empty'
+            expectedErrorMessage: 'Masukkan password anda'
         },
         {
             testName: 'Admin login dengan username yang valid dan kata sandi yang salah',
             username: validUsername,
             password: 'katasandisalah',
-            expectedErrorMessage: 'username atau password salah'
+            expectedErrorMessage: 'Username atau password anda salah'
         },
         {
             testName: 'Admin login dengan username tidak terdaftar dan katasandi yang benar/valid',
             username: 'usernametidakterdaftar',
             password: validPassword,
-            expectedErrorMessage: 'username atau password salah'
+            expectedErrorMessage: 'Username atau password anda salah'
         },
         {
             testName: 'Admin login dengan username tidak terdaftar dan katasandi yang kosong',
             username: 'usernametidakterdaftar',
             password: '',
-            expectedErrorMessage: 'password can not be empty'
+            expectedErrorMessage: 'Masukkan password anda'
         },
         {
             testName: 'Admin login dengan username tidak terdaftar dan kata sandi yang salah',
             username: 'usernametidakterdaftar',
             password: 'katasandisalah',
-            expectedErrorMessage: 'username atau password salah'
+            expectedErrorMessage: 'Username atau password anda salah'
         },
         {
             testName: 'Admin login dengan username kosong dan kata sandi yang benar',
             username: '',
             password: validPassword,
-            expectedErrorMessage: 'username can not be empty'
+            expectedErrorMessage: 'Masukkan username anda'
         },
         {
             testName: 'Admin login dengan username kosong dan kata sandi yang kosong',
             username: '',
             password: '',
-            expectedErrorMessages: ['username can not be empty', 'password can not be empty']
+            expectedErrorMessage: 'Masukkan username anda'
         },
         {
             testName: 'Admin login dengan username kosong dan kata sandi yang salah',
             username: '',
             password: 'katasandisalah',
-            expectedErrorMessage: 'username can not be empty'
+            expectedErrorMessage: 'Masukkan username anda'
         }
     ];
 
@@ -81,7 +81,7 @@ describe('Fungsionalitas Login - Metode Category Partitioning Method', () => {
             }
 
             cy.get('#btn-login').click();
-            cy.contains(testCase.expectedErrorMessages).should('exist');
+            cy.contains(testCase.expectedErrorMessage).should('exist');
 
         });
     });

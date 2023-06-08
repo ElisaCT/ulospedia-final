@@ -25,13 +25,13 @@ describe('Fungsionalitas Login - Metode Category Partitioning Method', () => {
             testName: 'Admin login dengan username yang valid dan kata sandi yang salah',
             username: validUsername,
             password: 'katasandisalah',
-            expectedErrorMessage: 'username atau password salah'
+            expectedErrorMessage: 'Username atau password anda salah'
         },
         {
             testName: 'Admin login dengan username tidak terdaftar dan katasandi yang benar/valid',
             username: 'usernametidakterdaftar',
             password: validPassword,
-            expectedErrorMessage: 'username atau password salah'
+            expectedErrorMessage: 'Username atau password anda salah'
         },
     ];
 
@@ -46,7 +46,7 @@ describe('Fungsionalitas Login - Metode Category Partitioning Method', () => {
             }
 
             cy.get('#btn-login').click();
-            cy.contains(testCase.expectedErrorMessages).should('exist');
+            cy.contains('.text-danger_main', testCase.expectedErrorMessage).should('be.visible');
 
         });
     });
