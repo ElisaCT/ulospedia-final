@@ -1,9 +1,12 @@
 <template>
   <Navbar />
-  <SliderUlos :data="imageList" />
+  <!-- <div class="mx-[180px]">
+    <SliderUlos :data="imageList" />
+  </div> -->
+
   <div v-if="ulosDetails">
     <div v-for="ulosDetail in ulosDetails" :key="ulosDetail.id">
-      <div class="flex flex-col items-center gap-12 px-32">
+      <div class="flex flex-col items-center gap-12 px-32 pb-12">
         <div class="flex gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
             <h3 id="nama-ulos" class="font-semibold text-lg">{{ ulosDetail.name }}</h3>
@@ -18,16 +21,20 @@
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span id="lokasi-ulos" class="text-sm font-normal text-gray-800 text-primary_main">{{
-                  ulosDetail.location
-                }}</span>
+                <span
+                  id="lokasi-ulos"
+                  class="text-sm font-normal text-gray-800 text-primary_main"
+                  >{{ ulosDetail.location }}</span
+                >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span id="teknik-tenun-ulos" class="text-sm font-normal text-gray-800 text-primary_main">{{
-                  ulosDetail.technique
-                }}</span>
+                <span
+                  id="teknik-tenun-ulos"
+                  class="text-sm font-normal text-gray-800 text-primary_main"
+                  >{{ ulosDetail.technique }}</span
+                >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
@@ -40,8 +47,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Image -->
       <!-- <div class="">
         <div class="swiper-container main-slider loading">
           <div class="swiper-wrapper">
@@ -242,9 +247,18 @@
           </div>
         </div> 
       </div> -->
-      <ImageDetail />
+      <!-- <ImageDetail /> -->
+    </div>
+  </div>
 
-      <div class="grid grid-cols-12 gap-6 px-32">
+  <!-- Image -->
+  <div class="mx-[180px]">
+    <SliderUlos :data="imageList" />
+  </div>
+
+  <div v-if="ulosDetails">
+    <div v-for="ulosDetail in ulosDetails" :key="ulosDetail.id">
+      <div class="grid grid-cols-12 gap-6 px-32 pt-12">
         <!-- makna dan fungsi -->
         <div class="flex flex-col gap-8 col-span-7">
           <div class="flex flex-col gap-3">
@@ -329,12 +343,18 @@
 import Navbar from '../../components/EndUser/Navbar.vue'
 import Footer from '../../components/EndUser/Footer.vue'
 import axios from 'axios'
-import ImageDetail from '../../components/EndUser/ImageDetail.vue'
+//import ImageDetail from '../../components/EndUser/ImageDetail.vue'
 import SliderUlos from '../../components/EndUser/SliderUlos.vue'
 
 export default {
   // eslint-disable-next-line vue/no-reserved-component-names, no-undef
-  components: { Navbar, Footer, ImageDetail, SliderUlos },
+  components: {
+    Navbar,
+    // eslint-disable-next-line vue/no-reserved-component-names
+    Footer,
+    // ImageDetail,
+    SliderUlos
+  },
   data: function () {
     return {
       imageList: []
@@ -343,17 +363,19 @@ export default {
   mounted() {
     console.log('TESTT')
 
-    axios.get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos/19`).then((response) => {
-      console.log(response.data)
-      this.imageList = response.data.data.ulosDetail.clientUlosRelatedImageResponseList
-      console.log(this.imageList)
-    })
+    // axios.get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos/19`).then((response) => {
+    //   console.log(response.data)
+    //   this.imageList = response.data.data.ulosDetail.clientUlosRelatedImageResponseList
+    //   console.log(this.imageList)
+    // })
 
     axios
       .get('http://company.ditenun.com/api/v1/ulospedia/client/ulos/' + this.$route.params.id)
       .then((response) => {
         this.ulosDetails = response.data.data
         console.log(this.ulosDetails)
+        this.imageList = response.data.data.ulosDetail.clientUlosRelatedImageResponseList
+        console.log(this.imageList)
       })
   }
 }

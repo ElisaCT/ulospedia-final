@@ -71,3 +71,4 @@ Cypress.Commands.add('getByType', (selector) => {
 Cypress.Commands.add('getByTestDataId', (selector) => {
     return cy.get(`[test-data-id="${selector}"]`);
 });
+// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })

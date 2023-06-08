@@ -247,7 +247,7 @@
 
       <div class="flex flex-row gap-6 justify-end mt-6">
         <button
-          id="btn-batal"  
+          id="btn-batal"
           @click="backToPenenun"
           class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
         >
@@ -258,7 +258,7 @@
           @click="editWeaver"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
-          Update
+          Simpan Perubahan
         </button>
       </div>
     </div>

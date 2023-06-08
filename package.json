@@ -17,9 +17,11 @@
         "preline": "^1.8.0",
         "save": "^2.9.0",
         "swiper": "^9.3.2",
+        "vee-validate": "^4.9.6",
         "vue": "^3.2.47",
         "vue-router": "^4.1.6",
-        "vuelidate": "^0.7.7"
+        "vuelidate": "^0.7.7",
+        "yup": "^1.2.0"
     },
     "devDependencies": {
         "@rushstack/eslint-patch": "^1.2.0",

@@ -17,16 +17,20 @@
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span id="lokasi-ulos" class="text-sm font-normal text-gray-800 text-primary_main">{{
-                  ulosDetails.location
-                }}</span>
+                <span
+                  id="lokasi-ulos"
+                  class="text-sm font-normal text-gray-800 text-primary_main"
+                  >{{ ulosDetails.location }}</span
+                >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
-                <span id="teknik-tenun-ulos" class="text-sm font-normal text-gray-800 text-primary_main">{{
-                  ulosDetails.technique
-                }}</span>
+                <span
+                  id="teknik-tenun-ulos"
+                  class="text-sm font-normal text-gray-800 text-primary_main"
+                  >{{ ulosDetails.technique }}</span
+                >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
@@ -114,12 +118,13 @@
                     <p id="nama-produk-ulos" class="font-medium text-lg">{{ product.name }}</p>
                     <h5 id="harga-produk-ulo" class="font-normal text-xl">Rp{{ product.price }}</h5>
                   </div>
-                  <a id="btn-beli-sekarang" class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2" :href="product.url"
-                  >Beli Sekarang</a
-                >
+                  <a
+                    id="btn-beli-sekarang"
+                    class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2"
+                    :href="product.url"
+                    >Beli Sekarang</a
+                  >
                 </div>
-
-                
               </div>
             </div>
           </div>
@@ -156,7 +161,6 @@ export default {
         console.log(this.ulosDetail)
         console.log(this.productAvail)
       })
-
   }
 }
 </script>

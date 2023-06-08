@@ -7,7 +7,8 @@
         <h3 class="font-medium text-3xl text-left pb-6">Daftar Penenun</h3>
         <router-link to="add-penenun">
           <button
-            id="btn-tambah-penenun" class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
+            id="btn-tambah-penenun"
+            class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
               <path
@@ -55,7 +56,11 @@
           <thead class="text-neutral_70 font-bold bg-[#F8F7FA] uppercase w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <button id="btn-sort-nama-penenun" @click="sortedBy('name')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-nama-penenun"
+                  @click="sortedBy('name')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Nama Penenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -70,7 +75,11 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button id="btn-sort-alat-tenun" @click="sortedBy('theLoom')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-alat-tenun"
+                  @click="sortedBy('theLoom')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Alat Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -86,8 +95,8 @@
               </th>
               <th scope="col" class="px-6 py-3">
                 <button
-                id="btn-sort-teknik-tenun"
-                @click="sortedBy('technique')"
+                  id="btn-sort-teknik-tenun"
+                  @click="sortedBy('technique')"
                   class="flex flex-row items-center gap-3"
                 >
                   Teknik Tenun
@@ -104,7 +113,11 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button id="btn-sort-suku-penenun" @click="sortedBy('ethnic')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-suku-penenun"
+                  @click="sortedBy('ethnic')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -125,7 +138,7 @@
           <template v-if="sortedItems.length > 0">
             <tbody class="divide-y divide-neutral_30 text-neutral_90">
               <tr
-              id="baris-daftar-penenun"
+                id="baris-daftar-penenun"
                 class="hover:bg-primary_surface hover:cursor-pointer"
                 v-for="(weavers, id) in sortedItems"
                 :key="id"
@@ -245,32 +258,34 @@ export default {
   // ini waktu di mau hit api nya
   // ini udah deploy di server del
   mounted() {
-    const token = localStorage.getItem('token')
-    const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
-      this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
-    }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
-      this.search !== '' ? '&searchByName=' + this.search : ''
-    }`
-    axios
-      .get(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then((response) => {
-        console.log(response.data)
-        this.lastPage = response.data.data.weavers.lastPage
-        this.weavers = response.data.data.weavers.weaversListAdminDashboard
-        this.totalElement = response.data.data.weavers.totalAllElements
-        this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
-      })
+    // const token = localStorage.getItem('token')
+    // const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
+    //   this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
+    // }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
+    //   this.search !== '' ? '&searchByName=' + this.search : ''
+    // }`
+    // axios
+    //   .get(apiUrl, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //     console.log(apiUrl)
+    //     this.lastPage = response.data.data.weavers.lastPage
+    //     this.weavers = response.data.data.weavers.weaversListAdminDashboard
+    //     this.totalElement = response.data.data.weavers.totalAllElements
+    //     this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
+    //   })
+    this.fetchWeavers()
   },
   data() {
     return {
       weavers: [],
       totalElement: 0,
       totalElementOnPage: 0,
-      
+
       lastPage: true,
       moveState: false,
       isLoading: false,
@@ -404,16 +419,20 @@ export default {
         const token = localStorage.getItem('token')
         const response = await axios.get('http://company.ditenun.com/api/v1/ulospedia/weavers', {
           params: {
-            pageNo: 1,
+            pageNo: this.pageNo,
             pageSize: 10,
             sortBy: this.sortBy,
-            sortOrder: this.sortOrder
+            sortOrder: this.sortOrder,
+            searchByName: this.search
           },
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
-        this.weavers = response.data
+        this.lastPage = response.data.data.weavers.lastPage
+        this.weavers = response.data.data.weavers.weaversListAdminDashboard
+        this.totalElement = response.data.data.weavers.totalAllElements
+        this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
       } catch (error) {
         console.error(error)
       }
@@ -428,10 +447,12 @@ export default {
   },
   computed: {
     sortedItems() {
-      const sorted = [...this.weavers]
+       const sorted = [...this.weavers]
 
       // search result
-      const filtered = sorted.filter(item => item.name.toLowerCase().includes(this.search.toLowerCase()));
+      const filtered = sorted.filter((item) =>
+        item.name.toLowerCase().includes(this.search.toLowerCase())
+      )
       console.log(this.search)
 
       filtered.sort((a, b) => {
@@ -443,9 +464,8 @@ export default {
         }
         return 0
       })
-      return filtered;
+      return filtered
     }
-
   },
   components: {
     Sidebar,

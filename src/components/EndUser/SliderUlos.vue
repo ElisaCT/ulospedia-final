@@ -7,7 +7,7 @@
       v-show="index + 1 === slideIndex"
     >
       <div class="numbertext">{{ index + 1 }} / {{ data.length }}</div>
-      <img :src="slide.url" style="width: 100%" />
+      <img class="flex justify-center" :src="slide.url" style="width: 100%; height: 400px" />
     </div>
 
     <a class="prev" @click="plusSlides(-1)">❮</a>
@@ -27,7 +27,7 @@
         <img
           class="demo cursor"
           :src="slide.url"
-          style="width: 100%"
+          style="width: 200px; height: 100px"
           @click="currentSlide(index + 1)"
           :alt="slide.imagePart"
         />
@@ -40,33 +40,33 @@
 export default {
   data() {
     return {
-      slideIndex: 1,
-      slides: [
-        {
-          image: 'https://www.w3schools.com/w3css/img_mountains_wide.jpg',
-          caption: 'The Woods'
-        },
-        {
-          image: 'https://www.w3schools.com/w3css/img_snow_wide.jpg',
-          caption: 'Cinque Terre'
-        },
-        {
-          image: 'https://www.w3schools.com/w3css/img_nature_wide.jpg',
-          caption: 'Mountains and fjords'
-        },
-        {
-          image: 'https://www.w3schools.com/howto/img_woods_wide.jpg',
-          caption: 'Northern Lights'
-        },
-        {
-          image: 'https://www.w3schools.com/howto/img_5terre_wide.jpg',
-          caption: 'Nature and sunrise'
-        },
-        {
-          image: 'https://www.quanzhanketang.com/w3css/img_fjords_wide.jpg',
-          caption: 'Snowy Mountains'
-        }
-      ]
+      slideIndex: 1
+      // slides: [
+      //   {
+      //     image: 'https://www.w3schools.com/w3css/img_mountains_wide.jpg',
+      //     caption: 'The Woods'
+      //   },
+      //   {
+      //     image: 'https://www.w3schools.com/w3css/img_snow_wide.jpg',
+      //     caption: 'Cinque Terre'
+      //   },
+      //   {
+      //     image: 'https://www.w3schools.com/w3css/img_nature_wide.jpg',
+      //     caption: 'Mountains and fjords'
+      //   },
+      //   {
+      //     image: 'https://www.w3schools.com/howto/img_woods_wide.jpg',
+      //     caption: 'Northern Lights'
+      //   },
+      //   {
+      //     image: 'https://www.w3schools.com/howto/img_5terre_wide.jpg',
+      //     caption: 'Nature and sunrise'
+      //   },
+      //   {
+      //     image: 'https://www.quanzhanketang.com/w3css/img_fjords_wide.jpg',
+      //     caption: 'Snowy Mountains'
+      //   }
+      // ]
     }
   },
   props: {
