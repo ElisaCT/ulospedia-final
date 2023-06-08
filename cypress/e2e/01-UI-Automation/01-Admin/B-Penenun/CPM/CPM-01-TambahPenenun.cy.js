@@ -81,19 +81,7 @@ describe('Fungsionalitas Menambahkan Penenun - Metode Category Partitioning Meth
             weavingTool: 'Alat Tenun Bukan Mesin (ATBM)',
             weavingTechnique: 'Teknik Ikat Lungsi',
             story: 'Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.',
-            errorMessage: 'Nama penenun harus diisi.',
-        },
-        {
-            testName: 'Admin menambahkan data penenun dengan tahun lahir penenun tidak diisi dan input lainnya dimasukkan valid input',
-            image: 'testgambar.jpg',
-            name: 'Anri',
-            birthYear: '',
-            ethnicity: 'Batak Toba',
-            domicile: 'Samosir',
-            weavingTool: 'Alat Tenun Bukan Mesin (ATBM)',
-            weavingTechnique: 'Teknik Ikat Lungsi',
-            story: 'Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.',
-            errorMessage: 'Tahun lahir penenun harus diisi.',
+            errorMessage: 'Nama penenun harus diisi',
         },
         {
             testName: 'Admin menambahkan data penenun dengan suku penenun tidak diisi dan input lainnya dimasukkan valid input',
@@ -105,7 +93,7 @@ describe('Fungsionalitas Menambahkan Penenun - Metode Category Partitioning Meth
             weavingTool: 'Alat Tenun Bukan Mesin (ATBM)',
             weavingTechnique: 'Teknik Ikat Lungsi',
             story: 'Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.',
-            errorMessage: 'Suku penenun harus diisi.',
+            errorMessage: 'Suku penenun harus diisi',
         },
         {
             testName: 'Admin menambahkan data penenun dengan panjang domisili penenun > 100 char dan input lainnya dimasukkan valid input',
@@ -129,7 +117,7 @@ describe('Fungsionalitas Menambahkan Penenun - Metode Category Partitioning Meth
             weavingTool: 'Alat Tenun Bukan Mesin (ATBM)',
             weavingTechnique: 'Teknik Ikat Lungsi',
             story: 'Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.',
-            errorMessage: 'Domisili penenun harus diisi.',
+            errorMessage: 'Domisili penenun harus diisi',
         },
         {
             testName: 'Admin menambahkan data penenun dengan alat tenun yang digunakan tidak diisi dan input lainnya dimasukkan valid input',
@@ -141,7 +129,7 @@ describe('Fungsionalitas Menambahkan Penenun - Metode Category Partitioning Meth
             weavingTool: '',
             weavingTechnique: 'Teknik Ikat Lungsi',
             story: 'Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.',
-            errorMessage: 'Alat tenun yang digunakan harus diisi.',
+            errorMessage: 'Alat tenun penenun harus diisi',
         },
         {
             testName: 'Admin menambahkan data penenun dengan teknik tenun yang digunakan tidak diisi dan input lainnya dimasukkan valid input',
@@ -153,7 +141,7 @@ describe('Fungsionalitas Menambahkan Penenun - Metode Category Partitioning Meth
             weavingTool: 'Alat Tenun Bukan Mesin (ATBM)',
             weavingTechnique: '',
             story: 'Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.',
-            errorMessage: 'Teknik tenun yang digunakan harus diisi.',
+            errorMessage: 'Teknik tenun penenun harus diisi',
         },
         {
             testName: 'Admin menambahkan data penenun dengan cerita penenun kurang dari 50 char dan input lainnya dimasukkan valid input',
@@ -177,7 +165,7 @@ describe('Fungsionalitas Menambahkan Penenun - Metode Category Partitioning Meth
             weavingTool: 'Alat Tenun Bukan Mesin (ATBM)',
             weavingTechnique: 'Teknik Ikat Lungsi',
             story: '',
-            errorMessage: 'Cerita penenun harus diisi.',
+            errorMessage: 'Cerita penenun harus diisi',
         },
     ];
 

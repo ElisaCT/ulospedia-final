@@ -108,6 +108,7 @@
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
               <Field
+              id="dropdown-suku-penenun"
                 name="ethnic"
                 as="select"
                 v-model="ethnic"
@@ -177,6 +178,7 @@
             <div class="w-full relative inline-block">
               <!-- <Field name="theLoom"  rules="required" > -->
               <Field
+                id="dropdown-alat-tenun"
                 name="theLoom"
                 v-model="theLoom"
                 as="select"
@@ -220,6 +222,7 @@
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
               <Field
+                id="dropdown-teknik-tenun"
                 as="select"
                 name="technique"
                 rules="required"
@@ -290,6 +293,7 @@
           Batal
         </button>
         <button
+        id="btn-simpan"
           type="submit"
           @click="submit"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
