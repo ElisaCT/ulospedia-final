@@ -45,6 +45,7 @@
           <div class="flex flex-col items-center bg-neutral_10 rounded-lg shadow-md p-2">
             <div class="h-[150] w-[200px]">
           <img
+              id="gambar-motif-asal"
             class="h-full w-full object-cover transition-transform rounded-lg"
             :src="parentUlos"
           />
@@ -59,12 +60,12 @@
             :src="parentMotif"
           />
         </div>
-        <p class="text-center text-xl font-medium pt-2">Motif Asal</p>
+        <p id="text-motif-ulos" class="text-center text-xl font-medium pt-2">Motif Asal</p>
         </div>
         </div>
        
       </div>
-      <p id="text-motif-ulos" class="text-center text-xl font-medium">Motif Asal</p>
+     
       </div>
 
       <div class="divide-y"></div>
