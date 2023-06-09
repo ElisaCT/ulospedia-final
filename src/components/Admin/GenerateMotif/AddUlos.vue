@@ -1,6 +1,7 @@
 <template>
   <div>
     <button
+      id="btn-tambah-gambar-ulos"
       @click="showModal = true"
       class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
     >
@@ -104,6 +105,7 @@
             >
             <div class="md:w-2/3 relative inline-block">
               <select
+                id="dropdown-suku-ulos"
                 v-model="ethnic"
                 class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                 required
@@ -140,12 +142,14 @@
           </div>
           <div class="flex flex-row gap-6 justify-end mt-6">
             <button
+              id="btn-batal"
               @click="showModal = false"
               class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
             >
               Batal
             </button>
             <button
+              id="btn-simpan"
               @click="submit"
               :disabled="isLoading"
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
