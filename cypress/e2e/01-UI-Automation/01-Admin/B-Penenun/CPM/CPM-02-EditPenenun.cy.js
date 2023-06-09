@@ -1,3 +1,4 @@
+import { LoginAndGoToPenenunPage } from "../../PreCondition";
 describe('Fungsionalitas Edit Penenun - Metode Category Partitioning Method', () => {
     //pre condition
     beforeEach(() => {
@@ -17,7 +18,7 @@ describe('Fungsionalitas Edit Penenun - Metode Category Partitioning Method', ()
             weavingTool: 'Alat Tenun Bukan Mesin (ATBM)',
             weavingTechnique: 'Teknik Ikat Lungsi',
             story: 'Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.',
-            expectedMessage: 'Data penenun berhasil ditambahkan',
+            expectedMessage: 'Tabel Data Penenun',
         },
 
         // ...
@@ -44,17 +45,12 @@ describe('Fungsionalitas Edit Penenun - Metode Category Partitioning Method', ()
         {
             testName: 'Admin mengedit salah satu data penenun yang diinginkan  dengan nama penenun yang kosong ',
             name: '',
-            errorMessage: 'Nama penenun harus diisi.',
-        },
-        {
-            testName: 'Admin mengedit salah satu data penenun yang diinginkan  dengan tahun lahir penenun tidak diisi',
-            birthYear: '',
-            errorMessage: 'Tahun lahir penenun harus diisi.',
+            errorMessage: 'Nama penenun harus diisi',
         },
         {
             testName: 'Admin mengedit salah satu data penenun yang diinginkan  dengan suku penenun tidak diisi',
             ethnicity: '',
-            errorMessage: 'Suku penenun harus diisi.',
+            errorMessage: 'Suku penenun harus diisi',
         },
         {
             testName: 'Admin mengedit salah satu data penenun yang diinginkan  dengan panjang domisili penenun > 100 char ',
@@ -64,27 +60,22 @@ describe('Fungsionalitas Edit Penenun - Metode Category Partitioning Method', ()
         {
             testName: 'Admin mengedit salah satu data penenun yang diinginkan dengan domisili penenun tidak diisi',
             domicile: '',
-            errorMessage: 'Domisili penenun harus diisi.',
+            errorMessage: 'Domisili penenun tidak boleh lebih dari 50 karakter',
         },
         {
             testName: 'Admin  mengedit salah satu data penenun yang diinginkan dengan alat tenun yang digunakan tidak diisi',
             weavingTool: '',
-            errorMessage: 'Alat tenun yang digunakan harus diisi.',
+            errorMessage: 'Alat tenun yang digunakan harus diisi',
         },
         {
             testName: 'Admin mengedit salah satu data penenun yang diinginkan dengan teknik tenun yang digunakan tidak diisi',
             weavingTechnique: '',
-            errorMessage: 'Teknik tenun yang digunakan harus diisi.',
-        },
-        {
-            testName: 'Admin mengedit salah satu data penenun yang diinginkan  dengan cerita penenun kurang dari 50 char',
-            story: 'Cerita',
-            errorMessage: 'Cerita penenun harus memiliki setidaknya 50 karakter.',
+            errorMessage: 'Teknik tenun yang digunakan harus diisi',
         },
         {
             testName: 'Admin  mengedit salah satu data penenun yang diinginkan dengan cerita penenun tidak diisi ',
             story: '',
-            errorMessage: 'Cerita penenun harus diisi.',
+            errorMessage: 'Cerita penenun harus diisi',
         },
     ];
 

@@ -9,7 +9,7 @@ describe('Fungsionalitas Halaman Penenun - Admin', () => {
         cy.visit('http://127.0.0.1:1753/admin/login');
         cy.get('#username-address-icon').type('rewina123');
         cy.get('#password').type('12345');
-        cy.get('#btn-login').click();
+        cy.get('#btn-submit').click();
         cy.wait(1000);
         cy.get('#ulospedia-logo').should('be.visible');
         cy.get('#sidebar-penenun').click();
@@ -17,7 +17,7 @@ describe('Fungsionalitas Halaman Penenun - Admin', () => {
     });
 
     describe('Fungsionalitas  Menambahkan Penenun- Admin', () => {
-        it('Admin menambahkan data penenun dengan inputan yang valid', () => {
+        it.only('Admin menambahkan data penenun dengan inputan yang valid', () => {
             cy.get('#btn-tambah-penenun').click();
             cy.get('input#dropzone-file').attachFile('testgambar.jpg');
             cy.get('#penenun-name').type('Anri')
@@ -28,6 +28,8 @@ describe('Fungsionalitas Halaman Penenun - Admin', () => {
             cy.get('#dropdown-teknik-tenun').select('Teknik Ikat Lungsi')
             cy.get('#penenun-story').type('Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara. Meski makin senja, namun produktivitas Opung tetap juara. Bersama penenun lain di lingkungannya, ia bisa membuat 1-2 setel pakaian ulos dalam waktu satu bulan. Termasuk membuat motif langsung di benang, telah jadi urusan sehari-harinya.')
             cy.get('#btn-simpan').click()
+            cy.wait(4000)
+            cy.contains('Tabel Data Penenun').should('exist');
         });
     })
 

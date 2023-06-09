@@ -10,7 +10,7 @@ export const Login = () => {
     visitLoginPage()
     cy.get('#username-address-icon').type('rewina123');
     cy.get('#password').type('12345');
-    cy.get('#btn-login').click();
+    cy.get('#btn-submit').click();
     cy.wait(1000);
     cy.get('#ulospedia-logo').should('be.visible');
 }
