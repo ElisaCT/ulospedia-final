@@ -1,6 +1,6 @@
 import {LoginAndGoToUlosPage} from "../../../PreCondition";
 
-describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () => {
+describe('Fungsionalitas Menambahkan Ulos pada Tahap 1. Gambar Ulos - Metode Category Partitioning', () => {
     //pre condition
     beforeEach(() => {
         LoginAndGoToUlosPage()

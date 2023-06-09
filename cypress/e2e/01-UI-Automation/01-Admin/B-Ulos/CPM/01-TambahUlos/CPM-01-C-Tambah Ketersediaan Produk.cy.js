@@ -4,7 +4,7 @@ import {
     uploadUlosImage
 } from "../../../PreCondition";
 
-describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () => {
+describe('Fungsionalitas Menambahkan Ulos pada Tahap 3. Ketersediaan Ulos - Metode Category Partitioning', () => {
     //pre condition
     beforeEach(() => {
         LoginAndGoToUlosPage()
@@ -13,6 +13,14 @@ describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () =>
     });
 
     const testCases = [
+        {
+            testCase: 'Admin menambahkan ketersediaan ulos produk dengan valid input',
+            image: 'ulosUtuh1.jpg',
+            productName: 'Ulos Harungguan',
+            productPrice: '500000',
+            productUrl: 'https://example.com/product/1',
+        },
+        
         // Test case 1: Admin menambahkan gambar produk dengan size > 5MB dan input lain terisi dengan valid input
         {
             testCase: 'Admin menambahkan gambar produk dengan size > 5MB dan input lain terisi dengan valid input',

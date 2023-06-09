@@ -2,7 +2,7 @@ import {
     LoginAndGoToUlosPage
 } from "../../../PreCondition";
 
-describe('Fungsionalitas Mengedit Ulos - Metode Category Partitioning', () => {
+describe('Fungsionalitas Mengedit Gambar Ulos - Metode Category Partitioning', () => {
     //pre condition
     beforeEach(() => {
         LoginAndGoToUlosPage()

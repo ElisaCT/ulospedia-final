@@ -2,13 +2,21 @@ import {
     LoginAndGoToUlosPage,
 } from "../../../PreCondition";
 
-describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () => {
+describe('Fungsionalitas Mengedit ketersediaan Ulos - Metode Random Testing', () => {
     //pre condition
     beforeEach(() => {
         LoginAndGoToUlosPage()
     });
 
-    const testCases = [{
+    const testCases = [
+        {
+            testCase: 'Admin mengedit ketersediaan ulos dengan valid input',
+            image: 'UlosUtuh.jpg',
+            productName: 'Ulos Harungguan',
+            productPrice: '500000',
+            productUrl: 'https://example.com/product/1',
+        },
+        {
             testCase: 'Admin mengedit gambar produk pada ketersedian Ulos pada E-commerce menjadi size > 5MB dan input lain terisi dengan valid input',
             image: 'largeUlosUtuh.jpg', // Nama file gambar dengan ukuran > 5MB
             expectedErrorMessage: 'Ukuran gambar tidak boleh lebih dari 5MB',

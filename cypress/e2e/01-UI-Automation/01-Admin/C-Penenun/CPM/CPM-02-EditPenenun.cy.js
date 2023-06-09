@@ -27,11 +27,11 @@ describe('Fungsionalitas Edit Penenun - Metode Category Partitioning Method', ()
             image: 'testgambar.pdf',
             errorMessage: 'File gambar harus berupa gambar dengan format JPG, JPEG, atau PNG.',
         },
-        // {
-        //     testName: 'Admin mengedit mengedit salah satu data penenun yang diinginkan dengan gambar penenun yang memiliki ukuran >5000 kb',
-        //     image: 'testgambar_large.jpg',
-        //     errorMessage: 'Ukuran gambar tidak boleh melebihi 5000 KB.',
-        // },
+        {
+            testName: 'Admin mengedit mengedit salah satu data penenun yang diinginkan dengan gambar penenun yang memiliki ukuran >5000 kb',
+            image: 'largePenenun.jpg',
+            errorMessage: 'Ukuran gambar tidak boleh melebihi 5000 KB.',
+        },
         {
             testName: 'Admin mengedit salah satu data penenun yang diinginkan  dengan gambar penenun yang kosong ',
             image: '',

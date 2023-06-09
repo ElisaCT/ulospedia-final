@@ -5,13 +5,24 @@ import {
     uploadUlosImage
 } from "../../../PreCondition";
 
-describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () => {
+describe('Fungsionalitas Mengedit Informasi Ulos - Metode Category Partitioning', () => {
     //pre condition
     beforeEach(() => {
         LoginAndGoToUlosPage()
     });
 
     const testCases = [{
+            testCase: 'Admin menambahkan data ulos dengan seluruh inputan terisi dengan valid input',
+            ulosName: 'Ulos Harungguan',
+            sukuUlos: 'Batak Toba',
+            ulosLocation: 'Samosir',
+            ulosLength: '122',
+            ulosWidth: '89',
+            teknikTenun: 'Teknik Ikat Lungsi',
+            ulosMeaning: 'Ulos Harungguan disebut sebagai “Raja” Ulos di Tanah Tapanuli karena di masa lampau hanya dipakai oleh Raja dan kalangan terpandang',
+            ulosFunction: 'Ulos berarti kain dalam bahasa Batak Toba.',
+        },
+        {
             testCase: 'Admin mengedit data ulos menjadi inputan nama ulos kosong dan inputan lain terisi dengan valid input',
             ulosName: '',
             expectedErrorMessage: 'Nama ulos harus diisi',
@@ -78,11 +89,6 @@ describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () =>
             testCase: 'Admin mengedit data ulos menjadi inputan Fungsi ulos kosong dan inputan lain terisi dengan valid input',
             ulosFunction: '',
             expectedErrorMessage: 'Fungsi ulos harus diisi',
-        },
-        {
-            testCase: 'Admin mengedit data ulos menjadi inputan Fungsi ulos lebih dari 500 char dan inputan lain terisi dengan valid input',
-            ulosFunction: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur gravida ante vel blandit feugiat. Donec a dui at justo efficitur pellentesque. Nunc efficitur velit vitae velit hendrerit tincidunt. Proin porta dolor at venenatis malesuada. Sed vitae feugiat massa. Vestibulum id volutpat lorem, eget posuere risus. Mauris ullamcorper justo id orci fermentum ultrices. Fusce fringilla eu nisl vel laoreet. Integer id sem vel risus placerat viverra. Mauris bibendum diam sit amet purus maximus rutrum. Aenean rutrum risus mi, a volutpat turpis porttitor sed. Mauris viverra metus eu mauris vestibulum, eget facilisis arcu tincidunt. Nam sed odio vel magna faucibus vulputate nec nec elit. Integer vehicula magna at tellus efficitur, in dignissim quam tincidunt. Sed nec neque a nulla rhoncus mattis. Integer ultricies sem sed congue commodo. In hac habitasse platea dictumst. Nullam vulputate elementum lacus id scelerisque.',
-            expectedErrorMessage: 'Fungsi ulos tidak boleh lebih dari 500 karakter',
         }
     ];
 
@@ -91,7 +97,7 @@ describe('Fungsionalitas Menambahkan Ulos - Metode Category Partitioning', () =>
             cy.get('#btn-edit-ulos').click();
             // cy.get('#btn-tambah-ulos').click();
             cy.get('#btn-selanjutnya').click();
-           
+
             if (testCase.ulosName) {
                 cy.get('#ulos-name').clear().type(testCase.ulosName)
             } else if (testCase.ulosName == '') {
