@@ -9,6 +9,7 @@
           <AddUlos @data="handleAddUlos" />
 
           <button
+            id="btn-sunting-or-simpan"
             @click="toggleDeleteUlos"
             :disabled="loading || filteredUlos.length.length === 0"
             class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
@@ -56,6 +57,7 @@
             />
           </svg>
           <input
+            id="field-cari-ulos"
             class="w-full bg-[#F5F5F5] focus:outline-none pl-3"
             type="text"
             v-model="searchText"
@@ -66,6 +68,7 @@
 
         <div class="col-span-3 relative inline-block">
           <select
+            id="dropdown-asal-ulos"
             class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
             v-model="selectedOptionEthnic" @change="handleSearch"
           >

@@ -487,6 +487,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="dropdown-suku-ulos"
                       v-model="ethnic"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
@@ -688,6 +689,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="dropdown-teknik-tenun"
                       v-model="technique"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
