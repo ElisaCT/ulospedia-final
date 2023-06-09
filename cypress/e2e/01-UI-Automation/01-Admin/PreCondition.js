@@ -30,7 +30,7 @@ export const LoginAndGoToUlosPage = () => {
 export const LoginAndGoToGenerateMotifPage = () => {
     Login()
     cy.wait(1000);
-    cy.get('sidebar-generate-motif').click()
+    cy.get('#sidebar-generate-motif').click()
 }
 
 export const uploadUlosImage = () => {
@@ -55,4 +55,10 @@ export const addUlosInformation = () => {
     cy.get('#ulos-meaning').type('Ulos Harungguan disebut sebagai “Raja” Ulos di Tanah Tapanuli karena di masa lampau hanya dipakai oleh Raja dan kalangan terpandang')
     cy.get('#ulos-function').type('Ulos berarti kain dalam bahasa Batak Toba.')
     cy.get('#btn-selanjutnya').click()
+}
+
+
+export const cariGambarUlos = () => {
+    cy.get('#field-cari-ulos').type('test_Ulos Harungguan')
+    cy.get('#ulos-name').click()
 }

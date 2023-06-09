@@ -3,7 +3,7 @@
     <!-- Delete button -->
     <div class="">
       <!-- <div class="fixed inset-0 bg-neutral_100 opacity-50"></div> -->
-      <button @click="showModal = true" class="relative justify-center pt-3">
+      <button id="btn-hapus" @click="showModal = true" class="relative justify-center pt-3">
         <svg xmlns="http://www.w3.org/2000/svg" width="124" height="44" fill="none">
           <rect width="124" height="44" fill="#CB3A31" rx="8" />
           <path

@@ -1,6 +1,7 @@
 <template>
   <div>
     <button
+      id="btn-tambah-gambar-motif-ulos"
       @click="showModal = true"
       class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
     >

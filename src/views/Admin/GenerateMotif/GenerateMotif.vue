@@ -120,6 +120,7 @@
                       <div class="h-[300px] w-[252px]">
                         <div class="gradient"></div>
                         <img
+                          id="ulos-gambar"
                           class="h-full w-full object-cover transition-transform rounded-lg"
                           :src="ulos.imageUrl"
                         />
@@ -130,8 +131,8 @@
                       <div
                         class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
                       >
-                        <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
-                        <p class="text-neutral_10">{{ ulos.ethnic }}</p>
+                        <h1 id="ulos-name" class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
+                        <p id="ulos-suku" class="text-neutral_10">{{ ulos.ethnic }}</p>
                       </div>
                     </div>
                   </router-link>
@@ -146,6 +147,7 @@
                     <div class="h-[300px] w-[252px]">
                       <div class="gradient"></div>
                       <img
+                        id="gambar-ulos"
                         class="h-full w-full object-cover transition-transform rounded-lg"
                         :src="ulos.imageUrl"
                       />

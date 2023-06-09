@@ -7,6 +7,7 @@
         <div class="flex flex-row gap-6">
           <AddMotifHasilGenerate @data="handleAddGeneratedMotif" />
           <button
+          id="btn-sunting-or-simpan"
             @click="toggleDeleteMotif"
             :disabled="motifUlosGenerated.length === 0 || loading"
             class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
@@ -44,7 +45,6 @@
         <div class="h-[150] w-[200px]">
           <!-- <div class="gradient"></div> -->
           <img
-            id="gambar-motif-asal"
             class="h-full w-full object-cover transition-transform rounded-lg"
             :src="parentMotif"
           />
@@ -53,7 +53,7 @@
           class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
         ></div>
       </div>
-      <p id="text-motif-ulos" class="text-center text-xl font-medium">Motif Asal</p>
+      <p class="text-center text-xl font-medium">Motif Asal</p>
       </div>
 
       <div class="divide-y"></div>
@@ -66,7 +66,6 @@
         >
           <nav class="flex space-x-2 p-1.5" aria-label="Tabs" role="tablist">
             <button
-              id="btn-semua"
               type="button"
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
@@ -76,7 +75,6 @@
               Semua
             </button>
             <button
-              id="btn-besar"
               type="button"
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
@@ -86,7 +84,6 @@
               Besar
             </button>
             <button
-              id="btn-sedang"
               type="button"
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
@@ -96,7 +93,6 @@
               Sedang
             </button>
             <button
-              id="btn-kecil"
               type="button"
               class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
               role="tab"
@@ -129,6 +125,7 @@
                   <div class="h-[300px] w-[252px]">
                     <!-- <div class="gradient"></div> -->
                     <img
+                      id="gambar-generate"
                       class="h-full w-full object-cover transition-transform rounded-lg"
                       :src="motif.imageUrl"
                     />
