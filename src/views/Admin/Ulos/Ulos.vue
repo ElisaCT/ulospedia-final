@@ -353,7 +353,7 @@ export default {
         this.totalElementOnPage = response.data.data.ulos.lastElOfPage
 
         // cek apakah current page adalah page terakhir
-        if (!response.data.data.ulos.isLastPage) {
+        if (!response.data.data.ulos.lastPage) {
           this.pageNo = this.pageNo + 1
           this.lastPage = false
         } else {

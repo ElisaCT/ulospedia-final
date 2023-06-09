@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="mb-10">
     <Sidebar />
     <div class="ml-80 pt-10 gap-6 mr-8">
       <div class="flex flex-row justify-between items-center">
@@ -36,6 +36,28 @@
       </div>
     </div>
 
+    <!-- parent motif -->
+    <div class="ml-80 pt-4 gap-6 mr-8">
+      <div class="flex flex-col items-center gap-2 p-2 rounded-lg">
+        <div
+        class="group relative items-center justify-center overflow-hidden transition-shadow"
+      >
+          <div class="flex flex-col items-center bg-neutral_10 rounded-lg shadow-md p-2">
+            <div class="h-[150] w-[200px]">
+          <img
+            class="h-full w-full object-cover transition-transform rounded-lg"
+            :src="parentUlos"
+          />
+        </div>
+        <p class="text-center text-xl font-medium pt-2">Ulos Asal</p>
+          </div>
+      </div>
+      
+     
+      </div>
+
+      <div class="divide-y"></div>
+    </div>
     <!-- navigation -->
     <div class="ml-80 pt-10 gap-6 mr-8">
       <div class="flex place-content-center pb-10 pt-10">
@@ -150,19 +172,6 @@
           <EmptyState :name="propName" />
         </div>
       </div>
-
-      <!-- besar -->
-      <!-- <div id="segment-2" class="hidden" role="tabpanel" aria-labelledby="segment-item-2">
-        motif ulos besar
-      </div> -->
-      <!-- sedang -->
-      <!-- <div id="segment-3" class="hidden" role="tabpanel" aria-labelledby="segment-item-3">
-        motif ulos sedang
-      </div> -->
-      <!-- kecil -->
-      <!-- <div id="segment-4" class="hidden" role="tabpanel" aria-labelledby="segment-item-4">
-        motif ulos kecil
-      </div> -->
     </div>
   </div>
 </template>
@@ -187,6 +196,7 @@ export default {
       motifUlos: [],
       propName: 'Motif Ulos',
       ulosID: this.$route.params.id,
+      parentUlos: null,
       loading: false,
       ulosName: '',
       size: '',
@@ -246,6 +256,7 @@ export default {
         console.log(response.data)
         this.motifUlos = response.data.data.motifs.motifDashboardResponseList
         this.ulosName = response.data.data.motifs.ulosName
+        this.parentUlos = response.data.data.motifs.ulosUrl
       } catch (error) {
         console.log(error)
       }
