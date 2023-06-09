@@ -1182,7 +1182,7 @@
                   <div class="md:w-2/3">
                     <input
                       type="text"
-                      id="ulos-name"
+                      id="nama-produk-ulos"
                       :class="{
                         'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                         'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -1203,7 +1203,7 @@
                   <div class="md:w-2/3">
                     <input
                       type="text"
-                      id="ulos-name"
+                      id="harga-produk-ulos"
                       :class="{
                         'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                         'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
@@ -1224,7 +1224,7 @@
                   <div class="md:w-2/3">
                     <input
                       type="text"
-                      id="ulos-name"
+                      id="url-produk-ulos"
                       :class="{
                         'bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5': true,
                         'bg-neutral_20 cursor-not-allowed border-neutral_20': !toggleStatus
