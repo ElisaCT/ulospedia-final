@@ -209,7 +209,7 @@ export default {
       this.$emit('data', {
         id: newMotifDataId,
         // size: responseDataText.data.data.motif,
-        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`
+        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image/public`
       })
       this.isLoading=false
     },

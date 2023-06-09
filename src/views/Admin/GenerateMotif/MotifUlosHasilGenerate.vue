@@ -3,7 +3,7 @@
     <Sidebar />
     <div class="ml-80 pt-10 gap-6 mr-8">
       <div class="flex flex-row justify-between items-center">
-        <h3 class="font-medium text-3xl text-left pb-6">Motif { Ulos name } Hasil Generate</h3>
+        <h3 class="font-medium text-3xl text-left pb-6">Motif {{ ulosName }} Hasil Generate</h3>
         <div class="flex flex-row gap-6">
           <AddMotifHasilGenerate @data="handleAddGeneratedMotif" />
           <button
@@ -38,20 +38,31 @@
 
     <!-- parent motif -->
     <div class="ml-80 pt-4 gap-6 mr-8">
-      <div class="flex flex-col items-center gap-2 p-2 border-neutral_60 border-dashed rounded-lg">
+      <div class="flex flex-col items-center gap-2 p-2 rounded-lg">
         <div
-        class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
+        class="group relative items-center justify-center overflow-hidden transition-shadow"
       >
-        <div class="h-[150] w-[200px]">
-          <!-- <div class="gradient"></div> -->
+        <div class="flex flex-row gap-4">
+          <div class="flex flex-col items-center bg-neutral_10 rounded-lg shadow-md p-2">
+            <div class="h-[150] w-[200px]">
+          <img
+            class="h-full w-full object-cover transition-transform rounded-lg"
+            :src="parentUlos"
+          />
+        </div>
+        <p class="text-center text-xl font-medium pt-2">Ulos Asal</p>
+          </div>
+        <div class="flex flex-col items-center bg-neutral_10 rounded-lg shadow-md p-2">
+          <div class="h-[150] w-[200px]">
           <img
             class="h-full w-full object-cover transition-transform rounded-lg"
             :src="parentMotif"
           />
         </div>
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
-        ></div>
+        <p class="text-center text-xl font-medium pt-2">Motif Asal</p>
+        </div>
+        </div>
+       
       </div>
       <p class="text-center text-xl font-medium">Motif Asal</p>
       </div>
@@ -123,7 +134,6 @@
                   class="group relative items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                 >
                   <div class="h-[300px] w-[252px]">
-                    <!-- <div class="gradient"></div> -->
                     <img
                       id="gambar-generate"
                       class="h-full w-full object-cover transition-transform rounded-lg"
@@ -178,6 +188,8 @@ export default {
       motifId: this.$route.params.motifId,
       loading: false,
       parentMotif: null,
+      parentUlos: null,
+      ulosName: '',
       size: '',
       activeButton: '',
       showDeleteMotif: false
@@ -211,7 +223,8 @@ export default {
         console.log(response.data)
         this.motifUlosGenerated = response.data.data.motifResults.motifResultDashboardResponseList
         this.parentMotif = response.data.data.motifResults.motifOriginUrl
-        //this.ulosName = response.data.data.motifs.ulosName
+        this.parentUlos = response.data.data.motifResults.ulosUrl
+        this.ulosName = response.data.data.motifResults.ulosName
       } catch (error) {
         console.log(error)
       }
