@@ -900,6 +900,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="checkbox-warna-ulos"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >

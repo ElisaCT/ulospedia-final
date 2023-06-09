@@ -73,21 +73,21 @@
         showModal: false
       }
     },
-    props: ['weaverId'],
+    props: ['ulosId'],
     methods: {
       async deleteItem() {
         const token = localStorage.getItem('token')
         const response = await axios.delete(
-          `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
+          `http://company.ditenun.com/api/v1/ulospedia/ulos/${this.ulosId}`,
           {
             headers: {
-              Authorizatioon: `Bearer ${token}`
+              Authorization: `Bearer ${token}`
             }
           }
         )
         console.log(response.data)
         this.showModal = false
-        this.$emit('weaver-deleted', this.weaverId)
+        this.$emit('ulos-deleted', this.ulosId)
       }
     }
   }

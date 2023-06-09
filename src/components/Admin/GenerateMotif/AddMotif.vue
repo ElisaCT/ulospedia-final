@@ -125,7 +125,7 @@
             </button>
             <button
               @click="submit"
-              :disabled="isLoading"
+              
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
