@@ -247,7 +247,7 @@
       v-if="selectedOptionType !== ''"
       class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
     >
-      <span class="text-sm font-normal text-primary_main mr-2">{{ selectedOptionType }}</span>
+      <span  id="label-jenis-ulos" class="text-sm font-normal text-primary_main mr-2">{{ selectedOptionType }}</span>
       <button @click="deleteSelectedOptionType">
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
           <path
@@ -285,7 +285,7 @@
     <!-- colors -->
     <div v-for="selectedColor in convertColorsObjToArray" :key="selectedColor">
       <div class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2">
-        <span class="text-sm font-normal text-primary_main mr-2">{{ selectedColor }}</span>
+        <span  id="label-warna-ulos" class="text-sm font-normal text-primary_main mr-2">{{ selectedColor }}</span>
         <button @click="deleteSelectedOptionColor(selectedColor)">
           <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
             <path

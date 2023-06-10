@@ -68,8 +68,5 @@ describe('Verifikasi Galeri Ulos - End User', () => {
         cy.get('#btn-beli-sekarang').should('be.enabled');
     })
 
-    // it('', () => {
-
-    // })
 
 })

@@ -53,6 +53,7 @@
                 </button>
                 <!-- Delete button -->
                 <button
+                  id="btn-hapus-confirm"
                   @click="deleteItem"
                   data-test-id="btn-hapus-konfirmasi"
                   class="text-neutral_10 rounded-lg bg-danger_main px-4 py-2"

@@ -54,7 +54,7 @@ describe('Pengujian API: Fitur Authentication', () => {
                 url: baseUrl,
                 failOnStatusCode: false,
                 body: requestbodyUsernameKosong,
-            }).then((response) => { 
+            }).then((response) => {
                 assertValidationErrorResponse(response, {
                     username: 'username tidak boleh kosong'
                 });
@@ -80,5 +80,19 @@ describe('Pengujian API: Fitur Authentication', () => {
                 body: requestbodyAkunTidakTerdaftar,
             }).then(assertInvalidCredentialsError);
         });
-    })
+        // it.only('Registrasi admin', () => {
+        //     cy.request({
+        //         method: 'POST',
+        //         url: 'auth/register',
+        //         failOnStatusCode: false,
+        //         body: {
+        //             "username": "admin11",
+        //             "password": "password"
+        //         },
+        //     }).then((response) => {
+        //         //expect(response.status).to.eq(201);
+        //         cy.log('Response Body:', JSON.stringify(response.body, null, 2));
+        //     });
+        // })
+    });
 });

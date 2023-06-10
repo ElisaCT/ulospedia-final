@@ -10,8 +10,8 @@
       <img class="flex justify-center" :src="slide.url" style="width: 100%; height: 400px" />
     </div>
 
-    <a class="prev" @click="plusSlides(-1)">❮</a>
-    <a class="next" @click="plusSlides(1)">❯</a>
+    <a id="btn=prev" class="prev" @click="plusSlides(-1)">❮</a>
+    <a id="btn-next" class="next" @click="plusSlides(1)">❯</a>
 
     <!-- <div class="caption-container">
       <p id="caption">{{ getCurrentSlide().caption }}</p>

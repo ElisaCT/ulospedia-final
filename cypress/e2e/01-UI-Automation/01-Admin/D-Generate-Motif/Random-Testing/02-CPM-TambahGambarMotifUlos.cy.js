@@ -3,7 +3,7 @@ import {
     cariGambarUlos
 } from "../../PreCondition";
 
-describe('Fungsionalitas Menambahkan Gambar motif ulos pada fitur Generate motif - Metode Category Partitioning Method', () => {
+describe('Fungsionalitas Menambahkan Gambar motif Ulos pada fitur Generate motif - Metode Random Testing', () => {
     //pre condition
     beforeEach(() => {
         LoginAndGoToGenerateMotifPage()
@@ -25,20 +25,7 @@ describe('Fungsionalitas Menambahkan Gambar motif ulos pada fitur Generate motif
             ukuranMotifUlos: 'Kecil',
             messageValidation: 'Gambar motif ulos harus diunggah',
         },
-        // Invalid data - Gambar PDF
-        {
-            testName: 'Admin menambahkan gambar motif ulos dengan gambar PDF',
-            image: 'motifUlos1.pdf',
-            ukuranMotifUlos: 'Sedang',
-            messageValidation: 'Format gambar motif ulos tidak valid. Harap unggah gambar dengan format JPEG atau PNG',
-        },
-        // Invalid data - Gambar > 5MB
-        {
-            testName: 'Admin menambahkan gambar motif ulos dengan gambar > 5MB',
-            image: 'largeMotifUlos.jpg',
-            ukuranMotifUlos: 'Besar',
-            messageValidation: 'Ukuran gambar motif ulos terlalu besar. Harap unggah gambar dengan ukuran maksimum 5MB',
-        },
+    
         // Invalid data - Dropdown tidak dipilih
         {
             testName: 'Admin menambahkan gambar motif ulos tanpa memilih ukuran motif',

@@ -19,6 +19,7 @@ describe('Fungsionalitas Mencari Ulos - Metode Category Partitioning Method', ()
 
     it('Admin mencari data Ulos dengan inputan yang tidak valid', () => {
         cy.get('#table-search').type('ulosinvalid');
-        cy.contains('p', 'Data Ulos belum ada');
+        cy.contains('p', 'Data Ulos belum ada')
+        
     })
 });

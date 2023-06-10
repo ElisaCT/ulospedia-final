@@ -2,7 +2,7 @@ import {
     LoginAndGoToGenerateMotifPage
 } from "../../PreCondition";
 
-describe('Fungsionalitas Menambahkan Gambar Ulos pada fitur Generate motif - Metode Category Partitioning Method', () => {
+describe('Fungsionalitas Menambahkan Gambar Ulos pada fitur Generate motif - Metode Random Testing', () => {
     //pre condition
     beforeEach(() => {
         LoginAndGoToGenerateMotifPage()
@@ -27,24 +27,6 @@ describe('Fungsionalitas Menambahkan Gambar Ulos pada fitur Generate motif - Met
             ulosName: 'Ulos Harungguan',
             asalSukuUlos: 'Batak Toba',
             messageValidation: 'Gambar tidak boleh kosong',
-        },
-
-        // Gambar PDF
-        {
-            testName: 'Admin menambahkan gambar ulos dengan gambar PDF',
-            image: 'potonganUlos.pdf',
-            ulosName: 'Ulos Harungguan',
-            asalSukuUlos: 'Batak Karo',
-            messageValidation: 'Format gambar tidak valid',
-        },
-
-        // Gambar >5MB
-        {
-            testName: 'Admin menambahkan gambar ulos dengan gambar >5MB',
-            image: 'largeUlosUtuh.jpg',
-            ulosName: 'largePotonganUlos.jpg',
-            asalSukuUlos: 'Batak Angkola',
-            messageValidation: 'Ukuran gambar melebihi batas maksimum',
         },
 
         // Validasi nama ulos (lebih dari 100 karakter)

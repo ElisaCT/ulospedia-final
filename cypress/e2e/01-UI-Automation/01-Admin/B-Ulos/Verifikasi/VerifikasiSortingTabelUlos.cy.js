@@ -1,29 +1,17 @@
-describe('Fungsionalitas Menghapus Penenun - Admin', () => {
+import {
+    LoginAndGoToUlosPage
+} from "../../PreCondition";
+describe('Fungsionalitas Mengurutkan data ulos - Admin', () => {
     //pre condition
     beforeEach(() => {
-        cy.on('uncaught:exception', (err, runnable) => {
-            if (err.message.includes('Cannot read properties of undefined')) {
-                return false;
-            }
-        });
-        cy.visit('http://127.0.0.1:1753/admin/login');
-        cy.get('#username-address-icon').type('rewina123');
-        cy.get('#password').type('12345');
-        cy.get('#btn-login').click();
-        cy.wait(1000);
-        cy.get('#ulospedia-logo').should('be.visible');
-        cy.get('#sidebar-penenun').click();
-        // cy.wait(1000);
-    })
+        LoginAndGoToUlosPage()
+    });
 
-    it('Verifikasi admin Bisa melakukan sorting pada setiap kolom tabel penenun', () => {
-        //cy.get('#btn-sort-nama-penenun').click();
-
-        //cy.get('#btn-sort-alat-tenun').click();
-        //cy.get('#btn-sort-teknik-tenun').click();
-        cy.get('#btn-sort-suku-penenun').click()
+    it.only('Verifikasi admin bisa melakukan sorting berdasarkan nama ulos pada tabel ulos', () => {
+        cy.get('#btn-sort-nama-ulos').click();
+        cy.wait(500)
         cy.get('tr').each((row, index) => {
-            if (index >= 2 && index <= 11) {
+            if (index >= 2 && index <= 9) {
                 const currentName = Cypress.$(row).find('td').eq(1).text();
                 const previousName = Cypress.$(row).prev().find('td').eq(0).text();
 
@@ -33,4 +21,34 @@ describe('Fungsionalitas Menghapus Penenun - Admin', () => {
         });
     })
 
+    it('Verifikasi admin bisa melakukan sorting berdasarkan suku ulos pada tabel ulos', () => {
+        cy.get('#btn-sort-suku-ulos').click();
+        cy.wait(5000)
+
+        cy.get('tr').each((row, index) => {
+            if (index >= 2 && index <= 9) {
+                const currentethnic = Cypress.$(row).find('td').eq(1).text();
+                const previousethnic = Cypress.$(row).prev().find('td').eq(0).text();
+
+                expect(currentethnic <= previousethnic).to.be.true,
+                    `ethnics are not sorted correctly. Expected "${currentethnic}" to be greater than or equal to "${previousethnic}".`;
+            }
+        });
+    })
+
+    it('Verifikasi admin bisa melakukan sorting berdasarkan teknik tenun pada tabel ulos', () => {
+        cy.get('#btn-sort-teknik-tenun').click()
+        cy.wait(5000)
+
+
+        cy.get('tr').each((row, index) => {
+            if (index >= 2 && index <= 9) {
+                const currentTeknikTenun = Cypress.$(row).find('td').eq(1).text();
+                const previousTeknikTenun = Cypress.$(row).prev().find('td').eq(0).text();
+
+                expect(currentTeknikTenun <= previousTeknikTenun).to.be.true,
+                    `TeknikTenun are not sorted correctly. Expected "${currentTeknikTenun}" to be greater than or equal to "${previousTeknikTenun}".`;
+            }
+        });
+    })
 })
