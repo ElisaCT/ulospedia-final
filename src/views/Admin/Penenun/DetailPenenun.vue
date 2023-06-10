@@ -6,8 +6,8 @@
       <div v-if="weaverDetails">
         <div v-for="weaverDetail in weaverDetails" :key="weaverDetail.id">
           <div class="flex flex-row gap-6">
-            <router-link to="">
-              <button
+            <router-link :to="'/admin/edit-penenun/' + weaverDetail.id">
+              <butotn
                 id="btn-edit-penenun" class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
@@ -29,7 +29,7 @@
                   />
                 </svg>
                 Edit Penenun
-              </button>
+              </butotn>
             </router-link>
             <DeleteButtonPenenun
               :weaver-id="weaverDetail.id"
