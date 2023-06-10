@@ -20,7 +20,6 @@ describe('Fungsionalitas LogOut', () => {
 
     it('Admin berhasil log out setelah melakukan login', () => {
         cy.get('#btn-logout').click();
-
         cy.wait(1000)
         cy.get('#username-address-icon').should('be.visible');
     })

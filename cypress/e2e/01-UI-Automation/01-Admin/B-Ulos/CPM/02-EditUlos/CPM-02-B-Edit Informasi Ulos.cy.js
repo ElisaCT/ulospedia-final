@@ -131,7 +131,7 @@ describe('Fungsionalitas Mengedit Informasi Ulos - Metode Category Partitioning'
                 cy.get('#ulos-legth').clear()
             }
             if (testCase.ulosWidth) {
-                cy.get('#ulos-width').clear().type('89')
+                cy.get('#ulos-width').clear().type(testCase.ulosWidth)
             } else if (testCase.ulosWidth == '') {
                 cy.get('#ulos-width').clear()
             }

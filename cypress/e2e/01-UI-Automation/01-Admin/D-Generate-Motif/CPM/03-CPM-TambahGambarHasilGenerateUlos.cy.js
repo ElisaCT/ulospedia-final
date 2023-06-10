@@ -42,7 +42,7 @@ describe('Fungsionalitas Menambahkan Gambar Hasil Generate Ulos pada fitur Gener
         // Invalid data - Dropdown tidak dipilih
         {
             testName: 'Admin menambahkan hasil generate motif ulos tanpa memilih ukuran motif',
-            image: 'motifUlos4.jpeg',
+            image: 'motifUlos1.jpeg',
             ukuranMotifUlos: '',
             messageValidation: 'Ukuran motif harus diisi',
         },
@@ -52,7 +52,6 @@ describe('Fungsionalitas Menambahkan Gambar Hasil Generate Ulos pada fitur Gener
         it(data.testName, () => {
             cy.get('#hasil-gambar-motif-ulos').click()
             cy.get('#btn-tambah-gambar-motif-ulos').click()
-
             if (data.image) {
                 cy.get('input#dropzone-file').attachFile(data.image);
             }

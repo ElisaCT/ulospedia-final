@@ -125,7 +125,7 @@ describe('Verifikasi Home Page - End User', () => {
         })
     })
 
-    it.only('Verifikasi halaman detail penenun', () => {
+    it('Verifikasi halaman detail penenun', () => {
         cy.get('#penenun-Gedongan > .bg-gradient-to-b').click()
         cy.getById('card-penenun').eq(0).click()
         // Memastikan elemen nama penenun ditampilkan

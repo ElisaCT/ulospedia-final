@@ -237,7 +237,7 @@ describe('Fungsionalitas Menambahkan Ulos pada Tahap 2. Informasi Ulos - Metode 
                 cy.get('#ulos-legth').type(testCase.ulosLength)
             }
             if (testCase.ulosWidth) {
-                cy.get('#ulos-width').type('89')
+                cy.get('#ulos-width').type(testCase.ulosWidth)
             }
             if (testCase.teknikTenun) {
                 cy.get('#dropdown-teknik-tenun').select(testCase.teknikTenun);

@@ -47,7 +47,7 @@
 
     <!-- Load more -->
     <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14">
-        <button class="text-neutral_70 font-medium text-lg bg-neutral_20 items-center px-4 py-4 rounded-lg w-full max-w-md" @click="loadMore" v-if="!lastPage">Muat lebih banyak</button>
+        <button id="btn-muatLebihBanyak" class="text-neutral_70 font-medium text-lg bg-neutral_20 items-center px-4 py-4 rounded-lg w-full max-w-md" @click="loadMore" v-if="!lastPage">Muat lebih banyak</button>
     </div>
     <Footer/>
 </template>

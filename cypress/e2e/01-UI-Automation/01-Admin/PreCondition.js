@@ -62,3 +62,17 @@ export const cariGambarUlos = () => {
     cy.get('#field-cari-ulos').type('test_Ulos Harungguan')
     cy.get('#ulos-name').click()
 }
+
+
+export const loginAsAdmin = () => {
+    const validUsername = 'ditenun';
+    const validPassword = '12345';
+
+    visitLoginPage()
+    cy.get('#username-address-icon').type(validUsername)
+    cy.get('#password').type(validPassword)
+    cy.get('#btn-submit').click();
+
+    cy.wait(1000)
+    cy.get('.self-center').should('be.visible');
+}

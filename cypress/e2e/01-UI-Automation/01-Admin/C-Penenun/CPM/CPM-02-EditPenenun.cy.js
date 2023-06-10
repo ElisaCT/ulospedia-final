@@ -135,7 +135,7 @@ describe('Fungsionalitas Edit Penenun - Metode Category Partitioning Method', ()
                 cy.contains(data.errorMessage).should('exist');
             } else {
                 // Tambahkan assertion untuk tindakan yang diharapkan ketika input valid
-                cy.contains('Data penenun berhasil ditambahkan').should('exist');
+                cy.contains('Data penenun berhasil diedit').should('exist');
             }
         });
     });

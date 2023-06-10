@@ -6,7 +6,6 @@
     >
       <nav class="flex space-x-2 p-1.5" aria-label="Tabs" role="tablist">
         <button
-          data-test-id="btn-sejarahUlos"
           type="button"
           test-data-id="tab-btn-sejarah-ulos"
           class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white active"
@@ -18,7 +17,6 @@
           Sejarah Ulos
         </button>
         <button
-        data-test-id="btn-artiUlos"
           type="button"
           test-data-id="tab-btn-arti-ulos"
           class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
@@ -30,7 +28,6 @@
           Arti Ulos
         </button>
         <button
-        data-test-id="btn-ulosModern"
           type="button"
           test-data-id="tab-btn-ulos-zaman-modern"
           class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"

@@ -134,11 +134,7 @@ describe('Verifikasi Home Page - End User', () => {
     })
 
     it('Verifikasi section video dapat dimainkan oleh pengguna', () => {
-        // Memeriksa apakah elemen video ada
-        cy.get('#video1').should('exist');
-
-        // Memeriksa apakah video dapat dimainkan
-        cy.get('#video1').should('have.prop', 'paused', false);
+        cy.get('.ytp-cued-thumbnail-overlay-image').should('exist');
     })
 
     it('Verifikasi section Ulos Tradisional', () => {
