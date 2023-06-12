@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-reserved-component-names -->
 <template>
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
@@ -491,6 +492,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="dropdown-suku-ulos"
                       v-model="originEthnic"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
@@ -692,6 +694,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
+                      id="dropdown-teknik-tenun"
                       v-model="technique"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
@@ -854,7 +857,9 @@
                             class="hidden"
                             accept="image/png, image/jpg, image/jpeg"
                             :disabled="!toggleStatus"
+
                             @change="handleImagePreview($event, formIndex)"
+
                           />
                         </label>
                       </div>
@@ -993,10 +998,17 @@
 <script>
 //import Multiselect from 'vue-multiselect'
 import axios from 'axios'
-
+import { Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+//import FormWizard from './components/FormWizard.vue';
+//import FormStep from './components/FormStep.vue';
+//import { ref, reactive, computed } from 'vue'
 export default {
   components: {
     //Multiselect
+     
+    Field,
+    ErrorMessage
   },
   watch: {
     mainImageReference(value) {
@@ -1061,7 +1073,31 @@ export default {
     }
   },
   data() {
+    const schemas = [
+      yup.object({
+        name: yup.string().required(),
+        email: yup.string().required().email()
+      }),
+      yup.object({
+        name: yup.string().required('Nama ulos harus diisi'),
+        ethnic: yup.string().required('Suku ulos harus diisi'),
+        color: yup.string().required('Pilih minimal 1 warna ulos'),
+        typeUlos: yup.string().required('Suku penenun harus diisi'),
+        location: yup.string().required('Suku penenun harus diisi'),
+        technique: yup.string().required('Teknik tenun ulos harus diisi'),
+        meaning: yup.string().required('Makna Ulos harus diisi'),
+        width: yup.string().required('Lebar ulos ulos harus diisi'),
+        length: yup.string().required('Panjang Ulos harus diisi'),
+        func: yup.string().required('Fungsi Ulos harus diisi'),
+      }),
+      yup.object({
+        productName: yup.string().required('Nama Produk ulos harus diisi'),
+        productPrice: yup.string().required('Harga Produk ulos harus diisi'),
+        urlProduct: yup.string().required('Url produk Ulos harus diisi'),
+      })
+    ]
     return {
+      schemas,
       mainImageReference: null,
       imageReference: null,
       imageMotifReference: null,

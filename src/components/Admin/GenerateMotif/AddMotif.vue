@@ -1,6 +1,7 @@
 <template>
   <div>
     <button
+      id="btn-tambah-gambar-motif-ulos"
       @click="showModal = true"
       class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
     >
@@ -21,7 +22,7 @@
       <!-- Background overlay -->
       <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
 
-      <div class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
+      <form @submit="submit" class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
         <div class="flex flex-col gap-4 w-full mr-4">
           <h5 class="font-bold text-left text-xl">Tambah Gambar Motif Ulos</h5>
           <div class="flex flex-col gap-6 md:flex-row pb-6">
@@ -78,8 +79,10 @@
                   type="file"
                   class="hidden"
                   accept="image/png, image/jpg, image/jpeg"
+                  ref="image"
                 />
               </label>
+
             </div>
           </div>
 
@@ -90,6 +93,7 @@
             >
             <div class="md:w-2/3 relative inline-block">
               <select
+                id="dropdown-ukuran-motif"
                 v-model="size"
                 class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                 required
@@ -118,27 +122,30 @@
           </div>
           <div class="flex flex-row gap-6 justify-end mt-6">
             <button
+              id="btn-batal"
               @click="showModal = false"
               class="px-6 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
             >
               Batal
             </button>
             <button
-              @click="submit"
-              :disabled="isLoading"
+              id="btn-simpan"
+              type="submit"
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
             </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { Form, Field, ErrorMessage } from 'vee-validate'
+
 export default {
   data() {
     return {
@@ -149,6 +156,11 @@ export default {
       ulosID: this.$route.params.id,
       isLoading: false
     }
+  },
+  components:{
+    Form,
+    Field,
+    ErrorMessage
   },
   watch: {
     size(newValue) {
@@ -206,7 +218,7 @@ export default {
       this.$emit('data', {
         id: newMotifDataId,
         // size: responseDataText.data.data.motif,
-        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image`
+        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${ulosID}/motifs/${newMotifDataId}/image/public`
       })
       this.isLoading=false
     },

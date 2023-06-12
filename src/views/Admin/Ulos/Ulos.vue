@@ -163,7 +163,7 @@
                       </button>
                     </router-link>
 
-                    <DeleteConfirmation
+                    <DeleteUlos
                       :ulos-id="ulos.id"
                       @ulos-deleted="handleUlosDeleted"
                       class="z-10"
@@ -203,7 +203,6 @@
           </p>
           <div class="flex flex-row gap-4 items-center">
             <button
-              id="btn-prev-pagination"
               @click="previousPage"
               :disabled="isLoading || pageNo === 1"
               class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
@@ -223,7 +222,6 @@
               <span class="p-1 w-5 h-5">{{ pageNo }}</span>
             </div>
             <button
-              id="btn-next-pagination"
               @click="nextPage"
               :disabled="isLoading || lastPage"
               class="p-1 bg-neutral_30 rounded disabled:bg-neutral_20 disabled:opacity-50"
@@ -248,14 +246,14 @@
 <script>
 import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
-import DeleteConfirmation from '../../../components/Admin/Modals/DeleteConfirmation.vue'
+import DeleteUlos from '../../../components/Admin/Modals/DeleteUlos.vue'
 import EmptyState from '../../../components/Admin/EmptyState.vue'
 export default {
   components: {
     Sidebar,
     EmptyState,
     // eslint-disable-next-line vue/no-unused-components
-    DeleteConfirmation
+    DeleteUlos
   },
   data() {
     return {
@@ -271,7 +269,7 @@ export default {
       // utk sorting
       pageNo: 1,
       sortBy: 'updatedAt',
-      sortDir: 'asc',
+      sortDir: 'desc',
       search: ''
     }
   },
@@ -323,7 +321,7 @@ export default {
       this.$router.push(`/admin/ulos/detail-ulos/${ulosId}`)
     },
     handleUlosDeleted(ulosId) {
-      this.ulos = this.ulos.filter((ulos) => ulos.id !== ulosId)
+      this.ulosList = this.ulosList.filter((ulos) => ulos.id !== ulosId)
     },
     defineParam(pageNo, sortBy, sortDir, search) {
       return `http://company.ditenun.com/api/v1/ulospedia/ulos?pageNo=${pageNo}${

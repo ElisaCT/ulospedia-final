@@ -152,23 +152,27 @@ export default {
     const token = localStorage.getItem('token')
     //get penenun data
     axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/weavers?sortDir=desc', {
+      .get('http://company.ditenun.com/api/v1/ulospedia/weavers/4-home-dashboard', {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       .then((response) => {
         console.log(response.data)
-            this.weavers = response.data.data.weavers.weaversListAdminDashboard.slice(0,4)
+            this.weavers = response.data.data.weavers
           
       })
       
       //get ulos data
       axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=1')
+      .get('http://company.ditenun.com/api/v1/ulospedia/ulos/4-home-dashboard',  {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
       .then((response) => {
         console.log(response.data)
-            this.ulosData = response.data.data.ulosList.clientUlosResponseList.slice(0,4)
+            this.ulosData = response.data.data.ulosList
           
       })
 

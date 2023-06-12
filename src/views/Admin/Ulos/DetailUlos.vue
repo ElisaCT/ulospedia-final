@@ -2,7 +2,7 @@
   <Sidebar />
   <div class="ml-80 pt-10 gap-6 mr-8">
     <div v-if="ulosDetails">
-      <div class="flex flex-col items-center gap-12 px-32">
+      <div class="flex flex-col items-center gap-12 px-32 mb-12">
         <div class="flex gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
             <h3 id="nama-ulos" class="font-semibold text-lg">{{ ulosDetails.name }}</h3>
@@ -45,8 +45,9 @@
       </div>
 
       <!-- image -->
+      <SliderUlos :data="ulosDetails.ulosRelatedImageResponseList" />
 
-      <div class="grid grid-cols-12 gap-6 px-32">
+      <div class="grid grid-cols-12 gap-6 px-8 mt-12">
         <!-- makna dan fungsi -->
         <div class="flex flex-col gap-8 col-span-7">
           <div class="flex flex-col gap-3">
@@ -109,25 +110,25 @@
         >
           <p class="font-normal text-lg text-neutral_100">Tersedia di e-commerce DiTenun</p>
 
-          <div v-if="ulosDetails">
-            <div v-for="product in ulosDetails.clientProductDetailResponseList" :key="product.id">
-              <div class="flex flex-row gap-4">
-                <img id="gambar-produk-ulos" :src="product.imageUrl" alt="" class="rounded-md" />
-                <div class="flex flex-col gap-6 pt-12">
-                  <div class="gap-4">
+          
+            <div v-for="product in ulosDetails.productDetailResponseList" :key="product.id">
+              <div class="grid grid-cols-6 gap-4">
+                <img id="gambar-produk-ulos" :src="product.imageUrl" alt="" class="rounded-md col-span-3 w-[200px] h-[180px]" />
+                <div class=" gap-6 pt-12 col-span-3">
+                  <div class="gap-4 mb-6">
                     <p id="nama-produk-ulos" class="font-medium text-lg">{{ product.name }}</p>
                     <h5 id="harga-produk-ulo" class="font-normal text-xl">Rp{{ product.price }}</h5>
                   </div>
                   <a
                     id="btn-beli-sekarang"
-                    class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2"
+                    class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2 "
+                    target="_blank"
                     :href="product.url"
                     >Beli Sekarang</a
                   >
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -137,6 +138,7 @@
 <script>
 import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
+import SliderUlos from '../../../components/EndUser/SliderUlos.vue'
 export default {
   data: function () {
     return {
@@ -145,7 +147,8 @@ export default {
     }
   },
   components: {
-    Sidebar
+    Sidebar, 
+    SliderUlos
   },
   mounted() {
     const token = localStorage.getItem('token')

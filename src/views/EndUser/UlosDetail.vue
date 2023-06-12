@@ -315,23 +315,28 @@
 
         <!-- e-commerce -->
         <div
-          v-if="ulosDetail.products != null"
+          v-if="ulosDetail.availabilityOfProduct"
           class="flex flex-col gap-4 bg-neutral_10 px-4 py-4 rounded-lg col-span-5 e-commerce"
         >
           <p class="font-normal text-lg text-neutral_100">Tersedia di e-commerce DiTenun</p>
 
-          <div class="flex flex-row gap-4">
-            <img src="../assets/images/tote-bag.png" alt="" class="rounded-md" />
-            <div class="flex flex-col gap-6 pt-12">
-              <div class="gap-4">
-                <p class="font-medium text-lg">Totebag Harungguan</p>
-                <h5 class="font-normal text-xl">Rp350.000</h5>
+          <div v-for="product in ulosDetail.clientProductDetailResponseList" :key="product.id">
+            <div class="grid grid-cols-6 gap-4">
+                <img id="gambar-produk-ulos" :src="product.imageUrl" alt="" class="rounded-md col-span-3 w-[200px] h-[180px]" />
+                <div class=" gap-6 pt-12 col-span-3">
+                  <div class="gap-4 mb-6">
+                    <p id="nama-produk-ulos" class="font-medium text-lg">{{ product.name }}</p>
+                    <h5 id="harga-produk-ulo" class="font-normal text-xl">Rp{{ product.price }}</h5>
+                  </div>
+                  <a
+                    id="btn-beli-sekarang"
+                    class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2 "
+                    target="_blank"
+                    :href="product.url"
+                    >Beli Sekarang</a
+                  >
+                </div>
               </div>
-
-              <button class="bg-primary_main text-neutral_10 rounded-lg px-4 py-2">
-                Beli sekarang
-              </button>
-            </div>
           </div>
         </div>
       </div>

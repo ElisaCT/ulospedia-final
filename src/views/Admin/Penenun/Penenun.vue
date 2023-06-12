@@ -296,7 +296,6 @@ export default {
       pageNo: 1,
       search: '',
       sortBy: 'updatedAt',
-
     }
   },
   methods: {
@@ -417,23 +416,25 @@ export default {
     async fetchWeavers() {
       try {
         const token = localStorage.getItem('token')
-        const response = await axios.get('http://company.ditenun.com/api/v1/ulospedia/weavers', {
-          params: {
-            pageNo: this.pageNo,
-            pageSize: 10,
-            sortBy: this.sortBy,
-            sortOrder: this.sortOrder,
-            searchByName: this.search
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+        const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
+      this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
+    }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
+      this.search !== '' ? '&search=' + this.search : ''
+    }`
+    axios
+      .get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response)=>{
         this.lastPage = response.data.data.weavers.lastPage
         this.weavers = response.data.data.weavers.weaversListAdminDashboard
         this.totalElement = response.data.data.weavers.totalAllElements
         this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
-      } catch (error) {
+      })
+        
+      }catch (error) {
         console.error(error)
       }
     },
