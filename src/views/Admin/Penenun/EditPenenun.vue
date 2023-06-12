@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
-    <div class="">
+    <Form @submit="editWeaver" :validation-schema="schema">
       <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Ubah Data Penenun</h3>
       <div class="bg-neutral_10 rounded-lg shadow-md p-8 ml-6 mb-8">
         <h5 class="font-medium text-xl text-neutral_90 text-left pb-6">Gambar Penenun</h5>
@@ -58,15 +58,16 @@
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Nama Penenun*</label
           >
-          <div class="md:w-2/3">
-            <input
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <Field
+              name="name"
               v-model="weaverData.name"
               type="text"
               id="ulos-name"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan nama penenun"
-              required
             />
+            <ErrorMessage name="name" class="text-danger_main text-s" />
           </div>
         </div>
 
@@ -90,12 +91,14 @@
             class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Suku Penenun*</label
           >
-          <div class="md:w-2/3 relative inline-block">
-            <select
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <div class="w-full relative inline-block">
+              <Field
+            name="ethnic"
+                as="select"
               id="dropdown-suku-penenun"
               v-model="weaverData.ethnic"
               class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-              required
             >
               <option value="" disabled selected hidden>Pilih Suku Penenun</option>
               <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
@@ -109,7 +112,7 @@
               <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
                 Batak Mandailing
               </option>
-            </select>
+            </Field>
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral_80"
             >
@@ -125,6 +128,8 @@
                 </defs>
               </svg>
             </div>
+            </div>
+            <ErrorMessage name="ethnic" class="text-danger_main text-s" />
           </div>
         </div>
 
@@ -134,14 +139,15 @@
             >Domisili Penenun*</label
           >
           <div class="md:w-2/3">
-            <input
+            <Field
               v-model="weaverData.domicile"
               type="text"
               id="domicile"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Contoh:Balige"
-              required
+              name="domicile"
             />
+            <ErrorMessage name="domicile" class="text-danger_main text-s" />
           </div>
         </div>
         <!-- alat tenun -->
@@ -151,37 +157,41 @@
             class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Alat Tenun*</label
           >
-          <div class="md:w-2/3 relative inline-block">
-            <select
-              id="dropdown-alat-tenun"
-              v-model="weaverData.theLoom"
-              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-              required
-            >
-              <option value="" disabled selected hidden>Pilih Alat Tenun</option>
-              <option value="Gedogan" class="pb-3 hover:bg-primary_surface">Gedogan</option>
-              <option value="ATBM" class="pb-3 hover:bg-primary_surface">
-                Alat Tenun Bukan Mesin (ATBM)
-              </option>
-              <option value="ATM" class="pb-3 hover:bg-primary_surface">
-                Alat Tenun Mesin (ATM)
-              </option>
-            </select>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <g clip-path="url(#a)">
-                  <path
-                    fill="#323232"
-                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                </defs>
-              </svg>
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <div class="w-full relative inline-block">
+              <Field
+                id="dropdown-alat-tenun"
+                name="theLoom"
+                v-model="weaverData.theLoom"
+                as="select"
+                class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              >
+                <option value="" disabled selected hidden>Pilih Alat Tenun</option>
+                <option value="Gedogan" class="pb-3 hover:bg-primary_surface">Gedogan</option>
+                <option value="ATBM" class="pb-3 hover:bg-primary_surface">
+                  Alat Tenun Bukan Mesin (ATBM)
+                </option>
+                <option value="ATM" class="pb-3 hover:bg-primary_surface">
+                  Alat Tenun Mesin (ATM)
+                </option>
+              </Field>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <g clip-path="url(#a)">
+                    <path
+                      fill="#323232"
+                      d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                  </defs>
+                </svg>
+              </div>
             </div>
+            <ErrorMessage name="theLoom" class="text-danger_main text-s" />
           </div>
         </div>
 
@@ -190,57 +200,67 @@
           <label for="ulos-name" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Teknik Tenun yang digunakan*</label
           >
-          <div class="md:w-2/3 relative inline-block">
-            <select
-              id="dropdown-teknik-tenun"
-              v-model="weaverData.technique"
-              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-              required
-            >
-              <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
-              <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Lungsi
-              </option>
-              <option value="Ikat Pakan" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Pakan
-              </option>
-              <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
-                Teknik Ikat Ganda
-              </option>
-            </select>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <g clip-path="url(#a)">
-                  <path
-                    fill="#323232"
-                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                </defs>
-              </svg>
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <div class="w-full relative inline-block">
+              <Field
+                id="dropdown-teknik-tenun"
+                as="select"
+                name="technique"
+                rules="required"
+                v-model="weaverData.technique"
+                class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              >
+                <option value="" disabled selected hidden>Pilih Teknik Tenun</option>
+                <option value="Ikat Lungsi" class="pb-3 hover:bg-primary_surface">
+                  Teknik Ikat Lungsi
+                </option>
+                <option value="Ikat Pakan" class="pb-3 hover:bg-primary_surface">
+                  Teknik Ikat Pakan
+                </option>
+                <option value="Ikan Ganda" class="pb-3 hover:bg-primary_surface">
+                  Teknik Ikat Ganda
+                </option>
+              </Field>
+
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <g clip-path="url(#a)">
+                    <path
+                      fill="#323232"
+                      d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                  </defs>
+                </svg>
+              </div>
             </div>
+            <ErrorMessage name="technique" class="text-danger_main text-s" />
           </div>
         </div>
 
         <!-- story penenun -->
         <div class="flex flex-col gap-6 md:flex-row pb-6">
-          <label for="ulos-meaning" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
+          <label for="penenun-story" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
             >Cerita Penenun*</label
           >
-          <div class="md:w-2/3">
-            <textarea
+          <div class="md:w-2/3 flex flex-col gap-2">
+            <!-- <Field name="story" as="TextArea"  rules="required" > -->
+            <Field
+              name="story"
+              as="TextArea"
               v-model="weaverData.story"
               type="text"
-              id="ulos-meaning"
+              id="penenun-story"
               rows="4"
               class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
               placeholder="Masukkan cerita yang ingin dibagikan penenun"
-              required
-            ></textarea>
+            ></Field>
+            <!-- </Field> -->
+            <ErrorMessage name="story" class="text-danger_main text-s" />
           </div>
         </div>
       </div>
@@ -255,25 +275,46 @@
         </button>
         <button
           id="btn-update"
-          @click="editWeaver"
+          type="submit"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
           Simpan Perubahan
         </button>
       </div>
-    </div>
+    </Form>
   </div>
 </template>
 <script>
 import YearPicker from '../../../components/Admin/YearPicker/YearPicker.vue'
+import { Form, Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+
 import axios from 'axios'
 export default {
   components: {
-    YearPicker
+    YearPicker,
+    Form,
+    Field,
+    ErrorMessage
   },
   name: 'editWeaver',
+  props: {
+    params: {
+      required: true,
+      type: Object
+    }
+  },
   data() {
+    const schema = yup.object().shape({
+      name: yup.string().required('Nama penenun harus diisi').max(100, 'Nama penenun tidak boleh lebih dari 100 karakter'),
+      domicile: yup.string().required('Domisili penenun harus diisi').max(50, 'Domisili penenun tidak boleh lebih dari 50 karakter'),
+      ethnic: yup.string().required('Suku penenun harus diisi'),
+      theLoom: yup.string().required('Alat tenun penenun harus diisi'),
+      story: yup.string().required('Cerita penenun harus diisi'),
+      technique: yup.string().required('Teknik tenun penenun harus diisi')
+    })
     return {
+      schema,
       weaverId: '',
       errorList: '',
       selectedTechnics: [],
@@ -282,13 +323,6 @@ export default {
       selectedYear: null,
       showDatepicker: false,
       domicile: '',
-      // name: '',
-      // birthYear: null,
-      // ethnic: '',
-      // theLoom: '',
-      // technique: '',
-      // story: '',
-      // image: null
       weaverData: {
         name: '',
         birthYear: null,
@@ -356,33 +390,6 @@ export default {
           }
         })
     },
-    // editWeaver() {
-    //   var mythis = this
-    //   axios
-    //     .put(
-    //       `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
-
-    //       this.getWeaverData.weaver
-    //     )
-    //     .then((res) => {
-    //       console.log(res.data)
-    //       alert(res.data.message)
-
-    //       this.errorList = ''
-    //     })
-    //     .catch(function (error) {
-    //       if (error.response) {
-    //         if (error.response.status == 422) {
-    //           mythis.errorList = error.response.data.errors
-    //         }
-    //         if (error.response.status == 404) {
-    //           alert(error.response.data.message)
-    //         }
-    //       } else if (error.message) {
-    //         console.log(error.request)
-    //       }
-    //     })
-    // },
     async editWeaver() {
       const token = localStorage.getItem('token')
       console.log(token)
@@ -412,24 +419,6 @@ export default {
           }
         }
       )
-      // console.log(responseDataText.data)
-      // const newWeaverId = responseDataText.data.data.weaver.id
-      // console.log(newWeaverId)
-      // console.log(`http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`)
-
-      // const formData = new FormData()
-      // formData.append('weaver-image', this.image)
-
-      // const responseDataImage = await axios.post(
-      //   `http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`,
-      //   formData,
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   }
-      // )
       console.log(responseDataText)
 
       this.$router.push('/admin/penenun')
@@ -458,86 +447,6 @@ export default {
       this.showDatepicker = !this.showDatepicker
     }
   }
-
-  // methods: {
-  //   async updateWeaver() {
-  //     const token = localStorage.getItem('token')
-
-  //     const responseDataText = await axios.put(
-  //       `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaver.id}`,
-  //       {
-  //         name: this.weaverData.name,
-  //         yearOfBirth: this.weaverData.birthYear,
-  //         ethnic: this.weaverData.ethnic,
-  //         domicile: this.weaverData.domicile,
-  //         theLoom: this.weaverData.theLoom,
-  //         technique: this.weaverData.technique,
-  //         story: this.weaverData.story
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           'Content-Type': 'application/json'
-  //         }
-  //       }
-  //     )
-  //     console.log(responseDataText.data)
-  //     const newWeaverId = responseDataText.data.data.weaver.id
-  //     console.log(newWeaverId)
-  //     console.log(`http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`)
-
-  //     const formData = new FormData()
-  //     formData.append('weaver-image', this.image)
-
-  //     const responseDataImage = await axios.put(
-  //       `http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           'Content-Type': 'multipart/form-data'
-  //         }
-  //       }
-  //     )
-  //     console.log(responseDataImage)
-
-  //     this.$router.push('/admin/penenun')
-  //   },
-  //   async editWeaver(weaverData) {
-  //     this.weaverData = {
-  //       name: weaverData.name,
-  //       birthYear: weaverData.birthYear,
-  //       domicile: weaverData.domicile,
-  //       ethnic: weaverData.ethnic,
-  //       theLoom: weaverData.theLoom,
-  //       technique: weaverData.theLoom,
-  //       story: weaverData.story
-  //     }
-  //   },
-  //   handleFileChange(event) {
-  //     this.image = event.target.files[0]
-  //   },
-  //   updateBirthYear(year) {
-  //     this.birthYear = year
-  //   },
-  //   backToPenenun() {
-  //     this.$router.push('/admin/penenun')
-  //   },
-  //   disableFutureDates(date) {
-  //     const today = new Date()
-  //     return date > today
-  //   },
-  //   getCurrentDate() {
-  //     const today = new Date()
-  //     const year = today.getFullYear()
-  //     const month = String(today.getMonth() + 1).padStart(2, '0')
-  //     const day = String(today.getDate()).padStart(2, '0')
-  //     return `${year}-${month}-${day}`
-  //   },
-  //   toggleDatepicker() {
-  //     this.showDatepicker = !this.showDatepicker
-  //   }
-  // }
 }
 </script>
 <style scoped></style>
