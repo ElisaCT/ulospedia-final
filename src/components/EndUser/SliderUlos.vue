@@ -13,15 +13,11 @@
     <a id="btn=prev" class="prev" @click="plusSlides(-1)">❮</a>
     <a id="btn-next" class="next" @click="plusSlides(1)">❯</a>
 
-    <!-- <div class="caption-container">
-      <p id="caption">{{ getCurrentSlide().caption }}</p>
-    </div> -->
-
     <div class="row overflow-x-auto whitespace-nowrap">
       <div
         v-for="(slide, index) in data"
         :key="index"
-        class="inline-block mr-4"
+        class="inline-block mr-2"
         style="width: 200px"
       >
         <img
@@ -40,81 +36,46 @@
 export default {
   data() {
     return {
-      slideIndex: 1
-      // slides: [
-      //   {
-      //     image: 'https://www.w3schools.com/w3css/img_mountains_wide.jpg',
-      //     caption: 'The Woods'
-      //   },
-      //   {
-      //     image: 'https://www.w3schools.com/w3css/img_snow_wide.jpg',
-      //     caption: 'Cinque Terre'
-      //   },
-      //   {
-      //     image: 'https://www.w3schools.com/w3css/img_nature_wide.jpg',
-      //     caption: 'Mountains and fjords'
-      //   },
-      //   {
-      //     image: 'https://www.w3schools.com/howto/img_woods_wide.jpg',
-      //     caption: 'Northern Lights'
-      //   },
-      //   {
-      //     image: 'https://www.w3schools.com/howto/img_5terre_wide.jpg',
-      //     caption: 'Nature and sunrise'
-      //   },
-      //   {
-      //     image: 'https://www.quanzhanketang.com/w3css/img_fjords_wide.jpg',
-      //     caption: 'Snowy Mountains'
-      //   }
-      // ]
-    }
+      slideIndex: 0 // Start with index 0 to show the first slide by default
+    };
   },
   props: {
     data: Array
   },
-  // mounted() {
-  //   this.showSlides(this.slideIndex)
-  //   console.log('TESTST')
-
-  //   axios
-  //     .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos/19`)
-  //     .then((response) => console.log(response.data))
-  // },
   methods: {
     plusSlides(n) {
-      this.showSlides((this.slideIndex += n))
+      this.showSlides(this.slideIndex + n);
     },
     currentSlide(n) {
-      this.showSlides((this.slideIndex = n))
+      this.showSlides(n - 1);
     },
     showSlides(n) {
-      const slides = document.getElementsByClassName('mySlides')
-      const dots = document.getElementsByClassName('demo')
-      const captionText = document.getElementById('caption')
+      const slides = document.getElementsByClassName('mySlides');
+      const dots = document.getElementsByClassName('demo');
 
-      if (n > slides.length) {
-        this.slideIndex = 1
-      }
-      if (n < 1) {
-        this.slideIndex = slides.length
+      if (n >= slides.length) {
+        this.slideIndex = 0; // Reset index to show the first slide
+      } else if (n < 0) {
+        this.slideIndex = slides.length - 1; // Set index to show the last slide
+      } else {
+        this.slideIndex = n;
       }
 
       for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = 'none'
+        slides[i].style.display = 'none';
       }
       for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(' active', '')
+        dots[i].className = dots[i].className.replace(' active', '');
       }
 
-      slides[this.slideIndex - 1].style.display = 'block'
-      dots[this.slideIndex - 1].className += ' active'
-      captionText.innerHTML = dots[this.slideIndex - 1].alt
-    },
-    getCurrentSlide() {
-      return this.slides[this.slideIndex - 1]
+      slides[this.slideIndex].style.display = 'block';
+      dots[this.slideIndex].className += ' active';
     }
+  },
+  mounted() {
+    this.showSlides(this.slideIndex);
   }
-}
+};
 </script>
 
 <style scoped>

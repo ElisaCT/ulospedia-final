@@ -22,7 +22,7 @@
       <!-- Background overlay -->
       <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
 
-      <div class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
+      <Form @submit="submit" :validation-schema="schema" class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
         <div class="flex flex-col gap-4 w-full mr-4">
           <h5 class="font-bold text-left text-xl">Tambah Gambar Ulos</h5>
           <div class="flex flex-col gap-6 md:flex-row pb-6">
@@ -79,8 +79,11 @@
                   type="file"
                   class="hidden"
                   accept="image/png, image/jpg, image/jpeg"
+                  name="inputImage"
+                  
                 />
               </label>
+              <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
             </div>
           </div>
           <div class="flex flex-col gap-6 md:flex-row md:items-center pb-6">
@@ -88,14 +91,15 @@
               >Nama Ulos*</label
             >
             <div class="md:w-2/3">
-              <input
+              <Field
+                name="name"
                 v-model="name"
                 type="text"
                 id="ulos-name"
                 class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
                 placeholder="Contoh: Harungguan"
-                required
               />
+              <ErrorMessage name="name" class="text-danger_main text-s" />
             </div>
           </div>
           <!-- Asal suku -->
@@ -103,8 +107,11 @@
             <label for="ulos-ethnic" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
               >Asal Suku Ulos*</label
             >
-            <div class="md:w-2/3 relative inline-block">
-              <select
+            <div class="md:w-2/3 flex flex-col gap-2">
+              <div class="w-full relative inline-block">
+                <Field
+                name="ethnic"
+                as="select"
                 id="dropdown-suku-ulos"
                 v-model="ethnic"
                 class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
@@ -122,7 +129,7 @@
                 <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
                   Batak Mandailing
                 </option>
-              </select>
+              </Field>
               <div
                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
               >
@@ -138,6 +145,8 @@
                   </defs>
                 </svg>
               </div>
+              </div>
+              <ErrorMessage name="ethnic" class="text-danger_main text-s" />
             </div>
           </div>
           <div class="flex flex-row gap-6 justify-end mt-6">
@@ -150,31 +159,44 @@
             </button>
             <button
               id="btn-simpan"
-              @click="submit"
-              :disabled="isLoading"
+              type="submit"
+             
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
             </button>
           </div>
         </div>
-      </div>
+      </Form>
     </div>
   </div>
 </template>
 
 <script>
+import { Form, Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
 import axios from 'axios'
 export default {
   data() {
+    const schema = yup.object().shape({
+      name: yup.string().required('Nama penenun harus diisi').max(100, 'Nama penenun tidak boleh lebih dari 100 karakter'),
+      ethnic: yup.string().required('Suku penenun harus diisi')
+    })
     return {
       showModal: false,
       image: null,
       selectedImage: null,
       name: '',
       ethnic: '',
-      isLoading: false
+      isLoading: false,
+      errorMessage: "",
+      schema
     }
+  },
+  components:{
+    Form,
+    Field,
+    ErrorMessage
   },
   watch: {
     name(newValue) {
@@ -190,6 +212,7 @@ export default {
   methods: {
     async submit() {
       this.isLoading = true
+      
       const token = localStorage.getItem('token')
 
       const responseDataText = await axios.post(
@@ -231,24 +254,46 @@ export default {
         id: newUlosDataId,
         name: responseDataText.data.data.ulosData.name,
         ethnic: responseDataText.data.data.ulosData.ethnic,
-        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${newUlosDataId}/image`
+        imageUrl: `http://company.ditenun.com/api/v1/generate/ulos/${newUlosDataId}/image/public`
       })
       this.isLoading = false
       //console.log(responseDataImage)
     },
     handleFileChange(event) {
-      this.image = event.target.files[0]
-      const image = event.target.files[0]
-      if (image) {
-        // Create a FileReader to read the file
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          // Set the selected image data to the component's data
-          this.selectedImage = e.target.result
-        }
-        reader.readAsDataURL(image) // Read the file as a data URL
-      }
-    }
+  const file = event.target.files[0];
+
+  if (!file) {
+    this.errorMessage = "Image is required.";
+    return;
+  }
+
+  // Validate image size
+  if (file.size > 5 * 1024 * 1024) {
+    this.errorMessage = "Image size exceeds the maximum limit of 5MB.";
+    return;
+  }
+
+  // Validate image type
+  if (!["image/jpeg", "image/jpg", "image/png"].includes(file.type)) {
+    this.errorMessage = "Invalid image type. Only JPG, JPEG, and PNG are allowed.";
+    return;
+  }
+
+  // Clear any previous error messages
+  this.errorMessage = "";
+
+  const image = event.target.files[0];
+  if (image) {
+    // Create a FileReader to read the file
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      // Set the selected image data to the component's data
+      this.selectedImage = e.target.result;
+    };
+    reader.readAsDataURL(image); // Read the file as a data URL
+  }
+}
+
   }
 }
 </script>

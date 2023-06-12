@@ -22,7 +22,7 @@
       <!-- Background overlay -->
       <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
 
-      <div class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
+      <Form @submit="submit" :validation-schema="schema" class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
         <div class="flex flex-col gap-4 w-full mr-4">
           <h5 class="font-bold text-left text-xl">Tambah Gambar Motif Ulos</h5>
           <div class="flex flex-col gap-6 md:flex-row pb-6">
@@ -82,8 +82,11 @@
             <label for="ulos-ethnic" class="block mb-2 text-sm font-medium text-neutral_80 md:w-1/3"
               >Ukuran Motif*</label
             >
-            <div class="md:w-2/3 relative inline-block">
-              <select
+            <div class="md:w-2/3 flex flex-col gap-2">
+              <div class="w-full relative inline-block">
+                <Field
+                name="size"
+                as="select"
                 id="dropdown-ukuran-motif"
                 v-model="size"
                 class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
@@ -93,7 +96,7 @@
                 <option value="Besar" class="pb-3 hover:bg-primary_surface">Besar</option>
                 <option value="Sedang" class="pb-3 hover:bg-primary_surface">Sedang</option>
                 <option value="Kecil" class="pb-3 hover:bg-primary_surface">Kecil</option>
-              </select>
+              </Field>
               <div
                 class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
               >
@@ -109,6 +112,8 @@
                   </defs>
                 </svg>
               </div>
+              </div>
+              <ErrorMessage name="size" class="text-danger_main text-s" />
             </div>
           </div>
           <div class="flex flex-row gap-6 justify-end mt-6">
@@ -129,16 +134,23 @@
             </button>
           </div>
         </div>
-      </div>
+      </Form>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { Form, Field, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
+
 export default {
   data() {
+    const schema = yup.object().shape({
+      size: yup.string().required('Ukuran motif harus diisi')
+    })
     return {
+      schema,
       showModal: false,
       image: null,
       size: '',
@@ -147,6 +159,11 @@ export default {
       selectedImage: null,
       isLoading: false
     }
+  },
+  components:{
+    Form,
+    Field,
+    ErrorMessage
   },
   watch: {
     size(newValue) {

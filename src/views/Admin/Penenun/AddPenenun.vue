@@ -176,7 +176,6 @@
           >
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
-              <!-- <Field name="theLoom"  rules="required" > -->
               <Field
                 id="dropdown-alat-tenun"
                 name="theLoom"
@@ -295,7 +294,6 @@
         <button
         id="btn-simpan"
           type="submit"
-          @click="submit"
           class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
         >
           Simpan
@@ -333,25 +331,6 @@ export default {
       theLoom: yup.string().required('Alat tenun penenun harus diisi'),
       story: yup.string().required('Cerita penenun harus diisi'),
       technique: yup.string().required('Teknik tenun penenun harus diisi')
-      //       image: yup.object().shape({
-      //   file: yup
-      //     .mixed()
-      //     .required('Gambar penenun harus diisi')
-      //     .test('fileType', 'Format gambar harus .jpg, .jpeg, .png', (value) => {
-      //       if (value) {
-      //         const supportedFormats = ['image/png', 'image/jpg', 'image/jpeg'];
-      //         return supportedFormats.includes(value.type);
-      //       }
-      //       return true;
-      //     })
-      //     .test('fileSize', 'Ukuran gambar harus kurang dari 5MB', (value) => {
-      //       if (value) {
-      //         const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-      //         return value.size <= maxSize;
-      //       }
-      //       return true;
-      //     }),
-      // })
     })
 
     return {
@@ -422,6 +401,7 @@ export default {
         }
       )
       console.log(responseDataText.data)
+
       const newWeaverId = responseDataText.data.data.weaver.id
       console.log(newWeaverId)
       console.log(`http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`)

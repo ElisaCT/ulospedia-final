@@ -1,6 +1,44 @@
 <template lang="">
   <Sidebar />
   <div class="ml-80 pt-10 gap-6 mr-8">
+    <div class="flex flex-row justify-between items-center">
+      <h3 class="font-medium text-3xl text-left pb-6">Data Ulos</h3>
+      <div v-if="ulosDetails">
+          <div class="flex flex-row gap-6">
+            <router-link :to="'/admin/edit-ulos/' + ulosDetails.id">
+              <butotn
+                id="btn-edit-ulos" class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <path
+                    stroke="#FFF"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    stroke-width="1.5"
+                    d="m11.05 3-6.842 7.242c-.258.275-.508.816-.558 1.191l-.308 2.7c-.109.975.591 1.642 1.558 1.475l2.683-.458c.375-.067.9-.342 1.159-.625l6.841-7.242c1.184-1.25 1.717-2.675-.125-4.416C13.625 1.142 12.233 1.75 11.05 3Z"
+                  />
+                  <path
+                    stroke="#FFF"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    stroke-width="1.5"
+                    d="M9.908 4.208A5.105 5.105 0 0 0 14.45 8.5M2.5 18.333h15"
+                  />
+                </svg>
+                Edit Ulos
+              </butotn>
+            </router-link>
+            <DeleteButtonUlos
+              :ulos-id="ulosDetails.id"
+              @ulos-deleted="handleUlosDeleted"
+              class="z-10"
+            />
+          </div>
+      </div>
+    </div>
+
     <div v-if="ulosDetails">
       <div class="flex flex-col items-center gap-12 px-32 mb-12">
         <div class="flex gap-6 items-center">
@@ -139,16 +177,19 @@
 import axios from 'axios'
 import Sidebar from '../../../components/Admin/Sidebar.vue'
 import SliderUlos from '../../../components/EndUser/SliderUlos.vue'
+import DeleteButtonUlos from '../../../components/Admin/Modals/DeleteButtonUlos.vue'
 export default {
   data: function () {
     return {
       ulosDetails: null,
-      productAvail: []
+      productAvail: [],
+      ulosId:0
     }
   },
   components: {
     Sidebar, 
-    SliderUlos
+    SliderUlos,
+    DeleteButtonUlos
   },
   mounted() {
     const token = localStorage.getItem('token')
@@ -159,11 +200,21 @@ export default {
         }
       })
       .then((response) => {
+        this.ulosId = response.data.data.ulos.id
         this.ulosDetails = response.data.data.ulos
         this.productAvail = response.data.data.ulos.clientProductDetailResponseList
         console.log(this.ulosDetail)
         console.log(this.productAvail)
       })
+  },
+  methods: {
+    handleUlosDeleted(ulosId) {
+      console.log('Before filtering:', this.ulosDetails)
+      this.ulosDetails = this.ulosDetails.filter((ulosDetail) => ulosDetail.id !== ulosId)
+      console.log('After filtering:', this.ulosDetails)
+      console.log('navigate')
+      this.$router.push('/admin/ulos')
+    }
   }
 }
 </script>
