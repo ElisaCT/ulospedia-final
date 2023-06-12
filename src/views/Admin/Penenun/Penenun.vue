@@ -255,8 +255,6 @@ import DeleteConfirmation from '../../../components/Admin/Modals/DeleteConfirmat
 import EmptyState from '../../../components/Admin/EmptyState.vue'
 import axios from 'axios'
 export default {
-  // ini waktu di mau hit api nya
-  // ini udah deploy di server del
   mounted() {
     // const token = localStorage.getItem('token')
     // const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
@@ -312,34 +310,6 @@ export default {
         search !== '' ? '&searchByName=' + search : ''
       }`
     },
-    // async sortByName() {
-    //   if (!this.moveState) {
-    //     this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc'
-    //   } else {
-    //     this.moveState = false
-    //     this.sortDir = 'asc'
-    //   }
-    //   const token = localStorage.getItem('token')
-    //   const url = this.defineParam(this.pageNo, 'name', 'asc', '')
-    //   console.log(url)
-    //   const response = await axios.get(url, {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`
-    //     }
-    //   })
-    //   console.log(response)
-    //   this.weavers = response.data.data.weavers.weaversListAdminDashboard
-    //   this.totalElement = response.data.data.weavers.totalAllElements
-    //   this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
-
-    //   // cek apakah current page adalah page terakhir
-    //   if (!response.data.data.weavers.lastPage) {
-    //     this.pageNo = this.pageNo + 1
-    //     this.lastPage = false
-    //   } else {
-    //     this.lastPage = true
-    //   }
-    // },
     async nextPage() {
       console.log('DITEKAN')
       console.log(this.lastPage)
