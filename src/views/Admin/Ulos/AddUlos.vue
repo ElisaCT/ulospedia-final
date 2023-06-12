@@ -552,7 +552,7 @@
                       <input
                         id="checkbox-hitam"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Hitam"
                         value="hitam"
                       />
                       <span>Hitam</span>
@@ -561,7 +561,7 @@
                       <input
                         id="checkbox-putih"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Putih"
                         value="putih"
                       />
                       <span>Putih</span>
@@ -570,7 +570,7 @@
                       <input
                         id="checkbox-kuning"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Kuning"
                         value="kuning"
                       />
                       <span>Kuning</span>
@@ -579,7 +579,7 @@
                       <input
                         id="checkbox-biru"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Biru"
                         value="biru"
                       />
                       <span>Biru</span>
@@ -588,7 +588,7 @@
                       <input
                         id="checkbox-hijau"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Hijau"
                         value="hijau"
                       />
                       <span>Hijau</span>
