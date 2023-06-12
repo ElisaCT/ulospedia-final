@@ -152,54 +152,59 @@
               <div class="flex flex-row gap-6 pt-6">
                 <form @submit.prevent="submitForm" class="flex flex-row gap-6">
                   <div v-for="(field, index) in ulosFields" :key="index">
-                    <label class="relative block">
-                      <input
-                        type="file"
-                        accept="image/jpeg, image/png"
-                        class="hidden"
-                        @change="handleFileChange('ulosFields', index, $event)"
-                        :required="index === 0"
-                      />
+                    <label class="relative block" for="dropzone-file">
                       <div
                         id="btn-tambah-gambar-utama"
                         class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
-                          v-if="field.image"
-                          :src="field.image"
-                          alt="Image Preview"
-                          class="mt-2 w-24 h-auto"
+                          v-if="selectedImage"
+                          :src="selectedImage"
+                          alt="Preview"
+                          class="w-24 h-24 object-cover rounded-lg"
                         />
-                        <svg
-                          v-if="!field.image"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlns:xlink="http://www.w3.org/1999/xlink"
-                          width="40"
-                          height="40"
-                          fill="none"
-                        >
-                          <path fill="url(#a)" d="M0 0h40v40H0z" />
-                          <defs>
-                            <pattern
-                              id="a"
-                              width="1"
-                              height="1"
-                              patternContentUnits="objectBoundingBox"
-                            >
-                              <use xlink:href="#b" transform="scale(.01)" />
-                            </pattern>
-                            <image
-                              xlink:href="data:image/png;base64,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"
-                              id="b"
-                              width="100"
-                              height="100"
-                            />
-                          </defs>
-                        </svg>
-                        <span class="file-input-text text-neutral_80">{{
+                        <div v-else>
+                          <svg
+                            v-if="!selectedImage"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="40"
+                            height="40"
+                            fill="none"
+                          >
+                            <path fill="url(#a)" d="M0 0h40v40H0z" />
+                            <defs>
+                              <pattern
+                                id="a"
+                                width="1"
+                                height="1"
+                                patternContentUnits="objectBoundingBox"
+                              >
+                                <use xlink:href="#b" transform="scale(.01)" />
+                              </pattern>
+                              <image
+                                xlink:href="data:image/png;base64,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"
+                                id="b"
+                                width="100"
+                                height="100"
+                              />
+                            </defs>
+                          </svg>
+                          <p v-if="!selectedImage" class="my-2 text-sm text-neutral_70">
+                            <span class="font-normal">Gambar Utama*</span>
+                          </p>
+                        </div>
+                        <!-- <span class="file-input-text text-neutral_80">{{
                           index === 0 && field.fileName === '' ? 'Gambar Utama*' : field.fileName
-                        }}</span>
+                        }}</span> -->
                       </div>
+                      <input
+                        @change="handleFileChange1"
+                        id="dropzone-file"
+                        type="file"
+                        accept="image/jpeg, image/png"
+                        class="hidden"
+                      />
                     </label>
                     <button
                       v-if="index > 0"
@@ -262,7 +267,7 @@
                         type="file"
                         accept="image/jpeg, image/png"
                         class="hidden"
-                        @change="handleFileChange('potonganFields', index, $event)"
+                        @change="handleFileChange2"
                         :required="index === 0"
                       />
                       <div
@@ -270,13 +275,13 @@
                         class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                       >
                         <img
-                          v-if="field.image"
-                          :src="field.image"
-                          alt="Image Preview"
-                          class="mt-2 w-24 h-auto"
+                          v-if="selectedPiecesImage"
+                          :src="selectedPiecesImage"
+                          alt="Preview"
+                          class="w-24 h-24 object-cover rounded-lg"
                         />
                         <svg
-                          v-if="!field.image"
+                          v-if="!selectedPiecesImage"
                           xmlns="http://www.w3.org/2000/svg"
                           xmlns:xlink="http://www.w3.org/1999/xlink"
                           width="40"
@@ -301,7 +306,7 @@
                             />
                           </defs>
                         </svg>
-                        <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
+                        <p v-if="!selectedPiecesImage" class="my-2 text-sm text-neutral_70"></p>
                       </div>
                     </label>
                     <button
@@ -366,20 +371,20 @@
                         type="file"
                         accept="image/jpeg, image/png"
                         class="hidden"
-                        @change="handleFileChange('motifFields', index, $event)"
+                        @change="handleFileChange3"
                       />
                       <div
                         id="btn-tambah-gambar-motif"
                         class="file-input-content flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10 text-neutral_80"
                       >
                         <img
-                          v-if="field.image"
-                          :src="field.image"
+                          v-if="selectedMotifImage"
+                          :src="selectedMotifImage"
                           alt="Image Preview"
-                          class="mt-2 w-24 h-auto"
+                          class="w-24 h-24 object-cover rounded-lg"
                         />
                         <svg
-                          v-if="!field.image"
+                          v-if="!selectedMotifImage"
                           xmlns="http://www.w3.org/2000/svg"
                           xmlns:xlink="http://www.w3.org/1999/xlink"
                           width="40"
@@ -404,7 +409,7 @@
                             />
                           </defs>
                         </svg>
-                        <span class="file-input-text text-neutral_80">{{ field.fileName }}</span>
+                        <p v-if="!selectedMotifImage" class="my-2 text-sm text-neutral_70"></p>
                       </div>
                     </label>
                     <button
@@ -486,7 +491,7 @@
                   >
                   <div class="md:w-2/3 relative inline-block">
                     <select
-                      v-model="ethnic"
+                      v-model="originEthnic"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
@@ -536,8 +541,8 @@
                       <input
                         id="checkbox-merah"
                         type="checkbox"
-                        v-model="selectedColors"
-                        value="merah"
+                        v-model="colors.Merah"
+                        value="true"
                       />
                       <span>Merah</span>
                     </div>
@@ -804,7 +809,11 @@
                           }"
                           class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                         >
-                          <img :src="form.previewUrl" v-if="form.previewUrl" alt="Image Preview" />
+                          <img
+                            :src="selectedImageProduct"
+                            v-if="selectedImageProduct"
+                            alt="Image Preview"
+                          />
                           <div
                             class="flex flex-col items-center justify-center pt-5 pb-6"
                             v-if="!form.image"
@@ -859,7 +868,7 @@
                       >
                       <div class="md:w-2/3">
                         <input
-                          v-model="form.productName"
+                          v-model="productName"
                           type="text"
                           id="ulos-name"
                           :class="{
@@ -881,7 +890,7 @@
                       >
                       <div class="md:w-2/3">
                         <input
-                          v-model="form.productPrice"
+                          v-model="price"
                           type="text"
                           id="ulos-price"
                           :class="{
@@ -903,7 +912,7 @@
                       >
                       <div class="md:w-2/3 text-neutral_80">
                         <input
-                          v-model="form.urlProduct"
+                          v-model="productUrl"
                           type="text"
                           id="ulos-url"
                           :class="{
@@ -990,16 +999,22 @@ export default {
     //Multiselect
   },
   watch: {
-    mainImage(value) {
+    mainImageReference(value) {
+      console.log(value)
+    },
+    imageReference(value) {
+      console.log(value)
+    },
+    imageMotifReference(value) {
       console.log(value)
     },
     name(value) {
       console.log(value)
     },
-    ethnic(value) {
+    originEthnic(value) {
       console.log(value)
     },
-    color(value) {
+    colors(value) {
       console.log(value)
     },
     typeUlos(value) {
@@ -1034,13 +1049,24 @@ export default {
     },
     forms(value) {
       console.log(value)
+    },
+    productName(value) {
+      console.log(value)
+    },
+    price(value) {
+      console.log(value)
+    },
+    productUrl(value) {
+      console.log(value)
     }
   },
   data() {
     return {
-      mainImage: null,
+      mainImageReference: null,
+      imageReference: null,
+      imageMotifReference: null,
       name: '',
-      ethnic: null,
+      originEthnic: null,
       color: null,
       typeUlos: null,
       location: '',
@@ -1075,19 +1101,30 @@ export default {
       potonganFields: [{ fileName: '', image: null }],
       motifFields: [{ fileName: '', image: null }],
       productImage: [{ fileName: '', image: null }],
-      forms: []
+      forms: [],
       //imagePreview:null,
+      selectedImage: null,
+      selectedPiecesImage: null,
+      selectedMotifImage: null,
+
+      selectedImageProduct: '',
+      productName: '',
+      price: '',
+      productUrl: ''
     }
   },
   methods: {
     async save() {
       console.log('CALLED')
       const token = localStorage.getItem('token')
+      console.log(this.colors)
+
+      const trueColors = Object.keys(this.colors).filter((color) => this.colors[color])
 
       const request1 = {
         name: this.name,
-        colors: [this.color],
-        originEthnic: this.ethnic,
+        colors: trueColors,
+        originEthnic: this.originEthnic,
         type: this.typeUlos,
         location: this.location,
         length: this.length,
@@ -1098,93 +1135,184 @@ export default {
       }
 
       const request2 = {
-        name: this.name,
+        name: this.productName,
         price: this.price,
-        url: this.url
+        productUrl: this.productUrl
       }
 
       console.log(request1)
+      console.log(request2)
 
+      //Ulos information
       const url1 = `http://company.ditenun.com/api/v1/ulospedia/ulos`
-      const response1 = await axios.post(url1, request1, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
-      console.log(response1.data)
-      const ulosId = response1.data.data.ulos.id
 
-      // main image
-      const url2 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`
+      let res1
 
-      const formData = new FormData()
-      formData.append('main-image', this.ulosFields[0].file)
-      const response2 = await axios.post(url2, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      console.log(response2.data)
-
-      // pieces image
-      const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/pieces-images`
-      formData.append('pieces-image', this.ulosFields[0].file)
-      const response3 = await axios.post(url3, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      console.log(response3.data)
-
-      // motif image
-      const url4 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`
-      formData.append('pieces-image', this.ulosFields[0].file)
-      const response4 = await axios.post(url4, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      console.log(response4.data)
-
-      //Availability product
-      const url5 = `http://company.ditenun.com/api/v1/ulospedia/ulos/1/products/availability?state=true`
-      const response5 = await axios.post(url5, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      console.log(response5.data)
-
-      //image product
-      const responseDataImage = await axios.post(
-        `http://company.ditenun.com/api/v1/ulospedia/ulos/1/products/${ulosId}/image`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
-          }
-        }
-      )
-      console.log(responseDataImage)
-
-      //detail text product
-      const responseDataText = await axios.post(
-        `http://company.ditenun.com/api/v1/ulospedia/ulos/1/products`,
-        request2,
-        {
+      try {
+        const response1 = await axios.post(url1, request1, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
-        }
+        })
+        console.log(response1.data)
+        res1 = response1.data
+      } catch (error) {
+        console.error(error)
+      }
+
+      // main image
+      const ulosId = res1.data.ulos.id
+      console.log(ulosId)
+      console.log(ulosId)
+      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`)
+
+      const formData = new FormData()
+      formData.append('main-image', this.mainImageReference)
+
+      try {
+        const responseDataImage = await axios.post(
+          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        console.log(responseDataImage)
+      } catch (error) {
+        console.log(error)
+      }
+
+      // pieces image
+      const ulosId_2 = res1.data.ulos.id
+      console.log(ulosId_2)
+      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId_2}/pieces-images`)
+
+      formData.append('pieces-image', this.imageReference)
+
+      try {
+        const url3 = await axios.post(
+          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId_2}/pieces-images`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        console.log(url3)
+      } catch (error) {
+        console.log(error)
+      }
+
+      // motif image
+      // const ulosId_3 = res1.data.ulosMotifImage.id
+      // console.log(ulosId_3)
+      // console.log(ulosId_3)
+      // console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId_3}/motif-images`)
+
+      // formData.append('pieces-image', this.imageReference)
+
+      // try {
+      //   const url4 = await axios.post(
+      //     `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId_3}/motif-images`,
+      //     formData,
+      //     {
+      //       headers: {
+      //         Authorization: `Bearer ${token}`,
+      //         'Content-Type': 'multipart/form-data'
+      //       }
+      //     }
+      //   )
+      //   console.log(url4)
+      // } catch (error) {
+      //   console.log(error)
+      // }
+
+      //Availability product
+      // const url5 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/availability?state=true`
+      // const response5 = await axios.post(url5, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //     'Content-Type': 'multipart/form-data'
+      //   }
+      // })
+      // console.log(response5.data)
+
+      //image product
+      const ulosId_5 = res1.data.ulos.id
+      console.log(ulosId_5)
+      console.log(ulosId_5)
+      console.log(
+        `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${ulosId_5}/image`
       )
-      console.log(responseDataText)
+
+      formData.append('product-image', this.mainImageReference)
+
+      try {
+        const url6 = await axios.post(
+          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${ulosId_5}/image`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        console.log(url6)
+      } catch (error) {
+        console.log(error)
+      }
+
+      //detail text product
+
+      // const url7 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`
+      // const response7 = await axios.post(url7, request2, {
+      //   headers: {
+      //     Authorization: `Bearer ${token}`,
+      //     'Content-Type': 'application/json'
+      //   }
+      // })
+      // console.log(response7.data.data.product)
+
+      // const url6 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`
+
+      // let res6
+
+      // try {
+      //   const response6 = await axios.post(url6, request2, {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //       'Content-Type': 'application/json'
+      //     }
+      //   })
+      //   console.log(response6.data)
+      //   // eslint-disable-next-line no-unused-vars
+      //   res6 = response6.data
+      // } catch (error) {
+      //   console.error(error)
+      // }
+
+      // const responseDataText = await axios.post(
+      //   `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`,
+      //   {
+      //     name: this.name,
+      //     price: this.price,
+      //     productUrl: this.productUrl
+      //   },
+      //   {
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //       'Content-Type': 'application/json'
+      //     }
+      //   }
+      // )
+      // console.log(responseDataText.data)
 
       // other image
       // const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/other-images`
@@ -1205,8 +1333,55 @@ export default {
       //     }
       //   }
       // }
+
       this.$router.push('/admin/ulos')
     },
+    handleFileChange1(event) {
+      this.mainImageReference = event.target.files[0]
+      const mainImageReference = event.target.files[0]
+
+      if (mainImageReference) {
+        // Create a FileReader to read the file
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          // Set the selected image data to the component's data
+          this.selectedImage = e.target.result
+          console.log('File name:', mainImageReference.name)
+        }
+        reader.readAsDataURL(mainImageReference) // Read the file as a data URL
+      }
+    },
+    handleFileChange2(event) {
+      this.imageReference = event.target.files[0]
+      const imageReference = event.target.files[0]
+
+      if (imageReference) {
+        // Create a FileReader to read the file
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          // Set the selected image data to the component's data
+          this.selectedPiecesImage = e.target.result
+          console.log('File name:', imageReference.name)
+        }
+        reader.readAsDataURL(imageReference) // Read the file as a data URL
+      }
+    },
+    // handleFileChange3(event) {
+    //   this.imageReference = event.target.files[0]
+    //   const imageReference = event.target.files[0]
+
+    //   if (imageReference) {
+    //     // Create a FileReader to read the file
+    //     const reader = new FileReader()
+    //     reader.onload = (e) => {
+    //       // Set the selected image data to the component's data
+    //       this.selectedMotifImage = e.target.result
+    //       console.log('File name:', imageReference.name)
+    //     }
+    //     reader.readAsDataURL(imageReference) // Read the file as a data URL
+    //   }
+    // },
+
     handleMainImage(event) {
       this.mainImage = event.target.files[0]
     },
@@ -1231,12 +1406,10 @@ export default {
     backToUlos() {
       this.$router.push('/admin/ulos')
     },
-    handleFileUpload(event, fileKey) {
-      const file = event.target.files[0]
-      // Handle the file upload as desired (e.g., store the file in the files array)
-      this.files[fileKey] = file
-    },
-
+    // handleFileUpload(event, fileKey) {
+    //   const file = event.target.files[0]
+    //   this.files[fileKey] = file
+    // },
     addField(formName) {
       const formFields = this[`${formName}`]
       console.log(formFields)
@@ -1247,14 +1420,6 @@ export default {
     removeField(formName, index) {
       const formFields = this[`${formName}`]
       formFields.splice(index, 1)
-    },
-    handleFileChange(formName, index, event) {
-      const formFields = this[`${formName}`]
-      const file = event.target.files[0]
-      // this.mainImage = event.target.files[0]
-      formFields[index].fileName = file.name
-      formFields[index].image = URL.createObjectURL(file)
-      formFields[index].file = event.target.files[0]
     },
     addForm() {
       const nextId = this.forms.length > 0 ? this.forms[this.forms.length - 1].id + 1 : 0
