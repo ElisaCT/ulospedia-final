@@ -813,13 +813,14 @@
                           class="flex flex-col items-center justify-center w-36 h-36 border-2 border-neutral_60 border-dashed rounded-lg cursor-pointer bg-neutral_10"
                         >
                           <img
-                            :src="selectedImageProduct"
-                            v-if="selectedImageProduct"
-                            alt="Image Preview"
+                            :src="selectedProductImage"
+                            v-if="selectedProductImage"
+                            alt="Preview"
+                            class="w-24 h-24 object-cover rounded-lg"
                           />
                           <div
                             class="flex flex-col items-center justify-center pt-5 pb-6"
-                            v-if="!form.image"
+                            v-if="!selectedProductImage"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -846,8 +847,8 @@
                                 />
                               </defs>
                             </svg>
-                            <p class="my-2 text-sm text-neutral_70">
-                              <span class="font-normal">Gambar Produk</span>
+                            <p v-if="!selectedProductImage" class="my-2 text-sm text-neutral_70">
+                              <span class="font-normal">Gambar Produk*</span>
                             </p>
                           </div>
                           INDEX {{ formIndex }}
@@ -856,10 +857,7 @@
                             type="file"
                             class="hidden"
                             accept="image/png, image/jpg, image/jpeg"
-                            :disabled="!toggleStatus"
-
-                            @change="handleImagePreview($event, formIndex)"
-
+                            @change="handleFileChange4"
                           />
                         </label>
                       </div>
@@ -998,17 +996,16 @@
 <script>
 //import Multiselect from 'vue-multiselect'
 import axios from 'axios'
-import { Field, ErrorMessage } from 'vee-validate'
-import * as yup from 'yup'
+// import { Field, ErrorMessage } from 'vee-validate'
+// import * as yup from 'yup'
 //import FormWizard from './components/FormWizard.vue';
 //import FormStep from './components/FormStep.vue';
 //import { ref, reactive, computed } from 'vue'
 export default {
   components: {
     //Multiselect
-     
-    Field,
-    ErrorMessage
+    // Field,
+    // ErrorMessage
   },
   watch: {
     mainImageReference(value) {
@@ -1073,34 +1070,31 @@ export default {
     }
   },
   data() {
-    const schemas = [
-      yup.object({
-        name: yup.string().required(),
-        email: yup.string().required().email()
-      }),
-      yup.object({
-        name: yup.string().required('Nama ulos harus diisi'),
-        ethnic: yup.string().required('Suku ulos harus diisi'),
-        color: yup.string().required('Pilih minimal 1 warna ulos'),
-        typeUlos: yup.string().required('Suku penenun harus diisi'),
-        location: yup.string().required('Suku penenun harus diisi'),
-        technique: yup.string().required('Teknik tenun ulos harus diisi'),
-        meaning: yup.string().required('Makna Ulos harus diisi'),
-        width: yup.string().required('Lebar ulos ulos harus diisi'),
-        length: yup.string().required('Panjang Ulos harus diisi'),
-        func: yup.string().required('Fungsi Ulos harus diisi'),
-      }),
-      yup.object({
-        productName: yup.string().required('Nama Produk ulos harus diisi'),
-        productPrice: yup.string().required('Harga Produk ulos harus diisi'),
-        urlProduct: yup.string().required('Url produk Ulos harus diisi'),
-      })
-    ]
+    // const schemas = [
+    // yup.object({
+    //   name: yup.string().required(),
+    //   email: yup.string().required().email()
+    // }),
+    // yup.object({
+    //   name: yup.string().required('Nama ulos harus diisi'),
+    //   ethnic: yup.string().required('Suku ulos harus diisi'),
+    //   color: yup.string().required('Pilih minimal 1 warna ulos'),
+    //   typeUlos: yup.string().required('Suku penenun harus diisi'),
+    //   location: yup.string().required('Suku penenun harus diisi'),
+    //   technique: yup.string().required('Teknik tenun ulos harus diisi'),
+    //   meaning: yup.string().required('Makna Ulos harus diisi'),
+    //   width: yup.string().required('Lebar ulos ulos harus diisi'),
+    //   length: yup.string().required('Panjang Ulos harus diisi'),
+    //   func: yup.string().required('Fungsi Ulos harus diisi'),
+    // }),
+    // yup.object({
+    //   productName: yup.string().required('Nama Produk ulos harus diisi'),
+    //   productPrice: yup.string().required('Harga Produk ulos harus diisi'),
+    //   urlProduct: yup.string().required('Url produk Ulos harus diisi'),
+    // })
+    // ]
     return {
-      schemas,
-      mainImageReference: null,
-      imageReference: null,
-      imageMotifReference: null,
+      mainImage: null,
       name: '',
       originEthnic: null,
       color: null,
@@ -1143,7 +1137,7 @@ export default {
       selectedPiecesImage: null,
       selectedMotifImage: null,
 
-      selectedImageProduct: '',
+      selectedProductImage: null,
       productName: '',
       price: '',
       productUrl: ''
@@ -1173,7 +1167,7 @@ export default {
       const request2 = {
         name: this.productName,
         price: this.price,
-        productUrl: this.productUrl
+        url: this.productUrl
       }
 
       console.log(request1)
@@ -1200,7 +1194,6 @@ export default {
       // main image
       const ulosId = res1.data.ulos.id
       console.log(ulosId)
-      console.log(ulosId)
       console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`)
 
       const formData = new FormData()
@@ -1223,15 +1216,14 @@ export default {
       }
 
       // pieces image
-      const ulosId_2 = res1.data.ulos.id
-      console.log(ulosId_2)
-      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId_2}/pieces-images`)
+      console.log(ulosId)
+      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/pieces-images`)
 
-      formData.append('pieces-image', this.imageReference)
+      formData.append('ulos-pieces-image', this.imageReference)
 
       try {
-        const url3 = await axios.post(
-          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId_2}/pieces-images`,
+        const responseDataImage = await axios.post(
+          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/pieces-images`,
           formData,
           {
             headers: {
@@ -1240,22 +1232,66 @@ export default {
             }
           }
         )
-        console.log(url3)
+        console.log(responseDataImage)
       } catch (error) {
         console.log(error)
       }
 
       // motif image
-      // const ulosId_3 = res1.data.ulosMotifImage.id
-      // console.log(ulosId_3)
-      // console.log(ulosId_3)
-      // console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId_3}/motif-images`)
+      console.log(ulosId)
+      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`)
 
-      // formData.append('pieces-image', this.imageReference)
+      formData.append('ulos-motif-image', this.imageReference)
+
+      try {
+        const url4 = await axios.post(
+          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        console.log(url4)
+      } catch (error) {
+        console.log(error)
+      }
+
+      // Detail Product
+      console.log(ulosId)
+      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`)
+      const url5 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`
+
+      let productId
+
+      try {
+        const response1 = await axios.post(url5, request2, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+        console.log(response1.data)
+        productId = response1.data.data.product.id
+        console.log(productId)
+      } catch (error) {
+        console.error(error)
+      }
+
+      // // Image Product
+      // console.log(ulosId)
+      // console.log(productId)
+      // console.log(
+      //   `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${productId}/image`
+      // )
+
+      // formData.append('product-image', this.imageReference)
 
       // try {
-      //   const url4 = await axios.post(
-      //     `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId_3}/motif-images`,
+      //   const responseDataImage = await axios.post(
+      //     `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${productId}/image`,
       //     formData,
       //     {
       //       headers: {
@@ -1264,46 +1300,28 @@ export default {
       //       }
       //     }
       //   )
-      //   console.log(url4)
+      //   console.log(responseDataImage)
       // } catch (error) {
       //   console.log(error)
       // }
 
-      //Availability product
-      // const url5 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/availability?state=true`
-      // const response5 = await axios.post(url5, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //     'Content-Type': 'multipart/form-data'
-      //   }
-      // })
-      // console.log(response5.data)
+      // formData.append('product-image', this.imageReference)
 
-      //image product
-      const ulosId_5 = res1.data.ulos.id
-      console.log(ulosId_5)
-      console.log(ulosId_5)
-      console.log(
-        `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${ulosId_5}/image`
-      )
-
-      formData.append('product-image', this.mainImageReference)
-
-      try {
-        const url6 = await axios.post(
-          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${ulosId_5}/image`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        )
-        console.log(url6)
-      } catch (error) {
-        console.log(error)
-      }
+      // try {
+      //   const url6 = await axios.post(
+      //     `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${productId}/image`,
+      //     formData,
+      //     {
+      //       headers: {
+      //         Authorization: `Bearer ${token}`,
+      //         'Content-Type': 'multipart/form-data'
+      //       }
+      //     }
+      //   )
+      //   console.log(url6)
+      // } catch (error) {
+      //   console.log(error)
+      // }
 
       //detail text product
 
@@ -1402,21 +1420,36 @@ export default {
         reader.readAsDataURL(imageReference) // Read the file as a data URL
       }
     },
-    // handleFileChange3(event) {
-    //   this.imageReference = event.target.files[0]
-    //   const imageReference = event.target.files[0]
+    handleFileChange3(event) {
+      this.imageReference = event.target.files[0]
+      const imageReference = event.target.files[0]
 
-    //   if (imageReference) {
-    //     // Create a FileReader to read the file
-    //     const reader = new FileReader()
-    //     reader.onload = (e) => {
-    //       // Set the selected image data to the component's data
-    //       this.selectedMotifImage = e.target.result
-    //       console.log('File name:', imageReference.name)
-    //     }
-    //     reader.readAsDataURL(imageReference) // Read the file as a data URL
-    //   }
-    // },
+      if (imageReference) {
+        // Create a FileReader to read the file
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          // Set the selected image data to the component's data
+          this.selectedMotifImage = e.target.result
+          console.log('File name:', imageReference.name)
+        }
+        reader.readAsDataURL(imageReference) // Read the file as a data URL
+      }
+    },
+    handleFileChange4(event) {
+      this.imageReference = event.target.files[0]
+      const imageReference = event.target.files[0]
+
+      if (imageReference) {
+        // Create a FileReader to read the file
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          // Set the selected image data to the component's data
+          this.selectedProductImage = e.target.result
+          console.log('File name:', imageReference.name)
+        }
+        reader.readAsDataURL(imageReference) // Read the file as a data URL
+      }
+    },
 
     handleMainImage(event) {
       this.mainImage = event.target.files[0]
