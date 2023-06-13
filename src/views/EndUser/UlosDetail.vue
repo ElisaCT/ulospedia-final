@@ -1,21 +1,17 @@
 <template>
   <Navbar />
-  <!-- <div class="mx-[180px]">
-    <SliderUlos :data="imageList" />
-  </div> -->
-
+ <div class="flex flex-col items-center gap-12 px-32 pb-12">
   <div v-if="ulosDetails">
-    <div v-for="ulosDetail in ulosDetails" :key="ulosDetail.id">
-      <div class="flex flex-col items-center gap-12 px-32 pb-12">
+      <div class="flex flex-col items-center gap-12 px-32 mb-12">
         <div class="flex gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
-            <h3 id="nama-ulos" class="font-semibold text-lg">{{ ulosDetail.name }}</h3>
+            <h3 id="nama-ulos" class="font-semibold text-lg">{{ ulosDetails.name }}</h3>
             <div class="flex flex-row gap-2">
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
                 <span id="suku-ulos" class="text-sm font-normal text-gray-800 text-primary_main">{{
-                  ulosDetail.ethnic
+                  ulosDetails.ethnic
                 }}</span>
               </span>
               <span
@@ -24,7 +20,7 @@
                 <span
                   id="lokasi-ulos"
                   class="text-sm font-normal text-gray-800 text-primary_main"
-                  >{{ ulosDetail.location }}</span
+                  >{{ ulosDetails.location }}</span
                 >
               </span>
               <span
@@ -33,232 +29,25 @@
                 <span
                   id="teknik-tenun-ulos"
                   class="text-sm font-normal text-gray-800 text-primary_main"
-                  >{{ ulosDetail.technique }}</span
+                  >{{ ulosDetails.technique }}</span
                 >
               </span>
               <span
                 class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
               >
                 <span id="ukuran-ulos" class="text-sm font-normal text-gray-800 text-primary_main"
-                  >{{ ulosDetail.length }}cm x {{ ulosDetail.width }}cm</span
+                  >{{ ulosDetails.length }}cm x {{ ulosDetails.width }}cm</span
                 >
               </span>
             </div>
           </div>
         </div>
       </div>
-      <!-- <div class="">
-        <div class="swiper-container main-slider loading">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Shaun Matthews</p>
-                <span class="caption"
-                  >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type
-                  specimen book.</span
-                >
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1500643752441-4dc90cda350a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1500643752441-4dc90cda350a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Alexis Berry</p>
-                <span class="caption"
-                  >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type
-                  specimen book.</span
-                >
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1465408953385-7c4627c29435?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1465408953385-7c4627c29435?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Billie Pierce</p>
-                <span class="caption"
-                  >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type
-                  specimen book.</span
-                >
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1538329972958-465d6d2144ed?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTkzNg&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1538329972958-465d6d2144ed?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTkzNg&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Trevor Copeland</p>
-                <span class="caption"
-                  >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type
-                  specimen book.</span
-                >
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTk1OQ&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTk1OQ&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Bernadette Newman</p>
-                <span class="caption"
-                  >Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                  when an unknown printer took a galley of type and scrambled it to make a type
-                  specimen book.</span
-                >
-              </div>
-            </div>
-          </div>
-           If we need navigation buttons -->
-      <!-- <div class="swiper-button-prev swiper-button-white"></div>
-          <div class="swiper-button-next swiper-button-white"></div>
-        </div> -->
 
-      <!-- Thumbnail navigation -->
-      <!-- <div class="swiper-container nav-slider loading">
-          <div class="swiper-wrapper" role="navigation">
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Shaun Matthews</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1500643752441-4dc90cda350a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1500643752441-4dc90cda350a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Alexis Berry</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1465408953385-7c4627c29435?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1465408953385-7c4627c29435?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTg2Ng&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Billie Pierce</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1538329972958-465d6d2144ed?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTkzNg&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1538329972958-465d6d2144ed?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTkzNg&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Trevor Copeland</p>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <figure
-                class="slide-bgimg"
-                style="
-                  background-image: url(https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTk1OQ&ixlib=rb-1.2.1&q=85);
-                "
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1583292650898-7d22cd27ca6f?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTY0MDE1NTk1OQ&ixlib=rb-1.2.1&q=85"
-                  class="entity-img"
-                />
-              </figure>
-              <div class="content">
-                <p class="title">Bernadette Newman</p>
-              </div>
-            </div>
-          </div>
-        </div> 
-      </div> -->
-      <!-- <ImageDetail /> -->
-    </div>
-  </div>
+      <!-- image -->
+      <SliderUlos :data="ulosDetails.clientUlosRelatedImageResponseList" />
 
-  <!-- Image -->
-  <div class="mx-[180px]">
-    <SliderUlos :data="imageList" />
-  </div>
-
-  <div v-if="ulosDetails">
-    <div v-for="ulosDetail in ulosDetails" :key="ulosDetail.id">
-      <div class="grid grid-cols-12 gap-6 px-32 pt-12">
+      <div class="grid grid-cols-12 gap-6 px-8 mt-12">
         <!-- makna dan fungsi -->
         <div class="flex flex-col gap-8 col-span-7">
           <div class="flex flex-col gap-3">
@@ -275,7 +64,7 @@
               <h4 class="font-medium text-base text-neutral_100">Makna Ulos</h4>
             </div>
             <p id="makna-ulos" class="font-normal text-sm text-neutral_90 text-left">
-              {{ ulosDetail.meaning }}
+              {{ ulosDetails.meaning }}
             </p>
           </div>
 
@@ -308,20 +97,22 @@
               <h4 class="font-medium text-base text-neutral_100">Fungsi Ulos</h4>
             </div>
             <p id="fungsi-ulos" class="font-normal text-sm text-neutral_90 text-left">
-              {{ ulosDetail.func }}
+              {{ ulosDetails.func }}
             </p>
           </div>
         </div>
 
         <!-- e-commerce -->
         <div
-          v-if="ulosDetail.availabilityOfProduct"
-          class="flex flex-col gap-4 bg-neutral_10 px-4 py-4 rounded-lg col-span-5 e-commerce"
+          id="card-ketersediaan-ulos"
+          v-if="ulosDetails.availabilityOfProduct"
+          class="flex flex-col gap-4 bg-neutral_10 px-4 py-4 rounded-lg col-span-5 e-commerce shadow-lg"
         >
           <p class="font-normal text-lg text-neutral_100">Tersedia di e-commerce DiTenun</p>
 
-          <div v-for="product in ulosDetail.clientProductDetailResponseList" :key="product.id">
-            <div class="grid grid-cols-6 gap-4">
+          
+            <div v-for="product in ulosDetails.clientProductDetailResponseList" :key="product.id">
+              <div class="grid grid-cols-6 gap-4">
                 <img id="gambar-produk-ulos" :src="product.imageUrl" alt="" class="rounded-md col-span-3 w-[200px] h-[180px]" />
                 <div class=" gap-6 pt-12 col-span-3">
                   <div class="gap-4 mb-6">
@@ -337,11 +128,11 @@
                   >
                 </div>
               </div>
-          </div>
+            </div>
         </div>
       </div>
     </div>
-  </div>
+ </div>
   <Footer />
 </template>
 <script>
@@ -362,22 +153,15 @@ export default {
   },
   data: function () {
     return {
-      imageList: []
+      imageList: [],
+      ulosDetails: null,
     }
   },
   mounted() {
-    console.log('TESTT')
-
-    // axios.get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos/19`).then((response) => {
-    //   console.log(response.data)
-    //   this.imageList = response.data.data.ulosDetail.clientUlosRelatedImageResponseList
-    //   console.log(this.imageList)
-    // })
-
     axios
       .get('http://company.ditenun.com/api/v1/ulospedia/client/ulos/' + this.$route.params.id)
       .then((response) => {
-        this.ulosDetails = response.data.data
+        this.ulosDetails = response.data.data.ulosDetail
         console.log(this.ulosDetails)
         this.imageList = response.data.data.ulosDetail.clientUlosRelatedImageResponseList
         console.log(this.imageList)
