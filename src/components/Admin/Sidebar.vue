@@ -198,7 +198,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 a.router-link-exact-active {
   background: #d6ddf0;
   color: #3355b5;
