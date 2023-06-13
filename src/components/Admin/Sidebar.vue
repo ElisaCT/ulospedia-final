@@ -31,7 +31,9 @@
     <div class="h-full px-6 py-6 overflow-y-auto bg-neutral_10 shadow-md">
       <a href="/admin/dashboard/" class="flex items-center pl-2.5 mb-5">
         <img src="../../assets/ditenun-logo.png" class="h-6 mr-3 sm:h-7" alt="DiTenun Logo" />
-        <span id="ulospedia-logo" class="self-center text-lg font-normal whitespace-nowrap text-primary_main"
+        <span
+          id="ulospedia-logo"
+          class="self-center text-lg font-normal whitespace-nowrap text-primary_main"
           >Ulospedia DiTenun</span
         >
       </a>
@@ -133,7 +135,9 @@
         >
           <div id="hs-mega-menu-basic-dr" type="button" class="flex items-center w-full">
             <div class="mr-16">
-              <div><span id="text-username">{{ username }}</span></div>
+              <div>
+                <span id="text-username">{{ username }}</span>
+              </div>
               <div class="font font-light text-sm pt-0"><span>admin</span></div>
             </div>
           </div>
@@ -198,7 +202,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 a.router-link-exact-active {
   background: #d6ddf0;
   color: #3355b5;
