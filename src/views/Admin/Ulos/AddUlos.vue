@@ -1259,6 +1259,25 @@ export default {
         console.log(error)
       }
 
+      //Availability Product
+      
+
+      try {
+        const url4 = await axios.post(
+          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        console.log(url4)
+      } catch (error) {
+        console.log(error)
+      }
+
       // Detail Product
       console.log(ulosId)
       console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`)
