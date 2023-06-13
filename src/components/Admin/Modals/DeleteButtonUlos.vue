@@ -15,11 +15,11 @@
                 d="M14 3.987a67.801 67.801 0 0 0-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987M5.667 3.313l.146-.873C5.92 1.807 6 1.333 7.127 1.333h1.746c1.127 0 1.214.5 1.314 1.114l.146.866M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714M6.887 11h2.22M6.333 8.333h3.334"
               />
             </svg>
-            Hapus Penenun
+            Hapus Ulos
           </button>
   
       <!-- Modal -->
-      <div v-if="showModal" class="fixed inset-0 flex items-center justify-center">
+      <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-10">
         <!-- Background overlay -->
         <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
   
@@ -78,12 +78,12 @@
         showModal: false
       }
     },
-    props: ['weaverId'],
+    props: ['ulosId'],
     methods: {
       async deleteItem() {
         const token = localStorage.getItem('token')
         const response = await axios.delete(
-          `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
+            `http://company.ditenun.com/api/v1/ulospedia/ulos/${this.ulosId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -92,10 +92,9 @@
         )
         console.log(response.data)
         this.showModal = false
-        this.$router.push('/admin/penenun')
-        this.$emit('weaver-deleted', this.weaverId)
+        this.$router.push('/admin/ulos')
+        this.$emit('ulos-deleted', this.ulosId)
         console.log("deleted")
-        
       }
     }
   }

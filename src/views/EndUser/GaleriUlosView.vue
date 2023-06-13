@@ -14,6 +14,7 @@
           />
         </svg>
         <input
+          id="field-cariUlos"
           class="w-full bg-[#F5F5F5] focus:outline-none pl-3"
           type="text"
           v-model="searchText"
@@ -23,7 +24,7 @@
       </div>
 
       <button
-        id="filterButton"
+        id="btn-filter"
         class="ml-4 border border-[#E0E0E0] bg-white text-[#616161] font-normal py-2 px-2 rounded-lg flex flex-row gap-2 items-center"
         @click="toggleDropdown"
       >
@@ -66,6 +67,7 @@
                 <li class="py-2">
                   <label>
                     <input
+                      id="label-batakToba"
                       type="radio"
                       value="Batak Toba"
                       v-model="selectedOptionEthnic"
@@ -76,25 +78,45 @@
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="Batak Karo" v-model="selectedOptionEthnic" />
+                    <input
+                      id="label-batakKaro"
+                      type="radio"
+                      value="Batak Karo"
+                      v-model="selectedOptionEthnic"
+                    />
                     Batak Karo
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="Batak Simalungun" v-model="selectedOptionEthnic" />
+                    <input
+                      id="label-batakSimalungun"
+                      type="radio"
+                      value="Batak Simalungun"
+                      v-model="selectedOptionEthnic"
+                    />
                     Batak Simalungun
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="Batak Mandailing" v-model="selectedOptionEthnic" />
+                    <input
+                      id="label-Mandailing"
+                      type="radio"
+                      value="Batak Mandailing"
+                      v-model="selectedOptionEthnic"
+                    />
                     Batak Mandailing
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="Batak Angkola" v-model="selectedOptionEthnic" />
+                    <input
+                      id="label-batakAngkola"
+                      type="radio"
+                      value="Batak Angkola"
+                      v-model="selectedOptionEthnic"
+                    />
                     Batak Angkola
                   </label>
                 </li>
@@ -109,13 +131,23 @@
               >
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="Tradisional" v-model="selectedOptionType" />
+                    <input
+                      id="label-ulosTradisional"
+                      type="radio"
+                      value="Tradisional"
+                      v-model="selectedOptionType"
+                    />
                     Tradisional
                   </label>
                 </li>
                 <li class="py-2">
                   <label>
-                    <input type="radio" value="Pengembangan" v-model="selectedOptionType" />
+                    <input
+                      id="label-ulosPengembangan"
+                      type="radio"
+                      value="Pengembangan"
+                      v-model="selectedOptionType"
+                    />
                     Pengembangan
                   </label>
                 </li>
@@ -124,39 +156,64 @@
           </div>
 
           <div>
-            <label class="font-normal text-left text-base text-neutral_90 pb-2">Jenis Ulos</label>
+            <label class="font-normal text-left text-base text-neutral_90 pb-2">Warna Ulos</label>
             <ul
               class="text-base text-neutral_80 font-normal gap-2 pl-3"
               aria-labelledby="dropdownDefaultButton"
             >
               <li class="py-2">
                 <label>
-                  <input type="checkbox" v-model="colors.Merah" @change="showChips" />
+                  <input
+                    id="label-Merah"
+                    type="checkbox"
+                    v-model="colors.Merah"
+                    @change="showChips"
+                  />
                   Merah
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" v-model="colors.Hitam" @change="showChips" />
+                  <input
+                    id="label-Hitam"
+                    type="checkbox"
+                    v-model="colors.Hitam"
+                    @change="showChips"
+                  />
                   Hitam
                 </label>
               </li>
 
               <li class="py-2">
                 <label>
-                  <input type="checkbox" v-model="colors.Biru" @change="showChips" />
+                  <input
+                    id="label-Biru"
+                    type="checkbox"
+                    v-model="colors.Biru"
+                    @change="showChips"
+                  />
                   Biru
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" v-model="colors.Hijau" @change="showChips" />
+                  <input
+                    id="label-Hijau"
+                    type="checkbox"
+                    v-model="colors.Hijau"
+                    @change="showChips"
+                  />
                   Hijau
                 </label>
               </li>
               <li class="py-2">
                 <label>
-                  <input type="checkbox" v-model="colors.Kuning" @change="showChips" />
+                  <input
+                    id="label-Kuning"
+                    type="checkbox"
+                    v-model="colors.Kuning"
+                    @change="showChips"
+                  />
                   Kuning
                 </label>
               </li>
@@ -166,12 +223,14 @@
 
         <div class="flex flex-row gap-4 justify-end">
           <button
+            id="btn-batal"
             class="px-4 py-3 rounded-lg bg-neutral_20 text-center text-lg font-medium text-neutral_70"
             @click="isDropdownVisible = false"
           >
             Batal
           </button>
           <button
+            id="btn-terapkan"
             class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             @click="addFilter"
           >
@@ -207,7 +266,9 @@
       v-if="selectedOptionEthnic !== ''"
       class="inline-flex items-center rounded-3xl border border-primary_border py-2 px-3 mr-2"
     >
-      <span class="text-sm font-normal text-primary_main mr-2">{{ selectedOptionEthnic }}</span>
+      <span id="label-asal-ulos" class="text-sm font-normal text-primary_main mr-2">{{
+        selectedOptionEthnic
+      }}</span>
       <button @click="deleteSelectedOptionEthnic">
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" fill="none">
           <path
@@ -241,9 +302,17 @@
     </div>
   </div>
 
+  <div v-if="isLoading" class="mx-[180px]">
+    <CardSkeleton />
+  </div>
+
+  <div v-else-if="ulosData.length === 0 && !isLoading">
+    <!-- Show empty state component when searchText is not empty and ulosData is empty -->
+    <EmptySearch />
+  </div>
   <!-- card ulos -->
-  <div class="flex justify-center py-8">
-    <div v-if="ulosData.length > 0">
+  <div v-else>
+    <div class="flex justify-center py-8">
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         <div v-for="ulos in ulosData" :key="ulos.id">
           <router-link :to="'/ulos-detail/' + ulos.id">
@@ -260,32 +329,30 @@
               <div
                 class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
               ></div>
-              <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
-                <h1 class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
-                <p class="text-neutral_10">{{ ulos.originEthnic }}</p>
+              <div
+                id="card-ulos"
+                class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]"
+              >
+                <h1 id="ulos-nama" class="text-xl font-medium text-neutral_10">{{ ulos.name }}</h1>
+                <p id="ulos-asal" class="text-neutral_10">{{ ulos.originEthnic }}</p>
               </div>
               <div v-if="ulos.isAvailableOnEcommerce === true">
-                <ecommerceAvailable class="absolute top-6 right-6 z-[3]" />
+                <ecommerceAvailable
+                  id="icon-produk-available"
+                  class="absolute top-6 right-6 z-[3]"
+                />
               </div>
             </div>
           </router-link>
         </div>
       </div>
     </div>
-
-    <div v-else-if="ulosData.length === 0">
-      <!-- Show empty state component when searchText is not empty and ulosData is empty -->
-      <EmptySearch />
-    </div>
-
-    <div v-else>
-      <CardSkeleton />
-    </div>
   </div>
 
   <!-- Load more -->
   <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14">
     <button
+      id="btn-muatLebihBanyak"
       class="text-neutral_70 font-medium text-lg bg-neutral_20 items-center px-4 py-4 rounded-lg w-full max-w-md"
       @click="loadMore"
       v-if="!lastPage"
@@ -339,7 +406,9 @@ export default {
       selectedOptionEthnic: '',
       // selectedOptionColors: [],
       applyClickedEthnic: false,
-      applyClickedType: false
+      applyClickedType: false,
+
+      isLoading: false
     }
   },
   watch: {
@@ -352,6 +421,7 @@ export default {
     }
   },
   mounted() {
+    this.isLoading = true
     axios
       .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos?pageNo=${this.pageNo}`)
       .then((response) => {
@@ -365,10 +435,14 @@ export default {
       .catch((error) => {
         console.log(error)
       })
+      .finally(() => {
+        this.isLoading = false
+      })
     if (this.$route.query.ethnic) {
       this.selectedOptionEthnic = this.$route.query.ethnic
       console.log(this.selectedOptionEthnic)
     }
+    console.log(this.isLoading)
   },
   computed: {
     convertColorsObjToArray() {

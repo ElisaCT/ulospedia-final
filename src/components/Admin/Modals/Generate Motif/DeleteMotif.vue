@@ -1,29 +1,28 @@
 <template>
     <div>
       <!-- Delete button -->
-      <button
-      id="btn-hapus-penenun"
-      @click="showModal = true"
-            class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
-              <path
-                stroke="#757575"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M14 3.987a67.801 67.801 0 0 0-6.68-.334c-1.32 0-2.64.067-3.96.2L2 3.987M5.667 3.313l.146-.873C5.92 1.807 6 1.333 7.127 1.333h1.746c1.127 0 1.214.5 1.314 1.114l.146.866M12.567 6.093l-.434 6.714c-.073 1.046-.133 1.86-1.993 1.86H5.86c-1.86 0-1.92-.814-1.993-1.86l-.434-6.714M6.887 11h2.22M6.333 8.333h3.334"
-              />
-            </svg>
-            Hapus Penenun
-          </button>
+      <div class="">
+        <!-- <div class="fixed inset-0 bg-neutral_100 opacity-50"></div> -->
+        <button @click="showModal = true" class="relative justify-center pt-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="124" height="44" fill="none">
+            <rect width="124" height="44" fill="#CB3A31" rx="8" />
+            <path
+              stroke="#fff"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M68 17.988a67.8 67.8 0 0 0-6.68-.334c-1.32 0-2.64.067-3.96.2l-1.36.134M59.666 17.314l.147-.873c.107-.634.187-1.107 1.313-1.107h1.747c1.127 0 1.214.5 1.313 1.113l.147.867M66.566 20.094l-.433 6.713c-.073 1.047-.133 1.86-1.993 1.86h-4.28c-1.86 0-1.92-.813-1.994-1.86l-.433-6.713M60.887 25h2.22M60.334 22.334h3.333"
+            />
+          </svg>
+        </button>
+      </div>
   
       <!-- Modal -->
-      <div v-if="showModal" class="fixed inset-0 flex items-center justify-center">
+      <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-10">
         <!-- Background overlay -->
         <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
   
-        <div id="card-konfirmasi-hapus-penenun" class="rounded-lg p-6 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
+        <div class="rounded-lg p-6 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
           <div class="flex flex-row gap-4 w-full mr-4">
             <div>
               <svg class="" xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none">
@@ -47,7 +46,6 @@
               <div class="mt-8 flex justify-end gap-3">
                 <!-- Cancel button -->
                 <button
-                  data-test-id="btn-batal-konfirmasi"
                   @click="showModal = false"
                   class="mr-2 rounded-lg border border-primary_surface px-4 py-2 text-neutral_80"
                 >
@@ -56,7 +54,6 @@
                 <!-- Delete button -->
                 <button
                   @click="deleteItem"
-                  data-test-id="btn-hapus-konfirmasi"
                   class="text-neutral_10 rounded-lg bg-danger_main px-4 py-2"
                 >
                   Hapus
@@ -75,15 +72,16 @@
   export default {
     data() {
       return {
-        showModal: false
+        showModal: false,
+        ulosId: this.$route.params.id,
       }
     },
-    props: ['weaverId'],
+    props: ['motifId'],
     methods: {
       async deleteItem() {
         const token = localStorage.getItem('token')
         const response = await axios.delete(
-          `http://company.ditenun.com/api/v1/ulospedia/weavers/${this.weaverId}`,
+          `http://company.ditenun.com/api/v1/generate/ulos/${this.ulosId}/motifs/${this.motifId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -92,10 +90,8 @@
         )
         console.log(response.data)
         this.showModal = false
-        this.$router.push('/admin/penenun')
-        this.$emit('weaver-deleted', this.weaverId)
-        console.log("deleted")
-        
+        this.$emit('motif-deleted', this.motifId)
+        console.log('deleted')
       }
     }
   }

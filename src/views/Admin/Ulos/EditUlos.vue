@@ -3,7 +3,7 @@
   <!-- <div class="fixed inset-0 bg-[#FCFBFD]"></div> -->
   <div class="mx-40 py-10 gap-6 z-10">
     <div class="">
-      <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Tambah Ulos</h3>
+      <h3 class="font-semibold text-2xl text-neutral_90 text-left pb-6">Edit Ulos</h3>
       <!-- stepper -->
       <div class="stepper">
         <div :hidden="currentStep != 1">
@@ -473,7 +473,7 @@
                   >
                   <div class="md:w-2/3">
                     <input
-                      v-model="name"
+                      v-model="ulosData.name"
                       type="text"
                       id="ulos-name"
                       class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -493,7 +493,7 @@
                   <div class="md:w-2/3 relative inline-block">
                     <select
                       id="dropdown-suku-ulos"
-                      v-model="originEthnic"
+                      v-model="ulosData.ethnic"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
@@ -610,7 +610,7 @@
                         class="form-radio text-primary_main"
                         name="radioGroup"
                         value="Tradisional"
-                        v-model="typeUlos"
+                        v-model="ulosData.typeUlos"
                       />
                       <span class="ml-2 text-neutral_90">Tradisional</span>
                     </label>
@@ -621,7 +621,7 @@
                         class="form-radio text-primary_main"
                         name="radioGroup"
                         value="Pengembangan"
-                        v-model="typeUlos"
+                        v-model="ulosData.typeUlos"
                       />
                       <span class="ml-2 text-neutral_90">Pengembangan</span>
                     </label>
@@ -636,7 +636,7 @@
                   >
                   <div class="md:w-2/3">
                     <input
-                      v-model="location"
+                      v-model="ulosData.location"
                       type="text"
                       id="ulos-location"
                       class="bg-neutral_10 border border-primary_border text-neutral_70 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -659,7 +659,7 @@
                         id="ulos-legth"
                         class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
                         placeholder="Panjang"
-                        v-model="length"
+                        v-model="ulosData.length"
                       />
                       <span
                         class="inline-flex items-center px-3 text-sm text-neutral_80 bg-neutral_20 border border-neutral_60 rounded"
@@ -669,7 +669,7 @@
                     </div>
                     <div class="flex md:w-2/3 gap-1">
                       <input
-                        v-model="width"
+                        v-model="ulosData.width"
                         type="number"
                         min="0"
                         id="ulos-width"
@@ -695,7 +695,7 @@
                   <div class="md:w-2/3 relative inline-block">
                     <select
                       id="dropdown-teknik-tenun"
-                      v-model="technique"
+                      v-model="ulosData.technique"
                       class="block appearance-none w-full bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
                       required
                     >
@@ -737,7 +737,7 @@
                   >
                   <div class="md:w-2/3">
                     <textarea
-                      v-model="meaning"
+                      v-model="ulosData.meaning"
                       type="text"
                       id="ulos-meaning"
                       rows="4"
@@ -754,7 +754,7 @@
                   >
                   <div class="md:w-2/3">
                     <textarea
-                      v-model="func"
+                      v-model="ulosData.func"
                       type="text"
                       id="ulos-meaning"
                       rows="4"
@@ -1094,28 +1094,10 @@ export default {
     // })
     // ]
     return {
-      mainImage: null,
-      name: '',
-      originEthnic: null,
-      color: null,
-      typeUlos: null,
-      location: '',
-      length: null,
-      width: null,
-      technique: null,
-      meaning: '',
-      func: '',
       state: false,
       currentStep: 1,
       totalSteps: 3, // Adjust this number based on the total number of steps in your form
       selectedEthnic: null, // Vue data property to store the selected values
-      ethincs: [
-        'Batak Toba',
-        'Batak Karo',
-        'Batak Simalungun',
-        'Batak Mandailing',
-        'Batak Angkola'
-      ], // Array of ethnics values for the dropdown
       selectedColors: [], // Vue data property to store the selected values
       colors: {
         Hitam: false,
@@ -1132,283 +1114,119 @@ export default {
       motifFields: [{ fileName: '', image: null }],
       productImage: [{ fileName: '', image: null }],
       forms: [],
-      //imagePreview:null,
-      selectedImage: null,
-      selectedPiecesImage: null,
-      selectedMotifImage: null,
 
-      selectedProductImage: null,
-      productName: '',
-      price: '',
-      productUrl: ''
+      ulosData: {
+        name: '',
+        colors: {
+          Hitam: false,
+          Merah: false,
+          Putih: false,
+          Hijau: false,
+          Biru: false,
+          Kuning: false
+        },
+        location: '',
+        technique: '',
+        length: '',
+        width: '',
+        meaning: '',
+        func: ''
+      },
+
+      mainImage: {
+        mainImageReference: null
+      }
     }
   },
+  mounted() {
+    if (this.forms.length === 0) {
+      this.addForm()
+    }
+
+    this.ulosId = this.$route.params.id
+    // this.getUlosImage(this.$route.params.id)
+    this.getUlosData(this.$route.params.id)
+  },
   methods: {
-    async save() {
-      console.log('CALLED')
+    // getUlosImage(ulosId) {
+    //   const token = localStorage.getItem('token')
+
+    //   axios
+    //     .get(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image/public`, {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         'Content-Type': 'application/json'
+    //       }
+    //     })
+    //     .then((res) => {
+    //       console.log(res.data.data.ulos)
+
+    //       this.mainImage = res.data.data.ulos
+    //     })
+    //     .catch(function (error) {
+    //       if (error.response) {
+    //         if (error.response.status == 404) {
+    //           alert(error.response.data.message)
+    //         }
+    //       }
+    //     })
+    // },
+    getUlosData(ulosId) {
       const token = localStorage.getItem('token')
-      console.log(this.colors)
 
-      const trueColors = Object.keys(this.colors).filter((color) => this.colors[color])
-
-      const request1 = {
-        name: this.name,
-        colors: trueColors,
-        originEthnic: this.originEthnic,
-        type: this.typeUlos,
-        location: this.location,
-        length: this.length,
-        width: this.width,
-        technique: this.technique,
-        meaning: this.meaning,
-        func: this.func
-      }
-
-      const request2 = {
-        name: this.productName,
-        price: this.price,
-        url: this.productUrl
-      }
-
-      console.log(request1)
-      console.log(request2)
-
-      //Ulos information
-      const url1 = `http://company.ditenun.com/api/v1/ulospedia/ulos`
-
-      let res1
-
-      try {
-        const response1 = await axios.post(url1, request1, {
+      axios
+        .get(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         })
-        console.log(response1.data)
-        res1 = response1.data
-      } catch (error) {
-        console.error(error)
-      }
+        .then((res) => {
+          console.log(res.data.data.ulos)
 
-      // main image
-      const ulosId = res1.data.ulos.id
-      console.log(ulosId)
-      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`)
-
-      const formData = new FormData()
-      formData.append('main-image', this.mainImageReference)
-
-      try {
-        const responseDataImage = await axios.post(
-          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/main-image`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'
+          this.ulosData = res.data.data.ulos
+        })
+        .catch(function (error) {
+          if (error.response) {
+            if (error.response.status == 404) {
+              alert(error.response.data.message)
             }
-          }
-        )
-        console.log(responseDataImage)
-      } catch (error) {
-        console.log(error)
-      }
-
-      // pieces image
-      console.log(ulosId)
-      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/pieces-images`)
-
-      formData.append('ulos-pieces-image', this.imageReference)
-
-      try {
-        const responseDataImage = await axios.post(
-          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/pieces-images`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        )
-        console.log(responseDataImage)
-      } catch (error) {
-        console.log(error)
-      }
-
-      // motif image
-      console.log(ulosId)
-      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`)
-
-      formData.append('ulos-motif-image', this.imageReference)
-
-      try {
-        const url4 = await axios.post(
-          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        )
-        console.log(url4)
-      } catch (error) {
-        console.log(error)
-      }
-
-      //Availability Product
-      
-
-      try {
-        const url4 = await axios.post(
-          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`,
-          formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        )
-        console.log(url4)
-      } catch (error) {
-        console.log(error)
-      }
-
-      // Detail Product
-      console.log(ulosId)
-      console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`)
-      const url5 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`
-
-      let productId
-
-      try {
-        const response1 = await axios.post(url5, request2, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
           }
         })
-        console.log(response1.data)
-        productId = response1.data.data.product.id
-        console.log(productId)
-      } catch (error) {
-        console.error(error)
-      }
-
-      // // Image Product
-      // console.log(ulosId)
-      // console.log(productId)
-      // console.log(
-      //   `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${productId}/image`
-      // )
-
-      // formData.append('product-image', this.imageReference)
-
-      // try {
-      //   const responseDataImage = await axios.post(
-      //     `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${productId}/image`,
-      //     formData,
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //         'Content-Type': 'multipart/form-data'
-      //       }
-      //     }
-      //   )
-      //   console.log(responseDataImage)
-      // } catch (error) {
-      //   console.log(error)
-      // }
-
-      // formData.append('product-image', this.imageReference)
-
-      // try {
-      //   const url6 = await axios.post(
-      //     `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/${productId}/image`,
-      //     formData,
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`,
-      //         'Content-Type': 'multipart/form-data'
-      //       }
-      //     }
-      //   )
-      //   console.log(url6)
-      // } catch (error) {
-      //   console.log(error)
-      // }
-
-      //detail text product
-
-      // const url7 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`
-      // const response7 = await axios.post(url7, request2, {
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //     'Content-Type': 'application/json'
-      //   }
-      // })
-      // console.log(response7.data.data.product)
-
-      // const url6 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`
-
-      // let res6
-
-      // try {
-      //   const response6 = await axios.post(url6, request2, {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //       'Content-Type': 'application/json'
-      //     }
-      //   })
-      //   console.log(response6.data)
-      //   // eslint-disable-next-line no-unused-vars
-      //   res6 = response6.data
-      // } catch (error) {
-      //   console.error(error)
-      // }
-
-      // const responseDataText = await axios.post(
-      //   `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products`,
-      //   {
-      //     name: this.name,
-      //     price: this.price,
-      //     productUrl: this.productUrl
-      //   },
-      //   {
-      //     headers: {
-      //       Authorization: `Bearer ${token}`,
-      //       'Content-Type': 'application/json'
-      //     }
-      //   }
-      // )
-      // console.log(responseDataText.data)
-
-      // other image
-      // const url3 = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/other-images`
-
-      // if (this.ulosFields.length !== 1) {
-      //   if (this.ulosFields[1].file !== null) {
-      //     for (let i = 1; i < this.ulosFields.length; i++) {
-      //       const formData = new FormData()
-      //       formData.append('other-image', this.ulosFields[i].file)
-      //       const response3 = await axios.post(url3, formData, {
-      //         headers: {
-      //           Authorization: `Bearer ${token}`,
-      //           'Content-Type': 'multipart/form-data'
-      //         }
-      //       })
-
-      //       console.log(response3.data)
-      //     }
-      //   }
-      // }
-
-      this.$router.push('/admin/ulos')
     },
+    // async editUlos() {
+    //   const token = localStorage.getItem('token')
+    //   console.log(token)
+    //   console.log(this.ulosId)
+    //   console.log(this.ulosData.name)
+
+    //   const bodyReq = {
+    //     id: this.ulosId,
+    //     name: this.name,
+    //     location: this.location,
+    //     technique: this.technique,
+    //     length: this.length,
+    //     width: this.width,
+    //     meaning: this.meaning,
+    //     func: this.func
+    //   }
+
+    //   console.log(bodyReq)
+
+    //   const responseDataText = await axios.put(
+    //     `http://company.ditenun.com/api/v1/ulospedia/ulos/${this.ulosId}`,
+    //     bodyReq,
+    //     {
+    //       headers: {
+    //         Authorization: `Bearer ${token}`,
+    //         'Content-Type': 'application/json'
+    //       }
+    //     }
+    //   )
+    //   console.log(responseDataText)
+
+    //   this.$router.push('/admin/ulos')
+    // },
     handleFileChange1(event) {
       this.mainImageReference = event.target.files[0]
       const mainImageReference = event.target.files[0]
@@ -1542,11 +1360,6 @@ export default {
         this.forms[index].previewUrl = previewUrl
       }
       reader.readAsDataURL(file)
-    }
-  },
-  mounted() {
-    if (this.forms.length === 0) {
-      this.addForm()
     }
   }
 }

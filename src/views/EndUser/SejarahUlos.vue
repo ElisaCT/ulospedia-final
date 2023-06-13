@@ -1,12 +1,14 @@
 <template>
   <Navbar/>
-  <div class="flex place-content-center pb-10 pt-10">
+  <div class="flex place-content-center pb-10 pt-10 mx-10">
     <div
       class="flex bg-primary_surface hover:bg-primary_surface rounded-[16px] transition dark:bg-primary_main dark:hover:bg-primary_hover"
     >
       <nav class="flex space-x-2 p-1.5" aria-label="Tabs" role="tablist">
         <button
+          data-test-id="btn-sejarahUlos"
           type="button"
+          test-data-id="tab-btn-sejarah-ulos"
           class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white active"
           id="segment-item-1"
           data-hs-tab="#segment-1"
@@ -16,7 +18,9 @@
           Sejarah Ulos
         </button>
         <button
+        data-test-id="btn-artiUlos"
           type="button"
+          test-data-id="tab-btn-arti-ulos"
           class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
           id="segment-item-2"
           data-hs-tab="#segment-2"
@@ -26,7 +30,9 @@
           Arti Ulos
         </button>
         <button
+        data-test-id="btn-ulosModern"
           type="button"
+          test-data-id="tab-btn-ulos-zaman-modern"
           class="hs-tab-active:bg-primary_main hs-tab-active:text-neutral_10 hs-tab-active:dark:bg-gray-800 hs-tab-active:dark:text-gray-400 dark:hs-tab-active:bg-gray-800 py-3 px-6 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 hover:text-primary_main font-medium rounded-[12px] hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white dark:hover:text-gray-300"
           id="segment-item-3"
           data-hs-tab="#segment-3"
@@ -39,7 +45,7 @@
     </div>
   </div>
 
-  <div class="mt-3">
+  <div class="mt-3 mx-28">
     <!-- Tab Sejarah Ulos -->
     <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">
       <!-- Hero -->
@@ -48,13 +54,14 @@
         <div class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
           <div class="lg:col-span-4 mt-10 lg:mt-0">
             <img
+              id="gambar-sejarah-ulos"
               class="w-full rounded-xl"
               src="../../assets/sejarah-ulos.png"
               alt="Image Description"
             />
           </div>
           <!-- End Col -->
-          <div class="lg:col-span-6 lg:mt-0">
+          <div id="text-sejarahUlos" class="lg:col-span-6 lg:mt-0">
             <h1 class="font-bold lg:text-4xl text-neutral_100 text-justify">Sejarah Ulos</h1>
             <p class="mt-3 text-md text-neutral_80 dark:text-gray-400 text-justify pt-2">
               Dikutip dari penelitian Hasibuan dan Rochmat yang berjudul Ulos sebagai Kearifan
@@ -96,10 +103,10 @@
         <!-- Grid -->
         <div class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
           <div class="lg:col-span-4 mt-10 lg:mt-0">
-            <img class="w-full rounded-xl" src="../../assets/arti-ulos.png" alt="Image Description" />
+            <img id="gambar-arti-ulos" class="w-full rounded-xl" src="../../assets/arti-ulos.png" alt="Image Description" />
           </div>
           <!-- End Col -->
-          <div class="lg:col-span-6 lg:mt-0">
+          <div id="text-artiUlos" class="lg:col-span-6 lg:mt-0">
             <h1 class="font-bold lg:text-4xl text-neutral_100 text-justify">Arti Ulos</h1>
             <p class="mt-3 text-md text-neutral_80 dark:text-gray-400 text-justify pt-2">
               Ulos merupakan kain tenun tradisional khas dari suku Batak. Ulos awalnya bermakna
@@ -134,16 +141,17 @@
       <!-- Hero -->
       <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Grid -->
-        <div class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
+        <div id="section-arti-ulos" class="grid lg:grid-cols-10 lg:gap-x-8 xl:gap-x-12">
           <div class="lg:col-span-4 mt-10 lg:mt-0">
             <img
+              id="gambar-ulos-modern"
               class="w-full rounded-xl"
               src="../../assets/ulos-modern.png"
               alt="Image Description"
             />
           </div>
           <!-- End Col -->
-          <div class="lg:col-span-6 lg:mt-0">
+          <div id="text-ulosModern" class="lg:col-span-6 lg:mt-0">
             <h1 class="font-bold lg:text-4xl text-neutral_100 text-justify">
               Ulos di zaman modern
             </h1>

@@ -1,7 +1,45 @@
-<template>
-  <Navbar />
- <div class="flex flex-col items-center gap-12 px-32 pb-12">
-  <div v-if="ulosDetails">
+<template lang="">
+  <Sidebar />
+  <div class="ml-80 pt-10 gap-6 mr-8">
+    <div class="flex flex-row justify-between items-center">
+      <h3 class="font-medium text-3xl text-left pb-6">Data Ulos</h3>
+      <div v-if="ulosDetails">
+          <div class="flex flex-row gap-6">
+            <router-link :to="'/admin/edit-ulos/' + ulosDetails.id">
+              <butotn
+                id="btn-edit-ulos" class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <path
+                    stroke="#FFF"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    stroke-width="1.5"
+                    d="m11.05 3-6.842 7.242c-.258.275-.508.816-.558 1.191l-.308 2.7c-.109.975.591 1.642 1.558 1.475l2.683-.458c.375-.067.9-.342 1.159-.625l6.841-7.242c1.184-1.25 1.717-2.675-.125-4.416C13.625 1.142 12.233 1.75 11.05 3Z"
+                  />
+                  <path
+                    stroke="#FFF"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-miterlimit="10"
+                    stroke-width="1.5"
+                    d="M9.908 4.208A5.105 5.105 0 0 0 14.45 8.5M2.5 18.333h15"
+                  />
+                </svg>
+                Edit Ulos
+              </butotn>
+            </router-link>
+            <DeleteButtonUlos
+              :ulos-id="ulosDetails.id"
+              @ulos-deleted="handleUlosDeleted"
+              class="z-10"
+            />
+          </div>
+      </div>
+    </div>
+
+    <div v-if="ulosDetails">
       <div class="flex flex-col items-center gap-12 px-32 mb-12">
         <div class="flex gap-6 items-center">
           <div class="flex flex-col items-center gap-2">
@@ -45,7 +83,7 @@
       </div>
 
       <!-- image -->
-      <SliderUlos :data="ulosDetails.clientUlosRelatedImageResponseList" />
+      <SliderUlos :data="ulosDetails.ulosRelatedImageResponseList" />
 
       <div class="grid grid-cols-12 gap-6 px-8 mt-12">
         <!-- makna dan fungsi -->
@@ -111,7 +149,7 @@
           <p class="font-normal text-lg text-neutral_100">Tersedia di e-commerce DiTenun</p>
 
           
-            <div v-for="product in ulosDetails.clientProductDetailResponseList" :key="product.id">
+            <div v-for="product in ulosDetails.productDetailResponseList" :key="product.id">
               <div class="grid grid-cols-6 gap-4">
                 <img id="gambar-produk-ulos" :src="product.imageUrl" alt="" class="rounded-md col-span-3 w-[200px] h-[180px]" />
                 <div class=" gap-6 pt-12 col-span-3">
@@ -132,49 +170,52 @@
         </div>
       </div>
     </div>
- </div>
-  <Footer />
+  </div>
+  <!-- </div> -->
 </template>
 <script>
-import Navbar from '../../components/EndUser/Navbar.vue'
-import Footer from '../../components/EndUser/Footer.vue'
 import axios from 'axios'
-//import ImageDetail from '../../components/EndUser/ImageDetail.vue'
-import SliderUlos from '../../components/EndUser/SliderUlos.vue'
-
+import Sidebar from '../../../components/Admin/Sidebar.vue'
+import SliderUlos from '../../../components/EndUser/SliderUlos.vue'
+import DeleteButtonUlos from '../../../components/Admin/Modals/DeleteButtonUlos.vue'
 export default {
-  // eslint-disable-next-line vue/no-reserved-component-names, no-undef
-  components: {
-    Navbar,
-    // eslint-disable-next-line vue/no-reserved-component-names
-    Footer,
-    // ImageDetail,
-    SliderUlos
-  },
   data: function () {
     return {
-      imageList: [],
       ulosDetails: null,
+      productAvail: [],
+      ulosId:0
     }
   },
+  components: {
+    Sidebar, 
+    SliderUlos,
+    DeleteButtonUlos
+  },
   mounted() {
+    const token = localStorage.getItem('token')
     axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/client/ulos/' + this.$route.params.id)
-      .then((response) => {
-        this.ulosDetails = response.data.data.ulosDetail
-        console.log(this.ulosDetails)
-        this.imageList = response.data.data.ulosDetail.clientUlosRelatedImageResponseList
-        console.log(this.imageList)
+      .get('http://company.ditenun.com/api/v1/ulospedia/ulos/' + this.$route.params.id, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
+      .then((response) => {
+        this.ulosId = response.data.data.ulos.id
+        this.ulosDetails = response.data.data.ulos
+        this.productAvail = response.data.data.ulos.clientProductDetailResponseList
+        console.log(this.ulosDetail)
+        console.log(this.productAvail)
+      })
+  },
+  methods: {
+    handleUlosDeleted(ulosId) {
+      console.log('Before filtering:', this.ulosDetails)
+      this.ulosDetails = this.ulosDetails.filter((ulosDetail) => ulosDetail.id !== ulosId)
+      console.log('After filtering:', this.ulosDetails)
+      console.log('navigate')
+      this.$router.push('/admin/ulos')
+    }
   }
 }
 </script>
-<style scoped>
-.e-commerce {
-  border: 1px solid #ededed;
-  box-shadow: 0px 6px 16px rgba(112, 144, 176, 0.2);
-}
-.aspect-ratio {
-  padding-top: 75%; /* 4:3 aspect ratio (75% = 3/4 * 100%) */
-}
-</style>
+<style lang=""></style>

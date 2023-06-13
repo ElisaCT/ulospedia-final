@@ -7,6 +7,7 @@
         <h3 class="font-medium text-3xl text-left pb-6">Daftar Penenun</h3>
         <router-link to="add-penenun">
           <button
+            id="btn-tambah-penenun"
             class="flex flex-row bg-primary_main items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_10"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
@@ -42,7 +43,7 @@
                 </svg>
               </div>
               <input
-                v-model="searchQuery"
+                v-model="search"
                 type="text"
                 id="table-search"
                 class="block p-2 pl-10 text-base font-normal text-neutral_90 rounded-lg w-80 bg-neutral_20 focus:ring-neutral_50 focus:border-neutral_80"
@@ -55,7 +56,11 @@
           <thead class="text-neutral_70 font-bold bg-[#F8F7FA] uppercase w-full rounded">
             <tr>
               <th scope="col" class="px-6 py-3">
-                <button v-on:click="sortTable('name')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-nama-penenun"
+                  @click="sortedBy('name')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Nama Penenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -70,7 +75,11 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button v-on:click="sortTable('theLoom')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-alat-tenun"
+                  @click="sortedBy('theLoom')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Alat Tenun
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -86,7 +95,8 @@
               </th>
               <th scope="col" class="px-6 py-3">
                 <button
-                  v-on:click="sortTable('technique')"
+                  id="btn-sort-teknik-tenun"
+                  @click="sortedBy('technique')"
                   class="flex flex-row items-center gap-3"
                 >
                   Teknik Tenun
@@ -103,7 +113,11 @@
                 </button>
               </th>
               <th scope="col" class="px-6 py-3">
-                <button v-on:click="sortTable('ethnic')" class="flex flex-row items-center gap-3">
+                <button
+                  id="btn-sort-suku-penenun"
+                  @click="sortedBy('ethnic')"
+                  class="flex flex-row items-center gap-3"
+                >
                   Suku
                   <svg xmlns="http://www.w3.org/2000/svg" width="26" height="28" fill="none">
                     <path
@@ -121,23 +135,25 @@
               <th scope="col" class="px-6 py-3"></th>
             </tr>
           </thead>
-          <template v-if="filteredWeavers.length > 0">
+          <template v-if="sortedItems.length > 0">
             <tbody class="divide-y divide-neutral_30 text-neutral_90">
               <tr
+                id="baris-daftar-penenun"
                 class="hover:bg-primary_surface hover:cursor-pointer"
-                v-for="(weavers, id) in filteredWeavers"
+                v-for="(weavers, id) in sortedItems"
                 :key="id"
-                
               >
                 <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.name }}</td>
                 <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.theLoom }}</td>
-                <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.technique }}</td>
+                <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">
+                  {{ weavers.technique }}
+                </td>
                 <td class="px-6 py-4" @click="goToDetailPage(weavers.id)">{{ weavers.ethnic }}</td>
 
                 <td class="px-6 py-4">
                   <div class="flex gap-4">
-                    <router-link :to="'/admin/edit-penenun/'+ weavers.id">
-                      <button class="p-[10px] bg-secondary_surface rounded">
+                    <router-link :to="'/admin/edit-penenun/' + weavers.id">
+                      <button id="btn-edit-penenun" class="p-[10px] bg-secondary_surface rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
                           <path
                             stroke="#ECB11F"
@@ -239,41 +255,51 @@ import DeleteConfirmation from '../../../components/Admin/Modals/DeleteConfirmat
 import EmptyState from '../../../components/Admin/EmptyState.vue'
 import axios from 'axios'
 export default {
-  // ini waktu di mau hit api nya
-  // ini udah deploy di server del
   mounted() {
-    const token = localStorage.getItem('token')
-    console.log(token)
-    axios
-      .get('http://company.ditenun.com/api/v1/ulospedia/weavers?sortDir=desc', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then((response) => {
-        console.log(response.data)
-        this.lastPage = response.data.data.weavers.lastPage
-        this.weavers = response.data.data.weavers.weaversListAdminDashboard
-        this.totalElement = response.data.data.weavers.totalAllElements
-        this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
-      })
+    // const token = localStorage.getItem('token')
+    // const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
+    //   this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
+    // }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
+    //   this.search !== '' ? '&searchByName=' + this.search : ''
+    // }`
+    // axios
+    //   .get(apiUrl, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`
+    //     }
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //     console.log(apiUrl)
+    //     this.lastPage = response.data.data.weavers.lastPage
+    //     this.weavers = response.data.data.weavers.weaversListAdminDashboard
+    //     this.totalElement = response.data.data.weavers.totalAllElements
+    //     this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
+    //   })
+    this.fetchWeavers()
   },
   data() {
     return {
       weavers: [],
       totalElement: 0,
       totalElementOnPage: 0,
-      sortDir: 'asc',
-      pageNo: 1,
-      searchQuery: '',
-      sortBy: '',
+
       lastPage: true,
       moveState: false,
       isLoading: false,
-      propName: 'Penenun'
+      propName: 'Penenun',
+
+      // sort
+      sortDir: 'asc',
+      pageNo: 1,
+      search: '',
+      sortBy: 'updatedAt',
     }
   },
   methods: {
+    goToDetailPage(weaverId) {
+      this.$router.push(`/admin/penenun/detail-penenun/${weaverId}`)
+    },
     handleWeaverDeleted(weaverId) {
       this.weavers = this.weavers.filter((weaver) => weaver.id !== weaverId)
     },
@@ -283,34 +309,6 @@ export default {
       }${sortDir !== '' ? '&sortDir=' + sortDir : ''}${
         search !== '' ? '&searchByName=' + search : ''
       }`
-    },
-    async sortByName() {
-      if (!this.moveState) {
-        this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc'
-      } else {
-        this.moveState = false
-        this.sortDir = 'asc'
-      }
-      const token = localStorage.getItem('token')
-      const url = this.defineParam(this.pageNo, 'name', 'asc', '')
-      console.log(url)
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      console.log(response)
-      this.weavers = response.data.data.weavers.weaversListAdminDashboard
-      this.totalElement = response.data.data.weavers.totalAllElements
-      this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
-
-      // cek apakah current page adalah page terakhir
-      if (!response.data.data.weavers.lastPage) {
-        this.pageNo = this.pageNo + 1
-        this.lastPage = false
-      } else {
-        this.lastPage = true
-      }
     },
     async nextPage() {
       console.log('DITEKAN')
@@ -388,40 +386,56 @@ export default {
     async fetchWeavers() {
       try {
         const token = localStorage.getItem('token')
-        const response = await axios.get('http://company.ditenun.com/api/v1/ulospedia/weavers', {
-          params: {
-            pageNo: 1,
-            pageSize: 10,
-            sortBy: this.sortBy,
-            sortOrder: this.sortOrder
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        this.weavers = response.data
-      } catch (error) {
+        const apiUrl = `http://company.ditenun.com/api/v1/ulospedia/weavers?pageNo=${this.pageNo}${
+      this.sortBy !== '' ? '&sortBy=' + this.sortBy : ''
+    }${this.sortDir !== '' ? '&sortDir=' + this.sortDir : ''}${
+      this.search !== '' ? '&search=' + this.search : ''
+    }`
+    axios
+      .get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((response)=>{
+        this.lastPage = response.data.data.weavers.lastPage
+        this.weavers = response.data.data.weavers.weaversListAdminDashboard
+        this.totalElement = response.data.data.weavers.totalAllElements
+        this.totalElementOnPage = response.data.data.weavers.totalElementsOnPage
+      })
+        
+      }catch (error) {
         console.error(error)
       }
     },
-    sortTable(sortBy) {
-      if (this.sortBy === sortBy) {
-        this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc'
-      } else {
-        this.sortBy = sortBy
-        this.sortOrder = 'asc'
-      }
-      this.fetchWeavers()
-    },
-    goToDetailPage(weaverId) {
-      this.$router.push(`/admin/penenun/detail-penenun/${weaverId}`)
+    sortedBy(key) {
+      this.sortDir = this.sortBy === key ? (this.sortDir === 'asc' ? 'desc' : 'asc') : 'asc'
+
+      this.sortBy = key
+      console.log(key)
+      console.log(this.sortDir)
     }
   },
   computed: {
-    filteredWeavers() {
-      return this.weavers.filter((weaver) =>
-        weaver.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+    sortedItems() {
+       const sorted = [...this.weavers]
+
+      // search result
+      const filtered = sorted.filter((item) =>
+        item.name.toLowerCase().includes(this.search.toLowerCase())
       )
+      console.log(this.search)
+
+      filtered.sort((a, b) => {
+        if (a[this.sortBy] > b[this.sortBy]) {
+          return this.sortDir === 'asc' ? 1 : -1
+        }
+        if (a[this.sortBy] < b[this.sortBy]) {
+          return this.sortDir === 'asc' ? -1 : 1
+        }
+        return 0
+      })
+      return filtered
     }
   },
   components: {
