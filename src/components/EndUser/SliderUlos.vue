@@ -17,7 +17,7 @@
       <div
         v-for="(slide, index) in data"
         :key="index"
-        class="inline-block mr-2"
+        class="inline-block mr-4"
         style="width: 200px"
       >
         <img

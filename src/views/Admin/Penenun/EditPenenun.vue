@@ -94,40 +94,40 @@
           <div class="md:w-2/3 flex flex-col gap-2">
             <div class="w-full relative inline-block">
               <Field
-            name="ethnic"
+                name="ethnic"
                 as="select"
-              id="dropdown-suku-penenun"
-              v-model="weaverData.ethnic"
-              class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-            >
-              <option value="" disabled selected hidden>Pilih Suku Penenun</option>
-              <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
-              <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
-                Batak Simalungun
-              </option>
-              <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
-              <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
-                Batak Angkola
-              </option>
-              <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
-                Batak Mandailing
-              </option>
-            </Field>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral_80"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                <g clip-path="url(#a)">
-                  <path
-                    fill="#323232"
-                    d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                  />
-                </g>
-                <defs>
-                  <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                </defs>
-              </svg>
-            </div>
+                id="dropdown-suku-penenun"
+                v-model="weaverData.ethnic"
+                class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+              >
+                <option value="" disabled selected hidden>Pilih Suku Penenun</option>
+                <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
+                <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
+                  Batak Simalungun
+                </option>
+                <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
+                <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
+                  Batak Angkola
+                </option>
+                <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
+                  Batak Mandailing
+                </option>
+              </Field>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neutral_80"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                  <g clip-path="url(#a)">
+                    <path
+                      fill="#323232"
+                      d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                  </defs>
+                </svg>
+              </div>
             </div>
             <ErrorMessage name="ethnic" class="text-danger_main text-s" />
           </div>
@@ -293,6 +293,7 @@ import axios from 'axios'
 export default {
   components: {
     YearPicker,
+    // eslint-disable-next-line vue/no-reserved-component-names
     Form,
     Field,
     ErrorMessage
@@ -306,8 +307,14 @@ export default {
   },
   data() {
     const schema = yup.object().shape({
-      name: yup.string().required('Nama penenun harus diisi').max(100, 'Nama penenun tidak boleh lebih dari 100 karakter'),
-      domicile: yup.string().required('Domisili penenun harus diisi').max(50, 'Domisili penenun tidak boleh lebih dari 50 karakter'),
+      name: yup
+        .string()
+        .required('Nama penenun harus diisi')
+        .max(100, 'Nama penenun tidak boleh lebih dari 100 karakter'),
+      domicile: yup
+        .string()
+        .required('Domisili penenun harus diisi')
+        .max(50, 'Domisili penenun tidak boleh lebih dari 50 karakter'),
       ethnic: yup.string().required('Suku penenun harus diisi'),
       theLoom: yup.string().required('Alat tenun penenun harus diisi'),
       story: yup.string().required('Cerita penenun harus diisi'),

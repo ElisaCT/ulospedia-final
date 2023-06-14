@@ -552,7 +552,7 @@
                       <input
                         id="checkbox-hitam"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Hitam"
                         value="hitam"
                       />
                       <span>Hitam</span>
@@ -561,7 +561,7 @@
                       <input
                         id="checkbox-putih"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Putih"
                         value="putih"
                       />
                       <span>Putih</span>
@@ -570,7 +570,7 @@
                       <input
                         id="checkbox-kuning"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Kuning"
                         value="kuning"
                       />
                       <span>Kuning</span>
@@ -579,7 +579,7 @@
                       <input
                         id="checkbox-biru"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Biru"
                         value="biru"
                       />
                       <span>Biru</span>
@@ -588,7 +588,7 @@
                       <input
                         id="checkbox-hijau"
                         type="checkbox"
-                        v-model="selectedColors"
+                        v-model="colors.Hijau"
                         value="hijau"
                       />
                       <span>Hijau</span>
@@ -1245,6 +1245,25 @@ export default {
       console.log(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`)
 
       formData.append('ulos-motif-image', this.imageReference)
+
+      try {
+        const url4 = await axios.post(
+          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        )
+        console.log(url4)
+      } catch (error) {
+        console.log(error)
+      }
+
+      //Availability Product
+      
 
       try {
         const url4 = await axios.post(
