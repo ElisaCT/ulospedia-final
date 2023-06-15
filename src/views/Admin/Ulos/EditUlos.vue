@@ -160,7 +160,7 @@
                       >
                         <img
                           v-if="selectedImage"
-                          :src="selectedImage"
+                          :src="ulosData.oldMainImage"
                           alt="Preview"
                           class="w-24 h-24 object-cover rounded-lg"
                         />
@@ -473,7 +473,7 @@
                   >
                   <div class="md:w-2/3">
                     <input
-                      v-model="ulosData.name"
+                      v-model="ulosData.ulosName"
                       type="text"
                       id="ulos-name"
                       class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
@@ -544,7 +544,7 @@
                         id="checkbox-merah"
                         type="checkbox"
                         v-model="colors.Merah"
-                        value="true"
+                        value="merah"
                       />
                       <span>Merah</span>
                     </div>
@@ -610,7 +610,7 @@
                         class="form-radio text-primary_main"
                         name="radioGroup"
                         value="Tradisional"
-                        v-model="ulosData.typeUlos"
+                        v-model="ulosData.type"
                       />
                       <span class="ml-2 text-neutral_90">Tradisional</span>
                     </label>
@@ -621,7 +621,7 @@
                         class="form-radio text-primary_main"
                         name="radioGroup"
                         value="Pengembangan"
-                        v-model="ulosData.typeUlos"
+                        v-model="ulosData.type"
                       />
                       <span class="ml-2 text-neutral_90">Pengembangan</span>
                     </label>
@@ -924,7 +924,6 @@
                           }"
                           class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
                           placeholder="contoh: https://ditenun.com/product/menik-lanyard/"
-                          v-bind:disabled="!toggleStatus"
                           required
                         />
                       </div>
@@ -1017,7 +1016,7 @@ export default {
     imageMotifReference(value) {
       console.log(value)
     },
-    name(value) {
+    ulosName(value) {
       console.log(value)
     },
     originEthnic(value) {
@@ -1066,6 +1065,9 @@ export default {
       console.log(value)
     },
     productUrl(value) {
+      console.log(value)
+    },
+    mainImageUrl(value) {
       console.log(value)
     }
   },
@@ -1116,7 +1118,11 @@ export default {
       forms: [],
 
       ulosData: {
-        name: '',
+        //Gambar Ulos
+        mainImageUrl: '',
+
+        //Informasi Ulos
+        ulosName: '',
         colors: {
           Hitam: false,
           Merah: false,
@@ -1125,12 +1131,15 @@ export default {
           Biru: false,
           Kuning: false
         },
+        ethnic: '',
+        type: '',
         location: '',
-        technique: '',
         length: '',
         width: '',
+        technique: '',
         meaning: '',
-        func: ''
+        func: '',
+        isAvailableInEcommerce: ''
       },
 
       mainImage: {
@@ -1143,9 +1152,28 @@ export default {
       this.addForm()
     }
 
-    this.ulosId = this.$route.params.id
-    // this.getUlosImage(this.$route.params.id)
-    this.getUlosData(this.$route.params.id)
+    const token = localStorage.getItem('token')
+
+    axios
+      // eslint-disable-next-line no-undef
+      .get(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/old-data-update-form`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((response) => {
+        const ulosData = response.data.data.ulosList
+
+        this.mainImageUrl = ulosData.oldMainImage.mainImageUrls
+      })
+      .catch((error) => {
+        console.error('Gagal mendapatkan data gambar:', error)
+      })
+    ;(this.ulosId = this.$route.params.id),
+      // this.getUlosImage(this.$route.params.id)
+
+      this.getUlosData(this.$route.params.id)
   },
   methods: {
     // getUlosImage(ulosId) {
@@ -1175,16 +1203,15 @@ export default {
       const token = localStorage.getItem('token')
 
       axios
-        .get(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}`, {
+        .get(`http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/old-data-update-form`, {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
           }
         })
         .then((res) => {
-          console.log(res.data.data.ulos)
-
-          this.ulosData = res.data.data.ulos
+          console.log(res.data.data.ulosList)
+          this.ulosData = res.data.data.ulosList
         })
         .catch(function (error) {
           if (error.response) {

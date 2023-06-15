@@ -22,7 +22,11 @@
       <!-- Background overlay -->
       <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
 
-      <Form @submit="submit" :validation-schema="schema" class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
+      <Form
+        @submit="submit"
+        :validation-schema="schema"
+        class="rounded-lg p-8 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50"
+      >
         <div class="flex flex-col gap-4 w-full mr-4">
           <h5 class="font-bold text-left text-xl">Tambah Gambar Ulos</h5>
           <div class="flex flex-col gap-6 md:flex-row pb-6">
@@ -80,7 +84,6 @@
                   class="hidden"
                   accept="image/png, image/jpg, image/jpeg"
                   name="inputImage"
-                  
                 />
               </label>
               <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
@@ -110,41 +113,45 @@
             <div class="md:w-2/3 flex flex-col gap-2">
               <div class="w-full relative inline-block">
                 <Field
-                name="ethnic"
-                as="select"
-                id="dropdown-suku-ulos"
-                v-model="ethnic"
-                class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
-                required
-              >
-                <option value="" disabled selected hidden>Pilih Suku Ulos</option>
-                <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">Batak Toba</option>
-                <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
-                  Batak Simalungun
-                </option>
-                <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">Batak Karo</option>
-                <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
-                  Batak Angkola
-                </option>
-                <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
-                  Batak Mandailing
-                </option>
-              </Field>
-              <div
-                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
-                  <g clip-path="url(#a)">
-                    <path
-                      fill="#323232"
-                      d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
-                  </defs>
-                </svg>
-              </div>
+                  name="ethnic"
+                  as="select"
+                  id="dropdown-suku-ulos"
+                  v-model="ethnic"
+                  class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
+                  required
+                >
+                  <option value="" disabled selected hidden>Pilih Suku Ulos</option>
+                  <option value="Batak Toba" class="pb-3 hover:bg-primary_surface">
+                    Batak Toba
+                  </option>
+                  <option value="Batak Simalungun" class="pb-3 hover:bg-primary_surface">
+                    Batak Simalungun
+                  </option>
+                  <option value="Batak Karo" class="pb-3 hover:bg-primary_surface">
+                    Batak Karo
+                  </option>
+                  <option value="Batak Angkola" class="pb-3 hover:bg-primary_surface">
+                    Batak Angkola
+                  </option>
+                  <option value="Batak Mandailing" class="pb-3 hover:bg-primary_surface">
+                    Batak Mandailing
+                  </option>
+                </Field>
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-neu"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none">
+                    <g clip-path="url(#a)">
+                      <path
+                        fill="#323232"
+                        d="M6.175 7.158 10 10.975l3.825-3.817L15 8.333l-5 5-5-5 1.175-1.175Z"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="a"><path fill="#fff" d="M0 0h20v20H0z" /></clipPath>
+                    </defs>
+                  </svg>
+                </div>
               </div>
               <ErrorMessage name="ethnic" class="text-danger_main text-s" />
             </div>
@@ -160,7 +167,6 @@
             <button
               id="btn-simpan"
               type="submit"
-             
               class="px-4 py-3 rounded-lg bg-primary_main text-center text-lg font-medium text-neutral_10"
             >
               Simpan
@@ -179,7 +185,10 @@ import axios from 'axios'
 export default {
   data() {
     const schema = yup.object().shape({
-      name: yup.string().required('Nama penenun harus diisi').max(100, 'Nama penenun tidak boleh lebih dari 100 karakter'),
+      name: yup
+        .string()
+        .required('Nama penenun harus diisi')
+        .max(100, 'Nama penenun tidak boleh lebih dari 100 karakter'),
       ethnic: yup.string().required('Suku penenun harus diisi')
     })
     return {
@@ -189,11 +198,12 @@ export default {
       name: '',
       ethnic: '',
       isLoading: false,
-      errorMessage: "",
+      errorMessage: '',
       schema
     }
   },
-  components:{
+  components: {
+    // eslint-disable-next-line vue/no-reserved-component-names
     Form,
     Field,
     ErrorMessage
@@ -212,7 +222,7 @@ export default {
   methods: {
     async submit() {
       this.isLoading = true
-      
+
       const token = localStorage.getItem('token')
 
       const responseDataText = await axios.post(
@@ -229,25 +239,41 @@ export default {
         }
       )
       console.log(responseDataText.data)
+
       const newUlosDataId = responseDataText.data.data.ulosData.id
       console.log(newUlosDataId)
       console.log(`http://company.ditenun.com/api/v1/generate/ulos/${newUlosDataId}/image`)
 
+      console.log(this.image)
       const formData = new FormData()
       formData.append('ulos-image', this.image)
 
-      const secondResponse = await axios.post(
-        `http://company.ditenun.com/api/v1/generate/ulos/${newUlosDataId}/image`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
+      try {
+        const secondResponse = await axios.post(
+          `http://company.ditenun.com/api/v1/generate/ulos/${newUlosDataId}/image`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'multipart/form-data'
+            }
           }
+        )
+        console.log(secondResponse)
+
+        this.$router.push('/admin/generate-motif')
+      } catch (error) {
+        if (error.response) {
+          if (error.response.status === 404) {
+            console.log('Image not found')
+          } else {
+            console.log('Error response:', error.response.data)
+          }
+        } else {
+          console.log('Error:', error.message)
         }
-      )
-      console.log(secondResponse)
-      
+      }
+
       this.showModal = false
 
       this.$emit('data', {
@@ -260,40 +286,42 @@ export default {
       //console.log(responseDataImage)
     },
     handleFileChange(event) {
-  const file = event.target.files[0];
+      const file = event.target.files[0]
+      console.log(file)
 
-  if (!file) {
-    this.errorMessage = "Image is required.";
-    return;
-  }
+      if (!file) {
+        this.errorMessage = 'Image is required.'
+        return
+      }
 
-  // Validate image size
-  if (file.size > 5 * 1024 * 1024) {
-    this.errorMessage = "Image size exceeds the maximum limit of 5MB.";
-    return;
-  }
+      // Validate image size
+      if (file.size > 5 * 1024 * 1024) {
+        this.errorMessage = 'Image size exceeds the maximum limit of 5MB.'
+        return
+      }
 
-  // Validate image type
-  if (!["image/jpeg", "image/jpg", "image/png"].includes(file.type)) {
-    this.errorMessage = "Invalid image type. Only JPG, JPEG, and PNG are allowed.";
-    return;
-  }
+      // Validate image type
+      if (!['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
+        this.errorMessage = 'Invalid image type. Only JPG, JPEG, and PNG are allowed.'
+        return
+      }
 
-  // Clear any previous error messages
-  this.errorMessage = "";
+      // Clear any previous error messages
+      this.errorMessage = ''
 
-  const image = event.target.files[0];
-  if (image) {
-    // Create a FileReader to read the file
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      // Set the selected image data to the component's data
-      this.selectedImage = e.target.result;
-    };
-    reader.readAsDataURL(image); // Read the file as a data URL
-  }
-}
-
+      const image = event.target.files[0]
+      if (image) {
+        // Create a FileReader to read the file
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          // Set the selected image data to the component's data
+          this.selectedImage = e.target.result
+          console.log('File name:', image.name)
+        }
+        reader.readAsDataURL(image) // Read the file as a data URL
+      }
+      this.image = event.target.files[0]
+    }
   }
 }
 </script>

@@ -403,6 +403,7 @@ export default {
       console.log(responseDataText.data)
 
       const newWeaverId = responseDataText.data.data.weaver.id
+      
       console.log(newWeaverId)
       console.log(`http://company.ditenun.com/api/v1/ulospedia/weavers/${newWeaverId}/image`)
 

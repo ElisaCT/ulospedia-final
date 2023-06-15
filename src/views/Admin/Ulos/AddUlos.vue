@@ -788,6 +788,7 @@
                         value=""
                         class="sr-only peer"
                         v-model="toggleStatus"
+                        @change="toggleAvailability"
                       />
                       <div
                         class="w-11 h-6 bg-neutral_70 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary_main rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-neutral_60 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary_main"
@@ -795,7 +796,7 @@
                     </label>
                   </div>
 
-                  <div v-for="(form, formIndex) in forms" :key="formIndex">
+                  <div v-if="toggleStatus">
                     <h1>{{ formIndex }}</h1>
                     <div class="flex flex-col gap-6 md:flex-row pb-8">
                       <label
@@ -880,7 +881,6 @@
                           }"
                           class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
                           placeholder="Masukkan nama produk"
-                          v-bind:disabled="!toggleStatus"
                           required
                         />
                       </div>
@@ -902,7 +902,6 @@
                           }"
                           class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
                           placeholder="Masukkan harga produk"
-                          v-bind:disabled="!toggleStatus"
                           required
                         />
                       </div>
@@ -924,18 +923,11 @@
                           }"
                           class="bg-neutral_10 border border-primary_border text-neutral_90 text-base rounded-lg focus:ring-primary_main focus:border-primary_main block w-full p-2.5"
                           placeholder="contoh: https://ditenun.com/product/menik-lanyard/"
-                          v-bind:disabled="!toggleStatus"
                           required
                         />
                       </div>
                     </div>
-                    <button
-                      id="btn-remove-produk"
-                      @click="removeForm(form.id)"
-                      :disabled="!toggleStatus"
-                    >
-                      Remove
-                    </button>
+                    <button id="btn-remove-produk" @click="removeForm(form.id)">Remove</button>
                   </div>
                 </form>
               </div>
@@ -1067,6 +1059,9 @@ export default {
     },
     productUrl(value) {
       console.log(value)
+    },
+    toggleStatus(value) {
+      console.log(value)
     }
   },
   data() {
@@ -1126,7 +1121,6 @@ export default {
         Kuning: false
       },
       selectedTechnics: [],
-      toggleStatus: false,
       ulosFields: [{ fileName: '', image: null, file: null }],
       potonganFields: [{ fileName: '', image: null }],
       motifFields: [{ fileName: '', image: null }],
@@ -1137,6 +1131,9 @@ export default {
       selectedPiecesImage: null,
       selectedMotifImage: null,
 
+      formIndex: 0,
+
+      toggleStatus: false,
       selectedProductImage: null,
       productName: '',
       price: '',
@@ -1260,22 +1257,21 @@ export default {
       }
 
       //Availability Product
-      
+      const ava = `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/products/availability?state=${this.toggleStatus}`
 
       try {
-        const url4 = await axios.post(
-          `http://company.ditenun.com/api/v1/ulospedia/ulos/${ulosId}/motif-images`,
-          formData,
+        const response = await axios.post(
+          ava,
+          {},
           {
             headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'multipart/form-data'
+              Authorization: `Bearer ${token}`
             }
           }
         )
-        console.log(url4)
+        console.log(response.data)
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
 
       // Detail Product
