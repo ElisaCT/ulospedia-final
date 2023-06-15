@@ -3,9 +3,8 @@
       <!-- Delete button -->
       <button
       @click="showModal = true"
-            class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
+            class="flex flex-row bg-neutral_20 items-center px-4 py-2 gap-2 rounded-lg text-lg font-medium text-neutral_70">
+            <svg  id="btn-hapus-penenun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none">
               <path
                 stroke="#757575"
                 stroke-linecap="round"
@@ -22,7 +21,7 @@
         <!-- Background overlay -->
         <div class="fixed inset-0 bg-neutral_10 opacity-50"></div>
   
-        <div class="rounded-lg p-6 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
+        <div id="card-konfirmasi-hapus-penenun" class="rounded-lg p-6 shadow-lg md:w-1/3 sm:w-full bg-neutral_10 z-50">
           <div class="flex flex-row gap-4 w-full mr-4">
             <div>
               <svg class="" xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none">
@@ -46,6 +45,7 @@
               <div class="mt-8 flex justify-end gap-3">
                 <!-- Cancel button -->
                 <button
+                  data-test-id="btn-batal-konfirmasi"
                   @click="showModal = false"
                   class="mr-2 rounded-lg border border-primary_surface px-4 py-2 text-neutral_80"
                 >
@@ -53,7 +53,9 @@
                 </button>
                 <!-- Delete button -->
                 <button
+                  id="btn-hapus-confirm"
                   @click="deleteItem"
+                  data-test-id="btn-hapus-konfirmasi"
                   class="text-neutral_10 rounded-lg bg-danger_main px-4 py-2"
                 >
                   Hapus
@@ -89,9 +91,10 @@
         )
         console.log(response.data)
         this.showModal = false
+        this.$router.push('/admin/penenun')
         this.$emit('weaver-deleted', this.weaverId)
         console.log("deleted")
-        this.$router.push('/admin/penenun')
+        
       }
     }
   }

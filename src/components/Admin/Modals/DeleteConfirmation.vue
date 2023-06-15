@@ -42,6 +42,7 @@
             <div class="mt-8 flex justify-end gap-3">
               <!-- Cancel button -->
               <button
+                id="btn-batal"
                 @click="showModal = false"
                 class="mr-2 rounded-lg border border-primary_surface px-4 py-2 text-neutral_80"
               >
@@ -49,6 +50,7 @@
               </button>
               <!-- Delete button -->
               <button
+                id="btn-hapus-confirm"
                 @click="deleteItem"
                 class="text-neutral_10 rounded-lg bg-danger_main px-4 py-2"
               >

@@ -2,13 +2,14 @@
   <div class="year-picker">
     <div class="md:w-full relative inline-block max-h-40 overflow-y-auto">
       <select
+        id="dropdown-pilih-tahun-lahir-penenun"
         v-model="selectedYear"
         @change="emitYear"
         class="block appearance-none w-full bg-neutral_10 border border-primary_border text-primary_pressed text-base rounded-lg focus:ring-primary_main focus:border-primary_main p-2.5"
         required
       >
         <option value="" disabled selected hidden>Pilih Tahun Lahir Penenun</option>
-        <option v-for="year in years" :key="year" :value="year">
+        <option id="tahun-lahir" v-for="year in years" :key="year" :value="year">
           {{ year }}
         </option>
       </select>
@@ -31,28 +32,31 @@
   </div>
 </template>
 <script>
+import { Form, Field, ErrorMessage, FieldArray} from 'vee-validate'
+import * as yup from 'yup';
 export default {
-  data() {
-    return {
-      selectedYear: new Date().getFullYear(),
-      years: []
-    }
-  },
-  created() {
-    this.populateYears()
-  },
-  methods: {
-    populateYears() {
-      this.years = []
-      const currentYear = new Date().getFullYear()
-      for (let year = currentYear; year >= 1950; year--) {
-        this.years.push(year)
-      }
+    data() {
+        return {
+            selectedYear: new Date().getFullYear(),
+            years: []
+        };
     },
-    emitYear() {
-      this.$emit('updateYear', this.selectedYear)
-    }
-  }
+    created() {
+        this.populateYears();
+    },
+    methods: {
+        populateYears() {
+            this.years = [];
+            const currentYear = new Date().getFullYear();
+            for (let year = currentYear; year >= 1950; year--) {
+                this.years.push(year);
+            }
+        },
+        emitYear() {
+            this.$emit("updateYear", this.selectedYear);
+        }
+    },
+    components: { FieldArray }
 }
 </script>
 <style lang=""></style>

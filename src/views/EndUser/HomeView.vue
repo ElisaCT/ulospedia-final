@@ -4,6 +4,7 @@
 <template>
   <Navbar />
   <div class="mx-[180px]">
+    <SliderUlos />
     <!-- Hero section -->
     <div class="flex flex-wrap items-center justify-center md:flex-row pt-8 pb-10 px-6">
       <div class="md:w-1/2 text-center md:text-left md:text-xl">
@@ -11,13 +12,14 @@
           Lebih dekat dengan <span class="text-primary_main">Ulos</span> bersama
           <span class="text-primary_main">Ulospedia</span>
         </h1>
-        <p class="mt-4 text-neutral_90 text-lg md:text-xl">
+        <p id="text-highlightUlos1" class="mt-4 text-neutral_90 text-lg md:text-xl">
           Kembangkan pengetahuanmu tentang ulos <br />
           bersama Ditenun Ulospedia
         </p>
         <div class="mt-8 md:mt-12">
           <a
             href="/galeri-ulos"
+            id="btn-exploreUlos"
             class="bg-primary_main hover:bg-primary_hover text-neutral_10 font-medium py-3 px-10 rounded-lg"
             >Eksplor Ulos</a
           >
@@ -37,9 +39,9 @@
           class="bg-[#D6DDF0] overflow-hidden justify-items-start text-left"
           style="box-shadow: 18px 18px 0px #000000"
         >
-          <div class="px-6 py-4">
+          <div id="card-apa-itu-ulos" class="px-6 py-4">
             <h4 class="font-bold text-2xl mb-2">Apa itu ulos?</h4>
-            <p class="text-gray-700 text-lg">
+            <p id="text-defenisiUlos" class="text-gray-700 text-lg">
               Ulos merupakan selendang tenun tradisional Batak yang berasal dari Sumatera Utara.
               Kain ini berperan penting dalam setiap tahap kehidupan budaya Batak, yaitu kelahiran,
               kehidupan, dan kematian.
@@ -47,6 +49,7 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
+              id="span-btn-jelajahiUlos"
               href="/sejarah-ulos"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
               >Jelajahi Ulos</a
@@ -71,9 +74,9 @@
           class="bg-[#FBEFD2] overflow-hidden justify-items-start text-left"
           style="box-shadow: 18px 18px 0px #000000"
         >
-          <div class="px-6 py-4">
+          <div id="card-lahir-hidup-mati" class="px-6 py-4">
             <h4 class="font-bold text-2xl mb-2">Lahir, hidup, dan mati</h4>
-            <p class="text-gray-700 text-lg">
+            <p id="text-lahirHidupMati" class="text-gray-700 text-lg">
               Ulos merupakan simbol kesuburan dalam upacara kelahiran, bagian penting dari tata cara
               pelaksanaan upacara adat selama hidup, serta tanda berkabung dan penghormatan terakhir
               pada saat kematian.
@@ -81,6 +84,7 @@
           </div>
           <div class="px-6 py-4 flex items-center gap-2">
             <a
+              id="span-btn-sejarahUlos"
               href="/sejarah-ulos"
               class="hover:text-primary_hover text-primary_main font-medium underline decoration-solid py-2"
               >Telusuri Sejarah Ulos</a
@@ -107,11 +111,29 @@
     <JenisUlos />
   </div>
 
-  <div class="home">
-    <h1>Welcome to My YouTube Channel</h1>
-    <VideoPlayer videoId="ywWLIckWVtk" />
+  <div class="flex justify-center">
+    <div class="mx-[180px]">
+      <section>
+        <div class="flex flex-row pb-6">
+          <h2
+            id="text-fakta-menarik"
+            class="lg:text-4xl md:text-3xl sm:text-2xl text-center grow font-medium"
+          >
+            Temukan Kekayaan Warisan Ulos
+          </h2>
+        </div>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Yb6H-XB6dDM"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </section>
+    </div>
   </div>
-
   <Footer />
 </template>
 
@@ -122,9 +144,17 @@ import JenisUlos from '../../components/EndUser/JenisUlos.vue'
 import Carousel from '../../components/EndUser/Carousel.vue'
 import Navbar from '../../components/EndUser/Navbar.vue'
 import Footer from '../../components/EndUser/Footer.vue'
+// import SliderUlos from '../../components/EndUser/SliderUlos.vue'
+import axios from 'axios'
 
 export default {
   name: 'HomeView',
+  mounted() {
+    console.log(`TESTTTTTTTT`)
+    axios
+      .get(`http://company.ditenun.com/api/v1/ulospedia/client/ulos/19`)
+      .then((response) => console.log(response.data))
+  },
   components: {
     // eslint-disable-next-line vue/no-unused-components, vue/no-reserved-component-names
     RagamUlos,
@@ -133,6 +163,8 @@ export default {
     // eslint-disable-next-line vue/no-reserved-component-names
     Footer,
     Navbar
+    // eslint-disable-next-line vue/no-unused-components
+    // SliderUlos
   }
 }
 </script>
