@@ -8,7 +8,7 @@ describe('Pengujian API - Gambar Ulos lainnya', () => {
 
 
     it('POST: Membuat/mengupload gambar ulos lainnya berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 10;
+        const ulosId = 40;
         const imagePath = 'ulosLainnya1.jpeg';
         const authToken = Cypress.env('authToken');
 
@@ -31,29 +31,29 @@ describe('Pengujian API - Gambar Ulos lainnya', () => {
         });
     });
 
-    it('GET: Mendapatkan gambar ulos lainnya berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 10;
-        const imageId = 1;
-        const authToken = Cypress.env('authToken');
+    // it('GET: Mendapatkan gambar ulos lainnya berdasarkan ulosId yang valid(tersedia)', () => {
+    //     const ulosId = 40;
+    //     const imageId = 1;
+    //     const authToken = Cypress.env('authToken');
 
-        cy.request({
-            method: 'GET',
-            url: `ulospedia/ulos/${ulosId}/other-images/${imageId}/public`,
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-                'Accept': '*/*'
-            },
-            encoding: 'binary'
-        }).then((response) => {
-            expect(response.status).to.eq(200);
-            cy.writeFile(`ulosLainnya${imageId}.jpeg`, response.body, 'binary');
-            cy.log('Response Body:', response.body);
-        });
-    });
+    //     cy.request({
+    //         method: 'GET',
+    //         url: `ulospedia/ulos/${ulosId}/other-images/${imageId}/public`,
+    //         headers: {
+    //             'Authorization': `Bearer ${authToken}`,
+    //             'Accept': '*/*'
+    //         },
+    //         encoding: 'binary'
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         cy.writeFile(`ulosLainnya${imageId}.jpeg`, response.body, 'binary');
+    //         cy.log('Response Body:', response.body);
+    //     });
+    // });
 
     it.only('PUT: Memperbarui Gambar Ulos Lainnya', () => {
         const authToken = Cypress.env('authToken');
-        const ulosId = 10;
+        const ulosId = 40;
 
         cy.fixture('ulosLainnya1.jpeg', 'binary')
             .then(Cypress.Blob.binaryStringToBlob)

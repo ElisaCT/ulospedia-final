@@ -13,7 +13,7 @@ describe('Fungsionalitas Login - Metode Category Partitioning Method', () => {
     it('Admin login with Admin login dengan username dan katasandi yang benar/valid', () => {
         cy.get('#username-address-icon').type(validUsername)
         cy.get('#password').type(validPassword)
-        cy.get('#btn-login').click();
+        cy.get('#btn-submit').click();
 
         cy.wait(1000)
         cy.get('.self-center').should('be.visible');
@@ -80,7 +80,7 @@ describe('Fungsionalitas Login - Metode Category Partitioning Method', () => {
                 cy.get('#password').type(testCase.password);
             }
 
-            cy.get('#btn-login').click();
+            cy.get('#btn-submit').click({ force: true });
             cy.contains(testCase.expectedErrorMessage).should('exist');
 
         });

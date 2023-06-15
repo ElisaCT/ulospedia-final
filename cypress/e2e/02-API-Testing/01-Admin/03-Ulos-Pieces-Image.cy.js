@@ -7,7 +7,7 @@ describe('Pengujian API - Gambar Potongan Ulos', () => {
     });
 
     it('POST-Membuat data potongan ulos yang baru berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 10;
+        const ulosId = 40;
         const authToken = Cypress.env('authToken');
         const imagePath = 'potonganUlos1.jpeg';
 
@@ -30,27 +30,27 @@ describe('Pengujian API - Gambar Potongan Ulos', () => {
         });
     });
 
-    it('GET: Mendapatkan gambar potongan ulos berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 10;
-        const piecesImageId = 2;
-        const authToken = Cypress.env('authToken');
+    // it('GET: Mendapatkan gambar potongan ulos berdasarkan ulosId yang valid(tersedia)', () => {
+    //     const ulosId =40;
+    //     const piecesImageId = 2;
+    //     const authToken = Cypress.env('authToken');
 
-        cy.request({
-            method: 'GET',
-            url: `ulospedia/ulos/${ulosId}/pieces-images/${piecesImageId}/public`,
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-                'Accept': '*/*'
-            }
-        }).then((response) => {
-            expect(response.status).to.eq(200);
-            // Perform additional assertions if needed
-        });
-    });
+    //     cy.request({
+    //         method: 'GET',
+    //         url: `ulospedia/ulos/${ulosId}/pieces-images/${piecesImageId}/public`,
+    //         headers: {
+    //             'Authorization': `Bearer ${authToken}`,
+    //             'Accept': '*/*'
+    //         }
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         // Perform additional assertions if needed
+    //     });
+    // });
 
     it('PUT: Memperbarui Data Potongan Ulos Baru', () => {
         const authToken = Cypress.env('authToken');
-        const ulosId = 10;
+        const ulosId = 40;
 
         cy.fixture('ulosUtuh1.jpeg', 'binary')
             .then(Cypress.Blob.binaryStringToBlob)

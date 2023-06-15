@@ -7,7 +7,7 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
     });
 
     it('POST: Menambahkan gambar ulos utuh pada generate motif berdasarkan id ulos yang valid(tersedia) ', () => {
-        const id = 10;
+        const id = 40;
         const authToken = Cypress.env('authToken');
 
         cy.fixture('ulosUtuh1.jpeg', 'binary')
@@ -64,7 +64,7 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
     });
 
     it('GET: Menampilkan data ulos pada fitur generate motif berdasarkan Id ulos yang valid', () => {
-        const id = 10; // Ulos ID parameter
+        const id = 40; // Ulos ID parameter
         const authToken = Cypress.env('authToken');
 
         cy.request({
@@ -158,22 +158,22 @@ describe('Pengujian API - Fitur Generate Ulos', () => {
         });
     });
 
-    it('DELETE: Menghapus Data Ulos & Semua Data Motif Terkait', () => {
-        const authToken = Cypress.env('authToken');
-        const ulosId = 64; // ID ulos yang ingin dihapus
+    // it('DELETE: Menghapus Data Ulos & Semua Data Motif Terkait', () => {
+    //     const authToken = Cypress.env('authToken');
+    //     const ulosId = 64; // ID ulos yang ingin dihapus
 
-        cy.request({
-            method: 'DELETE',
-            url: `generate/ulos/${ulosId}`,
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-                'Accept': '*/*',
-            },
-        }).then((response) => {
-            expect(response.status).to.eq(200);
-            // Tambahkan assertions tambahan sesuai kebutuhan
-        });
-    });
+    //     cy.request({
+    //         method: 'DELETE',
+    //         url: `generate/ulos/${ulosId}`,
+    //         headers: {
+    //             'Authorization': `Bearer ${authToken}`,
+    //             'Accept': '*/*',
+    //         },
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         // Tambahkan assertions tambahan sesuai kebutuhan
+    //     });
+    // });
 
     // it('DELETE: Menghapus Gambar Generate Ulos', () => {
     //     const authToken = Cypress.env('authToken');

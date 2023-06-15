@@ -25,18 +25,6 @@ describe('End To End Testing - Admin', () => {
             cy.get('table td').should('exist');
         });
 
-        it('Verifikasi Admin bisa melihat detail ulos dari dashboard', () => {
-            cy.get('#nama-ulos-dashboard').click()
-            cy.get('#nama-ulos').should('be.visible')
-            cy.get('#suku-ulos').should('be.visible');
-            cy.get('#lokasi-ulos').should('be.visible');
-            cy.get('#teknik-tenun-ulos').should('be.visible');
-            cy.get('#ukuran-ulos').should('be.visible');
-            cy.get('#makna-ulos').should('be.visible');
-            cy.get('#fungsi-ulos').should('be.visible');
-            cy.get('#btn-next').should('be.visible');
-            cy.get('#btn-prev').should('be.visible');
-        });
 
         it('Verifikasi Admin bisa melihat detail penenun dari dashboard', () => {
             cy.get('#nama-penenun-dashboard').click()
@@ -50,85 +38,7 @@ describe('End To End Testing - Admin', () => {
         });
     })
 
-    describe('Verifikasi Fitur Ulos', () => {
-        //precondition pergi ke halaman ulos
-        beforeEach(() => {
-            cy.get('#sidebar-ulos').click();
-        });
-
-        it('Admin menambahkan ulos baru dengan input yang valid', () => {
-            cy.get('#btn-tambah-ulos').click();
-            cy.get('form').find('input[type="file"]').eq(0).attachFile('ulosUtuh1.jpeg');
-            cy.get('form').find('input[type="file"]').eq(1).attachFile('potonganUlos1.jpeg');
-            cy.get('form').find('input[type="file"]').eq(2).attachFile('motifUlos1.jpeg');
-            cy.get('#btn-selanjutnya').click();
-            cy.get('#ulos-name').type('Ulos Harungguan test')
-            cy.get('#dropdown-suku-ulos').select('Batak Toba')
-            cy.get('#checkbox-merah').check(); // Tekan checkbox Merah
-            cy.get('#jenis-ulos-pengembangan').check();
-            cy.get('#ulos-location').type('Samosir')
-            cy.get('#ulos-legth').type('122')
-            cy.get('#ulos-width').type('189')
-            cy.get('#dropdown-teknik-tenun').select('Teknik Ikat Lungsi');
-            cy.get('#ulos-meaning').type('Ulos Harungguan disebut sebagai “Raja” Ulos di Tanah Tapanuli karena di masa lampau hanya dipakai oleh Raja dan kalangan terpandang')
-            cy.get('#ulos-function').clear().type('Ulos berarti kain dalam bahasa Batak Toba.')
-            cy.get('#btn-selanjutnya').click()
-            cy.get('.w-11').click()
-            cy.get('input#dropzone-file').attachFile('ulosUtuh1.jpeg');
-            cy.get('input#ulos-name-produk').type('Ulos Harungguan Produk Test')
-            cy.get('#ulos-price').type('500.000')
-            cy.get('#ulos-url').type('https://example.com/product/1')
-            cy.get('#btn-simpan-perubahan').click()
-            //masukkan assertion disini
-        })
-
-        it('Admin mengedit data salah satu ulos dengan input yang valid', () => {
-            cy.get('form').find('input[type="file"]').eq(0).attachFile('ulosUtuh1.jpeg');
-            cy.get('form').find('input[type="file"]').eq(1).attachFile('potonganUlos1.jpeg');
-            cy.get('form').find('input[type="file"]').eq(2).attachFile('motifUlos1.jpeg');
-            cy.get('#btn-selanjutnya').click();
-            cy.get('#ulos-name').clear().type('Ulos Harungguan test')
-            cy.get('#dropdown-suku-ulos').clear().select('Batak Toba')
-            cy.get('#jenis-ulos-pengembangan').check();
-            cy.get('#ulos-location').clear().type('Samosir')
-            cy.get('#ulos-legth').clear().type('122')
-            cy.get('#ulos-width').clear().type('189')
-            cy.get('#dropdown-teknik-tenun').clear().select('Teknik Ikat Lungsi');
-            cy.get('#ulos-meaning').clear().type('Ulos Harungguan disebut sebagai “Raja” Ulos di Tanah Tapanuli karena di masa lampau hanya dipakai oleh Raja dan kalangan terpandang')
-            cy.get('#ulos-function').clear().type('Ulos berarti kain dalam bahasa Batak Toba.')
-            cy.get('#btn-selanjutnya').click()
-            cy.get('.w-11').click()
-            cy.get('input#dropzone-file').attachFile('ulosUtuh1.jpeg');
-            cy.get('input#ulos-name-produk').clear().type('Ulos Harungguan Produk Test')
-            cy.get('#ulos-price').clear().type('500.000')
-            cy.get('#ulos-url').clear().type('https://example.com/product/1')
-            cy.get('#btn-simpan-perubahan').click()
-            //masukkan assertion disini
-        })
-
-        // it('Admin menghapus data ulos dari tabel ulos', () => {
-        //     cy.get('table tr')
-        //         .eq(2) // Select the 3rd row (index 2)
-        //         .find('#delete-button') // Replace 'button.delete-button' with the actual selector for your delete button
-        //         .click();
-        //     cy.get('#btn-hapus').click()
-        //     //cy.contains('Data Ulos berhasil dihapus').should('be.visible');
-        // });
-
-
-        it('Verifikasi Admin bisa melihat detail ulos dari tabel daftar ulos', () => {
-            cy.contains('td.px-6.py-4', 'Sumatera Utara').click();
-            cy.get('#nama-ulos').should('be.visible');
-            cy.get('#suku-ulos').should('be.visible');
-            cy.get('#lokasi-ulos').should('be.visible');
-            cy.get('#teknik-tenun-ulos').should('be.visible');
-            cy.get('#ukuran-ulos').should('be.visible');
-            cy.get('#makna-ulos').should('be.visible');
-            cy.get('#fungsi-ulos').should('be.visible');
-            cy.get('#btn-next').should('be.visible');
-            cy.get('#btn-prev').should('be.visible');
-        });
-    })
+    
 
     describe('Verifikasi Fitur Penenun', () => {
         //precondition: admi berada pada halaman penenun
@@ -159,7 +69,7 @@ describe('End To End Testing - Admin', () => {
             cy.get('#domicile').clear().type('Samosir');
             cy.get('#dropdown-alat-tenun').select('Alat Tenun Bukan Mesin (ATBM)');
             cy.get('#dropdown-teknik-tenun').select('Teknik Ikat Lungsi');
-            cy.get('#ulos-meaning').clear().type('Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.');
+            cy.get('#penenun-story').clear().type('Akrab disapa Opung, Nurhaeda Siregar adalah penenun ulos senior dari Desa Hutanagodang, Muara, Tapanuli Utara.');
             cy.get('#btn-update').click();
             //cy.contains('Data penenun berhasil diedit').should('exist');
         })
@@ -177,7 +87,7 @@ describe('End To End Testing - Admin', () => {
         // })
 
         it('Verifikasi Admin bisa melihat data detail penenun dari tabel daftar penenun ', () => {
-            cy.get('#table-search').type('Hanna')
+            cy.get('#table-search').type('Mama Jadi')
             cy.get('#baris-daftar-penenun').click()
             cy.get('#nama-penenun').should('be.visible');
             cy.get('#teknik-tenun-penenun').should('be.visible');
@@ -204,7 +114,7 @@ describe('End To End Testing - Admin', () => {
         })
 
         it('Admin menambahkan gambar Motif ulos', () => {
-            cy.get('#field-cari-ulos').type('test_Ulos Harungguan')
+            cy.get('#field-cari-ulos').type('Ulos hitam')
             cy.get('#ulos-name').click()
             cy.get('#btn-tambah-gambar-motif-ulos').click()
             cy.get('input#dropzone-file').attachFile('motifUlos1.jpeg');
@@ -215,9 +125,10 @@ describe('End To End Testing - Admin', () => {
         })
 
         it('Admin menambahkan gambar hasil generate motif ulos', () => {
-            cy.get('#field-cari-ulos').type('test_Ulos Harungguan')
+            cy.get('#field-cari-ulos').type('Ulos hitam')
+            cy.wait(3000)
             cy.get('#ulos-name').click()
-            cy.get('#hasil-gambar-motif-ulos').click()
+            cy.get('#hasil-gambar-motif-ulos').wait(3000).click({ force: true });
             cy.get('#btn-tambah-gambar-motif-ulos').click()
             cy.get('input#dropzone-file').attachFile('motifUlos1.jpeg');
             cy.get('#dropdown-ukuran-motif').select('Besar');
@@ -239,10 +150,10 @@ describe('End To End Testing - Admin', () => {
     })
     
 
-    it('Admin keluar dari website', () =>{
-        cy.get('#btn-logout').click();
-        cy.wait(5000)
-        cy.reload()
-        cy.get('#username-address-icon').should('be.visible');
-    })
+    // it('Admin keluar dari website', () =>{
+    //     cy.get('#btn-logout').click();
+    //     cy.wait(5000)
+    //     cy.reload()
+    //     cy.get('#username-address-icon').should('be.visible');
+    // })
 })

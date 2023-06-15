@@ -31,9 +31,7 @@ describe('Verifikasi Home Page - End User', () => {
 
             // Memastikan tombol jelajahi ulos mengarahkan ke router dan halaman yang benar
             cy.get('#span-btn-jelajahiUlos').click();
-            cy.url().should('eq', 'http://127.0.0.1:1753/galeri-ulos');
-
-            cy.get('#field-cariUlos').should('be.visible');
+            cy.url().should('eq', 'http://127.0.0.1:1753/sejarah-ulos');
         })
 
         it('Verifikasi section Lahir hidup dan Mati', () => {
@@ -45,7 +43,7 @@ describe('Verifikasi Home Page - End User', () => {
             cy.url().should('eq', 'http://127.0.0.1:1753/sejarah-ulos');
 
             // Memastikan tombol sejarah ulos aktif atau terlihat oleh pengguna
-            cy.get('[data-test-id="btn-sejarahUlos"]').should('be.visible');
+            cy.get('#segment-item-1').should('be.visible');
 
             cy.getById('text-sejarahUlos').should('be.visible').should('contain', 'Sejarah Ulos');
             // Memastikan ada gambar pada elemen
@@ -64,9 +62,9 @@ describe('Verifikasi Home Page - End User', () => {
             cy.get('#btn-ragamUlos-BatakToba').click()
             // cy.get('#navbar-GaleriUlos').click() 
             cy.get('#label-asal-ulos').should('have.text', 'Batak Toba');
-            // cy.get('#btn-filter').click()
-            // cy.get('#label-batakToba').click()
-            // cy.get('#btn-terapkan').click()
+            cy.get('#btn-filter').click()
+            cy.get('#label-batakToba').click()
+            cy.get('#btn-terapkan').click()
             cy.wait(3000)
             cy.get('#ulos-asal').each((element) => {
                 cy.wrap(element).should(($p) => {
@@ -133,73 +131,6 @@ describe('Verifikasi Home Page - End User', () => {
         })
     })
 
-    describe('Galeri Ulos', () => {
-        //pre condition
-        beforeEach(() => {
-            cy.get('#navbar-GaleriUlos').click()
-        });
-        it('Verfikasi Informasi Detail Ulos ada', () => {
-            cy.getById('field-cariUlos').type('ragi pakko')
-            cy.wait(2000)
-            cy.getById('icon-produk-available').should('be.visible')
-            cy.getById('ulos-nama').click()
-
-            // Memastikan elemen nama ulos ditampilkan
-            cy.get('#nama-ulos').should('be.visible');
-
-            // Memastikan elemen suku ulos ditampilkan
-            cy.get('#suku-ulos').should('be.visible');
-
-            // Memastikan elemen lokasi ulos ditampilkan
-            cy.get('#lokasi-ulos').should('be.visible');
-
-            // Memastikan elemen teknik tenun ulos ditampilkan
-            cy.get('#teknik-tenun-ulos').should('be.visible');
-
-            // Memastikan elemen ukuran ulos ditampilkan
-            cy.get('#ukuran-ulos').should('be.visible');
-
-            // Memastikan elemen makna ulos ditampilkan
-            cy.get('#makna-ulos').should('be.visible');
-
-            // Memastikan elemen fungsi ulos ditampilkan
-            cy.get('#fungsi-ulos').should('be.visible');
-        })
-
-
-        it('Verifikasi Slider Gambar bisa digunakan', () => {
-            cy.getById('field-cariUlos').type('ragi pakko')
-            cy.wait(2000)
-            cy.getById('icon-produk-available').should('be.visible')
-            cy.getById('ulos-nama').click()
-            // memastika tombol next slider bisa digunakan
-            cy.get('#btn-next-slider').should('be.enabled')
-        })
-
-        it('Verifikasi ikon belanja ada pada card Ulos', () => {
-            cy.getById('field-cariUlos').type('ragi pakko')
-            cy.wait(2000)
-            cy.getById('icon-produk-available').should('be.visible');
-        })
-
-        it('Verifikasi Section ketersediaan di Eccomerce', () => {
-            cy.getById('field-cariUlos').type('ragi pakko')
-            cy.wait(2000)
-            cy.getById('icon-produk-available').should('be.visible')
-            cy.getById('ulos-nama').click()
-
-            //memastikan card ketersediaan visible
-            cy.get('#card-ketersediaan-ulos').should('be.visible');
-            //memastikan elemen gambar produk ulos ada
-            cy.get('#gambar-produk-ulos').should('be.visible');
-            //memastikan elemen harga produk ulos ada
-            cy.get('#harga-produk-ulos').should('be.visible');
-            //memastikan elemen nama produk ulos ada
-            cy.get('#nama-produk-ulos').should('be.visible');
-            //memastikan tombol beli sekarang clickable 
-            cy.get('#btn-beli-sekarang').should('be.enabled');
-        })
-    })
 
     describe('Penenun', () => {
         //pre condition

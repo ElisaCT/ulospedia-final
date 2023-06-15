@@ -7,7 +7,7 @@ describe('Pengujian API - Ulos utuh', () => {
     });
 
     it('GET: Mendapatkan Gambar Utama Ulos berdasarkan ulosID yang valid(tersedia)', () => { // Test title
-        const ulosId = 10;
+        const ulosId = 40;
         const authToken = Cypress.env('authToken');
         // console.log('authToken:', authToken);
 
@@ -24,7 +24,7 @@ describe('Pengujian API - Ulos utuh', () => {
     });
 
     it('PUT: Memperbarui gambar utama ulos dengan ID ulos yang valid', () => {
-        const ulosId = 10;
+        const ulosId =40;
         const authToken = Cypress.env('authToken');
 
         cy.fixture('ulosUtuh1.jpeg', 'binary')
@@ -52,7 +52,7 @@ describe('Pengujian API - Ulos utuh', () => {
 
 
     it('POST: Membuat atau mengupload gambar ulos utuh yang baru berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 10;
+        const ulosId = 40;
         const imagePath = 'ulosUtuh1.jpeg';
         const authToken = Cypress.env('authToken');
 

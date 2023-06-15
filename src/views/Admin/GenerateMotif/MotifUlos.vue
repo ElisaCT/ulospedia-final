@@ -130,13 +130,12 @@
                   <div  class="h-[300px] w-[252px]">
                     
                     <img
-                      
+                      id="hasil-gambar-motif-ulos"
                       class="h-full w-full object-cover transition-transform rounded-lg"
                       :src="motif.imageUrl"
                     />
                   </div>
                   <div
-                  id="hasil-gambar-motif-ulos"
                     class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
                   ></div>
                 </div>
@@ -151,7 +150,6 @@
                     class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
                   >
                     <div class="h-[300px] w-[252px]">
-                      
                       <img
                         class="h-full w-full object-cover transition-transform rounded-lg"
                         :src="motif.imageUrl"

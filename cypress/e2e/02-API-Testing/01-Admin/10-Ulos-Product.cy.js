@@ -25,7 +25,7 @@ describe('Pengujian API: Ulos Product', () => {
     });
 
     it('PUT: Memperbaharui Ketersediaan Produk yang Berkaitan dengan Ulos', () => {
-        const ulosId = 10;
+        const ulosId = 40;
         const state = false;
         const authToken = Cypress.env('authToken');
 
@@ -70,7 +70,7 @@ describe('Pengujian API: Ulos Product', () => {
 
     it('POST: Menambahkan Data Produk Baru', () => {
         const authToken = Cypress.env('authToken');
-        const ulosId = 10;
+        const ulosId = 40;
         const requestBody = {
             name: "Ragi Hotang",
             price: 200000,

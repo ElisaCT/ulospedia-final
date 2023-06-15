@@ -45,7 +45,7 @@ describe('Fungsionalitas Login - Metode Category Partitioning Method', () => {
                 cy.get('#password').type(testCase.password);
             }
 
-            cy.get('#btn-login').click();
+            cy.get('#btn-submit').click();
             cy.contains('.text-danger_main', testCase.expectedErrorMessage).should('be.visible');
 
         });

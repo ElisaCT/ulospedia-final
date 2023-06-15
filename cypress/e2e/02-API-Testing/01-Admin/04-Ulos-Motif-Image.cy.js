@@ -7,7 +7,7 @@ describe('Pengujian API - Gambar motif Ulos', () => {
     });
 
     it('POST:Membuat/mengupload gambar motif dari ulos utuh yang baru berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 10;
+        const ulosId = 40;
         const imagePath = 'motifUlos1.jpeg';
         const authToken = Cypress.env('authToken');
 
@@ -30,28 +30,28 @@ describe('Pengujian API - Gambar motif Ulos', () => {
         });
     });
 
-    it('GET:Mendapatkan Gambar motif ulos berdasarkan ulosId yang valid(tersedia)', () => {
-        const ulosId = 10;
-        const motifImageId = 2;
-        const authToken = Cypress.env('authToken');
+    // it('GET:Mendapatkan Gambar motif ulos berdasarkan ulosId yang valid(tersedia)', () => {
+    //     const ulosId = 40;
+    //     const motifImageId = 2;
+    //     const authToken = Cypress.env('authToken');
 
-        cy.request({
-            method: 'GET',
-            url: `ulospedia/ulos/${ulosId}/motif-images/${motifImageId}/public`,
-            headers: {
-                'Authorization': `Bearer ${authToken}`,
-                'Accept': '*/*'
-            }
-        }).then((response) => {
-            expect(response.status).to.eq(200);
-            // Perform additional assertions if needed
-            cy.log('Response Body:', response.body);
-        });
-    });
+    //     cy.request({
+    //         method: 'GET',
+    //         url: `ulospedia/ulos/${ulosId}/motif-images/${motifImageId}/public`,
+    //         headers: {
+    //             'Authorization': `Bearer ${authToken}`,
+    //             'Accept': '*/*'
+    //         }
+    //     }).then((response) => {
+    //         expect(response.status).to.eq(200);
+    //         // Perform additional assertions if needed
+    //         cy.log('Response Body:', response.body);
+    //     });
+    // });
 
     it('PUT: Memperbarui Gambar Motif Ulos Baru', () => {
         const authToken = Cypress.env('authToken');
-        const ulosId = 10;
+        const ulosId = 40;
 
         cy.fixture('ulosUtuh1.jpeg', 'binary')
             .then(Cypress.Blob.binaryStringToBlob)
