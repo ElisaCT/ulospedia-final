@@ -11,13 +11,14 @@
     <div v-if="penenuns">
       <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
         <div v-for="penenun in penenuns" :key="penenun.id">
-          <router-link :to="'/penenun-gedogan/' + penenun.id">
+          <router-link :to="'/penenun-gedogan/' + penenun.id" id="card-penenun">
             <div
               class="group relative cursor-pointer items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-neutral_30"
             >
               <div class="h-[300px] w-[252px]">
                 <div class="gradient"></div>
                 <img
+                  id="penenun-gambar"
                   class="h-full w-full object-cover transition-transform rounded-lg"
                   :src="penenun.imageUrl"
                 />
@@ -26,8 +27,8 @@
                 class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral_100 group-hover:from_neutral_80 group-hover:via-neutral_60 group-hover:to-neutral_80"
               ></div>
               <div class="absolute inset-0 flex translate-y-[80%] flex-col text-left pl-6 z-[3]">
-                <h1 class="text-xl font-medium text-neutral_10">{{ penenun.name }}</h1>
-                <p class="text-neutral_10">{{ penenun.age }}</p>
+                <h1 id="penenun-nama" class="text-xl font-medium text-neutral_10">{{ penenun.name }}</h1>
+                <p id="penenun-umur" class="text-neutral_10">{{ penenun.age }}</p>
               </div>
             </div>
           </router-link>
@@ -43,6 +44,7 @@
   <!-- Load more -->
   <div class="max-w-6xl mx-auto text-center mb-10 lg:mb-14">
     <button
+      id="btn-muatLebihBanyak"
       class="text-neutral_70 font-medium text-lg bg-neutral_20 items-center px-4 py-4 rounded-lg w-full max-w-md"
       @click="loadMore"
       v-if="!lastPage"

@@ -10,14 +10,16 @@
   <div class="flex justify-center">
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       <div class="group relative cursor-pointer items-center justify-center overflow-hidden">
-        <router-link to="/penenun-gedogan">
+        <router-link to="/penenun-gedogan" id="penenun-Gedongan">
           <div class="relative">
             <img
               class="h-80 w-90 rounded-xl object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
               src="../../assets/gedogan.png"
               alt=""
             />
-            <div class="absolute inset-0 flex items-center justify-center">
+            <div 
+            id="gedongan"
+            class="absolute inset-0 flex items-center justify-center">
               <p
                 class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2 opacity-100 hover:opacity-0 transition duration-300 ease-in"
               >
@@ -32,7 +34,7 @@
             class="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0"
           >
             <p
-              class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              id="text-gedongan" class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             >
               Gedogan merupakan salah satu jenis alat tenun tradisional yang sudah sejak lama
               digunakan oleh para leluhur di berbagai daerah Indonesia dalam proses penenunan kain.
@@ -44,7 +46,7 @@
       </div>
 
       <div class="group relative cursor-pointer items-center justify-center overflow-hidden">
-        <router-link to="/penenun-atbm">
+        <router-link to="/penenun-atbm" id="penenun-ATBM">
             <div class="">
               <img
                 class="h-80 w-90 object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
@@ -66,7 +68,7 @@
               class="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0"
             >
               <p
-                class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              id="text-atbm" class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               >
                 Alat tenun bukan mesin (ATBM) merupakan alat untuk melakukan penenunan yang digerakkan
                 oleh manusia. ATBM dapat dipergunakan sambil duduk maupun berdiri. Alat ini biasa
@@ -76,14 +78,14 @@
         </router-link>
       </div>
       <div class="group relative cursor-pointer items-center justify-center overflow-hidden">
-        <router-link to="/penenun-atm">
+        <router-link to="/penenun-atm" id="penenun-ATM">
           <div class="relative">
           <img
             class="h-80 w-90 object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
             src="../../assets/atm.png"
             alt=""
           />
-          <div class="absolute inset-0 flex items-center justify-center">
+          <div   id="atm" class="absolute inset-0 flex items-center justify-center">
             <p
               class="text-neutral_10 text-center text-2xl font-bold bg-black bg-opacity-50 px-4 py-2"
             >
@@ -98,7 +100,7 @@
           class="absolute inset-0 flex translate-y-[60%] flex-col items-center justify-center px-9 text-center transition-all duration-500 group-hover:translate-y-0"
         >
           <p
-            class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            id="text-atm" class="mb-3 text-[16px] text-neutral_10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           >
             Alat tenun mesin (ATM) merupakan alat tenun yang dilengkapi dengan motor penggerak
             sehingga proses pengerjaan kain tenun menjadi relatif lebih cepat karena sepenuhnya

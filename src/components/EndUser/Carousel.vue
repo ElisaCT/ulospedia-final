@@ -3,12 +3,19 @@
   <div class="carousel">
     <!-- title -->
     <div class="flex flex-row pb-6">
-      <h2 class="lg:text-4xl md:text-3xl sm:text-2xl text-left grow font-medium">Temukan Fakta Menarik Ulos</h2>
+      <h2
+        id="text-fakta-menarik"
+        class="lg:text-4xl md:text-3xl sm:text-2xl text-left grow font-medium"
+      >
+        Temukan Fakta Menarik Ulos
+      </h2>
+
       <!-- button -->
       <div class="flex flex-row gap-6">
         <!-- prev -->
         <button
           @click="prevSlide"
+          id="prev-button"
           class="flex items-center justify-center w-10 h-10 rounded-full bg-[#EDEDED] hover:bg-gray-300 focus:outline-none rotate-180"
         >
           <svg
@@ -27,6 +34,7 @@
         <!-- Next -->
         <button
           @click="nextSlide"
+          id="next-button"
           class="flex items-center justify-center w-10 h-10 rounded-full bg-[#3355B5] hover:bg-gray-300 focus:outline-none"
         >
           <svg
@@ -50,8 +58,7 @@
         :key="index"
         :class="['carousel-item', { active: index === currentSlide }]"
       >
-        <img :src="slide.image" :alt="slide.alt" 
-            class="object-cover"/>
+        <img :src="slide.image" :alt="slide.alt" class="object-cover" />
       </div>
     </div>
   </div>

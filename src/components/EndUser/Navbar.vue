@@ -7,10 +7,10 @@
       </a>
       <div class="md:block md:w-auto" id="navbar-default">
         <div class="flex md:flex-row md:space-x-16 md:border-0">
-          <router-link to="/">Home</router-link>
-          <router-link to="/sejarah-ulos">Sejarah Ulos</router-link>
-          <router-link to="/galeri-ulos">Galeri Ulos</router-link>
-          <router-link to="/penenun">Penenun</router-link>
+          <router-link to="/" id="navbar-Home">Home</router-link>
+          <router-link to="/sejarah-ulos" id="navbar-SejarahUlos">Sejarah Ulos</router-link>
+          <router-link to="/galeri-ulos" id="navbar-GaleriUlos">Galeri Ulos</router-link>
+          <router-link to="/penenun" id="navbar-Penenun">Penenun</router-link>
         </div>
       </div>
     </div>
